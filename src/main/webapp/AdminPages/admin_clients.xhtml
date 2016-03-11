@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
+        <title>Admin Clients</title>
+    </head>
+    <body>
+        <ui:composition template="admin_template.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{bundle.ListClientTitle}"></h:outputText>
+            </ui:define>
+
+            <ui:define name="body">
+                <!-- Content Wrapper. Contains page content -->
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <h1>
+                            Clients Tables
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Clients</a></li>
+                        </ol>
+                    </section>
+                    <section class="content">
+
+                        <div class="col-sm-6">
+                            <div class="dataTables_filter" id="example1_filter">
+                                <label>Search:<input aria-controls="example1" placeholder="" class="form-control input-sm" type="search"></input>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-body">
+                                        <h:form class="table table-bordered table-striped">
+                                            <h:panelGroup id="messagePanel" layout="block">
+                                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                            </h:panelGroup>
+                                            <h:outputText escape="false" value="#{bundle.ListClientEmpty}" rendered="#{clientController.items.rowCount == 0}"/>
+                                            <h:panelGroup rendered="#{clientController.items.rowCount > 0}">
+                                                <h:outputText value="#{clientController.pagination.pageFirstItem + 1}..#{clientController.pagination.pageLastItem + 1}/#{clientController.pagination.itemsCount}"/>&nbsp;
+                                                <h:commandLink action="#{clientController.previous}" value="#{bundle.Previous} #{clientController.pagination.pageSize}" rendered="#{clientController.pagination.hasPreviousPage}"/>&nbsp;
+                                                <h:commandLink action="#{clientController.next}" value="#{bundle.Next} #{clientController.pagination.pageSize}" rendered="#{clientController.pagination.hasNextPage}"/>&nbsp;
+                                                <h:dataTable value="#{clientController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_id}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.id}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_title}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.title}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_firstName}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.firstName}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_lastName}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.lastName}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_email}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.email}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_password}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.password}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_companyName}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.companyName}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_homePhoneNumber}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.homePhoneNumber}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListClientTitle_cellPhoneNumber}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.cellPhoneNumber}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="&nbsp;"/>
+                                                        </f:facet>
+                                                        <h:commandLink action="#{clientController.prepareView}" value="#{bundle.ListClientViewLink}"/>
+                                                        <h:outputText value=" "/>
+                                                        <h:commandLink action="#{clientController.prepareEdit}" value="#{bundle.ListClientEditLink}"/>
+                                                        <h:outputText value=" "/>
+                                                        <h:commandLink action="#{clientController.destroy}" value="#{bundle.ListClientDestroyLink}"/>
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </h:panelGroup>
+                                            <br />
+                                        </h:form>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box --> 
+                            </div>
+                        </div>
+                    </section>
+                </div>>
+            </ui:define>
+        </ui:composition>
+    
+    </body>
+</html>

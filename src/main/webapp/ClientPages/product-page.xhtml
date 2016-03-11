@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Bibuli | #{productPageBB.book.title}</title>
+        <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
+        <link rel="stylesheet" href="resources/css/foundation/foundation-icons.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/mycss.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/fluidity/fluidity.css"/>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    </h:head>
+    <h:body>
+        <c:set var="test" value="#{productPageBB.setBook(bookController.findBookByID(1))}" scope='request'/>
+        <hr/>
+        <br/>
+
+        <!--        <div class="row columns">
+                    <nav aria-label="You are here:" role="navigation">
+                        <ul class="breadcrumbs">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Features</a></li>
+                            <li class="disabled">Gene Splicing</li>
+                            <li>
+                                <span class="show-for-sr">Current: </span> Cloning
+                            </li>
+                        </ul>
+                    </nav>
+                </div>-->
+
+        <div class="row">
+            <div class="medium-5 columns text-center">
+                <img class="thumbnail" src="resources/images/#{productPageBB.book.id}.jpg" alt="Book cover" width="350"/> 
+            </div>
+            <div class="medium-7 columns">
+                <p:rating value="#{productPageBB.averageRating}" readonly="true"/><br/>
+                <h3><h:outputText value="#{productPageBB.book.title}"/></h3>
+                <h5>
+                    <ul>
+                        <li class="inlineClass">By </li>
+                        <ui:repeat value="#{productPageBB.book.contributorList}" var="contrib">
+                            <li class="inlineClass">#{contrib.name} (#{contrib.contribution.type})</li>
+                        </ui:repeat>
+                    </ul>
+                </h5>
+                <p class="bookDescription"><h:outputText value="#{productPageBB.book.description}"/></p>
+                <!--                <label>Size
+                                    <select>
+                                        <option value="husker">Small</option>
+                                        <option value="starbuck">Medium</option>
+                                        <option value="hotdog">Large</option>
+                                        <option value="apollo">Yeti</option>
+                                    </select>
+                                </label>-->
+                <!--                <div class="row">
+                                    <div class="small-3 columns">
+                                        <label for="middle-label" class="middle">Quantity</label>
+                                    </div>
+                                    <div class="small-9 columns">
+                                        <input type="text" id="middle-label" placeholder="One fish two fish">
+                                    </div>
+                                </div>-->
+                <ul>
+                    <c:if test="#{productPageBB.book.salePrice eq 0}">
+                        <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.booklistPrice}"/></li>
+                    </c:if>
+                    <c:if test="#{productPageBB.book.salePrice ne 0}">
+                        <li class="prices"><b>List Price: </b><h:outputText value="#{productPageBB.book.listPrice}$" class="strikethrough"/></li>
+                        <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.book.salePrice}"/></li>
+                        <li class="prices redFont"><b><h:outputText value="#{productPageBB.savingsPercentage}"/>% OFF</b></li>
+                    </c:if>
+                </ul>
+                <a href="#" class="button expanded hollow step fi-shopping-cart size-12">Add to Cart</a>
+                <label>All available Formats
+                    <div class="small secondary expanded button-group">
+                        <ui:repeat value="#{productPageBB.book.bookFormatsList}" var="theBookFormat">
+                            <a class="button pointer"><h:outputText value="#{theBookFormat.format1.type}"/></a>   
+                        </ui:repeat>     
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="column row">
+            <hr/>
+            <ul class="tabs" data-tabs="" id="example-tabs">
+                <li class="tabs-title"><a href="#panel1">Book Details</a></li>
+                <li class="tabs-title"><a href="#panel2" aria-selected="true">Reviews</a></li>
+                <li class="tabs-title is-active"><a href="#panel3">Recommended Books</a></li>
+            </ul>
+            <div class="tabs-content" data-tabs-content="example-tabs">
+                <div class="tabs-panel" id="panel1">
+                    <h4>Book Details</h4>
+                    <table class="noborder">
+                        <tbody>
+                            <tr>
+                                <td class="rightAlign"><b>Genres:</b></td>
+                                <td>
+                                    <ui:repeat value="#{productPageBB.book.genreList}" var="theGenre">
+                                        <h:outputText value="#{theGenre.type}"/><br/>
+                                    </ui:repeat>
+                                </td>
+                            </tr>
+                            <ui:repeat value="#{productPageBB.book.bookIdentifiersList}" var="theBookIdentifier">
+                                <tr>
+                                    <td class="rightAlign"><b><h:outputText value="#{theBookIdentifier.identifierType.type}:"/></b></td>
+                                    <td><h:outputText value="#{theBookIdentifier.code}"/></td>
+                                </tr>
+                            </ui:repeat>
+                            <tr>
+                                <td class="rightAlign"><b>Publisher:</b></td>
+                                <td><h:outputText value="#{productPageBB.book.publisher}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="rightAlign"><b>Publication date:</b></td>
+                                <td><h:outputText value="#{productPageBB.formattedBookPubDate}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="rightAlign"><b>Pages:</b></td>
+                                <td><h:outputText value="#{productPageBB.book.pages}"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="tabs-panel" id="panel2">
+                    <h4>Reviews</h4>
+                    <ui:repeat value="#{productPageBB.book.reviewsList}" var="theReview">
+                        <div class="media-object stack-for-small">
+                            <div class="media-object-section">
+                                <p:rating value="#{theReview.rating}" readonly="true"/><br/>
+                                <h5 class="justify"><h:outputText value="#{theReview.client1.firstName} #{theReview.client1.lastName}"/></h5>
+                                <h6><h:outputText value="#{theReview.formattedReviewCreationDate}" /></h6>
+                                <p><h:outputText value="#{theReview.text}"/></p>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                    <h:form id="reviewForm">
+                        <label>
+                            My Review
+                            <p:inputTextarea value="#{productPageBB.review.text}" placeholder="Write a review..." autoResize="false" />
+                            <p:rating value="#{productPageBB.review.rating}" cancel="false" /><br/>
+                        </label>
+                        <!--                        <button class="button">Submit Review <i class="step fi-pencil size-12"></i></button>-->
+                        <p:commandLink class="button hollow step fi-pencil size-12" value="Submit Review" action="#{productPageBB.createReview()}" update="reviewForm" ajax="false" />
+                    </h:form>
+                </div>
+                <div class="tabs-panel is-active" id="panel3">
+                    <div class="row medium-up-3 large-up-5">
+                        <div class="column">
+                            <img class="thumbnail" src="http://placehold.it/350x200"/>
+                            <h5>Other Product <small>$22</small></h5>
+                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
+                        </div>
+                        <div class="column">
+                            <img class="thumbnail" src="http://placehold.it/350x200"/>
+                            <h5>Other Product <small>$22</small></h5>
+                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
+                        </div>
+                        <div class="column">
+                            <img class="thumbnail" src="http://placehold.it/350x200"/>
+                            <h5>Other Product <small>$22</small></h5>
+                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
+                        </div>
+                        <div class="column">
+                            <img class="thumbnail" src="http://placehold.it/350x200"/>
+                            <h5>Other Product <small>$22</small></h5>
+                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
+                        </div>
+                        <div class="column">
+                            <img class="thumbnail" src="http://placehold.it/350x200"/>
+                            <h5>Other Product <small>$22</small></h5>
+                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+        <hr/>
+        <!--        <div class="row column">
+                    <hr>
+                    <ul class="menu">
+                        <li>Yeti Store</li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li class="float-right">Copyright 2016</li>
+                    </ul>
+                </div>-->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+        <script>
+            $(document).foundation();
+        </script>
+    </h:body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
+        <title>Admin Management</title>
+    </head>
+    <body>
+        <ui:composition template="admin_template.xhtml">
+
+            <ui:define name="title">
+                <h:outputText value="#{bundle.ListAdminTitle}"></h:outputText>
+
+            </ui:define>
+
+            <ui:define name="body">
+                <!-- Content Wrapper. Contains page content -->
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <h1>
+                            Management
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Management</a></li>
+                        </ol>
+                    </section>
+                    <section class="content">
+                        <div class="col-sm-6">
+                            <div id="example1_length" class="dataTables_length">
+                                <label>Show 
+                                    <select class="form-control input-sm" aria-controls="example1" name="example1_length">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select> entries
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="dataTables_filter" id="example1_filter">
+                                <label>Search:<input aria-controls="example1" placeholder="" class="form-control input-sm" type="search"></input>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+
+                                    <div class="box-body">
+
+                                        <h:form styleClass="jsfcrud_list_form">
+                                            <h:panelGroup id="messagePanel" layout="block">
+                                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                            </h:panelGroup>
+                                            <h:outputText escape="false" value="#{bundle.ListAdminEmpty}" rendered="#{adminController.items.rowCount == 0}"/>
+                                            <h:panelGroup rendered="#{adminController.items.rowCount > 0}">
+                                                <h:outputText value="#{adminController.pagination.pageFirstItem + 1}..#{adminController.pagination.pageLastItem + 1}/#{adminController.pagination.itemsCount}"/>&nbsp;
+                                                <h:commandLink action="#{adminController.previous}" value="#{bundle.Previous} #{adminController.pagination.pageSize}" rendered="#{adminController.pagination.hasPreviousPage}"/>&nbsp;
+                                                <h:commandLink action="#{adminController.next}" value="#{bundle.Next} #{adminController.pagination.pageSize}" rendered="#{adminController.pagination.hasNextPage}"/>&nbsp;
+                                                <h:dataTable value="#{adminController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListAdminTitle_username}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.username}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{bundle.ListAdminTitle_password}"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.password}"/>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="&nbsp;"/>
+                                                        </f:facet>
+                                                        <h:commandLink action="#{adminController.prepareView}" value="#{bundle.ListAdminViewLink}"/>
+                                                        <h:outputText value=" "/>
+                                                        <h:commandLink action="#{adminController.prepareEdit}" value="#{bundle.ListAdminEditLink}"/>
+                                                        <h:outputText value=" "/>
+                                                        <h:commandLink action="#{adminController.destroy}" value="#{bundle.ListAdminDestroyLink}"/>
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </h:panelGroup>
+                                            <br />
+                                            <h:commandLink action="#{adminController.prepareCreate}" value="#{bundle.ListAdminCreateLink}"/>
+                                            <br />
+                                            <br />
+                                            <h:link outcome="/index" value="#{bundle.ListAdminIndexLink}"/>
+                                        </h:form>
+
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box --> 
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </ui:define>
+        </ui:composition>
+
+        <!-- jQuery 2.1.4 -->
+        <script src="/resources/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="/resources/admin/bootstrap/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="/resources/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/resources/admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="/resources/admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="/resources/admin/plugins/fastclick/fastclick.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/resources/admin/dist/js/app.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="/resources/admin/dist/js/demo.js"></script>
+        <!-- page script -->
+        <script>
+            $(function () {
+                $("#example1").DataTable();
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false
+                });
+            });
+        </script>
+    </body>
+</html>

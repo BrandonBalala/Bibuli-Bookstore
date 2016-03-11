@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
+        <title>Admin Add A New Book</title>
+    </head>
+    <body>
+        <ui:composition template="admin_template.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{bundle.CreateBooksTitle}"></h:outputText>
+            </ui:define>
+
+            <ui:define name="body">
+                <!-- Content Wrapper. Contains page content -->
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <h1>
+                            Add New Book
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Add New Book</a></li>
+                        </ol>
+                    </section>
+                    <section class="content">
+                        
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-body">
+
+         
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{booksController.selected.id}" title="#{bundle.CreateBooksTitle_id}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_title}" for="title" />
+                    <h:inputText id="title" value="#{booksController.selected.title}" title="#{bundle.CreateBooksTitle_title}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_title}"/>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_publisher}" for="publisher" />
+                    <h:inputText id="publisher" value="#{booksController.selected.publisher}" title="#{bundle.CreateBooksTitle_publisher}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_publisher}"/>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_description}" for="description" />
+                    <h:inputTextarea rows="4" cols="30" id="description" value="#{booksController.selected.description}" title="#{bundle.CreateBooksTitle_description}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_description}"/>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_pages}" for="pages" />
+                    <h:inputText id="pages" value="#{booksController.selected.pages}" title="#{bundle.CreateBooksTitle_pages}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_pages}"/>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_wholesalePrice}" for="wholesalePrice" />
+                    <h:inputText id="wholesalePrice" value="#{booksController.selected.wholesalePrice}" title="#{bundle.CreateBooksTitle_wholesalePrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_wholesalePrice}"/>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_listPrice}" for="listPrice" />
+                    <h:inputText id="listPrice" value="#{booksController.selected.listPrice}" title="#{bundle.CreateBooksTitle_listPrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_listPrice}"/>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_salePrice}" for="salePrice" />
+                    <h:inputText id="salePrice" value="#{booksController.selected.salePrice}" title="#{bundle.CreateBooksTitle_salePrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_salePrice}"/>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_pubDate}" for="pubDate" />
+                    <h:inputText id="pubDate" value="#{booksController.selected.pubDate}" title="#{bundle.CreateBooksTitle_pubDate}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_pubDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_dateEntered}" for="dateEntered" />
+                    <h:inputText id="dateEntered" value="#{booksController.selected.dateEntered}" title="#{bundle.CreateBooksTitle_dateEntered}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_dateEntered}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateBooksLabel_removalStatus}" for="removalStatus" />
+                    <h:inputText id="removalStatus" value="#{booksController.selected.removalStatus}" title="#{bundle.CreateBooksTitle_removalStatus}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_removalStatus}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{booksController.create}" value="#{bundle.CreateBooksSaveLink}" />
+                
+            </h:form>
+       
+                                        
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box --> 
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

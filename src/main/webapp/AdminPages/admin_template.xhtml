@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
+
+        <!-- In the content of each page have <ui:define name="windowTitle">Title</ui:define> -->
+        <title><ui:insert name="title" /></title>
+
+        <!-- Bootstrap 3.3.5 -->
+        <link rel="stylesheet" href="resources/admin/bootstrap/css/bootstrap.min.css"></link>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
+        <!-- Theme style -->
+        <link rel="stylesheet" href="resources/admin/dist/css/AdminLTE.min.css"></link>
+        <link rel="stylesheet" href="resources/admin/dist/css/skins/skin-black.min.css"></link>
+
+        <!-- REQUIRED JS SCRIPTS -->
+        <!-- jQuery 2.1.4 -->
+        <script src="resources/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="resources/admin/bootstrap/js/bootstrap.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="resources/admin/dist/js/app.min.js"></script>
+    </h:head>
+    <h:body class="hold-transition skin-black sidebar-mini">
+        <div class="wrapper">
+            <!-- Main Header -->
+            <header id ="header" class="main-header">
+                <!-- Logo -->
+                <!-- Figure out logo stuff -->
+                <a href="admin_template.xhtml" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>B</b></span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>Bibuli e-books</b></span>
+                </a>
+
+                <!-- Header Navbar -->
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <!-- Navbar Right Menu -->
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- Admin name. Will be a variable in JSF. -->
+                            <li>
+                                <a>Alexander Pierce</a>
+                            </li>
+                            <li>
+                                <!-- Add functionality -->
+                                <a href="#">Sign out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </div>
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside id="sidebar" class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu">
+                    <li class="header">Navigation</li>     
+                    <li class="active"><a href="admin_home.xhtml"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                    <li class="treeview active">
+                        <a href="#"><i class="fa fa-book"></i> <span>Inventory</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="admin_view_inventory.xhtml">View Inventory</a></li>
+                            <li><a href="admin_add_book.xhtml">Add New Book</a></li>
+                        </ul>
+                        <li><a href="admin_sales.xhtml"><i class="fa fa-dollar"></i> <span>Sales</span></a></li>
+                        <li><a href="admin_clients.xhtml"><i class="fa fa-user"></i> <span>Clients</span></a></li>
+                        <li><a href="admin_orders.xhtml"><i class="fa fa-money"></i> <span>Orders</span></a></li>
+                        <li><a href="admin_reports.xhtml"><i class="fa fa-line-chart"></i> <span>Reports</span></a></li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-edit"></i> <span>Reviews</span> <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="admin_view_reviews.xhtml">View Reviews</a></li>
+                                <li><a href="admin_approve_reviews.xhtml">Approve New Reviews</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-question-circle"></i> <span>Surveys</span> <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="admin_surveys.xhtml">Manage Surveys</a></li>
+                                <li><a href="admin_surveys.xhtml">View Statistics</a></li>
+                                <li><a href="admin_surveys.xhtml">Add New Survey</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="admin_news.xhtml"><i class="fa fa-feed"></i> <span>News</span></a></li>
+                        <li><a href="admin_ads.xhtml"><i class="fa fa-tv"></i> <span>Ads</span></a></li>
+                        <li><a href="admin_tax_rates.xhtml"><i class="fa fa-thumb-tack"></i> <span>Tax Rates</span></a></li>
+                        <li><a href="admin_manage.xhtml"><i class="fa fa-user-plus"></i> <span>Manage Admins</span></a></li>
+                        <li><a href="admin_add_miscellaneous.xhtml"><i class="fa fa-exclamation-circle"></i> <span>Add Miscellaneous</span></a></li>
+                    </li>
+                </ul><!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div id="content" class="content-wrapper">
+            <ui:insert name="body" />
+        </div><!-- /.content-wrapper -->
+
+        <footer id="footer" class="main-footer">
+            <!-- Make a better footer -->
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2016 <a href="#">Bibuli e-books</a>.</strong> All rights reserved.
+        </footer>
+    </h:body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="loginForm" >
+            <h:panelGrid columns="1" styleClass="centered-panel">
+                <p:panel id="primepanel" header="#{bundle.login}">
+
+                    <h:panelGrid columns="3" cellpadding="1" border="0">                       
+                        
+                        <p:outputLabel for="email" value="#{bundle.emailLabel}"/>
+                        <p:inputText id="email" value="#{loginController.email}"
+                                     requiredMessage="#{bundle.emailRequired}"/>
+                        <p:message for="email" style="color:red"/>
+
+                        <p:outputLabel for="password" value="#{bundle.passwordLabel}"/>
+                        <p:password id="password" value="#{loginController.password}"
+                                    requiredMessage="#{bundle.passwordRequired}" />
+                        <p:message for="password" style="color:red"/>
+                        <h:outputText value="#{session.getAttribute('loggedIn')}"/>
+                    </h:panelGrid>
+                    <p:commandButton id="primebutton" value="#{bundle.loginButton}"
+                                     style="display: block;margin: 0 auto;"
+                                     action="#{loginController.login}" ajax="false" />
+
+                </p:panel>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

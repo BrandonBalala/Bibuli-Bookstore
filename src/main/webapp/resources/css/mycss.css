@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8-Mar-2016, 10:20:03 AM
+    Author     : BRANDON-PC
+*/
+table tr:nth-of-type(even) {
+    background-color: transparent !important;
+}
+
+.pointer:hover {
+    cursor: default;
+}
+
+.prices {
+    display: inline;
+    padding-right: 20px;
+}
+
+.inlineClass{
+    display: inline;
+}
+
+.noBulletpoint {
+    list-style-type: none;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.centerAlign {
+    text-align: center;
+}
+
+.bookDescription {
+    text-align: justify;
+    padding-right: 25px;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.noborder{
+    border: none;
+    border-collapse: separate;
+}
+
+.strikethrough {
+    position: relative;
+}
+
+.redFont{
+    color: red;
+}
+
+.strikethrough:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid;
+    border-color: inherit;
+
+    -webkit-transform:rotate(-5deg);
+    -moz-transform:rotate(-5deg);
+    -ms-transform:rotate(-5deg);
+    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
+}
+
