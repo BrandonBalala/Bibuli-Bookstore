@@ -11,6 +11,7 @@ import com.g4w16.entities.ReviewsPK;
 import com.g4w16.persistence.BooksJpaController;
 import com.g4w16.persistence.ClientJpaController;
 import com.g4w16.persistence.ReviewsJpaController;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -27,8 +29,8 @@ import javax.inject.Named;
  * @author Brandon Balala
  */
 @Named("productPageBB")
-@RequestScoped
-public class ProductPageBackingBean {
+@SessionScoped
+public class ProductPageBackingBean implements Serializable{
 
     private Books book;
     private Reviews review;

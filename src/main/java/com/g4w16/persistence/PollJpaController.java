@@ -26,14 +26,14 @@ import javax.transaction.UserTransaction;
  *
  * @author Brandon Balala
  */
-@Named
+@Named("pollController")
 @RequestScoped
 public class PollJpaController implements Serializable, PollJpaInterface {
 
     @Resource
     private UserTransaction utx;
 
-    @PersistenceContext(unitName = "bookstorePU")
+    @PersistenceContext//(unitName = "bookstorePU")
     private EntityManager em;
 
     /**

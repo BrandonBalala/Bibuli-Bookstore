@@ -1375,7 +1375,7 @@ INSERT INTO reviews (Book, CreationDate, Client, Rating, Text, Approval) VALUES
 ("49", "2015-12-25 00:00:00", "57", "2", "lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede", "0"),
 ("50", "2015-12-25 00:00:00", "78", "1", "nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus", "0");
 
-INSERT INTO `poll`(`Question`, `FirstAnswer`, `SecondAnswer`, `ThirdAnswer`, `FourthAnswer`)
-VALUES ("What is your native language?", "English", "French", "Spanish", "Other"),
-        ("What is your current status?", "Student", "Employed", "Retired", "Other"),
-        ("How old are you?", "Under 18", "18-30", "31-65", "Over 65");
+INSERT INTO `poll`(`Question`, `FirstAnswer`, `SecondAnswer`, `ThirdAnswer`, `FourthAnswer`, `FirstCount`, `SecondCount`, `ThirdCount`, `FourthCount`)
+VALUES ("What is your native language?", "English", "French", "Spanish", "Other", 15, 10, 30, 10),
+        ("What is your current status?", "Student", "Employed", "Retired", "Other", 20, 12, 18, 23),
+        ("How old are you?", "Under 18", "18-30", "31-65", "Over 65", 16, 32, 45, 10);

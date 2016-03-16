@@ -15,13 +15,12 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Bibuli | #{productPageBB.book.title}</title>
         <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
-        <link rel="stylesheet" href="resources/css/foundation/foundation-icons.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/mycss.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/fluidity/fluidity.css"/>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="../resources/css/foundation/foundation-icons.css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/mycss.css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/fluidity/fluidity.css"/>
     </h:head>
     <h:body>
-        <c:set var="test" value="#{productPageBB.setBook(bookController.findBookByID(1))}" scope='request'/>
+<!--        <c:set var="test" value="#productPageBB.setBook(bookController.findBookByID(92))}" scope='request'/>-->
         <hr/>
         <br/>
 
@@ -40,7 +39,7 @@ and open the template in the editor.
 
         <div class="row">
             <div class="medium-5 columns text-center">
-                <img class="thumbnail" src="resources/images/#{productPageBB.book.id}.jpg" alt="Book cover" width="350"/> 
+                <img class="thumbnail" src="../resources/images/#{productPageBB.book.id}.jpg" alt="Book cover" width="350"/> 
             </div>
             <div class="medium-7 columns">
                 <p:rating value="#{productPageBB.averageRating}" readonly="true"/><br/>
@@ -54,34 +53,19 @@ and open the template in the editor.
                     </ul>
                 </h5>
                 <p class="bookDescription"><h:outputText value="#{productPageBB.book.description}"/></p>
-                <!--                <label>Size
-                                    <select>
-                                        <option value="husker">Small</option>
-                                        <option value="starbuck">Medium</option>
-                                        <option value="hotdog">Large</option>
-                                        <option value="apollo">Yeti</option>
-                                    </select>
-                                </label>-->
-                <!--                <div class="row">
-                                    <div class="small-3 columns">
-                                        <label for="middle-label" class="middle">Quantity</label>
-                                    </div>
-                                    <div class="small-9 columns">
-                                        <input type="text" id="middle-label" placeholder="One fish two fish">
-                                    </div>
-                                </div>-->
+                
                 <ul>
                     <c:if test="#{productPageBB.book.salePrice eq 0}">
-                        <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.booklistPrice}"/></li>
+                        <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.book.listPrice}"/></li>
                     </c:if>
                     <c:if test="#{productPageBB.book.salePrice ne 0}">
                         <li class="prices"><b>List Price: </b><h:outputText value="#{productPageBB.book.listPrice}$" class="strikethrough"/></li>
-                        <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.book.salePrice}"/></li>
+                        <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.book.salePrice}$"/></li>
                         <li class="prices redFont"><b><h:outputText value="#{productPageBB.savingsPercentage}"/>% OFF</b></li>
                     </c:if>
                 </ul>
                 <a href="#" class="button expanded hollow step fi-shopping-cart size-12">Add to Cart</a>
-                <label>All available Formats
+                <label>Available formats after purchase:
                     <div class="small secondary expanded button-group">
                         <ui:repeat value="#{productPageBB.book.bookFormatsList}" var="theBookFormat">
                             <a class="button pointer"><h:outputText value="#{theBookFormat.format1.type}"/></a>   
@@ -194,20 +178,13 @@ and open the template in the editor.
 
         <br/>
         <hr/>
-        <!--        <div class="row column">
-                    <hr>
-                    <ul class="menu">
-                        <li>Yeti Store</li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li class="float-right">Copyright 2016</li>
-                    </ul>
-                </div>-->
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+
         <script>
-            $(document).foundation();
+            $(window).load(function () {
+                $(document).foundation();
+            });
         </script>
     </h:body>
 </html>
