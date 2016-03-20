@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui" 
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Search Results</title>
         <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
@@ -14,51 +15,64 @@
     </h:head>
     <h:body>
         <c:set var="test" value="#{resultBB.setBookList(bookController.findBooksByYear(2011))}" scope='request'/>
+        <hr/>
 
+        <div class="row">
+            <div class="panel medium-9 columns text-left">
+                <h4><h:outputText value="#{resultBB.bookList.size()} book(s) found."/></h4>
+            </div>
+            <h:form>
+                <div class="medium-3 columns text-right">
+                    <label>Sort By
+                        <h:selectOneMenu value="#{resultBB.sortBy}">
+                            <f:selectItem itemValue=" " itemLabel=""/>
+                            <f:selectItem itemValue="cheapestFirst" itemLabel="Price: Low to High"/>
+                            <f:selectItem itemValue="expensiveFirst" itemLabel="Price: High to Low"/>
+                            <f:selectItem itemValue="newestFirst" itemLabel="Newest Arrivals First"/>
+                            <f:selectItem itemValue="oldestFirst" itemLabel="Oldest Arrivals First"/>
+                            <f:selectItem itemValue="highestRatingFirst" itemLabel="Avg. Customer Review"/>
+                            <f:ajax listener="#{resultBB.sortBooks}" render="result booksResult"/>
+                        </h:selectOneMenu>
+                    </label>
+                </div>
+            </h:form>
+            
+            <h:outputText id="result" value="TESTING PURPOSE: #{resultBB.sortBy}" />
+        </div>
         <div class="row small-up-1 medium-up-2 large-up-4">
             <br/>
-            <ui:repeat value="#{resultBB.bookList}" var="theBook">
-                <div class="column">
-                    <div class="image-wrapper overlay-fade-in-new-background">
-                        <img class="thumbnail resultImage" src="resources/images/#{theBook.id}.jpg" alt="Book cover"/>
-                        <div class="image-overlay-content">
-                            <h2><h:outputText value="#{theBook.title}"/></h2>
+            <h:panelGroup id="booksResult">
+                <ui:repeat value="#{resultBB.bookList}" var="theBook">
+                    <div class="column">
+                        <div class="image-wrapper overlay-fade-in-new-background">
+                            <img class="thumbnail resultImage" src="resources/images/#{theBook.id}.jpg" alt="Book cover"/>
+                            <div class="image-overlay-content">
+                                <h2><h:outputText value="#{theBook.title}"/></h2>
 
-                            <c:if test="#{theBook.salePrice eq 0}">
-                                <p class="price"><h:outputText value="#{theBook.listPrice}"/></p>
-                            </c:if>
-                            <c:if test="#{theBook.salePrice ne 0}">
-                                <p class="price">
-                                    <h:outputText value="#{theBook.listPrice}$" class="strikethrough"/>&nbsp;
-                                    <h:outputText value="#{theBook.salePrice}$" class="redFont"/>
-                                </p>
-                                <!--                                <li class="prices redFont"><b><h:outputText value="{productPageBB.savingsPercentage}"/>% OFF</b></li>-->
-                            </c:if>
+                                <c:if test="#{theBook.salePrice eq 0}">
+                                    <p class="price"><h:outputText value="#{theBook.listPrice}"/></p>
+                                </c:if>
+                                <c:if test="#{theBook.salePrice ne 0}">
+                                    <p class="price">
+                                        <h:outputText value="#{theBook.listPrice}$" class="strikethrough"/>&nbsp;
+                                        <h:outputText value="#{theBook.salePrice}$" class="redFont"/>
+                                    </p>
+                                </c:if>
 
-                            <br/>
-                            <h:form>
-                                <h:commandButton type="submit" class="button secondary expanded" value="Buy" action="#{resultBB.displayProductPage(theBook)}"/>
-<!--                                    <ui:param name="product" value="#theBook}" />
-                                </h:commandButton>-->
-                            </h:form>
-                            <!--                            <a command="#" class="button secondary expanded">Buy</a>-->
+                                <br/>
+                                <h:form>
+                                    <h:commandButton type="submit" class="button secondary expanded hollow" value="Buy Now" action="#{resultBB.displayProductPage(theBook)}"/>
+                                </h:form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </ui:repeat>
+                </ui:repeat>
+            </h:panelGroup>
 
-            <!--            <div class="column">
-                            <div class="image-wrapper overlay-fade-in-new-background">
-                                <img class="thumbnail" src="http://placehold.it/150x225" />
-                                <div class="image-overlay-content">
-                                    <h2>1</h2>
-                                    <p class="price">$189,000</p>
-                                    <br/>
-                                    <a href="#" class="button secondary expanded">Buy</a>
-                                </div>
-                            </div>
-                        </div>-->
+            <br/>
         </div>
+
+        <hr/>
 
 
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

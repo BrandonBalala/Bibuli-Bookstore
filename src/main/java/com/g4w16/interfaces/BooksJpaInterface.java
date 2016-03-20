@@ -33,6 +33,7 @@ public interface BooksJpaInterface{
     public List<Books> findBooksByContributorName(String name);
     public List<Books> findBooksByFormat(String format);
     public List<Books> findBooksByGenre(String genre);
+    public List<Books> findRecommendedBook(String genre, int bookID);
     public List<Books> findNewestBooks(int amount);
     public List<Books> findRecentlyAddedBooks(int amount);
     public List<Books> findBestSellingBook(int amount);

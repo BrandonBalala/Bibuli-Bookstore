@@ -20,7 +20,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="../resources/css/fluidity/fluidity.css"/>
     </h:head>
     <h:body>
-<!--        <c:set var="test" value="#productPageBB.setBook(bookController.findBookByID(92))}" scope='request'/>-->
+        <!--        <c:set var="test" value="#productPageBB.setBook(bookController.findBookByID(92))}" scope='request'/>-->
         <hr/>
         <br/>
 
@@ -32,17 +32,18 @@ and open the template in the editor.
                             <li class="disabled">Gene Splicing</li>
                             <li>
                                 <span class="show-for-sr">Current: </span> Cloning
-                            </li>
+                            </li>6>
                         </ul>
                     </nav>
                 </div>-->
 
         <div class="row">
-            <div class="medium-5 columns text-center">
+            <div class="medium-12 large-5 columns text-center">
                 <img class="thumbnail" src="../resources/images/#{productPageBB.book.id}.jpg" alt="Book cover" width="350"/> 
             </div>
-            <div class="medium-7 columns">
-                <p:rating value="#{productPageBB.averageRating}" readonly="true"/><br/>
+            <div class="medium-12 large-7 columns">
+                <p:rating value="#{productPageBB.averageRating}" readonly="true"/>
+                <h6><small><h:outputText value=" #{productPageBB.book.reviewsList.size()} customer reviews" class="inline paddingLeft"/></small></h6>
                 <h3><h:outputText value="#{productPageBB.book.title}"/></h3>
                 <h5>
                     <ul>
@@ -53,8 +54,8 @@ and open the template in the editor.
                     </ul>
                 </h5>
                 <p class="bookDescription"><h:outputText value="#{productPageBB.book.description}"/></p>
-                
-                <ul>
+
+                <ul class="centerAlign">
                     <c:if test="#{productPageBB.book.salePrice eq 0}">
                         <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.book.listPrice}"/></li>
                     </c:if>
@@ -140,37 +141,32 @@ and open the template in the editor.
                     </h:form>
                 </div>
                 <div class="tabs-panel is-active" id="panel3">
-                    <div class="row medium-up-3 large-up-5">
-                        <div class="column">
-                            <img class="thumbnail" src="http://placehold.it/350x200"/>
-                            <h5>Other Product <small>$22</small></h5>
-                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
-                        </div>
-                        <div class="column">
-                            <img class="thumbnail" src="http://placehold.it/350x200"/>
-                            <h5>Other Product <small>$22</small></h5>
-                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
-                        </div>
-                        <div class="column">
-                            <img class="thumbnail" src="http://placehold.it/350x200"/>
-                            <h5>Other Product <small>$22</small></h5>
-                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
-                        </div>
-                        <div class="column">
-                            <img class="thumbnail" src="http://placehold.it/350x200"/>
-                            <h5>Other Product <small>$22</small></h5>
-                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
-                        </div>
-                        <div class="column">
-                            <img class="thumbnail" src="http://placehold.it/350x200"/>
-                            <h5>Other Product <small>$22</small></h5>
-                            <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                            <a href="#" class="button hollow tiny expanded">Buy Now</a>
-                        </div>
+                    <div class="row small-up-1 medium-up-2 large-up-4">
+                        <ui:repeat value="#{productPageBB.recommendedBookList}" var="theRecommendedBook">
+                            <div class="column">
+                                <div class="image-wrapper overlay-fade-in-new-background">
+                                    <img class="thumbnail recommendedImage" src="../resources/images/#{theRecommendedBook.id}.jpg" alt="Book cover"/>
+                                    <div class="image-overlay-content">
+                                        <h2><h:outputText value="#{theRecommendedBook.title}"/></h2>
+
+                                        <c:if test="#{theRecommendedBook.salePrice eq 0}">
+                                            <p class="price"><h:outputText value="#{theRecommendedBook.listPrice}"/></p>
+                                        </c:if>
+                                        <c:if test="#{theRecommendedBook.salePrice ne 0}">
+                                            <p class="price">
+                                                <h:outputText value="#{theRecommendedBook.listPrice}$" class="strikethrough"/>
+                                                <h:outputText value=" #{theRecommendedBook.salePrice}$" class="redFont"/>
+                                            </p>
+                                        </c:if>
+
+                                        <br/>
+                                        <h:form>
+                                            <h:commandButton type="submit" class="button secondary expanded hollow" value="Buy Now" action="#{productPageBB.displayProductPageRecommended(theRecommendedBook)}" />
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
                     </div>
                 </div>
             </div>

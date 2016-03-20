@@ -20,6 +20,10 @@ table tr:nth-of-type(even) {
     padding-right: 20px;
 }
 
+.paddingLeft{
+    padding-left: 5px;
+}
+
 .inlineClass{
     display: inline;
 }
@@ -139,8 +143,13 @@ table tr:nth-of-type(even) {
     transition-delay: 0.2s; }
 
 .resultImage{
-    width: 250px;
-    max-height: 300px
+    max-width: 275px;
+    height: 300px
+}
+
+.recommendedImage{
+    max-width: 300px;
+    height: 325px;
 }
 
 

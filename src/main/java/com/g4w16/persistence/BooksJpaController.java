@@ -710,6 +710,20 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
     }
 
     @Override
+    public List<Books> findRecommendedBook(String genre, int bookID) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        CriteriaQuery cq = cb.createQuery();
+        Root<Books> books = cq.from(Books.class);
+        Join genres = books.join("genreList");
+        cq.select(books).distinct(true);
+        cq.where(cb.equal(genres.get("type"), genre), cb.notEqual(books.get("id"), bookID));
+        TypedQuery<Books> query = em.createQuery(cq);
+
+        return (List<Books>) query.getResultList();
+    }
+
+    @Override
     public List<Books> findNewestBooks(int amount) {
         Query q = em.createQuery("SELECT b FROM Books b ORDER BY b.pubDate DESC");
         q.setMaxResults(amount);
@@ -757,9 +771,8 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
 //
 //        return (List<Books>) query.getResultList();
 //    }
-
     @Override
-    public void updateRemovalStatus(boolean status, int bookID) throws Exception{
+    public void updateRemovalStatus(boolean status, int bookID) throws Exception {
 //        Query q = em.createQuery("UPDATE Books b SET b.removalStatus = :status WHERE b.id  = :id");
 //        q.setParameter("status", status);
 //        q.setParameter("id", bookID);
