@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Bibuli | Shopping Cart</title>
+        <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
+        <link rel="stylesheet" href="resources/css/foundation/foundation-icons.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/mycss.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/fluidity/fluidity.css"/>
+    </h:head>
+    <h:body>
+        <c:set var="test" value="#{cartBB.setBookList(bookController.findBooksByYear(2011))}" scope='session'/>
+
+        <hr/>
+        <br/>
+
+        <div class="row">
+            <div class="panel medium-12 columns text-left">
+                <h4><h:outputText value="Your Cart"/></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 medium-12 large-9 columns">
+                <div class="row">
+                    <div class="hidden-for-small medium-9 large-9 columns text-left">&#160;</div>
+                    <div class="hidden-for-small medium-2 large-2 columns text-left">
+                        Price
+                    </div>
+                    <div class="hidden-for-small medium-1 large-1 columns text-right">
+                        Actions
+                    </div>  
+                </div>
+                <ui:repeat value="#{cartBB.bookList}" var="theBook">
+                    <hr/>
+                    <div class="row">
+                        <div class="small-12 medium-3 large-3 columns text-center">
+                            <img class="thumbnail cartImage" src="resources/images/#{theBook.id}.jpg" alt="Book cover"/>
+                        </div>
+                        <div class="small-12 medium-6 large-6 columns text-left">
+                            <h:form>
+                                <h5><h:commandLink type="submit" value="#{theBook.title}" action="#{cartBB.displayProductPage(theBook)}"/></h5>
+                            </h:form>
+                            <h6>
+                                <ul>
+                                    <li class="inlineClass">By </li>
+                                    <ui:repeat value="#{theBook.contributorList}" var="contrib">
+                                        <li class="inlineClass">#{contrib.name} (#{contrib.contribution.type})</li>
+                                    </ui:repeat>
+                                </ul>
+                            </h6>
+                        </div>
+                        <div class="small-6 medium-2 large-2 columns text-left">
+                            <c:if test="#{theBook.salePrice eq 0}">
+                                <p><h:outputText value="#{theBook.listPrice}$" class="redFont"/></p>
+                            </c:if>
+                            <c:if test="#{theBook.salePrice ne 0}">
+                                <p>
+                                    <h:outputText value="#{theBook.salePrice}$" class="redFont"/>
+                                    <br/><br/>
+                                    You save:
+                                    <h:outputText value="#{theBook.listPrice}$" class="strikethrough"/>
+                                    <h:outputText value="&nbsp;(#{cartBB.getSavingsPercentage(theBook.salePrice, theBook.listPrice)}%)"/>
+                                </p>
+                            </c:if>
+                        </div>
+                        <div class="small-6 medium-1 large-1 columns text-right">
+                            <h:form>
+                                <h:commandLink type="submit" class="button alert step fi-trash size-12" action="#{cartBB.removeBookFromCart(theBook)}"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </ui:repeat>
+            </div>
+            <div class="small-12 medium-12 large-3 columns text-center">
+                <br/><br/>
+                <div class="callout secondary">
+                    <hr/>
+                    <br/>
+                    <h4>Subtotal <small><h:outputText value="(#{cartBB.bookList.size()} books)"/></small></h4>
+                    <p><h:outputText value="#{cartBB.subtotal}$"/></p>
+                    <h:form>
+                        <h:commandLink type="submit" class="button expanded success step fi-credit-card size-12" value=" Proceed to Checkout" action="#{cartBB.proceedToCheckout()}"/>
+                    </h:form>
+                    <br/>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+        <hr/>
+
+
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+
+        <script>
+            $(window).load(function () {
+                $(document).foundation();
+            });
+        </script>
+    </h:body>
+</html>
+

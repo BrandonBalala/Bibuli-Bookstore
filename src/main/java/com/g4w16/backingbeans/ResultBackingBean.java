@@ -84,7 +84,7 @@ public class ResultBackingBean {
                 Collections.sort(bookList, new Comparator<Books>() {
                     public int compare(Books b1, Books b2) {
                         BigDecimal priceB1 = (b1.getSalePrice() == BigDecimal.ZERO) ? b1.getListPrice() : b1.getSalePrice();
-                        BigDecimal priceB2 =(b2.getSalePrice() == BigDecimal.ZERO) ? b2.getListPrice() : b2.getSalePrice();
+                        BigDecimal priceB2 = (b2.getSalePrice() == BigDecimal.ZERO) ? b2.getListPrice() : b2.getSalePrice();
                         return priceB2.compareTo(priceB1);
                     }
                 });
@@ -98,10 +98,10 @@ public class ResultBackingBean {
             case "highestRatingFirst":
                 break;
         }
-        
+
         bookList.remove(0);
-        
-        for(Books book : bookList){
+
+        for (Books book : bookList) {
             sortBy += ", " + book.getSalePrice();
         }
     }

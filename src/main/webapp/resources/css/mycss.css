@@ -152,4 +152,9 @@ table tr:nth-of-type(even) {
     height: 325px;
 }
 
+.cartImage{
+    max-width: 150px;
+    height: 175px;
+}
+
 
