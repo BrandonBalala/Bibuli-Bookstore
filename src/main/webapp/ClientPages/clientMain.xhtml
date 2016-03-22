@@ -8,47 +8,8 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
-       
-        <div class="owl-carousel">
-            <div class="row small-up-1 medium-up-2 large-up-4">
-                        <ui:repeat value="#{productPageBB.recommendedBookList}" var="theRecommendedBook">
-                            <div class="column">
-                                <div class="image-wrapper overlay-fade-in-new-background">
-                                    <img class="thumbnail recommendedImage" src="../resources/images/#{theRecommendedBook.id}.jpg" alt="Book cover"/>
-                                    <div class="image-overlay-content">
-                                        <h2><h:outputText value="#{theRecommendedBook.title}"/></h2>
-
-                                        <c:if test="#{theRecommendedBook.salePrice eq 0}">
-                                            <p class="price"><h:outputText value="#{theRecommendedBook.listPrice}"/></p>
-                                        </c:if>
-                                        <c:if test="#{theRecommendedBook.salePrice ne 0}">
-                                            <p class="price">
-                                                <h:outputText value="#{theRecommendedBook.listPrice}$" class="strikethrough"/>
-                                                <h:outputText value=" #{theRecommendedBook.salePrice}$" class="redFont"/>
-                                            </p>
-                                        </c:if>
-
-                                        <br/>
-                                        <h:form>
-                                            <h:commandLink type="submit" class="button secondary expanded hollow step fi-shopping-cart size-12" action="#{productPageBB.displayProductPageRecommended(theRecommendedBook)}" />
-                                        </h:form>
-                                    </div>
-                                </div>
-                            </div>
-                        </ui:repeat>
-                    </div>
-        </div>
-        
-        
-        
-        
-        <script>$('.owl-carousel').owlCarousel({
-    items:4,
-    lazyLoad:true,
-    loop:true,
-    margin:10
-});</script>
+        Text
+        <h:outputText value="#{ClientMainBB.bestSellersCount}"/>
     </h:body>
 </html>
 
