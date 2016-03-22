@@ -27,11 +27,11 @@
         <div class="row">
             <div class="small-12 medium-12 large-9 columns">
                 <div class="row">
-                    <div class="hidden-for-small medium-9 large-9 columns text-left">&#160;</div>
-                    <div class="hidden-for-small medium-2 large-2 columns text-left">
+                    <div class="hidden-for-small small-4 medium-9 large-9 columns text-left">&#160;</div>
+                    <div class="hidden-for-small small-4 medium-2 large-2 columns text-left">
                         Price
                     </div>
-                    <div class="hidden-for-small medium-1 large-1 columns text-right">
+                    <div class="hidden-for-small small-4 medium-1 large-1 columns text-right">
                         Actions
                     </div>  
                 </div>
@@ -78,7 +78,7 @@
             </div>
             <div class="small-12 medium-12 large-3 columns text-center">
                 <br/><br/>
-                <div class="callout secondary">
+                <div class="callout secondary sticky">
                     <hr/>
                     <br/>
                     <h4>Subtotal <small><h:outputText value="(#{cartBB.bookList.size()} books)"/></small></h4>
@@ -99,6 +99,7 @@
 
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+        <script type="text/javascript" src="resources/js/stickySideBar.js"></script> 
 
         <script>
             $(window).load(function () {
