@@ -296,7 +296,7 @@ table tr:nth-of-type(even) {
 }
 
 #logoHeader{
-/*    width: 40px;*/
+    /*    width: 40px;*/
     max-height: 40px;    
 }
 
@@ -315,12 +315,17 @@ table tr:nth-of-type(even) {
 @font-face {
     font-family: pacifico;
     src: url("#{resource['font:Pacifico.ttf']}");
-/*    src: url(../font/Pacifico.ttf);*/
+    /*    src: url(../font/Pacifico.ttf);*/
 }
 
 .bibuliFont{
     font-size: 30px;
     font-family: pacifico;
+}
+
+.removePaddingLeft{
+    padding-left: 0px !important;
+    margin-left: 0px !important;
 }
 
 .pacificoFont{
@@ -329,11 +334,29 @@ table tr:nth-of-type(even) {
 }
 
 .menu li a{
-/*    line-height: 0 !important;*/
+    /*    line-height: 0 !important;*/
 }
 
 .title-bar{
     padding: 0 !important;
+}
+
+.anchorBibuli {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.anchorBibuli:hover 
+{
+    color:orange; 
+    text-decoration:none; 
+    cursor:pointer;  
+}
+
+li a:hover{
+    color:orange; 
+    text-decoration:none; 
+    cursor:pointer;
 }
 
 
