@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title><ui:insert name="title" /></title>
+        <link rel="stylesheet" type="text/css" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
+        <link rel="stylesheet" type="text/css" href="#{resource['css:foundation/foundation-icons.css']}"/>
+        <link rel="stylesheet" type="text/css" href="#{resource['css:mycss.css']}"/>
+        <link rel="stylesheet" type="text/css" href="#{resource['css:fluidity/fluidity.css']}"/>
+        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
+        <link rel="icon" href="resources/images/logo.png"/>
+    </h:head>
+    <h:body>
+        <!--        <h:outputStylesheet library="css" name="mycss.css" />-->
+
+        <div data-sticky-container="" id="header">
+            <div class="title-bar removeMarginTop" data-sticky="" style="width:100%;background-color: #1e1b1b" >
+                <div class="title-bar-left">
+                    <ul class="dropdown menu inline-list" data-dropdown-menu=""> 
+                        <!--homepage.xhtml pas define / change img to graphicimg-->
+                        <li class="menu-text bibuliFont"><img id="logoHeader" src="#{resource['images:logo.png']}"/> Bibuli</li>
+                        <li>
+                            <a href="#" class="whiteFont"><i class="fi-book"></i>Books</a>
+                            <ul class="menu vertical inline-list blackBackgroundColor">
+                                <li><a href="#" class="whiteFont blackBackgroundColor">Shop All</a></li>
+                                <li>
+                                    <a href="#" class="whiteFont blackBackgroundColor">By Genre</a>
+                                    <ul class="vertical menu blackBackgroundColor">
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">Comedy</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">Cookbooks</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">Science Fiction</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">Graphic Novels</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">Hisotry</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="whiteFont blackBackgroundColor">By Format</a>
+                                    <ul class="vertical menu blackBackgroundColor">
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">PDF</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">PDB</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">EPUB</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">MOBI</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--                        <li><input type="search" placeholder="Search"/></li>
+                                                <li><button type="button" class="button">Search</button></li>-->
+                    </ul>
+                </div>
+                <div class="title-bar-right">
+                    <ul class="dropdown menu inline-list" style="padding: 10px">
+                        <li>
+                            <div class="box">
+                                <div class="container-4">
+                                    <input type="search" id="search" placeholder="Search..." />
+                                    <button class="icon"><i class="fi-magnifying-glass"></i></button>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"/>
+                        <li><a href="#" class="whiteFont"><i class="fi-info"></i> Help</a></li>
+                        <li><h:link class="whiteFont fi-shopping-cart" value=" Cart" outcome="shopping-cart" /></li>
+                        <!--                        <li><a href="#" class="whiteFont"><i class="fi-shopping-cart"></i> Cart</a></li>-->
+                        <li>
+                            <ul class="dropdown menu" data-dropdown-menu="">
+                                <li>
+                                    <a href="#" class="whiteFont"><i class="fi-torso-business"></i> Actions</a>
+                                    <ul class="menu vertical whiteFont blackBackgroundColor" >
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">Login</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">Logout</a></li>
+                                        <li><a href="#" class="whiteFont blackBackgroundColor">Register</a></li> 
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="whiteFont">EN</a></li>
+                        <li><a href="#" class="whiteFont">FR</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="background-color: whitesmoke">
+            <ui:insert name="content" />
+        </div>
+
+        <footer class="footer">
+            <div class="row full-width">
+                <div class="small-12 medium-3 large-4 columns">
+                    <br/>
+                    <img id="logoFooter" src="#{resource['images:logo.png']}"/>
+                    <br/><br/>
+                    <h6>
+                        &#169; 2016 - Bibuli e-Books, Inc.<br/>
+                        3040 Rue Sherbrooke Ouest<br/>
+                        Montreal, QC, H32 1A4
+                    </h6>
+                </div>
+                <div class="small-12 medium-3 large-4 columns">
+                    <i class="fi-torsos-all"></i>
+                    <ul class="footer-links pacificoFont">
+                        <li><a href="#">Annie So</a></li>
+                        <li><a href="#">Dan Wang</a></li>
+                        <li><a href="#">Paul Corrand</a></li>
+                        <li><a href="#">Brandon Balala</a></li>
+                        <li><a href="#">Ofer Nitka-Nakash</a></li>
+                    </ul>
+                </div>
+                <div class="small-6 medium-3 large-2 columns">
+                    <h4>The Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="small-6 medium-3 large-2 columns">
+                    <h4>Follow Us</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">GitLab</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+
+        <script>
+            $(window).load(function () {
+                $(document).foundation();
+            });
+        </script>
+    </h:body>
+</html>
+
