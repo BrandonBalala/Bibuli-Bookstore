@@ -6,7 +6,7 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Client;
-import com.g4w16.jsf.controller.util.MessageUtil;
+import com.g4w16.jsf.util.MessageUtil;
 import com.g4w16.persistence.ClientJpaController;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
