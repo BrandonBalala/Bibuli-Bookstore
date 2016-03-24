@@ -23,7 +23,12 @@
                 <div class="title-bar-left">
                     <ul class="dropdown menu inline-list" data-dropdown-menu=""> 
                         <!--homepage.xhtml pas define / change img to graphicimg-->
-                        <li class="menu-text bibuliFont"><img id="logoHeader" src="#{resource['images:logo.png']}"/> Bibuli</li>
+                        <li class="menu-text">
+                            <img id="logoHeader" src="#{resource['images:logo.png']}"/> 
+                        </li>
+                        <li class="menu-text bibuliFont removePaddingLeft whiteFont">
+                            <a class="removePaddingLeft anchorBibuli" href="#{request.contextPath}"> Bibuli</a>
+                        </li>
                         <li>
                             <a href="#" class="whiteFont"><i class="fi-book"></i>Books</a>
                             <ul class="menu vertical inline-list blackBackgroundColor">
