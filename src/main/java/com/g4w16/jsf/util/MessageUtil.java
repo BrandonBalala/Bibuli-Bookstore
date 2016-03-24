@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.g4w16.jsf.controller.util;
+package com.g4w16.jsf.util;
 
 import java.text.MessageFormat;
 import java.util.Locale;

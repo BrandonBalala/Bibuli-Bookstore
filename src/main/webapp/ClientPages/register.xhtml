@@ -18,61 +18,61 @@
                     <h:panelGrid columns="3" cellpadding="1" border="0">                       
 
                         <h:outputLabel value="#{bundle.titleLabel}" for="title" />
-                        <h:selectOneMenu id="title" value="#{registerController.client.title}" required="true" requiredMessage="#{bundle.titleRequired}" >
-                              <c:forEach var="item" items="#{titleController.getTitles()}">
+                        <h:selectOneMenu id="title" value="#{registerBB.client.title}" required="true" requiredMessage="#{bundle.titleRequired}" >
+                              <c:forEach var="item" items="#{titleBB.getTitles()}">
                                   <f:selectItem itemValue="#{item.id}" itemLabel="#{bundle[item.id]}"/>
                               </c:forEach>
                             </h:selectOneMenu>
                          <p:message for="title" style="color:red"/>
                         
                         <p:outputLabel for="firstName" value="#{bundle.firstNameLabel}"/>
-                        <p:inputText id="firstName" value="#{registerController.client.firstName}" required="true"
+                        <p:inputText id="firstName" value="#{registerBB.client.firstName}" required="true"
                                      requiredMessage="#{bundle.firstNameRequired}"/>
                         <p:message for="firstName" style="color:red"/>
 
                       
                         <p:outputLabel for="lastName" value="#{bundle.lastNameLabel}"/>
-                        <p:inputText id="lastName" value="#{registerController.client.lastName}"  required="true"
+                        <p:inputText id="lastName" value="#{registerBB.client.lastName}"  required="true"
                                      requiredMessage="#{bundle.lastNameRequired}"/>
                         <p:message for="lastName" style="color:red"/>
 
                         
                         <p:outputLabel for="companyName" value="#{bundle.companyNameLabel}"/>
-                        <p:inputText id="companyName" value="#{registerController.client.companyName}"/>
+                        <p:inputText id="companyName" value="#{registerBB.client.companyName}"/>
                         <p:message for="companyName" style="color:red"/>
 
                         <p:outputLabel for="homePhoneNumber" value="#{bundle.homePhoneNumberLabel}"/>
-                        <p:inputMask id="homePhoneNumber" value="#{registerController.client.homePhoneNumber}" required="true"
+                        <p:inputMask id="homePhoneNumber" value="#{registerBB.client.homePhoneNumber}" required="true"
                                      requiredMessage="#{bundle.homePhoneRequired}"
                                      mask="(999) 999-9999" />
                         <p:message for="homePhoneNumber" style="color:red"/>
 
                         <p:outputLabel for="cellPhoneNumber" value="#{bundle.cellPhoneNumberLabel}"/>
-                        <p:inputMask id="cellPhoneNumber" value="#{registerController.client.cellPhoneNumber}"
+                        <p:inputMask id="cellPhoneNumber" value="#{registerBB.client.cellPhoneNumber}"
                                      mask="(999) 999-9999" />
                         <p:message for="cellPhoneNumber" style="color:red"/>
 
                         <p:outputLabel for="email" value="#{bundle.emailLabel}"/>
-                        <p:inputText id="email" value="#{registerController.client.email}" required="true"
+                        <p:inputText id="email" value="#{registerBB.client.email}" required="true"
                                      requiredMessage="#{bundle.emailRequired}"/>
                         <p:message for="email" style="color:red"/>
 
                         <p:outputLabel for="password" value="#{bundle.passwordLabel}"/>
-                        <p:password id="password" value="#{registerController.client.password}" feedback="true"
+                        <p:password id="password" value="#{registerBB.client.password}" feedback="true"
                                     required="true" promptLabel="#{bundle.passwordPrompt}"
                                     weakLabel="#{bundle.weakPassword}" goodLabel="#{bundle.goodPassword}" strongLabel="#{bundle.strongPassword}"
                                     requiredMessage="#{bundle.passwordRequired}" match="password2"/>
                         <p:message for="password" style="color:red"/>
 
                         <p:outputLabel for="password2" value="#{bundle.passwordConfirmLabel}"/>
-                        <p:password id="password2" value="#{registerController.client.password}" feedback="false"
+                        <p:password id="password2" value="#{registerBB.client.password}" feedback="false"
                                     required="true" requiredMessage="#{bundle.passwordConfirmRequired}"/>
                         <p:message for="password2" style="color:red"/>
 
                     </h:panelGrid>
                     <p:commandButton id="primebutton" value="#{bundle.registerButton}"
                                      style="display: block;margin: 0 auto;"
-                                     action="#{registerController.register()}" ajax="false" />
+                                     action="#{registerBB.register()}" ajax="false" />
 
                 </p:panel>
             </h:panelGrid>
