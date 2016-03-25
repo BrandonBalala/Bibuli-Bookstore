@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
+        <title>Admin Not Approval Reviews</title>
+    </head>
+    <body>
+        <ui:composition template="admin_template.xhtml">
+            <ui:define name="title">
+                <h:outputText value="Not Approval Reviews"></h:outputText>
+            </ui:define>
+            <ui:define name="body">
+                <!-- Content Wrapper. Contains page content -->
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Not Approval Reviews ( <h:outputText value="#{notApprovalReviewBB.falseReviewsAccount}"/>  Reviews )
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="faces/admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Not Approval Reviews</a></li>
+                    </ol>
+                </section>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">                                    
+                                <div class="box-body">
+
+                                    <h:form>
+                                        <p:dataTable var="review" value="#{notApprovalReviewBB.reviews}" rows="5"
+                                                     paginator="true"
+                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15"
+                                                     editable="true" editMode="cell" widgetVar="cellReviews">
+                                            
+                                            <p:ajax event="cellEdit" listener="#{notApprovalReviewBB.onCellEdit}" update=":form:msgs" />  
+
+                                            <p:column headerText="Book Id" sortBy="#{review.reviewsPK.book}" filterBy="#{review.reviewsPK.book}" filterMatchMode="contains" style="width:115px">
+                                                <h:outputText value="#{review.reviewsPK.book}" />
+                                            </p:column>
+
+                                            <p:column headerText="Creation Date" sortBy="#{review.creationDate}" filterBy="#{review.creationDate}" filterMatchMode="contains" style="width:140px">
+                                                <h:outputText value="#{review.creationDate}" />
+                                            </p:column>
+
+                                            <p:column headerText="Client Id" sortBy="#{review.reviewsPK.client}" filterBy="#{review.reviewsPK.client}" filterMatchMode="contains" style="width:115px">
+                                                <h:outputText value="#{review.reviewsPK.client}" />
+                                            </p:column>
+
+                                            <p:column headerText="Rating" sortBy="#{review.rating}" filterBy="#{review.rating}" filterMatchMode="contains" style="width:115px">
+                                                <h:outputText value="#{review.rating}" />
+                                            </p:column>
+
+                                            <p:column headerText="Review Text" sortBy="#{review.text}" filterBy="#{review.text}" filterMatchMode="contains" style="width:900px">
+                                                <h:outputText value="#{review.text}" />
+                                            </p:column>
+
+                                            <p:column headerText="Approval Status" sortBy="#{review.approval}" filterBy="#{review.approval}" filterMatchMode="contains" style="width:115px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"> <h:outputText value="#{review.approval}" /></f:facet>
+                                                    <f:facet name="input">
+                                                        <h:selectOneMenu value="#{review.approval}" style="width:100%">
+                                                            <f:selectItems value="#{notApprovalReviewBB.status}" var="status" itemLabel="#{status}" itemValue="#{status}" />
+                                                        </h:selectOneMenu>
+                                                    </f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <!--                                           <p:column headerText="Delete" style="width:64px">
+                                                                                             actionListener="" 
+                                                                                                                                            <p:commandButton id="edit" icon="fa fa-fw fa-edit" type="button"/>
+                                                                                            <p:commandButton id="delete" title="remove" update="table" actionListener="#{notApprovalReviewBB.onDelete(review)}" icon="fa fa-fw fa-remove" type="button"/>
+                                                                                        </p:column>-->
+                                        </p:dataTable>
+                                    </h:form>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box --> 
+                        </div>
+                    </div>
+                </section>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

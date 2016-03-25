@@ -253,7 +253,7 @@ public class ReviewsJpaControllerTest {
     public void testUpdateRemovalStatus() throws Exception {
         System.out.println("updateRemovalStatus");
         ReviewsPK pk=new ReviewsPK(1,20);
-        reviewJpaController.updateRemovalStatus(pk);
+        reviewJpaController.updateApprovalStatus(pk);
         Boolean expResult = true;
         Boolean result = reviewJpaController.findReviewByPK(pk).getApproval();
         assertEquals(expResult, result);

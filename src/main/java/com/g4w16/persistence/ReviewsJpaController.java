@@ -269,7 +269,7 @@ public class ReviewsJpaController implements Serializable {
         return result;
     }
 
-    public void updateRemovalStatus(ReviewsPK id) throws Exception {
+    public void updateApprovalStatus(ReviewsPK id) throws Exception {
         Reviews review = findReviewByPK(id);
         review.setApproval(true);
         edit(review);
