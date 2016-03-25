@@ -7,12 +7,15 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Books;
 import com.g4w16.persistence.BooksJpaController;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,8 +24,8 @@ import javax.inject.Named;
  * @author Brandon Balala
  */
 @Named("resultBB")
-@RequestScoped
-public class ResultBackingBean {
+@SessionScoped
+public class ResultBackingBean implements Serializable {
 
     private List<Books> bookList;
     private String sortBy;
@@ -32,6 +35,11 @@ public class ResultBackingBean {
 
     @Inject
     private ProductPageBackingBean productBB;
+
+    @PostConstruct
+    public void init() {
+        bookList = bookController.findBooksByYear(2011);
+    }
 
     public List<Books> getBookList() {
         if (bookList == null) {
