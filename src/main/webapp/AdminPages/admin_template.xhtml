@@ -1,39 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
 
-        <meta charset="utf-8"></meta>
+<!--        <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
+         Tell the browser to be responsive to screen width 
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>-->
 
         <!-- In the content of each page have <ui:define name="windowTitle">Title</ui:define> -->
         <title><ui:insert name="title" /></title>
 
         <!-- Bootstrap 3.3.5 -->
-        <link rel="stylesheet" href="resources/admin/bootstrap/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="#{resource['css:foundation/foundation-icons.css']}"/>
+        <link rel="stylesheet" href="#{resource['admin:bootstrap/css/bootstrap.min.css']}"></link>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
         <!-- Theme style -->
-        <link rel="stylesheet" href="resources/admin/dist/css/AdminLTE.min.css"></link>
-        <link rel="stylesheet" href="resources/admin/dist/css/skins/skin-black.min.css"></link>
-
-        <!-- REQUIRED JS SCRIPTS -->
-        <!-- jQuery 2.1.4 -->
-        <script src="resources/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <!-- Bootstrap 3.3.5 -->
-        <script src="resources/admin/bootstrap/js/bootstrap.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="resources/admin/dist/js/app.min.js"></script>
+        <link rel="stylesheet" href="#{resource['admin:dist/css/AdminLTE.min.css']}"></link>
+        <link rel="stylesheet" href="#{resource['admin:dist/css/skins/skin-black.min.css']}"></link>
     </h:head>
     <h:body class="hold-transition skin-black sidebar-mini">
         <div class="wrapper">
@@ -80,7 +73,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">Navigation</li>     
                     <li class="active"><a href="faces/admin_home.xhtml"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                    <li><a href="faces/admin_books.xhtml"><i class="fa fa-book"></i> <span>Inventory</span></a></li>                  
+                    <li><a href="admin_books.xhtml"><i class="fa fa-book"></i> <span>Inventory</span></a></li>
                     <li><a href="faces/admin_sales.xhtml"><i class="fa fa-dollar"></i> <span>Sales</span></a></li>
                     <li><a href="faces/admin_clients.xhtml"><i class="fa fa-user"></i> <span>Clients</span></a></li>
                     <li><a href="faces/admin_orders.xhtml"><i class="fa fa-money"></i> <span>Orders</span></a></li>
@@ -113,5 +106,13 @@
             <!-- Default to the left -->
             <strong>Copyright &copy; 2016 <a href="#">Bibuli e-books</a>.</strong> All rights reserved.
         </footer>
+
+        <!-- REQUIRED JS SCRIPTS -->
+        <!-- jQuery 2.1.4 -->
+        <script src="#{resource['admin:plugins/jQuery/jQuery-2.1.4.min.js']}"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="#{resource['admin:bootstrap/js/bootstrap.min.js']}"></script>
+        <!-- AdminLTE App -->
+        <script src="#{resource['admin:dist/js/app.min.js']}"></script>|
     </h:body>
 </html>
