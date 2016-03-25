@@ -3,103 +3,76 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <head>
+        <!-- DataTables -->
         <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
-        <title>Admin View Reviews</title>
+        <title>Admin All Reviews</title>
     </head>
     <body>
         <ui:composition template="admin_template.xhtml">
             <ui:define name="title">
-                View Reviews
+                <h:outputText value="All Reviews"></h:outputText>
             </ui:define>
             <ui:define name="body">
+                <!-- Content Wrapper. Contains page content -->
+                <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        All Reviews
+                        Reviews 
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i>Reviews</a></li>
-                        <li class="active">View Reviews</li>
+                        <li><a href="faces/admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Reviews</a></li>
                     </ol>
                 </section>
                 <section class="content">
-                    <div class="col-sm-6">
-                        <div class="dataTables_filter" id="example1_filter">
-                            <label>Search:<input aria-controls="example1" placeholder="" class="form-control input-sm" type="search"></input>
-                            </label>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="box">
+                            <div class="box">                                    
                                 <div class="box-body">
-                                    <h:form styleClass="jsfcrud_list_form">
-                                        <h:panelGroup id="messagePanel" layout="block">
-                                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                                        </h:panelGroup>
-                                        <h:outputText escape="false" value="#{bundle.ListReviewsEmpty}" rendered="#{reviewsController.items.rowCount == 0}"/>
-                                        <h:panelGroup rendered="#{reviewsController.items.rowCount > 0}">
-                                            <h:outputText value="#{reviewsController.pagination.pageFirstItem + 1}..#{reviewsController.pagination.pageLastItem + 1}/#{reviewsController.pagination.itemsCount}"/>
-                                            <h:commandLink action="#{reviewsController.previous}" value="#{bundle.Previous} #{reviewsController.pagination.pageSize}" rendered="#{reviewsController.pagination.hasPreviousPage}"/>
-                                            <h:commandLink action="#{reviewsController.next}" value="#{bundle.Next} #{reviewsController.pagination.pageSize}" rendered="#{reviewsController.pagination.hasNextPage}"/>
-                                            <h:dataTable value="#{reviewsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                                                <h:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="#{bundle.ListReviewsTitle_creationDate}"/>
-                                                    </f:facet>
-                                                    <h:outputText value="#{item.creationDate}">
-                                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                                    </h:outputText>
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="#{bundle.ListReviewsTitle_rating}"/>
-                                                    </f:facet>
-                                                    <h:outputText value="#{item.rating}"/>
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="#{bundle.ListReviewsTitle_text}"/>
-                                                    </f:facet>
-                                                    <h:outputText value="#{item.text}"/>
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="#{bundle.ListReviewsTitle_approval}"/>
-                                                    </f:facet>
-                                                    <h:outputText value="#{item.approval}"/>
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="#{bundle.ListReviewsTitle_books}"/>
-                                                    </f:facet>
-                                                    <h:outputText value="#{item.books}"/>
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="#{bundle.ListReviewsTitle_client1}"/>
-                                                    </f:facet>
-                                                    <h:outputText value="#{item.client1}"/>
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="&nbsp;"/>
-                                                    </f:facet>
-                                                    <h:commandLink action="#{reviewsController.prepareView}" value="#{bundle.ListReviewsViewLink}"/>
-                                                    <h:outputText value=" "/>
-                                                    <h:commandLink action="#{reviewsController.prepareEdit}" value="#{bundle.ListReviewsEditLink}"/>
-                                                    <h:outputText value=" "/>
-                                                    <h:commandLink action="#{reviewsController.destroy}" value="#{bundle.ListReviewsDestroyLink}"/>
-                                                </h:column>
-                                            </h:dataTable>
-                                        </h:panelGroup>
-                                        <br />
-                                        <br />
-                                        <br />
+
+                                    <h:form>
+                                        <p:growl id="msgs" showDetail="true"/>
+                                        <h3>
+                                            All Reviews ( <h:outputText value="#{reviewBB.allReviewsAccount}"/>  Reviews )
+                                        </h3>
+                                        <p:dataTable var="review" value="#{reviewBB.reviews}" rows="5"
+                                                     paginator="true"
+                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15">
+
+                                            <p:column headerText="Book Id" sortBy="#{review.reviewsPK.book}" filterBy="#{review.reviewsPK.book}" filterMatchMode="contains" style="width:35px">
+                                                <h:outputText value="#{review.reviewsPK.book}" />
+                                            </p:column>
+
+                                            <p:column headerText="Creation Date" sortBy="#{review.creationDate}" filterBy="#{review.creationDate}" filterMatchMode="contains" style="width:45px">
+                                                <h:outputText value="#{review.creationDate}" />
+                                            </p:column>
+
+                                            <p:column headerText="Client Id" sortBy="#{review.reviewsPK.client}" filterBy="#{review.reviewsPK.client}" filterMatchMode="contains" style="width:35px">
+                                                <h:outputText value="#{review.reviewsPK.client}" />
+                                            </p:column>
+
+                                            <p:column headerText="Rating" sortBy="#{review.rating}" filterBy="#{review.rating}" filterMatchMode="contains" style="width:35px">
+                                                <h:outputText value="#{review.rating}" />
+                                            </p:column>
+
+                                            <p:column headerText="Review Text" sortBy="#{review.text}" filterBy="#{review.text}" filterMatchMode="contains" style="width:300px">
+                                                <h:outputText value="#{review.text}" />
+                                            </p:column>
+
+                                            <p:column headerText="Approval Status" sortBy="#{review.approval}" filterBy="#{review.approval}" filterMatchMode="contains" style="width:35px">
+                                                <h:outputText value="#{review.approval}" />
+                                            </p:column>
+                                        </p:dataTable>
+
+                                        
+                                        
                                     </h:form>
-                                </div> 
-                            </div> 
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box --> 
                         </div>
                     </div>
                 </section>
@@ -107,4 +80,3 @@
         </ui:composition>
     </body>
 </html>
-

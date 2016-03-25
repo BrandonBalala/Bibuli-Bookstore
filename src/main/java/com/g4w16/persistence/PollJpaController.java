@@ -168,4 +168,9 @@ public class PollJpaController implements Serializable, PollJpaInterface {
         edit(poll);
     }
 
+    public int getAnswerCount(int pollId){
+        Poll poll = findPollByID(pollId);
+        int totalCount=poll.getFirstCount()+poll.getSecondCount()+poll.getThirdCount()+poll.getFourthCount();
+        return totalCount;
+    }
 }
