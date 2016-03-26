@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -40,7 +39,7 @@ public class MasterLayoutBackingBean implements Serializable {
     private BooksJpaController bookController;
     
     @Inject
-    private ResultBackingBean resulBB;
+    private ResultBackingBean resultBB;
     
     public List<Genre> getGenreList(){
         if(genreList == null){
@@ -73,7 +72,19 @@ public class MasterLayoutBackingBean implements Serializable {
     }
     
     public String displayAllBooks(){
-        resulBB.setBookList(bookController.findAllBooks());
+        resultBB.setBookList(bookController.findAllBooks());
+        
+        return "results";
+    }
+    
+    public String displayBooksByGenre(String genre){
+        resultBB.setBookList(bookController.findBooksByGenre(genre));
+        
+        return "results";
+    }
+    
+    public String displayBooksByFormat(String format){
+        resultBB.setBookList(bookController.findBooksByFormat(format));
         
         return "results";
     }

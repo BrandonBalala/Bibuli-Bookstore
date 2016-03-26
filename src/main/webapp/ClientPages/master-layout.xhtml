@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="#{resource['css:fluidity/fluidity.css']}"/>
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
         <link rel="icon" href="resources/images/logo.png"/>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
     </h:head>
     <h:body>
         <!--        <h:outputStylesheet library="css" name="mycss.css" />-->
@@ -33,14 +34,20 @@
                             <a href="#" class="whiteFont anchorFontSize"><i class="fi-book"></i>Books</a>
                             <ul class="menu vertical inline-list blackBackgroundColor">
                                 <li>
-                                    <h:link class="whiteFont blackBackgroundColor" value=" Shop All!" outcome="#{masterLayoutBB.displayAllBooks()}"/>
-<!--                                    <a href="#" class="whiteFont blackBackgroundColor">Shop All</a>-->
+                                    <h:form>
+                                        <h:commandLink class="whiteFont blackBackgroundColor" value=" Shop All" action="#{masterLayoutBB.displayAllBooks()}"/>
+                                    </h:form>
+                                    <!--                                    <h:link class="whiteFont blackBackgroundColor" value=" Shop All" outcome="{masterLayoutBB.displayAllBooks()}"/>-->
                                 </li>
                                 <li>
                                     <a href="#" class="whiteFont blackBackgroundColor">By Genre</a>
                                     <ul class="menu blackBackgroundColor twoColumns">
                                         <ui:repeat value="#{masterLayoutBB.genreList}" var="theGenre">
-                                            <li><a href="#" class="whiteFont blackBackgroundColor"><h:outputText value="#{theGenre.type}"/></a></li>
+                                            <li>
+                                                <h:form>
+                                                    <h:commandLink class="whiteFont blackBackgroundColor" value="#{theGenre.type}" action="#{masterLayoutBB.displayBooksByGenre(theGenre.type)}"/>
+                                                </h:form>
+                                            </li>
                                         </ui:repeat>
                                     </ul>
                                 </li>
@@ -48,7 +55,9 @@
                                     <a href="#" class="whiteFont blackBackgroundColor">By Format</a>
                                     <ul class="vertical menu blackBackgroundColor">
                                         <ui:repeat value="#{masterLayoutBB.formatList}" var="theFormat">
-                                            <li><a href="#" class="whiteFont blackBackgroundColor"><h:outputText value="#{theFormat.type}"/></a></li>
+                                            <h:form>
+                                                <h:commandLink class="whiteFont blackBackgroundColor" value="#{theFormat.type}" action="#{masterLayoutBB.displayBooksByFormat(theFormat.type)}"/>
+                                            </h:form>
                                         </ui:repeat>
                                     </ul>
                                 </li>
@@ -69,9 +78,8 @@
                             </div>
                         </li>
                         <li class="divider"/>
-                        <li><a href="#" class="whiteFont anchorFontSize"><i class="fi-info"></i> Help</a></li>
-                        <li><h:link class="whiteFont fi-shopping-cart anchorFontSize" value=" Cart" outcome="shopping-cart" /></li>
-                        <!--                        <li><a href="#" class="whiteFont"><i class="fi-shopping-cart"></i> Cart</a></li>-->
+                        <li><a href="#" class="whiteFont anchorFontSize"><i class="fi-info"></i>Help</a></li>
+                        <li><a href="shopping-cart.xhtml" class="whiteFont anchorFontSize"><i class="fi-shopping-cart"></i>Cart</a></li>
                         <li>
                             <ul class="dropdown menu" data-dropdown-menu="">
                                 <li>
@@ -92,53 +100,58 @@
         </div>
 
         <div style="background-color: whitesmoke">
+            <br/><br/><br/><br/>
             <ui:insert name="content" />
+            <br/>
         </div>
 
         <footer class="footer">
-            <div class="row full-width">
-                <div class="small-12 medium-3 large-4 columns">
-                    <br/>
-                    <img id="logoFooter" src="#{resource['images:logo.png']}"/>
-                    <br/><br/>
-                    <h6>
-                        &#169; 2016 - Bibuli e-Books, Inc.<br/>
-                        3040 Rue Sherbrooke Ouest<br/>
-                        Montreal, QC, H32 1A4
-                    </h6>
-                </div>
-                <div class="small-12 medium-3 large-4 columns">
-                    <i class="fi-torsos-all"></i>
-                    <ul class="footer-links pacificoFont">
-                        <li><a href="#">Annie So</a></li>
-                        <li><a href="#">Dan Wang</a></li>
-                        <li><a href="#">Paul Corrand</a></li>
-                        <li><a href="#">Brandon Balala</a></li>
-                        <li><a href="#">Ofer Nitka-Nakash</a></li>
-                    </ul>
-                </div>
-                <div class="small-6 medium-3 large-2 columns">
-                    <h4>The Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="small-6 medium-3 large-2 columns">
-                    <h4>Follow Us</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
-                    </ul>
+            <div class="wrapper">
+                <div class="row full-width">
+                    <div class="small-12 medium-3 large-4 columns">
+                        <br/>
+                        <img id="logoFooter" src="#{resource['images:logo.png']}"/>
+                        <br/><br/>
+                        <h6>
+                            &#169; 2016 - Bibuli e-Books, Inc.<br/>
+                            3040 Rue Sherbrooke Ouest<br/>
+                            Montreal, QC, H32 1A4
+                        </h6>
+                    </div>
+                    <div class="small-12 medium-3 large-4 columns">
+                        <i class="fi-torsos-all"></i>
+                        <ul class="footer-links pacificoFont">
+                            <li><a href="#">Annie So</a></li>
+                            <li><a href="#">Dan Wang</a></li>
+                            <li><a href="#">Paul Corrand</a></li>
+                            <li><a href="#">Brandon Balala</a></li>
+                            <li><a href="#">Ofer Nitka-Nakash</a></li>
+                        </ul>
+                    </div>
+                    <div class="small-6 medium-3 large-2 columns">
+                        <h4>The Company</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="small-6 medium-3 large-2 columns">
+                        <h4>Follow Us</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">GitHub</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </footer>
 
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 
         <script>
