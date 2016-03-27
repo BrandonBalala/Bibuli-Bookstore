@@ -111,7 +111,7 @@ table tr:nth-of-type(even) {
     box-shadow: 0 0 5px #fff;
     background-color: #222; }
 .overlay-fade-in-new-background p {
-    font-size: 12px; }
+    font-size: 18px; }
 .overlay-fade-in-new-background .image-overlay-content {
     opacity: 0;
     background-image: url(http://subtlepatterns.com/patterns/gplaypattern.png);
@@ -145,6 +145,10 @@ table tr:nth-of-type(even) {
 .resultImage{
     max-width: 275px;
     height: 300px
+}
+
+.ui-growl {
+    top:80px;
 }
 
 .recommendedImage{
@@ -370,5 +374,12 @@ li a:hover{
     font-size: 18px !important;
 }
 
+body{
+    background-color: #1e1b1b;
+}
+
+.iconLarge {
+    font-size: 1.3rem;
+}
 
 

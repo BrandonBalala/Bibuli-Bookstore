@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -42,13 +41,19 @@ public class ProductPageBackingBean implements Serializable {
     private static final int NUM_BOOKS = 4;
 
     @Inject
-    ReviewsJpaController reviewController;
+    private ReviewsJpaController reviewController;
 
     @Inject
-    BooksJpaController bookController;
+    private BooksJpaController bookController;
 
     @Inject
-    ClientJpaController clientController;
+    private ClientJpaController clientController;
+    
+    @Inject
+    private ShoppingCartBackingBean cartBB;
+    
+    @Inject
+    private MessageManagedBean messageBean;
 
     public Reviews getReview() {
         if (review == null) {
@@ -135,10 +140,6 @@ public class ProductPageBackingBean implements Serializable {
 
         return savingsPercentage;
     }
-
-    public void addBookToCart() {
-
-    }
     
     public List<Books> getRecommendedBookList(){
         return recommendedBookList;
@@ -168,5 +169,17 @@ public class ProductPageBackingBean implements Serializable {
 //        return "product-page";
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+    }
+    
+    public void addBookToCart(){
+        List<Books> bookList = cartBB.getBookList();
+        
+        if(!bookList.contains(book)){
+            cartBB.addBookToCart(book);
+            messageBean.setMessage(book.getTitle() + " has been added to your cart!");
+        }
+        else{
+            messageBean.setMessage(book.getTitle() + " is already in your cart!");
+        }
     }
 }

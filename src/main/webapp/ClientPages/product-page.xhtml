@@ -16,11 +16,10 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <ui:composition template="./master-layout.xhtml">
-            
+
             <ui:define name="title">Bibuli | #{productPageBB.book.title}</ui:define>
 
             <ui:define name="content">
-                <br/><br/><br/>
                 <hr/>
                 <br/>
 
@@ -52,7 +51,10 @@ and open the template in the editor.
                                 <li class="prices redFont"><b><h:outputText value="#{productPageBB.savingsPercentage}"/>% OFF</b></li>
                             </c:if>
                         </ul>
-                        <a href="#" class="button expanded hollow step fi-shopping-cart size-12">Add to Cart</a>
+                        <h:form id="cartForm">
+                            <p:growl id="cartMessage"/>
+                            <p:commandLink class="button expanded hollow step fi-shopping-cart size-12" value=" Add to Cart" actionListener="#{productPageBB.addBookToCart()}" action="#{messageBean.displayMessage()}" update="cartMessage"/>
+                        </h:form>
                         <label>Available formats after purchase:
                             <div class="small secondary expanded button-group">
                                 <ui:repeat value="#{productPageBB.book.bookFormatsList}" var="theBookFormat">
@@ -148,7 +150,7 @@ and open the template in the editor.
 
                                                 <br/>
                                                 <h:form>
-                                                    <h:commandLink type="submit" class="button secondary expanded hollow step fi-shopping-cart size-12" action="#{productPageBB.displayProductPageRecommended(theRecommendedBook)}" />
+                                                    <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{productPageBB.displayProductPageRecommended(theRecommendedBook)}" />
                                                 </h:form>
                                             </div>
                                         </div>
@@ -161,7 +163,6 @@ and open the template in the editor.
 
                 <br/>
                 <hr/>
-                <br/>
             </ui:define>
         </ui:composition>>
     </h:body>
