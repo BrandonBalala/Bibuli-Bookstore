@@ -173,4 +173,14 @@ public class PollJpaController implements Serializable, PollJpaInterface {
         int totalCount=poll.getFirstCount()+poll.getSecondCount()+poll.getThirdCount()+poll.getFourthCount();
         return totalCount;
     }
+
+    @Override
+    public Poll findSelectedPoll() {
+        List<Poll> polls=findAllPolls();
+        for(int i=0;i<polls.size();i++){
+            if(polls.get(i).getSelected())
+                return polls.get(i);
+        }
+        return null;
+    }
 }

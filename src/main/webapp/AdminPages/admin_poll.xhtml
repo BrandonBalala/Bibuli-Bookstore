@@ -3,138 +3,142 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListPollTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <section class="content-header">
-                <h1>
-                    All Surveys ( <h:outputText value="#{AdminSiteBB.pollCount}"/>  Surveys )
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>Reviews</a></li>
-                    <li class="active">All Reviews</li>
-                </ol>
-            </section>
-            <section class="content">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="box">
-                            <div class="box-body">
-                                <h:form>
-                                    <h:commandLink action="#{pollController.prepareCreate}" value="#{bundle.ListPollCreateLink}"/> 
-                                    <!-- pagination-->
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                      <!-- end pagination-->
-                                    <h:dataTable value="#{AdminSiteBB.allPolls}" var="polls" class="table table-bordered table-striped">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_id}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{polls.id}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_question}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{polls.question}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_firstAnswer}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{polls.firstAnswer}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_firstCount}"/>
-                                            </f:facet>
-                                                <h:outputText value="#{polls.firstCount}"/>
-<!--                                                <h:outputText value="#{AdminSiteBB.getFirstPercentage(polls)}"/>-->
-                                        </h:column>
-                                        
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_secondAnswer}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{polls.secondAnswer}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_secondCount}"/>
-                                            </f:facet>
-<!--                                            <h:outputText value="#{AdminSiteBB.getSecondPercentage(polls)}"/>-->
-                                                <h:outputText value="#{polls.secondCount}"/>
-                                        </h:column>
-                                        
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_thirdAnswer}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{polls.thirdAnswer}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_thirdCount}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{polls.thirdCount}"/>
-                                        </h:column>
-                                        
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_fourthAnswer}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{polls.fourthAnswer}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{bundle.ListPollTitle_fourthCount}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{polls.fourthCount}"/>
-                                        </h:column>
-                                        
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="&nbsp;"/>
-                                            </f:facet>
-                                            <h:commandLink action="#{pollController.prepareView}" value="#{bundle.ListPollViewLink}"/>
-                                            <h:outputText value=" "/>
-                                            <h:commandLink action="#{pollController.prepareEdit}" value="#{bundle.ListPollEditLink}"/>
-                                            <h:outputText value=" "/>
-                                            <h:commandLink action="#{pollController.destroy}" value="#{bundle.ListPollDestroyLink}"/>
-                                        </h:column>
-                                    </h:dataTable>
+    <head>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="#{resource['admin:plugins/datatables/dataTables.bootstrap.css']}"></link>
+        <title>Admin Polls</title>
+    </head>
 
+    <body>
+        <ui:composition template="admin_template.xhtml">
+            <ui:define name="title">
+                <h:outputText value="Polls"></h:outputText>
+            </ui:define>
 
+            <ui:define name="body">
+                <!-- Content Wrapper. Contains page content -->
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Surveys ( <h:outputText value="#{pollsBB.pollCount}"/>  Surveys )
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="faces/admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Surveys</a></li>
+                    </ol>
+                </section>
 
-                                </h:form>
-                            </div> 
-                        </div> 
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">                                    
+                                <div class="box-body">
+
+                                    <p><p:commandButton id="create" value="New Poll" icon="fa fa-plus" type="button"/></p>
+
+                                    <h:form id="form">
+                                        <p:outputLabel for="pollId" value="Select survey id: " />
+                                        <p:selectOneRadio id="pollId" value="#{pollsBB.pollId}"  layout="grid" columns="10">
+                                            <f:selectItems value="#{pollsBB.ids}" var="c" itemLabel="#{pollId}" itemValue="#{pollId}"/>
+                                        </p:selectOneRadio>
+                                        <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
+                                        <h:message for="pollId" errorStyle="color:red display:block"/>
+
+                                        <p:growl id="msgs"/>
+
+                                        <p:dataTable id="table" var="poll" value="#{pollsBB.polls}" rows="10"
+                                                     paginator="true"
+                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15"
+                                                     editable="true" style="margin-bottom:20px"
+                                                     selection="#{poll}" selectionMode="single" rowKey="#{poll.id}">
+
+                                            <p:ajax event="rowEdit" listener="#{pollsBB.onRowEdit}" update=":form:msgs" />
+                                            <p:ajax event="rowEditCancel" listener="#{pollsBB.onRowCancel}" update=":form:msgs" />
+
+                                            <p:column  headerText="Edit" style="width:50px">
+                                                <p:rowEditor />
+                                            </p:column>
+
+                                            <p:column headerText="Id" sortBy="#{poll.id}" filterBy="#{poll.id}" filterMatchMode="contains" style="width:120px">
+                                                <h:outputText value="#{poll.id}" />
+                                            </p:column>
+
+                                            <p:column headerText="Question" sortBy="#{poll.question}" filterBy="#{poll.question}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.question}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.question}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                            <p:column headerText="First Answer" sortBy="#{poll.firstAnswer}" filterBy="#{poll.firstAnswer}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.firstAnswer}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.firstAnswer}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                            <p:column headerText="First Count" sortBy="#{poll.secondAnswer}" filterBy="#{poll.secondAnswer}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.secondAnswer}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.secondAnswer}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column> 
+
+                                            <p:column headerText="Second Answer" sortBy="#{poll.thirdAnswer}" filterBy="#{poll.thirdAnswer}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.thirdAnswer}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.thirdAnswer}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                            <p:column headerText="Second Count" sortBy="#{poll.fourthAnswer}" filterBy="#{poll.fourthAnswer}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.fourthAnswer}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.fourthAnswer}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                            <p:column headerText="Third Answer" sortBy="#{poll.firstCount}" filterBy="#{poll.firstCount}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.firstCount}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.firstCount}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                            <p:column headerText="Third Count" sortBy="#{poll.secondCount}" filterBy="#{poll.secondCount}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.secondCount}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.secondCount}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                            <p:column headerText="Fourth Answer" sortBy="#{poll.thirdCount}" filterBy="#{poll.thirdCount}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.thirdCount}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.thirdCount}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                            <p:column headerText="Fourth Count" sortBy="#{poll.fourthCount}" filterBy="#{poll.fourthCount}" filterMatchMode="contains" style="width:200px">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{poll.fourthCount}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{poll.fourthCount}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                        </p:dataTable>
+                                    </h:form>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box --> 
+                        </div>
                     </div>
-                </div>
-            </section>                     
-        </ui:define>
-    </ui:composition>
+                </section>
+            </ui:define>
+        </ui:composition>
+    </body>
 
 </html>
