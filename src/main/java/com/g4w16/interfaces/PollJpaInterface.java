@@ -22,6 +22,7 @@ public interface PollJpaInterface{
     public List<Poll> findAllPolls();
     public List<Poll> findPollEntities(int maxResults, int firstResult);
     public Poll findPollByID(Integer id);
+    public List<Poll> findSelectedPolls();
     public int getPollCount();
     public void updatePoll(int pollID, int choice) throws Exception;
 

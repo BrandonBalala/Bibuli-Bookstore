@@ -6,8 +6,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
         <title>Admin Not Approval Reviews</title>
     </head>
     <body>
@@ -23,17 +21,16 @@
                         Not Approval Reviews ( <h:outputText value="#{notApprovalReviewBB.falseReviewsAccount}"/>  Reviews )
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="faces/admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#"><i class="fa fa-dashboard"></i> Not Approval Reviews</a></li>
                     </ol>
                 </section>
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="box">                                    
-                                <div class="box-body">
 
-                                    <h:form>
+                                    <h:form id="form">
+                                        <p:growl id="msgs" showDetail="true"/>
                                         <p:dataTable var="review" value="#{notApprovalReviewBB.reviews}" rows="5"
                                                      paginator="true"
                                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -72,15 +69,10 @@
                                                     </f:facet>
                                                 </p:cellEditor>
                                             </p:column>
-                                            <!--                                           <p:column headerText="Delete" style="width:64px">
-                                                                                             actionListener="" 
-                                                                                                                                            <p:commandButton id="edit" icon="fa fa-fw fa-edit" type="button"/>
-                                                                                            <p:commandButton id="delete" title="remove" update="table" actionListener="#{notApprovalReviewBB.onDelete(review)}" icon="fa fa-fw fa-remove" type="button"/>
-                                                                                        </p:column>-->
+                                           
                                         </p:dataTable>
                                     </h:form>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box --> 
+
                         </div>
                     </div>
                 </section>

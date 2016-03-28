@@ -743,6 +743,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
 
     @Override
     public List<Books> findBestSellingBook(int amount) {
+        
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         CriteriaQuery cq = cb.createQuery();

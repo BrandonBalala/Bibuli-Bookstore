@@ -7,6 +7,8 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Poll;
 import com.g4w16.persistence.PollJpaController;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -28,10 +30,16 @@ public class PollBackingBean {
     private PollJpaController pollController;
     
     public Poll getPoll(){
-        if(poll == null){
+        List<Poll> polls = pollController.findSelectedPolls();
+        if(polls.isEmpty()){
             poll = new Poll();
         }
-        
+        else
+        {
+            Random randomGenerator = new Random();
+            int index = randomGenerator.nextInt(polls.size());
+            poll = polls.get(index);
+        }
         return poll;
     }
     

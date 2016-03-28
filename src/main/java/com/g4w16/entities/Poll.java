@@ -12,18 +12,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author BRANDON-PC
+ * @author wangd
  */
 @Entity
-@Table(name = "poll", catalog = "g4w16", schema = "")
+@Table(name = "poll")
+@XmlRootElement
 //@NamedQueries({
-//    @NamedQuery(name = "Poll.findAll", query = "SELECT p FROM Poll p")})
+//    @NamedQuery(name = "Poll.findAll", query = "SELECT p FROM Poll p"),
+//    @NamedQuery(name = "Poll.findById", query = "SELECT p FROM Poll p WHERE p.id = :id"),
+//    @NamedQuery(name = "Poll.findBySelected", query = "SELECT p FROM Poll p WHERE p.selected = :selected"),
+//    @NamedQuery(name = "Poll.findByQuestion", query = "SELECT p FROM Poll p WHERE p.question = :question"),
+//    @NamedQuery(name = "Poll.findByFirstAnswer", query = "SELECT p FROM Poll p WHERE p.firstAnswer = :firstAnswer"),
+//    @NamedQuery(name = "Poll.findBySecondAnswer", query = "SELECT p FROM Poll p WHERE p.secondAnswer = :secondAnswer"),
+//    @NamedQuery(name = "Poll.findByThirdAnswer", query = "SELECT p FROM Poll p WHERE p.thirdAnswer = :thirdAnswer"),
+//    @NamedQuery(name = "Poll.findByFourthAnswer", query = "SELECT p FROM Poll p WHERE p.fourthAnswer = :fourthAnswer"),
+//    @NamedQuery(name = "Poll.findByFirstCount", query = "SELECT p FROM Poll p WHERE p.firstCount = :firstCount"),
+//    @NamedQuery(name = "Poll.findBySecondCount", query = "SELECT p FROM Poll p WHERE p.secondCount = :secondCount"),
+//    @NamedQuery(name = "Poll.findByThirdCount", query = "SELECT p FROM Poll p WHERE p.thirdCount = :thirdCount"),
+//    @NamedQuery(name = "Poll.findByFourthCount", query = "SELECT p FROM Poll p WHERE p.fourthCount = :fourthCount")})
 public class Poll implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,6 +47,10 @@ public class Poll implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Selected")
+    private boolean selected;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 128)
@@ -73,8 +92,9 @@ public class Poll implements Serializable {
         this.id = id;
     }
 
-    public Poll(Integer id, String question, String firstAnswer, String secondAnswer, String thirdAnswer, String fourthAnswer) {
+    public Poll(Integer id, boolean selected, String question, String firstAnswer, String secondAnswer, String thirdAnswer, String fourthAnswer) {
         this.id = id;
+        this.selected = selected;
         this.question = question;
         this.firstAnswer = firstAnswer;
         this.secondAnswer = secondAnswer;
@@ -88,6 +108,14 @@ public class Poll implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     public String getQuestion() {

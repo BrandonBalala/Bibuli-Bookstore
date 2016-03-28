@@ -164,6 +164,7 @@ CREATE TABLE SalesDetails (
 
 CREATE TABLE Poll (
   ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Selected boolean NOT NULL,
   Question varchar(128) NOT NULL,
   FirstAnswer varchar(128) NOT NULL,
   SecondAnswer varchar(128) NOT NULL,
@@ -1375,7 +1376,42 @@ INSERT INTO reviews (Book, CreationDate, Client, Rating, Text, Approval) VALUES
 ("49", "2015-12-25 00:00:00", "57", "2", "lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede", "0"),
 ("50", "2015-12-25 00:00:00", "78", "1", "nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus", "0");
 
-INSERT INTO `poll`(`Question`, `FirstAnswer`, `SecondAnswer`, `ThirdAnswer`, `FourthAnswer`, `FirstCount`, `SecondCount`, `ThirdCount`, `FourthCount`)
-VALUES ("What is your native language?", "English", "French", "Spanish", "Other", 15, 10, 30, 10),
-        ("What is your current status?", "Student", "Employed", "Retired", "Other", 20, 12, 18, 23),
-        ("How old are you?", "Under 18", "18-30", "31-65", "Over 65", 16, 32, 45, 10);
+INSERT INTO `poll`(Selected,`Question`, `FirstAnswer`, `SecondAnswer`, `ThirdAnswer`, `FourthAnswer`, `FirstCount`, `SecondCount`, `ThirdCount`, `FourthCount`)
+VALUES (1,"What is your native language?", "English", "French", "Spanish", "Other", 15, 10, 30, 10),
+        (0,"What is your current status?", "Student", "Employed", "Retired", "Other", 20, 12, 18, 23),
+        (0,"How old are you?", "Under 18", "18-30", "31-65", "Over 65", 16, 32, 45, 10),
+        (0,"What’s your favorite genre of book?","Travel","Cooking","Science Fiction","Other",29,13,36,45),
+        (0,"How often do you read?","Every day","Once a week","Once a month","Other",38,48,47,21),
+        (0,"Where do you prefer to read?","At home","On public transit","At a Cafe","Other",13,25,53,2),
+        (0,"Who would you recommend a book to?","Your family","Your friends","Your Colleagues","Other",90,34,76,42),
+        (0,"How often do you buy books?","Every day","Once a week","Once a month","Other",34,32,57,21),
+        (0,"Which device do you prefer to read on?","Tablet","Computer","Smartphone","Other",37,21,45,20),
+        (0,"Which e-book format do you prefer?","PDF","EPUB","Mobi","Other",46,24,39,27);
+
+
+INSERT INTO `feed` (`Name`, `URI`) 
+VALUES
+('Librarians fight rise of precarious work', 'http://www.cbc.ca/news/canada/toronto/precarious-work-librarians-1.3508778'),
+('CBC FORUM\r\nWhat''s the best way forward for Canadian health care?', 'http://www.cbc.ca/news/politics/health-care-forum-1.3508132');
+
+INSERT INTO `banner` (`URI`) 
+VALUES
+('https://www.amazon.ca/'),
+('http://www.ebay.ca/'),
+('https://www.dawsoncollege.qc.ca/');
+
+
+INSERT INTO `Sales` (`ID`,`DateEntered`,`Client`,`GrossValue`,`NetValue`,`Removed`) 
+VALUES
+("1","2015-12-25 00:00:00","1","19.99","15.99","1");
+
+INSERT INTO `SalesDetails` (`ID`,`Sale`,`Book`,`Price`,`PST`,`HST`,`QST`,`Removed`) 
+VALUES
+("1","1","1","19.99","0.14","0.14","0.14","1"),
+("2","1","5","13.99","0.14","0.14","0.14","1"),
+("3","1","2","15.99","0.14","0.14","0.14","1"),
+("4","1","3","16.99","0.14","0.14","0.14","1"),
+("5","1","45","19.99","0.14","0.14","0.14","1"),
+("6","1","93","13.99","0.14","0.14","0.14","1"),
+("7","1","23","15.99","0.14","0.14","0.14","1"),
+("8","1","34","16.99","0.14","0.14","0.14","1");

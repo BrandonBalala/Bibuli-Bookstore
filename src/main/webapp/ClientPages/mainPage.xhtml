@@ -11,32 +11,68 @@
         <link rel="stylesheet" href="../resources/css/foundation/foundation-icons.css"/>
         <link rel="stylesheet" type="text/css" href="../resources/css/mycss.css"/>
         <link rel="stylesheet" type="text/css" href="../resources/css/fluidity/fluidity.css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/owl.carousel.css"  />
+        <link rel="stylesheet" href="../resources/css/owl-carousel/owl.theme.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../resources/js/owl.carousel.min.js" type="text/javascript"></script>
     </h:head>
     <h:body>
-        <h:form id="loginForm" >
-            <h:panelGrid columns="1" styleClass="centered-panel">
-                <p:panel id="primepanel" header="#{bundle.login}">
+        <div id="carousels">
+                    <div class="bestSellers carousel owl-carousel" rendered="#{ClientMainBB.bestSellers()}">
+                        <ui:repeat var="bestSeller" value="#{ClientMainBB.bestSellersBooks}">
+                              <div class="column">
+                                       <div class="image-wrapper overlay-fade-in-new-background">
+                                            <img class="carouselImage" src="../resources/images/#{bestSeller.id}.jpg" alt="Book cover"/>
+                                            <div class="image-overlay-content">
+                                                <h2><h:outputText value="#{bestSeller.title}"/></h2>
 
-                    <h:panelGrid columns="3" cellpadding="1" border="0">                       
-                        
-                        <p:outputLabel for="email" value="#{bundle.emailLabel}"/>
-                        <p:inputText id="email" value="#{loginBB.email}"
-                                     requiredMessage="#{bundle.emailRequired}"/>
-                        <p:message for="email" style="color:red"/>
+                                                <c:if test="#{bestSeller.salePrice eq 0}">
+                                                    <p class="price"><h:outputText value="#{bestSeller.listPrice}"/></p>
+                                                </c:if>
+                                                <c:if test="#{bestSeller.salePrice ne 0}">
+                                                    <p class="price">
+                                                        <h:outputText value="#{bestSeller.listPrice}$" class="strikethrough"/>&nbsp;
+                                                        <h:outputText value="#{bestSeller.salePrice}$" class="redFont"/>
+                                                    </p>
+                                                </c:if>
 
-                        <p:outputLabel for="password" value="#{bundle.passwordLabel}"/>
-                        <p:password id="password" value="#{loginBB.password}"
-                                    requiredMessage="#{bundle.passwordRequired}" />
-                        <p:message for="password" style="color:red"/>
-                        <h:outputText value="#{session.getAttribute('loggedIn')}"/>
-                    </h:panelGrid>
-                    <p:commandButton id="primebutton" value="#{bundle.loginButton}"
-                                     style="display: block;margin: 0 auto;"
-                                     action="#{loginBB.login}" ajax="false" />
+                                                <br/>
+                                                <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{ClientMainBB.displayProductPage(theBook)}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </ui:repeat>
+                    </div>
+                    <div class="recentlyAdded carousel owl-carousel" rendered="#{ClientMainBB.recentlyAdded()}">
+                        <ui:repeat var="recentlyAdded" value="#{ClientMainBB.recentlyAddedBooks}">
+                              <div class="column">
+                                       <div class="image-wrapper overlay-fade-in-new-background">
+                                            <img class="carouselImage" src="../resources/images/#{recentlyAdded.id}.jpg" alt="Book cover"/>
+                                            <div class="image-overlay-content">
+                                                <h2><h:outputText value="#{recentlyAdded.title}"/></h2>
 
-                </p:panel>
-            </h:panelGrid>
-        </h:form>
+                                                <c:if test="#{recentlyAdded.salePrice eq 0}">
+                                                    <p class="price"><h:outputText value="#{recentlyAdded.listPrice}"/></p>
+                                                </c:if>
+                                                <c:if test="#{recentlyAdded.salePrice ne 0}">
+                                                    <p class="price">
+                                                        <h:outputText value="#{recentlyAdded.listPrice}$" class="strikethrough"/>&nbsp;
+                                                        <h:outputText value="#{recentlyAdded.salePrice}$" class="redFont"/>
+                                                    </p>
+                                                </c:if>
+
+                                                <br/>
+                                                <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{ClientMainBB.displayProductPage(theBook)}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </ui:repeat>
+                    </div>
+        </div>
+         <div id="poll">
+                    
+        </div>
+        <script src="../resources/js/script.js" type="text/javascript"></script>
     </h:body>
 </html>
 

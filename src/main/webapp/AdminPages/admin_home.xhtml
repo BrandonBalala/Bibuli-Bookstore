@@ -4,12 +4,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="#{resource['admin:plugins/datatables/dataTables.bootstrap.css']}"></link>
         <title>Admin Home</title>
     </head>
     <body>
-        <ui:composition template="./admin_template.xhtml">
+        <ui:composition template="admin_template.xhtml">
             <ui:define name="title">
                 Home
             </ui:define>
@@ -20,9 +18,9 @@
                     <!-- Content Header (Page header) -->
                     <section class="content-header">
                         <p>
-                        <h1>
-                            Welcome Administrator!
-                        </h1>
+                            <h1>
+                                Welcome Administrator!
+                            </h1>
                         </p>
                         <ol class="breadcrumb">
                             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,164 +30,164 @@
 
                         <div class="row">
                             <div class="col-lg-3 col-xs-6">
-                                <a href="faces/books/List.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-blue"><i class="fa fa-book"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Inventory</span>
-                                        <span class="info-box-number"><h:outputText value="#{AdminSiteBB.booksCount}"/></span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
+                                <a href="admin_books.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-blue"><i class="fa fa-book"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Inventory</span>
+                                            <span class="info-box-number"><h:outputText value="#{booksBB.booksCount}"/></span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
                                 </a>
                             </div><!-- ./col -->      
 
 
                             <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_sales.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-blue-light"><i class="fa fa-dollar"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Sales</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
+                                <a href="admin_sales.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-blue-light"><i class="fa fa-dollar"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Sales</span>
+                                            <span class="info-box-number"><h:outputText value="#{booksBB.salesCount}"/></span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
                                 </a>
                             </div><!-- ./col -->    
 
                             <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_clients.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Clients</span>
-                                        <span class="info-box-number"><h:outputText value="#{clientBB.clientCount}"/></span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
+                                <a href="admin_clients.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Clients</span>
+                                            <span class="info-box-number"><h:outputText value="#{clientBB.clientCount}"/></span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
                                 </a>
                             </div><!-- ./col -->    
 
 
                             <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_orders.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-orange"><i class="fa fa-money"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Orders</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
-                                </a>
-                            </div><!-- ./col -->    
-                        </div><!-- /.row -->
-
-                        <div class="row">
-                            <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_reports.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-fuchsia"><i class="fa fa-line-chart"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Reports</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
-                                </a>
-                            </div><!-- ./col -->    
-
-                            <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_view_reviews.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-yellow"><i class="fa fa-edit"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Reviews</span>
-                                        <span class="info-box-number"><h:outputText value="#{AdminSiteBB.allReviewsAccount}"/></span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
-                                </a>
-                            </div><!-- ./col -->    
-
-                            <div class="col-lg-3 col-xs-6">
-                                <a href="faces/poll/List.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-green"><i class="fa fa-question-circle"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Surveys</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
-                                </a>
-                            </div><!-- ./col -->    
-
-                            <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_news.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-purple"><i class="fa fa-feed"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">News</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
+                                <a href="admin_orders.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-orange"><i class="fa fa-money"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Orders</span>
+                                            <span class="info-box-number">93,139</span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
                                 </a>
                             </div><!-- ./col -->    
                         </div><!-- /.row -->
 
                         <div class="row">
                             <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_ads.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-lime"><i class="fa fa-tv"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Ads</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
+                                <a href="admin_reports.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-fuchsia"><i class="fa fa-line-chart"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Reports</span>
+                                            <span class="info-box-number">93,139</span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
                                 </a>
                             </div><!-- ./col -->    
 
                             <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_tax_rates.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-maroon"><i class="fa fa-thumb-tack"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Tax Rates</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
+                                <a href="admin_view_reviews.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-yellow"><i class="fa fa-edit"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Reviews</span>
+                                            <span class="info-box-number"><h:outputText value="#{reviewBB.allReviewsAccount}"/></span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
                                 </a>
                             </div><!-- ./col -->    
 
                             <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_manage.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-olive"><i class="fa fa-user-plus"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Manage Admins</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
+                                <a href="admin_poll.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-green"><i class="fa fa-question-circle"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Surveys</span>
+                                            <span class="info-box-number"><h:outputText value="#{pollsBB.pollCount}"/></span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
                                 </a>
                             </div><!-- ./col -->    
 
                             <div class="col-lg-3 col-xs-6">
-                                <a href="faces/admin_add_miscellaneous.xhtml">
-                                <div class="info-box">
-                                    <!-- Apply any bg-* class to to the icon to color it -->
-                                    <span class="info-box-icon bg-teal"><i class="fa fa-exclamation-circle"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Add Miscellaneous</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
+                                <a href="admin_news.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-purple"><i class="fa fa-feed"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">News</span>
+                                            <span class="info-box-number"><h:outputText value="#{feedBB.feedCount}"/></span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
+                                </a>
+                            </div><!-- ./col -->    
+                        </div><!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-lg-3 col-xs-6">
+                                <a href="admin_ads.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-lime"><i class="fa fa-tv"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Ads</span>
+                                            <span class="info-box-number"><h:outputText value="#{bannerBB.bannerCount}"/></span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
+                                </a>
+                            </div><!-- ./col -->    
+
+                            <div class="col-lg-3 col-xs-6">
+                                <a href="admin_tax_rates.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-maroon"><i class="fa fa-thumb-tack"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Tax Rates</span>
+                                            <span class="info-box-number">93,139</span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
+                                </a>
+                            </div><!-- ./col -->    
+
+                            <div class="col-lg-3 col-xs-6">
+                                <a href="admin_manage.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-olive"><i class="fa fa-user-plus"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Manage Admins</span>
+                                            <span class="info-box-number">93,139</span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
+                                </a>
+                            </div><!-- ./col -->    
+
+                            <div class="col-lg-3 col-xs-6">
+                                <a href="admin_add_miscellaneous.xhtml">
+                                    <div class="info-box">
+                                        <!-- Apply any bg-* class to to the icon to color it -->
+                                        <span class="info-box-icon bg-teal"><i class="fa fa-exclamation-circle"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Add Miscellaneous</span>
+                                            <span class="info-box-number">93,139</span>
+                                        </div><!-- /.info-box-content -->
+                                    </div><!-- /.info-box -->
                                 </a>
                             </div><!-- ./col -->    
                         </div><!-- /.row -->
