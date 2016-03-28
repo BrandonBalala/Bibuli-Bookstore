@@ -9,6 +9,7 @@ import com.g4w16.entities.Books;
 import com.g4w16.persistence.BooksJpaController;
 import com.g4w16.persistence.PollJpaController;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -28,18 +29,53 @@ public class ClientMainBackingBean implements Serializable{
     @Inject
     private PollJpaController pollJpaController;
     
-    public List<Books> getBestSellers()
+    @Inject
+    private ProductPageBackingBean productBB;
+    
+    private List<Books> bestSellerBooks = new ArrayList<Books>();
+    private List<Books> recentlyAddedBooks = new ArrayList<Books>();
+    
+    public boolean bestSellers()
     {
-       return  bookJpaController.findBestSellingBook(12);
+       List<Books> container = bookJpaController.findBestSellingBook(12);
+       if(container.isEmpty())
+       {
+            return false;
+       }
+       else
+       {
+           bestSellerBooks = container;
+           return true;
+       }
+
     }
     
-    public List<Books> getRecentlyAdded()
+     public List<Books> getBestSellersBooks()
     {
-      return bookJpaController.findRecentlyAddedBooks(12);
+      return bestSellerBooks;
     }
     
-    public void getBestSellersCount()
+    public boolean recentlyAdded()
     {
-       System.out.print(bookJpaController.findRecentlyAddedBooks(12).size());
+      List<Books> container = bookJpaController.findRecentlyAddedBooks(12);
+      if(container.isEmpty())
+       {
+            return false;
+       }
+       else
+       {
+           recentlyAddedBooks = container;
+           return true;
+       }
+    }
+    
+    public List<Books> getRecentlyAddedBooks()
+    {
+      return recentlyAddedBooks;
+    }
+    public String displayProductPage(Books book) {
+        productBB.setBook(book);
+
+        return "product-page";
     }
 }

@@ -5,7 +5,7 @@
 <!--        <param-value>Development</param-value>-->
         <param-value>Production</param-value>
     </context-param>
-    
+
     <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>
         <param-value>true</param-value>

@@ -146,7 +146,16 @@ table tr:nth-of-type(even) {
     max-width: 275px;
     height: 300px
 }
+#carousels{
+    height: 100px;
+    
+}
 
+.carouselImage{
+    margin:10px;
+    height:100%;
+    width:100%;
+}
 .ui-growl {
     top:80px;
 }
@@ -376,10 +385,17 @@ li a:hover{
 
 body{
     background-color: #1e1b1b;
+    height:100%;
+    width:100%
 }
 
 .iconLarge {
     font-size: 1.3rem;
 }
 
+.carousels{
+    height:50%;
+    width: 80%;
+    align-content: center;
+}
 
