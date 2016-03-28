@@ -174,13 +174,9 @@ public class PollJpaController implements Serializable, PollJpaInterface {
         return totalCount;
     }
 
-    @Override
-    public Poll findSelectedPoll() {
-        List<Poll> polls=findAllPolls();
-        for(int i=0;i<polls.size();i++){
-            if(polls.get(i).getSelected())
-                return polls.get(i);
-        }
-        return null;
+    public List<Poll> findSelectedPolls() {
+        Query q = em.createQuery("SELECT p FROM Poll p WHERE p.selected=1");
+        return (List<Poll>) q.getResultList();
+
     }
 }

@@ -28,6 +28,7 @@ public class PollBackingBean {
     private PollJpaController pollController;
     
     public Poll getPoll(){
+        pollController.findSelectedPolls()
         if(poll == null){
             poll = new Poll();
         }
