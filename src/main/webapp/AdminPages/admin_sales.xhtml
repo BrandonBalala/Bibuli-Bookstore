@@ -1,101 +1,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
-        <title>Admin Sales</title>
-        <meta charset="utf-8"></meta>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
-        <!-- Bootstrap 3.3.5 -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"></link>
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
-        <!-- Theme style -->
-        <link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-             folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css"></link>
-        <!-- iCheck -->
-        <link rel="stylesheet" href="plugins/iCheck/flat/blue.css"></link>
-        <!-- Morris chart -->
-        <link rel="stylesheet" href="plugins/morris/morris.css"></link>
-        <!-- jvectormap -->
-        <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css"></link>
-        <!-- Date Picker -->
-        <link rel="stylesheet" href="plugins/datepicker/datepicker3.css"></link>
-        <!-- Daterange picker -->
-        <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css"></link>
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"></link>
-    </head>
-    <body>
-        <ui:composition template="admin_template.xhtml">
-            <ui:define name="title">
-                Sales
-            </ui:define>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-            <ui:define name="body">
-                <!-- Content Wrapper. Contains page content -->
-                <div>
-                    <!-- Content Header (Page header) -->
-                    
-                    <section class="content">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Sales Table</h3>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body">
-                                        
-                                        <!-- solid sales graph -->
-                                        <div class="box box-solid bg-teal-gradient">
-                                            <div class="box-header">
-                                                <i class="fa fa-th"></i>
-                                                <h3 class="box-title">Sales Graph</h3>
-                                                <div class="box-tools pull-right">
-                                                    <button class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                    <button class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="box-body border-radius-none">
-                                                <div class="chart" id="line-chart" style="height: 250px;"></div>
-                                            </div><!-- /.box-body -->
-                                            <div class="box-footer no-border">
-                                                <div class="row">
-                                                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                                                        <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                                                            <div class="knob-label">Mail-Orders</div>
-                                                        </input>
-                                                    </div><!-- ./col -->
-                                                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                                                        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                                                            <div class="knob-label">Online</div>
-                                                        </input>
-                                                    </div><!-- ./col -->
-                                                    <div class="col-xs-4 text-center">
-                                                        <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                                                            <div class="knob-label">In-Store</div>
-                                                        </input>
-                                                    </div><!-- ./col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-footer -->
-                                        </div><!-- /.box -->
-                                    </div><!-- /.box-body -->
-                                </div><!-- /.box --> 
-                            </div>
-                        </div>
-                    </section>
-                </div>>
-            </ui:define>
-        </ui:composition>
+    <ui:composition template="./admin_template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Admin Sales"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <section class="content-header">
+                <h1>
+                    Sales ( <h:outputText value="#{booksBB.salesCount}"/>  Books )
+                </h1>
+
+                <ol class="breadcrumb">
+                    <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Sales</a></li>
+                </ol>
+            </section>
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-xs-12">
 
 
-    </body>
+
+                        <h:form id="form">
+                            <p:growl id="msgs"/>
+
+                            <p:dataTable id="table" var="book" value="#{booksBB.saleBooks}" rows="10"
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15"
+                                         editable="true" style="margin-bottom:20px"
+                                         selection="#{book}" selectionMode="single" rowKey="#{book.id}">
+
+                                <p:ajax event="rowEdit" listener="#{booksBB.onRowEdit}" update=":form:msgs" />
+                                <p:ajax event="rowEditCancel" listener="#{booksBB.onRowCancel}" update=":form:msgs" />
+
+                                <p:column  headerText="Edit" style="width:25px">
+                                    <p:rowEditor />
+                                </p:column>
+
+                                <p:column headerText="Id" sortBy="#{book.id}" filterBy="#{book.id}" filterMatchMode="contains" style="width:70px">
+                                    <h:outputText value="#{book.id}" />
+                                </p:column>
+
+                                <p:column headerText="Title" sortBy="#{book.title}" filterBy="#{book.title}" filterMatchMode="contains" style="width:200px">
+                                    <h:outputText value="#{book.title}" />
+                                </p:column>
+
+                                <p:column headerText="List Price" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" filterMatchMode="contains" style="width:70px">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{book.listPrice}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{book.listPrice}" /></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Sale Price" sortBy="#{book.salePrice}" filterBy="#{book.salePrice}" filterMatchMode="contains" style="width:70px">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{book.salePrice}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{book.salePrice}" /></f:facet>
+                                    </p:cellEditor>
+                                </p:column> 
+
+                                <p:column headerText="Wholesale Price" sortBy="#{book.wholesalePrice}" filterBy="#{book.wholesalePrice}" filterMatchMode="contains" style="width:70px">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{book.wholesalePrice}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{book.wholesalePrice}" /></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+
+
+                    </div>
+                </div>
+            </section>
+
+        </ui:define>
+    </ui:composition>
 </html>

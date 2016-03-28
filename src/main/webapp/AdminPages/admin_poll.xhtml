@@ -7,8 +7,6 @@
       xmlns:p="http://primefaces.org/ui">
 
     <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="#{resource['admin:plugins/datatables/dataTables.bootstrap.css']}"></link>
         <title>Admin Polls</title>
     </head>
 
@@ -26,7 +24,7 @@
                         Surveys ( <h:outputText value="#{pollsBB.pollCount}"/>  Surveys )
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="faces/admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#"><i class="fa fa-dashboard"></i> Surveys</a></li>
                     </ol>
                 </section>
@@ -34,106 +32,104 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="box">                                    
-                                <div class="box-body">
 
-                                    <p><p:commandButton id="create" value="New Poll" icon="fa fa-plus" type="button"/></p>
 
-                                    <h:form id="form">
-                                        <p:outputLabel for="pollId" value="Select survey id: " />
-                                        <p:selectOneRadio id="pollId" value="#{pollsBB.pollId}"  layout="grid" columns="10">
-                                            <f:selectItems value="#{pollsBB.ids}" var="c" itemLabel="#{pollId}" itemValue="#{pollId}"/>
-                                        </p:selectOneRadio>
-                                        <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
-                                        <h:message for="pollId" errorStyle="color:red display:block"/>
+                            <p><p:commandButton id="create" value="New Poll" icon="fa fa-plus" type="button"/></p>
 
-                                        <p:growl id="msgs"/>
+                            <h:form id="form">
+                                <p:outputLabel for="pollId" value="Select survey id: " />
+                                <p:selectOneRadio id="pollId" value="#{pollsBB.pollId}"  layout="grid" columns="10">
+                                    <f:selectItems value="#{pollsBB.ids}" var="c" itemLabel="#{pollId}" itemValue="#{pollId}"/>
+                                </p:selectOneRadio>
+                                <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
+                                <h:message for="pollId" errorStyle="color:red display:block"/>
 
-                                        <p:dataTable id="table" var="poll" value="#{pollsBB.polls}" rows="10"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" style="margin-bottom:20px"
-                                                     selection="#{poll}" selectionMode="single" rowKey="#{poll.id}">
+                                <p:growl id="msgs"/>
 
-                                            <p:ajax event="rowEdit" listener="#{pollsBB.onRowEdit}" update=":form:msgs" />
-                                            <p:ajax event="rowEditCancel" listener="#{pollsBB.onRowCancel}" update=":form:msgs" />
+                                <p:dataTable id="table" var="poll" value="#{pollsBB.polls}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{poll}" selectionMode="single" rowKey="#{poll.id}">
 
-                                            <p:column  headerText="Edit" style="width:50px">
-                                                <p:rowEditor />
-                                            </p:column>
+                                    <p:ajax event="rowEdit" listener="#{pollsBB.onRowEdit}" update=":form:msgs" />
+                                    <p:ajax event="rowEditCancel" listener="#{pollsBB.onRowCancel}" update=":form:msgs" />
 
-                                            <p:column headerText="Id" sortBy="#{poll.id}" filterBy="#{poll.id}" filterMatchMode="contains" style="width:120px">
-                                                <h:outputText value="#{poll.id}" />
-                                            </p:column>
+                                    <p:column  headerText="Edit" style="width:50px">
+                                        <p:rowEditor />
+                                    </p:column>
 
-                                            <p:column headerText="Question" sortBy="#{poll.question}" filterBy="#{poll.question}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.question}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.question}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Id" sortBy="#{poll.id}" filterBy="#{poll.id}" filterMatchMode="contains" style="width:120px">
+                                        <h:outputText value="#{poll.id}" />
+                                    </p:column>
 
-                                            <p:column headerText="First Answer" sortBy="#{poll.firstAnswer}" filterBy="#{poll.firstAnswer}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.firstAnswer}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.firstAnswer}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Question" sortBy="#{poll.question}" filterBy="#{poll.question}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.question}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.question}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="First Count" sortBy="#{poll.secondAnswer}" filterBy="#{poll.secondAnswer}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.secondAnswer}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.secondAnswer}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column> 
+                                    <p:column headerText="First Answer" sortBy="#{poll.firstAnswer}" filterBy="#{poll.firstAnswer}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.firstAnswer}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.firstAnswer}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="Second Answer" sortBy="#{poll.thirdAnswer}" filterBy="#{poll.thirdAnswer}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.thirdAnswer}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.thirdAnswer}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="First Count" sortBy="#{poll.secondAnswer}" filterBy="#{poll.secondAnswer}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.secondAnswer}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.secondAnswer}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column> 
 
-                                            <p:column headerText="Second Count" sortBy="#{poll.fourthAnswer}" filterBy="#{poll.fourthAnswer}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.fourthAnswer}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.fourthAnswer}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Second Answer" sortBy="#{poll.thirdAnswer}" filterBy="#{poll.thirdAnswer}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.thirdAnswer}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.thirdAnswer}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="Third Answer" sortBy="#{poll.firstCount}" filterBy="#{poll.firstCount}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.firstCount}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.firstCount}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Second Count" sortBy="#{poll.fourthAnswer}" filterBy="#{poll.fourthAnswer}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.fourthAnswer}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.fourthAnswer}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="Third Count" sortBy="#{poll.secondCount}" filterBy="#{poll.secondCount}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.secondCount}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.secondCount}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Third Answer" sortBy="#{poll.firstCount}" filterBy="#{poll.firstCount}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.firstCount}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.firstCount}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="Fourth Answer" sortBy="#{poll.thirdCount}" filterBy="#{poll.thirdCount}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.thirdCount}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.thirdCount}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Third Count" sortBy="#{poll.secondCount}" filterBy="#{poll.secondCount}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.secondCount}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.secondCount}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="Fourth Count" sortBy="#{poll.fourthCount}" filterBy="#{poll.fourthCount}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{poll.fourthCount}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{poll.fourthCount}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Fourth Answer" sortBy="#{poll.thirdCount}" filterBy="#{poll.thirdCount}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.thirdCount}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.thirdCount}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                        </p:dataTable>
-                                    </h:form>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box --> 
+                                    <p:column headerText="Fourth Count" sortBy="#{poll.fourthCount}" filterBy="#{poll.fourthCount}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{poll.fourthCount}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{poll.fourthCount}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+
                         </div>
                     </div>
                 </section>

@@ -30,44 +30,41 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="box">                                    
-                                <div class="box-body">
 
-                                    <h:form>
-                                        
+                            <h:form>
 
-                                        <p:dataTable var="review" value="#{reviewBB.reviews}" rows="5"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15">
 
-                                            <p:column headerText="Book Id" sortBy="#{review.reviewsPK.book}" filterBy="#{review.reviewsPK.book}" filterMatchMode="contains" style="width:35px">
-                                                <h:outputText value="#{review.reviewsPK.book}" />
-                                            </p:column>
+                                <p:dataTable var="review" value="#{reviewBB.reviews}" rows="5"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15">
 
-                                            <p:column headerText="Creation Date" sortBy="#{review.creationDate}" filterBy="#{review.creationDate}" filterMatchMode="contains" style="width:45px">
-                                                <h:outputText value="#{review.creationDate}" />
-                                            </p:column>
+                                    <p:column headerText="Book Id" sortBy="#{review.reviewsPK.book}" filterBy="#{review.reviewsPK.book}" filterMatchMode="contains" style="width:35px">
+                                        <h:outputText value="#{review.reviewsPK.book}" />
+                                    </p:column>
 
-                                            <p:column headerText="Client Id" sortBy="#{review.reviewsPK.client}" filterBy="#{review.reviewsPK.client}" filterMatchMode="contains" style="width:35px">
-                                                <h:outputText value="#{review.reviewsPK.client}" />
-                                            </p:column>
+                                    <p:column headerText="Creation Date" sortBy="#{review.creationDate}" filterBy="#{review.creationDate}" filterMatchMode="contains" style="width:45px">
+                                        <h:outputText value="#{review.creationDate}" />
+                                    </p:column>
 
-                                            <p:column headerText="Rating" sortBy="#{review.rating}" filterBy="#{review.rating}" filterMatchMode="contains" style="width:35px">
-                                                <h:outputText value="#{review.rating}" />
-                                            </p:column>
+                                    <p:column headerText="Client Id" sortBy="#{review.reviewsPK.client}" filterBy="#{review.reviewsPK.client}" filterMatchMode="contains" style="width:35px">
+                                        <h:outputText value="#{review.reviewsPK.client}" />
+                                    </p:column>
 
-                                            <p:column headerText="Review Text" sortBy="#{review.text}" filterBy="#{review.text}" filterMatchMode="contains" style="width:300px">
-                                                <h:outputText value="#{review.text}" />
-                                            </p:column>
+                                    <p:column headerText="Rating" sortBy="#{review.rating}" filterBy="#{review.rating}" filterMatchMode="contains" style="width:35px">
+                                        <h:outputText value="#{review.rating}" />
+                                    </p:column>
 
-                                            <p:column headerText="Approval Status" sortBy="#{review.approval}" filterBy="#{review.approval}" filterMatchMode="contains" style="width:35px">
-                                                <h:outputText value="#{review.approval}" />
-                                            </p:column>
-                                        </p:dataTable>
-                                    </h:form>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box --> 
+                                    <p:column headerText="Review Text" sortBy="#{review.text}" filterBy="#{review.text}" filterMatchMode="contains" style="width:300px">
+                                        <h:outputText value="#{review.text}" />
+                                    </p:column>
+
+                                    <p:column headerText="Approval Status" sortBy="#{review.approval}" filterBy="#{review.approval}" filterMatchMode="contains" style="width:35px">
+                                        <h:outputText value="#{review.approval}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+
                         </div>
                     </div>
                 </section>

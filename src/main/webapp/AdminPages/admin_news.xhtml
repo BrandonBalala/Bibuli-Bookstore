@@ -1,47 +1,91 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
     <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
         <title>Admin News</title>
     </head>
+
     <body>
         <ui:composition template="admin_template.xhtml">
             <ui:define name="title">
-                News
+                <h:outputText value="News Feed"></h:outputText>
             </ui:define>
 
             <ui:define name="body">
                 <!-- Content Wrapper. Contains page content -->
-                <div>
-                    <!-- Content Header (Page header) -->
-                    <section class="content-header">
-                        <h1>
-                            News
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li><a href="#"><i class="fa fa-dashboard"></i> News</a></li>
-                        </ol>
-                    </section>
-                     <section class="content">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="box">
-                                    
-                                    <div class="box-body">
-                                       
-                                       <h1>Coming Soon!</h1>
-                                  
-                                    </div><!-- /.box-body -->
-                                </div><!-- /.box --> 
-                            </div>
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        News Feed ( <h:outputText value="#{pollsBB.pollCount}"/>  Feeds )
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> News Feed</a></li>
+                    </ol>
+                </section>
+
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+
+                            <p><p:commandButton id="create" value="New Feed" icon="fa fa-plus" type="button"/></p>
+
+                            <h:form id="form">
+                                <p:outputLabel for="feedId" value="Select feed id: " />
+                                <p:selectOneRadio id="feedId" value="#{feedBB.feedId}"  layout="grid" columns="10">
+                                    <f:selectItems value="#{feedBB.ids}" var="c" itemLabel="#{feedId}" itemValue="#{feedId}"/>
+                                </p:selectOneRadio>
+                                <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
+                                <h:message for="pollId" errorStyle="color:red display:block"/>
+
+                                <p:growl id="msgs"/>
+
+                                <p:dataTable id="table" var="feed" value="#{feedBB.feeds}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{feed}" selectionMode="single" rowKey="#{feed.id}">
+
+                                    <p:ajax event="rowEdit" listener="#{feedBB.onRowEdit}" update=":form:msgs" />
+                                    <p:ajax event="rowEditCancel" listener="#{feedBB.onRowCancel}" update=":form:msgs" />
+
+                                    <p:column  headerText="Edit" style="width:50px">
+                                        <p:rowEditor />
+                                    </p:column>
+
+                                    <p:column headerText="Id" sortBy="#{feed.id}" filterBy="#{feed.id}" filterMatchMode="contains" style="width:60px">
+                                        <h:outputText value="#{feed.id}" />
+                                    </p:column>
+
+                                    <p:column headerText="Name" sortBy="#{feed.name}" filterBy="#{feed.name}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{feed.name}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{feed.name}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="URL" sortBy="#{feed.uri}" filterBy="#{feed.uri}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{feed.uri}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{feed.uri}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </ui:define>
         </ui:composition>
- 
     </body>
+
 </html>

@@ -1387,3 +1387,17 @@ VALUES (1,"What is your native language?", "English", "French", "Spanish", "Othe
         (0,"How often do you buy books?","Every day","Once a week","Once a month","Other",34,32,57,21),
         (0,"Which device do you prefer to read on?","Tablet","Computer","Smartphone","Other",37,21,45,20),
         (0,"Which e-book format do you prefer?","PDF","EPUB","Mobi","Other",46,24,39,27);
+
+
+INSERT INTO `feed` (`Name`, `URI`) 
+VALUES
+('Librarians fight rise of precarious work', 'http://www.cbc.ca/news/canada/toronto/precarious-work-librarians-1.3508778'),
+('CBC FORUM\r\nWhat''s the best way forward for Canadian health care?', 'http://www.cbc.ca/news/politics/health-care-forum-1.3508132');
+
+INSERT INTO `banner` (`URI`) 
+VALUES
+('https://www.amazon.ca/'),
+('http://www.ebay.ca/'),
+('https://www.dawsoncollege.qc.ca/');
+
+

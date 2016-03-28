@@ -6,8 +6,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="#{resource['admin:plugins/datatables/dataTables.bootstrap.css']}"></link>
         <title>Admin Clients</title>
     </head>
     <body>
@@ -23,96 +21,94 @@
                         Clients ( <h:outputText value="#{clientBB.clientCount}"/>  Clients )
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="faces/admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#"><i class="fa fa-dashboard"></i> Clients</a></li>
                     </ol>
                 </section>
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="box">                                    
-                                <div class="box-body">
-                                    <p><p:commandButton id="create" value="New Client" icon="fa fa-plus" type="button"/></p>
 
-                                    <h:form id="form">
-                                        <p:growl id="msgs"/>
+                            <p><p:commandButton id="create" value="New Client" icon="fa fa-plus" type="button"/></p>
 
-                                        <p:dataTable id="table" var="client" value="#{clientBB.clients}" rows="10"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" style="margin-bottom:20px"
-                                                     selection="#{client}" selectionMode="single" rowKey="#{client.id}">
+                            <h:form id="form">
+                                <p:growl id="msgs"/>
 
-                                            <p:ajax event="rowEdit" listener="#{clientBB.onRowEdit}" update=":form:msgs" />
-                                            <p:ajax event="rowEditCancel" listener="#{clientBB.onRowCancel}" update=":form:msgs" />
-                                            
-                                            <p:column  headerText="Edit" style="width:50px">
-                                                <p:rowEditor />
-                                            </p:column>
-                                            
-                                            <p:column headerText="Id" sortBy="#{client.id}" filterBy="#{client.id}" filterMatchMode="contains" style="width:120px">
-                                                <h:outputText value="#{client.id}" />
-                                            </p:column>
+                                <p:dataTable id="table" var="client" value="#{clientBB.clients}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{client}" selectionMode="single" rowKey="#{client.id}">
 
-                                            <p:column headerText="Title" sortBy="#{client.title}" filterBy="#{client.title}" filterMatchMode="contains" style="width:120px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{client.title}" /></f:facet>
-                                                    <f:facet name="input">
-                                                        <h:selectOneMenu value="#{client.title}" style="width:100%">
-                                                            <f:selectItems value="#{clientBB.titles}" var="title" itemLabel="#{title.id}" itemValue="#{title.id}" />
-                                                        </h:selectOneMenu>
-                                                    </f:facet>
-                                                   
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:ajax event="rowEdit" listener="#{clientBB.onRowEdit}" update=":form:msgs" />
+                                    <p:ajax event="rowEditCancel" listener="#{clientBB.onRowCancel}" update=":form:msgs" />
 
-                                            <p:column headerText="First Name" sortBy="#{client.firstName}" filterBy="#{client.firstName}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{client.firstName}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{client.firstName}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column  headerText="Edit" style="width:50px">
+                                        <p:rowEditor />
+                                    </p:column>
 
-                                            <p:column headerText="Last Name" sortBy="#{client.lastName}" filterBy="#{client.lastName}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{client.lastName}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{client.lastName}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Id" sortBy="#{client.id}" filterBy="#{client.id}" filterMatchMode="contains" style="width:120px">
+                                        <h:outputText value="#{client.id}" />
+                                    </p:column>
 
-                                            <p:column headerText="Email" sortBy="#{client.email}" filterBy="#{client.email}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{client.email}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{client.email}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column> 
+                                    <p:column headerText="Title" sortBy="#{client.title}" filterBy="#{client.title}" filterMatchMode="contains" style="width:120px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{client.title}" /></f:facet>
+                                            <f:facet name="input">
+                                                <h:selectOneMenu value="#{client.title}" style="width:100%">
+                                                    <f:selectItems value="#{clientBB.titles}" var="title" itemLabel="#{title.id}" itemValue="#{title.id}" />
+                                                </h:selectOneMenu>
+                                            </f:facet>
 
-                                            <p:column headerText="Company" sortBy="#{client.companyName}" filterBy="#{client.companyName}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{client.companyName}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{client.companyName}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="Home Phone" sortBy="#{client.homePhoneNumber}" filterBy="#{client.homePhoneNumber}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{client.homePhoneNumber}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{client.homePhoneNumber}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="First Name" sortBy="#{client.firstName}" filterBy="#{client.firstName}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{client.firstName}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{client.firstName}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="Cell Phone" sortBy="#{client.cellPhoneNumber}" filterBy="#{client.cellPhoneNumber}" filterMatchMode="contains" style="width:200px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{client.cellPhoneNumber}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{client.cellPhoneNumber}" /></f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
+                                    <p:column headerText="Last Name" sortBy="#{client.lastName}" filterBy="#{client.lastName}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{client.lastName}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{client.lastName}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                        </p:dataTable>
-                                    </h:form>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box --> 
+                                    <p:column headerText="Email" sortBy="#{client.email}" filterBy="#{client.email}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{client.email}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{client.email}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column> 
+
+                                    <p:column headerText="Company" sortBy="#{client.companyName}" filterBy="#{client.companyName}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{client.companyName}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{client.companyName}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Home Phone" sortBy="#{client.homePhoneNumber}" filterBy="#{client.homePhoneNumber}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{client.homePhoneNumber}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{client.homePhoneNumber}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Cell Phone" sortBy="#{client.cellPhoneNumber}" filterBy="#{client.cellPhoneNumber}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{client.cellPhoneNumber}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{client.cellPhoneNumber}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+
                         </div>
                     </div>
                 </section>

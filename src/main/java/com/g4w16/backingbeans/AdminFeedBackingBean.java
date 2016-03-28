@@ -5,9 +5,10 @@
  */
 package com.g4w16.backingbeans;
 
-import com.g4w16.entities.Books;
-import com.g4w16.persistence.BooksJpaController;
-import java.math.BigDecimal;
+import com.g4w16.entities.Feed;
+import com.g4w16.persistence.FeedJpaController;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -20,64 +21,66 @@ import org.primefaces.event.RowEditEvent;
 
 /**
  *
- * @author wangd
+ * @author wangdan
  */
-@Named("booksBB")
+@Named("feedBB")
 @RequestScoped
-public class AdminBooksBackingBean {
+public class AdminFeedBackingBean implements Serializable { 
+    private List<Feed> feeds;
+    private List<Integer> ids ;
+    private int feedId;
+    private List<Feed> filteredFeeds;
     
-    private List<Books> books;
-    private List<Books> saleBooks;
-    private List<Books> filteredBooks;
+    @Inject
+    FeedJpaController feedJpaController;
     
-    @Inject 
-    BooksJpaController booksJpaController;
-    
-     /**
-     * For Inventory page
-     */
     @PostConstruct
     public void init() {
-        books = booksJpaController.findAllBooks();
-        BigDecimal min=new BigDecimal(0);
-        BigDecimal max=new BigDecimal(999999999);
-        saleBooks=booksJpaController.findBookByPriceRange(min,max);
+        feeds = feedJpaController.findAllFeeds();
     }
     
-    public List<Books> getBooks() {
-        return books;
+    public List<Feed> getFeeds(){
+        return feeds;
     }
     
-    public List<Books> getSaleBooks() {
-        return saleBooks;
+    public int getFeedCount(){
+        return feedJpaController.getFeedCount();
     }
     
-    public int getSalesCount() {
-        return saleBooks.size();
+    public List<Integer> getIds() {
+        ids=new ArrayList<>();
+         for(int i=0;i<feeds.size();i++){
+            ids.add(i+1);
+         }
+         return ids;
     }
     
-    public int getBooksCount() {
-        return booksJpaController.getBooksCount();
-    }
-    
-    public List<Books> getFilteredBooks() {
-        return filteredBooks;
+    public int getFeedId() {
+        return feedId;
     }
  
-    public void setFilteredClients(List<Books> filteredBooks) {
-        this.filteredBooks = filteredBooks;
+    public void setFeedId(int feedId) {
+        this.feedId = feedId;
+    }
+    
+    public List<Feed> getFilteredFeeds() {
+        return filteredFeeds;
+    }
+ 
+    public void setFilteredFeeds(List<Feed> filteredFeeds) {
+        this.filteredFeeds = filteredFeeds;
     }
     
     public void onRowEdit(RowEditEvent event) {
 //        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
-           System.out.println(((Books) event.getObject()).getId());
+    //       System.out.println(((Client) event.getObject()).getId());
     }
      
     public void onRowCancel(RowEditEvent event) {
 //        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
-        System.out.println(((Books) event.getObject()).getId());
+    //    System.out.println(((Client) event.getObject()).getId());
     }
     
     public void onCellEdit(CellEditEvent event) {
@@ -89,6 +92,5 @@ public class AdminBooksBackingBean {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-    
     
 }
