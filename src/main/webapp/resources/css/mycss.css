@@ -382,4 +382,27 @@ body{
     font-size: 1.3rem;
 }
 
+.searchBar{
+    background: #1e1b1b;
+    border-color: darkgrey;
+    width: 200px;
+    height: 35px;
+    text-align: right;
+}
+
+.searchButton{
+    background: #1e1b1b !important; 
+}
+
+.searchBar:hover{
+    background: whitesmoke !important;
+}
+
+#formNoStyle {
+  all: initial;
+  * {
+    all: unset;
+  }
+}
+
 

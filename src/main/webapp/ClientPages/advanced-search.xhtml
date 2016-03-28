@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="./master-layout.xhtml">
+            <ui:define name="title">Bibuli | Advanced Search</ui:define>
+
+            <ui:define name="content">
+                <hr/>
+
+                <div class="row">
+                    <div class="panel large-12 columns text-left">
+                        <h2>Advanced Search</h2>
+                    </div>
+                </div>
+                <h:form>
+                    <div class="row">
+                        <div class="large-3 columns text-left">
+                            <h:outputText value="What are you looking for:"/>
+                        </div>
+                        <div class="large-9 columns">
+                            <h:inputText value="#{searchBean.keywords}" a:placeholder="Write anything..."/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-3 columns text-left">
+                            <h:outputText value="Search by:"/>
+                        </div>
+                        <div class="large-9 columns">
+                            <h:selectOneMenu value="#{searchBean.searchBy}" >
+                                <f:selectItem itemValue="all" itemLabel="All"/>
+                                <f:selectItem itemValue="title" itemLabel="Title"/>
+                                <f:selectItem itemValue="identifier" itemLabel="Identifier Code"/>
+                                <f:selectItem itemValue="contributor" itemLabel="Contributor"/>
+                                <f:selectItem itemValue="publisher" itemLabel="Publisher"/>
+                                <f:selectItem itemValue="year" itemLabel="Publication Year"/>
+                                <f:selectItem itemValue="genre" itemLabel="Genre"/>
+                                <f:selectItem itemValue="format" itemLabel="Format"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns text-right">
+                            <h:commandLink class="button expanded hollow step fi-magnifying-glass size-12" value=" Advanced Search" action="#{searchBean.advancedSearchBooks()}"/>
+                        </div>
+                    </div>
+                </h:form>
+                <hr/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
