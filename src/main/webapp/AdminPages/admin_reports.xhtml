@@ -1,226 +1,89 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
-        <title>Admin Reports</title>
-        <meta charset="utf-8"></meta>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-        <title>AdminLTE 2 | Calendar</title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
-        <!-- Bootstrap 3.3.5 -->
-        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css"></link>
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
-        <!-- fullCalendar 2.2.5-->
-        <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.min.css"></link>
-        <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.print.css" media="print"></link>
-        <!-- Theme style -->
-        <link rel="stylesheet" href="../dist/css/AdminLTE.min.css"></link>
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-             folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css"></link>
-    </head>
-    <body>
-        <ui:composition template="admin_template.xhtml">
-            <ui:define name="title">
-                Reports
-            </ui:define>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-            <ui:define name="body">
-                <!-- Content Wrapper. Contains page content -->
-                <div>
-                    <section class="content">
-                        <!-- Content Wrapper. Contains page content -->
-                        <div>
-                            <!-- Content Header (Page header) -->
-                            <section class="content-header">
-                                <h1>
-                                    Calendar
-                                    <small>Control panel</small>
-                                </h1>
-                                <ol class="breadcrumb">
-                                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                                    <li class="active">Calendar</li>
-                                </ol>
-                            </section>
+    <ui:composition template="admin_template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Admin Reports"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <section class="content-header">
+                <h1>
+                    Report 
+                </h1>
 
-                            <!-- Main content -->
-                            <section class="content">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="box box-solid">
-                                            <div class="box-header with-border">
-                                                <h4 class="box-title">Draggable Events</h4>
-                                            </div>
-                                            <div class="box-body">
-                                                <!-- the events -->
-                                                <div id="external-events">
-                                                    <div class="external-event bg-green">Lunch</div>
-                                                    <div class="external-event bg-yellow">Go home</div>
-                                                    <div class="external-event bg-aqua">Do homework</div>
-                                                    <div class="external-event bg-light-blue">Work on UI design</div>
-                                                    <div class="external-event bg-red">Sleep tight</div>
-                                                    <div class="checkbox">
-                                                        <label for="drop-remove">
-                                                            <input type="checkbox" id="drop-remove">
-                                                                remove after drop
-                                                            </input>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div><!-- /.box-body -->
-                                        </div><!-- /. box -->
-                                        <div class="box box-solid">
-                                            <div class="box-header with-border">
-                                                <h3 class="box-title">Create Event</h3>
-                                            </div>
-                                            <div class="box-body">
-                                                <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                                                    <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
-                                                    <ul class="fc-color-picker" id="color-chooser">
-                                                        <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-teal" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-orange" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-lime" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-purple" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-fuchsia" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
-                                                        <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
-                                                    </ul>
-                                                </div><!-- /btn-group -->
-                                                <div class="input-group">
-                                                    <input id="new-event" type="text" class="form-control" placeholder="Event Title">
-                                                        <div class="input-group-btn">
-                                                            <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
-                                                        </div><!-- /btn-group -->
-                                                    </input>
-                                                </div><!-- /input-group -->
-                                            </div>
-                                        </div>
-                                    </div><!-- /.col -->
-                                    <div class="col-md-9">
-                                        <div class="box box-primary">
-                                            <div class="box-body no-padding">
-                                                <!-- THE CALENDAR -->
-                                                <div id="calendar">
-                                                    <!-- Calendar -->
-                                                    <div class="box box-solid bg-green-gradient">
-                                                        <div class="box-header">
-                                                            <i class="fa fa-calendar"></i>
-                                                            <h3 class="box-title">Calendar</h3>
-                                                            <!-- tools box -->
-                                                            <div class="pull-right box-tools">
-                                                                <!-- button with a dropdown -->
-                                                                <div class="btn-group">
-                                                                    <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                                                                    <ul class="dropdown-menu pull-right" role="menu">
-                                                                        <li><a href="#">Add new event</a></li>
-                                                                        <li><a href="#">Clear events</a></li>
-                                                                        <li class="divider"></li>
-                                                                        <li><a href="#">View calendar</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                                                            </div><!-- /. tools -->
-                                                        </div><!-- /.box-header -->
-                                                        <div class="box-body no-padding">
-                                                            <!--The calendar -->
-                                                            <div id="calendar" style="width: 100%"></div>
-                                                        </div><!-- /.box-body -->
-                                                        <div class="box-footer text-black">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <!-- Progress bars -->
-                                                                    <div class="clearfix">
-                                                                        <span class="pull-left">Task #1</span>
-                                                                        <small class="pull-right">90%</small>
-                                                                    </div>
-                                                                    <div class="progress xs">
-                                                                        <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                                                                    </div>
+                <ol class="breadcrumb">
+                    <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Report</a></li>
+                </ol>
+            </section>
 
-                                                                    <div class="clearfix">
-                                                                        <span class="pull-left">Task #2</span>
-                                                                        <small class="pull-right">70%</small>
-                                                                    </div>
-                                                                    <div class="progress xs">
-                                                                        <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                                                                    </div>
-                                                                </div><!-- /.col -->
-                                                                <div class="col-sm-6">
-                                                                    <div class="clearfix">
-                                                                        <span class="pull-left">Task #3</span>
-                                                                        <small class="pull-right">60%</small>
-                                                                    </div>
-                                                                    <div class="progress xs">
-                                                                        <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                                                                    </div>
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
 
-                                                                    <div class="clearfix">
-                                                                        <span class="pull-left">Task #4</span>
-                                                                        <small class="pull-right">40%</small>
-                                                                    </div>
-                                                                    <div class="progress xs">
-                                                                        <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                                                                    </div>
-                                                                </div><!-- /.col -->
-                                                            </div><!-- /.row -->
-                                                        </div>
-                                                    </div><!-- /.box -->
 
-                                                </div>
-                                            </div><!-- /.box-body -->
-                                        </div><!-- /. box -->
-                                    </div><!-- /.col -->
-                                </div><!-- /.row -->
-                            </section><!-- /.content -->
-                        </div><!-- /.content-wrapper -->
+                        <h:form id="form">
+                            
+                            <p:messages/>
+                            <h4>Start Date </h4>
+                            <p:calendar value="#{reportBB.date1}" pattern="MM/dd/yyyy" required="true"
+                                        requiredMessage="Start date required"/>
 
-                    </section>
+                            <h4>End Date</h4>
+                            <p:calendar value="#{reportBB.date2}" pattern="MM/dd/yyyy" required="true"
+                                        requiredMessage="End date required"/>
+
+
+                            <h3>Report</h3>
+                            <p:tabView scrollable="true">
+                                <p:tab title="Total Sales">Total Sales</p:tab>
+                                <p:tab title="Sales by Client">Tab 2 Content</p:tab>
+                                <p:tab title="Sales by Author">Tab 3 Content</p:tab>
+                                <p:tab title="Sales by Publisher">Tab 4 Content</p:tab>
+                                <p:tab title="Top Sellers">Tab 5 Content</p:tab>
+                                <p:tab title="Top Clients">Tab 6 Content</p:tab>
+                                <p:tab title="Zero Sales">Tab 7 Content</p:tab>
+                                <p:tab title="Reorder Report">Tab 8 Content</p:tab>
+                                <p:tab title="Stock Report">
+                                    <p:dataTable id="table" var="book" value="#{booksBB.books}" rows="5"
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15"
+                                         editable="true" style="margin-bottom:20px"
+                                         selection="#{book}" selectionMode="single" rowKey="#{book.id}">
+                                     <p:column headerText="Id" sortBy="#{book.id}" filterBy="#{book.id}" filterMatchMode="contains" style="width:70px">
+                                    <h:outputText value="#{book.id}" />
+                                </p:column>
+
+                                <p:column headerText="Title" sortBy="#{book.title}" filterBy="#{book.title}" filterMatchMode="contains" style="width:200px">
+                                   <h:outputText value="#{book.title}" />
+                                </p:column>
+
+                                <p:column headerText="List Price" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" filterMatchMode="contains" style="width:70px">
+                                   <h:outputText value="#{book.listPrice}" />
+                                </p:column>
+
+                                <p:column headerText="Sale Price" sortBy="#{book.salePrice}" filterBy="#{book.salePrice}" filterMatchMode="contains" style="width:70px">
+                                    <h:outputText value="#{book.salePrice}" />
+                                </p:column> 
+
+                                <p:column headerText="Wholesale Price" sortBy="#{book.wholesalePrice}" filterBy="#{book.wholesalePrice}" filterMatchMode="contains" style="width:70px">
+                                    <h:outputText value="#{book.wholesalePrice}" />
+                                </p:column>   
+                                    </p:dataTable>
+                                </p:tab>      
+                            </p:tabView>
+                        </h:form>
+                    </div>
                 </div>
-            </ui:define>
-        </ui:composition>
+            </section>
 
-        <!-- jQuery 2.1.4 -->
-        <script src="/resources/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <!-- Bootstrap 3.3.5 -->
-        <script src="/resources/admin/bootstrap/js/bootstrap.min.js"></script>
-        <!-- DataTables -->
-        <script src="/resources/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="/resources/admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <!-- SlimScroll -->
-        <script src="/resources/admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-        <!-- FastClick -->
-        <script src="/resources/admin/plugins/fastclick/fastclick.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="/resources/admin/dist/js/app.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="/resources/admin/dist/js/demo.js"></script>
-        <!-- page script -->
-        <script>
-            $(function () {
-                $("#example1").DataTable();
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false
-                });
-            });
-        </script>
-    </body>
+        </ui:define>
+    </ui:composition>
 </html>
+

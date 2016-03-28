@@ -58,24 +58,24 @@
                                     </p:cellEditor>
                                 </p:column>
 
-                                <p:column headerText="List Price" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" filterMatchMode="contains" style="width:70px">
+                                <p:column headerText="Pub Date" sortBy="#{book.formattedPubDate}" filterBy="#{book.formattedPubDate}" filterMatchMode="contains" style="width:70px">
                                     <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{book.listPrice}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{book.listPrice}" /></f:facet>
+                                        <f:facet name="output"><h:outputText value="#{book.formattedPubDate}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{book.formattedPubDate}" /></f:facet>
                                     </p:cellEditor>
                                 </p:column>
 
-                                <p:column headerText="Sale Price" sortBy="#{book.salePrice}" filterBy="#{book.salePrice}" filterMatchMode="contains" style="width:70px">
+                                <p:column headerText="genre List" sortBy="#{book.genreList}" filterBy="#{book.genreList}" filterMatchMode="contains" style="width:70px">
                                     <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{book.salePrice}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{book.salePrice}" /></f:facet>
+                                        <f:facet name="output"><h:outputText value="#{book.genreList}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{book.genreList}" /></f:facet>
                                     </p:cellEditor>
                                 </p:column> 
 
-                                <p:column headerText="Wholesale Price" sortBy="#{book.wholesalePrice}" filterBy="#{book.wholesalePrice}" filterMatchMode="contains" style="width:70px">
+                                <p:column headerText="publisher" sortBy="#{book.publisher}" filterBy="#{book.publisher}" filterMatchMode="contains" style="width:70px">
                                     <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{book.wholesalePrice}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{book.wholesalePrice}" /></f:facet>
+                                        <f:facet name="output"><h:outputText value="#{book.publisher}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{book.publisher}" /></f:facet>
                                     </p:cellEditor>
                                 </p:column>
 

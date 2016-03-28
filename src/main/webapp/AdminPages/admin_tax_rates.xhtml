@@ -2,10 +2,10 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
         <title>Admin Tax Rates</title>
     </head>
     <body>
@@ -20,64 +20,28 @@
                     <!-- Content Header (Page header) -->
                     <section class="content-header">
                         <h1>
-                            Data Tables
+                            Tax Rates
                         </h1>
                         <ol class="breadcrumb">
+                            <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
                             <li><a href="#"><i class="fa fa-dashboard"></i> Tax Rates</a></li>
                         </ol>
                     </section>
                     <section class="content">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="box box-primary">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="box">
 
-                                                <div class="box-body">
-                                                    <h1>Coming Soon!</h1>
-                                                    
-                                                </div><!-- /.box-body -->
-                                            </div><!-- /.box --> 
-                                        </div>
-                                    </div>
-                                </div>
+                                <h1>Coming Soon!</h1>
+
                             </div>
                         </div>
+
                     </section>
 
                 </div>
             </ui:define>
         </ui:composition>
 
-        <!-- jQuery 2.1.4 -->
-        <script src="/resources/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <!-- Bootstrap 3.3.5 -->
-        <script src="/resources/admin/bootstrap/js/bootstrap.min.js"></script>
-        <!-- DataTables -->
-        <script src="/resources/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="/resources/admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <!-- SlimScroll -->
-        <script src="/resources/admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-        <!-- FastClick -->
-        <script src="/resources/admin/plugins/fastclick/fastclick.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="/resources/admin/dist/js/app.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="/resources/admin/dist/js/demo.js"></script>
-        <!-- page script -->
-        <script>
-            $(function () {
-                $("#example1").DataTable();
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false
-                });
-            });
-        </script>
+
     </body>
 </html>
