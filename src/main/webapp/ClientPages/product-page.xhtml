@@ -119,7 +119,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                             </ui:repeat>
-                            <h:form id="reviewForm">
+                            <h:form id="reviewForm" rendered="#{session.getAttribute('loggedIn')}">
                                 <label>
                                     My Review
                                     <p:inputTextarea value="#{productPageBB.review.text}" placeholder="Write a review..." autoResize="false" />

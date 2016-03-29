@@ -22,7 +22,6 @@
                         <p:password id="password" value="#{loginBB.password}"
                                     requiredMessage="#{bundle.passwordRequired}" />
                         <p:message for="password" style="color:red"/>
-                        <h:outputText value="#{session.getAttribute('loggedIn')}"/>
                     </h:panelGrid>
                     <p:commandButton id="primebutton" value="#{bundle.loginButton}"
                                      style="display: block;margin: 0 auto;"
