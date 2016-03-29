@@ -54,10 +54,7 @@
                                 </p:column>
 
                                 <p:column headerText="List Price" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" filterMatchMode="contains" style="width:70px">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{book.listPrice}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{book.listPrice}" /></f:facet>
-                                    </p:cellEditor>
+                                    <h:outputText value="#{book.listPrice}" />
                                 </p:column>
 
                                 <p:column headerText="Sale Price" sortBy="#{book.salePrice}" filterBy="#{book.salePrice}" filterMatchMode="contains" style="width:70px">
@@ -68,10 +65,7 @@
                                 </p:column> 
 
                                 <p:column headerText="Wholesale Price" sortBy="#{book.wholesalePrice}" filterBy="#{book.wholesalePrice}" filterMatchMode="contains" style="width:70px">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{book.wholesalePrice}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{book.wholesalePrice}" /></f:facet>
-                                    </p:cellEditor>
+                                    <h:outputText value="#{book.wholesalePrice}" />
                                 </p:column>
 
                             </p:dataTable>
