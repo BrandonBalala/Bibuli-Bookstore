@@ -78,31 +78,15 @@ public class AdminNotApprovalReviewsBackingBean implements Serializable{
         return reviews.size();
     }
     
-    public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-           System.out.println(((Client) event.getObject()).getId());
+    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
+        Reviews editedReviw = (Reviews)event.getObject();
+        reviewController.edit(editedReviw);
+        init();
     }
      
     public void onRowCancel(RowEditEvent event) {
 //        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
         System.out.println(((Client) event.getObject()).getId());
-    }
-    
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
-    
-    
-        
+    }   
 }
-
-    
-

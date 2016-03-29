@@ -10,6 +10,8 @@ import com.g4w16.entities.Client;
 import com.g4w16.entities.Title;
 import com.g4w16.persistence.ClientJpaController;
 import com.g4w16.persistence.TitleJpaController;
+import com.g4w16.persistence.exceptions.NonexistentEntityException;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -58,16 +60,13 @@ public class AdminClientsBackingBean implements Serializable {
         this.filteredClients = filteredClients;
     }
     
-    public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-           System.out.println(((Client) event.getObject()).getId());
+    public void onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
+        Client editedClient = (Client) event.getObject();
+        clientJpaController.edit(editedClient);
     }
      
     public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-        System.out.println(((Client) event.getObject()).getId());
+
     }
     
     public void onCellEdit(CellEditEvent event) {

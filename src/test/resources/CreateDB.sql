@@ -194,9 +194,9 @@ CREATE TABLE Banner (
 
 CREATE TABLE TaxeRates (
   Province varchar(128) PRIMARY KEY,
-  PST DECIMAL(12,2) DEFAULT 0,
+  GST DECIMAL(12,2) DEFAULT 0,
   HST DECIMAL(12,2) DEFAULT 0,
-  QST DECIMAL(12,2) DEFAULT 0,
+  PST DECIMAL(12,2) DEFAULT 0,
   Updated timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 )ENGINE=InnoDB;
 
@@ -1415,3 +1415,18 @@ VALUES
 ("6","1","93","13.99","0.14","0.14","0.14","1"),
 ("7","1","23","15.99","0.14","0.14","0.14","1"),
 ("8","1","34","16.99","0.14","0.14","0.14","1");
+
+INSERT INTO `TaxeRates` (`Province`, `HST`, `GST`, `PST`, `Updated`) 
+VALUES ('AB', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('BC', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('MA', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('NB', '0.05','0.00',  '0.00', CURRENT_TIMESTAMP),
+ ('NL', '0.05','0.00',  '0.00', CURRENT_TIMESTAMP),
+ ('NT', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('NS', '0.05', '0.00', '0.00', CURRENT_TIMESTAMP),
+ ('NU', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('ON', '0.05','0.00',  '0.00', CURRENT_TIMESTAMP),
+ ('PI', '0.05','0.00',  '0.00', CURRENT_TIMESTAMP),
+ ('QC', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('SA', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('YU', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP);

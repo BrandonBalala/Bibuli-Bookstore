@@ -7,6 +7,7 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Books;
 import com.g4w16.persistence.BooksJpaController;
+import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -29,6 +30,16 @@ public class AdminBooksBackingBean {
     private List<Books> books;
     private List<Books> saleBooks;
     private List<Books> filteredBooks;
+    private Books selectedBook;
+
+    public Books getSelectedBook() {
+        return selectedBook;
+    }
+
+    public void setSelectedBook(Books selectedBook) {
+        this.selectedBook = selectedBook;
+    }
+    
     
     @Inject 
     BooksJpaController booksJpaController;
@@ -68,16 +79,8 @@ public class AdminBooksBackingBean {
         this.filteredBooks = filteredBooks;
     }
     
-    public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-           System.out.println(((Books) event.getObject()).getId());
-    }
-     
-    public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-        System.out.println(((Books) event.getObject()).getId());
+    public void onDelete(){
+        System.out.println(selectedBook.getId());
     }
     
     public void onCellEdit(CellEditEvent event) {
