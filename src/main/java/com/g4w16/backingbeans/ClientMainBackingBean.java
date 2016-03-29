@@ -73,6 +73,7 @@ public class ClientMainBackingBean implements Serializable{
     {
       return recentlyAddedBooks;
     }
+    
     public String displayProductPage(Books book) {
         productBB.setBook(book);
 

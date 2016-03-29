@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 
-$('.owl-carousel').owlCarousel({
-margin:10,
-responsiveClass:true,
-})
+$('.owlcarousel').owlCarousel({
+    margin:10,
+    responsive:{
+        600:{
+            items:4
+        }
+    }
+});

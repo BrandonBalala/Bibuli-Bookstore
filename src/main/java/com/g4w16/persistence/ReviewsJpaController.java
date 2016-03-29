@@ -264,9 +264,12 @@ public class ReviewsJpaController implements Serializable {
         Query q = em.createQuery("SELECT r FROM Reviews r WHERE r.reviewsPK.book = :book and r.reviewsPK.client = :client");
         q.setParameter("book", id.getBook());
         q.setParameter("client", id.getClient());
-        Reviews result = (Reviews) q.getSingleResult();
-
-        return result;
+        List<Reviews> result = (List<Reviews>) q.getResultList();
+        if(result.isEmpty())
+            return null;
+        else
+            return result.get(0);
+                    
     }
 
     public void updateApprovalStatus(ReviewsPK id) throws Exception {
