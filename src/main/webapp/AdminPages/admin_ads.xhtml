@@ -35,16 +35,9 @@
 
 
 
-                            <p><p:commandButton id="create" value="New Ad" icon="fa fa-plus" type="button"/></p>
+                            <p><p:commandButton id="create" value="New Ad" icon="fa fa-plus" type="button" /></p>
 
                             <h:form id="form">
-                                <p:outputLabel for="bannerId" value="Select Ad id: " />
-                                <p:selectOneRadio id="bannerId" value="#{bannerBB.bannerId}"  layout="grid" columns="10">
-                                    <f:selectItems value="#{bannerBB.ids}" var="c" itemLabel="#{bannerId}" itemValue="#{bannerId}"/>
-                                </p:selectOneRadio>
-                                <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
-
-
                                 <p:growl id="msgs"/>
 
                                 <p:dataTable id="table" var="ad" value="#{bannerBB.banners}" rows="10"
@@ -52,11 +45,12 @@
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
                                              editable="true" style="margin-bottom:20px"
-                                             selection="#{ad}" selectionMode="single" rowKey="#{ad.id}">
+                                             selection="#{bannerBB.selected}"  rowKey="#{ad.id}">
 
                                     <p:ajax event="rowEdit" listener="#{bannerBB.onRowEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{bannerBB.onRowCancel}" update=":form:msgs" />
 
+                                    <p:column selectionMode="single" style="width:30px;text-align:center"/>
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
                                     </p:column>
@@ -73,9 +67,12 @@
                                         </p:cellEditor>
                                     </p:column>
 
+                                    <f:facet name="footer">
+                                        <p:commandButton process="table" update=":form" icon="ui-icon-search" value="Submit" oncomplete="#{bannerBB.changeStatus()}" />
+                                    </f:facet>
+
                                 </p:dataTable>
                             </h:form>
-
 
                         </div>
                     </div>

@@ -30,6 +30,7 @@ public class AdminFeedBackingBean implements Serializable {
     private List<Integer> ids ;
     private int feedId;
     private List<Feed> filteredFeeds;
+    private Feed selected;
     
     @Inject
     FeedJpaController feedJpaController;
@@ -46,6 +47,16 @@ public class AdminFeedBackingBean implements Serializable {
     public int getFeedCount(){
         return feedJpaController.getFeedCount();
     }
+
+    public Feed getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Feed selected) {
+        this.selected = selected;
+    }
+    
+    
     
     public List<Integer> getIds() {
         ids=new ArrayList<>();

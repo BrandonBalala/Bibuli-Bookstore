@@ -32,6 +32,9 @@ public class AdminPollBackingBean implements Serializable {
     private List<Integer> ids ;
     private int pollId;
     private List<Poll> filteredPolls;
+    private Poll selected;
+
+    
     
     @Inject
     PollJpaController pollJpaController;
@@ -63,6 +66,14 @@ public class AdminPollBackingBean implements Serializable {
  
     public void setPollId(int pollId) {
         this.pollId = pollId;
+    }
+    
+    public Poll getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Poll selected) {
+        this.selected = selected;
     }
     
     public List<Poll> getFilteredPolls() {

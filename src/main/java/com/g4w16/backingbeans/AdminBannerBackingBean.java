@@ -30,6 +30,7 @@ public class AdminBannerBackingBean implements Serializable {
     private List<Integer> ids ;
     private int bannerId;
     private List<Banner> filteredBanners;
+    private Banner selected=new Banner();
     
     @Inject
     BannerJpaController bannerJpaController;
@@ -46,6 +47,16 @@ public class AdminBannerBackingBean implements Serializable {
     public int getBannerCount(){
         return bannerJpaController.getBannerCount();
     }
+
+    public Banner getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Banner selected) {
+        this.selected = selected;
+    }
+    
+    
     
     public List<Integer> getIds() {
         ids=new ArrayList<>();
@@ -72,25 +83,16 @@ public class AdminBannerBackingBean implements Serializable {
     }
     
     public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //       System.out.println(((Client) event.getObject()).getId());
+        System.out.println(((Banner) event.getObject()).getId());
     }
      
     public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //    System.out.println(((Client) event.getObject()).getId());
     }
     
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
+   public void changeStatus(){
+//       bannerJpaController.
+//       selected.getId())
+       
+   }
     
 }
