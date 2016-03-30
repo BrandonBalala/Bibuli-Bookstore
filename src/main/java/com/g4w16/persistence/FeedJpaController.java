@@ -6,6 +6,7 @@
 package com.g4w16.persistence;
 
 import com.g4w16.entities.Feed;
+import com.g4w16.interfaces.FeedJpaInterface;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
@@ -14,17 +15,17 @@ import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
-import com.g4w16.interfaces.FeedJpaInterface;
 
 /**
  *
- * @author BRANDON-PC
+ * @author wangdan
  */
 @Named
 @RequestScoped
@@ -42,7 +43,8 @@ public class FeedJpaController implements Serializable, FeedJpaInterface {
     public FeedJpaController() {
     }
 
-	@Override
+
+    @Override
     public void create(Feed feed) throws RollbackFailureException, Exception {
         try {
             utx.begin();
@@ -151,4 +153,3 @@ public class FeedJpaController implements Serializable, FeedJpaInterface {
         return (List<Feed>) query.getResultList();
     }
 }
-

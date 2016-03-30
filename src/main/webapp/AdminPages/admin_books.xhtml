@@ -38,7 +38,8 @@
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15"
                                          editable="true" style="margin-bottom:20px"
-                                         selection="#{booksBB.selectedBook}" selectionMode="single" rowKey="#{book.id}">
+                                         selection="#{booksBB.selectedBook}" selectionMode="single" rowKey="#{book}">
+                                         
 
                                 <p:column headerText="Id" sortBy="#{book.id}" filterBy="#{book.id}" filterMatchMode="contains" style="width:70px">
                                     <h:outputText value="#{book.id}" />
@@ -74,9 +75,7 @@
 
                                 <p:column headerText="Action" style="width:70px">
                                     <p:commandButton value="Edit" icon="fa fa-fw fa-edit" type="button"/>
-                                    <p:commandButton process="form" value="Remove"  icon="fa fa-fw fa-remove" type="button">
-                                        <f:setPropertyActionListener value="#{booksBB.selectedBook}" target="#{booksBB.onDelete}" />
-                                    </p:commandButton>
+                                    <p:commandButton process="form" actionListener="#{booksBB.onDelete(selectedBook)}" value="Remove"  icon="fa fa-fw fa-remove" type="button"/>
                                 </p:column>
 
                             </p:dataTable>

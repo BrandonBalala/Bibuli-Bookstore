@@ -10,6 +10,7 @@ import com.g4w16.persistence.BooksJpaController;
 import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -32,13 +33,7 @@ public class AdminBooksBackingBean {
     private List<Books> filteredBooks;
     private Books selectedBook;
 
-    public Books getSelectedBook() {
-        return selectedBook;
-    }
-
-    public void setSelectedBook(Books selectedBook) {
-        this.selectedBook = selectedBook;
-    }
+    
     
     
     @Inject 
@@ -53,6 +48,7 @@ public class AdminBooksBackingBean {
         BigDecimal min=new BigDecimal(0);
         BigDecimal max=new BigDecimal(999999999);
         saleBooks=booksJpaController.findBookByPriceRange(min,max);
+        
     }
     
     public List<Books> getBooks() {
@@ -79,7 +75,18 @@ public class AdminBooksBackingBean {
         this.filteredBooks = filteredBooks;
     }
     
-    public void onDelete(){
+    public Books getSelectedBook() {
+        System.out.println(">>>>>>>>>>> getSelectedBook");
+        return selectedBook;
+    }
+
+    public void setSelectedBook(Books selectedBook) {
+        System.out.println(">>>>>>>>>>> setSelectedBook");
+        this.selectedBook = selectedBook;
+    }
+    
+    public void onDelete(Books selectedBook){
+        System.out.println(">>>>>>>>>>> setSelectedBook");
         System.out.println(selectedBook.getId());
     }
     

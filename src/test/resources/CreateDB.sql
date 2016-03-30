@@ -184,12 +184,14 @@ CREATE TABLE Admin (
 CREATE TABLE Feed (
   ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   Name varchar(254) NOT NULL UNIQUE,
-  URI varchar(254) NOT NULL
+  URI varchar(254) NOT NULL,
+  SELECTED BOOLEAN NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE Banner (
   ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  URI varchar(254) NOT NULL
+  URI varchar(254) NOT NULL,
+  SELECTED BOOLEAN NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE TaxeRates (
@@ -1389,17 +1391,16 @@ VALUES (1,"What is your native language?", "English", "French", "Spanish", "Othe
         (0,"Which e-book format do you prefer?","PDF","EPUB","Mobi","Other",46,24,39,27);
 
 
-INSERT INTO `feed` (`Name`, `URI`) 
+INSERT INTO `feed` (`Name`, `URI`, `SELECTED`)
 VALUES
-('Librarians fight rise of precarious work', 'http://www.cbc.ca/news/canada/toronto/precarious-work-librarians-1.3508778'),
-('CBC FORUM\r\nWhat''s the best way forward for Canadian health care?', 'http://www.cbc.ca/news/politics/health-care-forum-1.3508132');
+('Librarians fight rise of precarious work', 'http://www.cbc.ca/news/canada/toronto/precarious-work-librarians-1.3508778', '1'),
+('CBC FORUM\r\nWhat''s the best way forward for Canadian health care?', 'http://www.cbc.ca/news/politics/health-care-forum-1.3508132', '0');
 
-INSERT INTO `banner` (`URI`) 
+INSERT INTO `banner` (`URI`, `SELECTED`)
 VALUES
-('https://www.amazon.ca/'),
-('http://www.ebay.ca/'),
-('https://www.dawsoncollege.qc.ca/');
-
+('https://www.amazon.ca/', '1'),
+('http://www.ebay.ca/', '0'),
+('https://www.dawsoncollege.qc.ca/', '0');
 
 INSERT INTO `Sales` (`ID`,`DateEntered`,`Client`,`GrossValue`,`NetValue`,`Removed`) 
 VALUES

@@ -37,12 +37,6 @@
                             <p><p:commandButton id="create" value="New Poll" icon="fa fa-plus" type="button"/></p>
 
                             <h:form id="form">
-                                <p:outputLabel for="pollId" value="Select survey id: " />
-                                <p:selectOneRadio id="pollId" value="#{pollsBB.pollId}"  layout="grid" columns="10">
-                                    <f:selectItems value="#{pollsBB.ids}" var="c" itemLabel="#{pollId}" itemValue="#{pollId}"/>
-                                </p:selectOneRadio>
-                                <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
-                                <h:message for="pollId" errorStyle="color:red display:block"/>
 
                                 <p:growl id="msgs"/>
 
@@ -51,11 +45,12 @@
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
                                              editable="true" style="margin-bottom:20px"
-                                             selection="#{poll}" selectionMode="single" rowKey="#{poll.id}">
+                                             selection="#{poll.selected}"  rowKey="#{poll.id}">
 
                                     <p:ajax event="rowEdit" listener="#{pollsBB.onRowEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{pollsBB.onRowCancel}" update=":form:msgs" />
 
+                                    <p:column selectionMode="single" style="width:40px;text-align:center" />
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
                                     </p:column>

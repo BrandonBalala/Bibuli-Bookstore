@@ -35,27 +35,29 @@
 
 
 
-                            <p><p:commandButton id="create" value="New Ad" icon="fa fa-plus" type="button"/></p>
+                            <p><p:commandButton id="create" value="New Ad" icon="fa fa-plus" type="button" /></p>
 
                             <h:form id="form">
-                                <p:outputLabel for="bannerId" value="Select Ad id: " />
-                                <p:selectOneRadio id="bannerId" value="#{bannerBB.bannerId}"  layout="grid" columns="10">
-                                    <f:selectItems value="#{bannerBB.ids}" var="c" itemLabel="#{bannerId}" itemValue="#{bannerId}"/>
-                                </p:selectOneRadio>
-                                <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
-
-
                                 <p:growl id="msgs"/>
 
                                 <p:dataTable id="table" var="ad" value="#{bannerBB.banners}" rows="10"
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
-                                             editable="true" style="margin-bottom:20px"
-                                             selection="#{ad}" selectionMode="single" rowKey="#{ad.id}">
+                                             editable="true" style="margin-bottom:20px">
+
 
                                     <p:ajax event="rowEdit" listener="#{bannerBB.onRowEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{bannerBB.onRowCancel}" update=":form:msgs" />
+
+
+
+
+                                    <p:column headerText="Selected" style="width:50px">
+                                        <p:selectBooleanCheckbox value="#{ad.selected}">
+                                            <p:ajax update="form" listener="#{bannerBB.changeStatus(ad)}" />
+                                        </p:selectBooleanCheckbox>
+                                    </p:column>
 
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
@@ -73,9 +75,12 @@
                                         </p:cellEditor>
                                     </p:column>
 
+
+
+
+
                                 </p:dataTable>
                             </h:form>
-
 
                         </div>
                     </div>
