@@ -44,6 +44,17 @@
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
                                     </p:column>
+                                    
+                                      <p:column headerText="Approval Status" sortBy="#{review.approval}" filterBy="#{review.approval}" filterMatchMode="contains" style="width:115px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"> <h:outputText value="#{review.approval}" /></f:facet>
+                                            <f:facet name="input">
+                                                <h:selectOneMenu value="#{review.approval}" style="width:100%">
+                                                    <f:selectItems value="#{notApprovalReviewBB.status}" var="status" itemLabel="#{status}" itemValue="#{status}" />
+                                                </h:selectOneMenu>
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
                                     <p:column headerText="Book Id" sortBy="#{review.reviewsPK.book}" filterBy="#{review.reviewsPK.book}" filterMatchMode="contains" style="width:115px">
                                         <h:outputText value="#{review.reviewsPK.book}" />
@@ -65,16 +76,7 @@
                                         <h:outputText value="#{review.text}" />
                                     </p:column>
 
-                                    <p:column headerText="Approval Status" sortBy="#{review.approval}" filterBy="#{review.approval}" filterMatchMode="contains" style="width:115px">
-                                        <p:cellEditor>
-                                            <f:facet name="output"> <h:outputText value="#{review.approval}" /></f:facet>
-                                            <f:facet name="input">
-                                                <h:selectOneMenu value="#{review.approval}" style="width:100%">
-                                                    <f:selectItems value="#{notApprovalReviewBB.status}" var="status" itemLabel="#{status}" itemValue="#{status}" />
-                                                </h:selectOneMenu>
-                                            </f:facet>
-                                        </p:cellEditor>
-                                    </p:column>
+                                  
 
                                 </p:dataTable>
                             </h:form>

@@ -29,14 +29,21 @@
 
                         <h:form id="form">
                             
-                            <p:messages/>
-                            <h4>Start Date </h4>
-                            <p:calendar value="#{reportBB.date1}" pattern="MM/dd/yyyy" required="true"
-                                        requiredMessage="Start date required"/>
+                            <h:panelGrid columns="5" cellpadding="20">
+                                
+                                <p:outputLabel for="event1" value="Start Date:" />
+                                <p:calendar id="event1" value="#{reportBB.start}" pattern="dd-MM-yyyy">
+                                    <p:ajax event="dateSelect" listener="#{reportBB.onDateSelect}" />
+                                </p:calendar>
+                                
+                                <p:outputLabel for="event2" value="End Date:" />
+                                <p:calendar id="event2" value="#{reportBB.end}">
+                                    <p:ajax event="dateSelect" listener="#{reportBB.onDateSelect}" />
+                                </p:calendar>
 
-                            <h4>End Date</h4>
-                            <p:calendar value="#{reportBB.date2}" pattern="MM/dd/yyyy" required="true"
-                                        requiredMessage="End date required"/>
+                                <p:commandButton value="Submit"  actionListener="#{reportBB.click}" icon="ui-icon-check" />
+                            </h:panelGrid>
+
 
 
                             <h3>Report</h3>
@@ -49,34 +56,7 @@
                                 <p:tab title="Top Clients">Tab 6 Content</p:tab>
                                 <p:tab title="Zero Sales">Tab 7 Content</p:tab>
                                 <p:tab title="Reorder Report">Tab 8 Content</p:tab>
-                                <p:tab title="Stock Report">
-                                    <p:dataTable id="table" var="book" value="#{booksBB.books}" rows="5"
-                                         paginator="true"
-                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         rowsPerPageTemplate="5,10,15"
-                                         editable="true" style="margin-bottom:20px"
-                                         selection="#{book}" selectionMode="single" rowKey="#{book.id}">
-                                     <p:column headerText="Id" sortBy="#{book.id}" filterBy="#{book.id}" filterMatchMode="contains" style="width:70px">
-                                    <h:outputText value="#{book.id}" />
-                                </p:column>
 
-                                <p:column headerText="Title" sortBy="#{book.title}" filterBy="#{book.title}" filterMatchMode="contains" style="width:200px">
-                                   <h:outputText value="#{book.title}" />
-                                </p:column>
-
-                                <p:column headerText="List Price" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" filterMatchMode="contains" style="width:70px">
-                                   <h:outputText value="#{book.listPrice}" />
-                                </p:column>
-
-                                <p:column headerText="Sale Price" sortBy="#{book.salePrice}" filterBy="#{book.salePrice}" filterMatchMode="contains" style="width:70px">
-                                    <h:outputText value="#{book.salePrice}" />
-                                </p:column> 
-
-                                <p:column headerText="Wholesale Price" sortBy="#{book.wholesalePrice}" filterBy="#{book.wholesalePrice}" filterMatchMode="contains" style="width:70px">
-                                    <h:outputText value="#{book.wholesalePrice}" />
-                                </p:column>   
-                                    </p:dataTable>
-                                </p:tab>      
                             </p:tabView>
                         </h:form>
                     </div>

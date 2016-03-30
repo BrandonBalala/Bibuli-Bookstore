@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -31,7 +28,6 @@ public class AdminBannerBackingBean implements Serializable {
     private List<Integer> ids ;
     private int bannerId;
     private List<Banner> filteredBanners;
-    
     private Banner selected;
     
     @Inject

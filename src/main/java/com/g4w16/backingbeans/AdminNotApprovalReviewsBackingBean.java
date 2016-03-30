@@ -2,7 +2,6 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Client;
 import com.g4w16.entities.Reviews;
-import com.g4w16.entities.Title;
 import com.g4w16.persistence.ReviewsJpaController;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
@@ -12,8 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.CellEditEvent;
@@ -33,10 +30,11 @@ import org.primefaces.event.RowEditEvent;
 @SessionScoped
 public class AdminNotApprovalReviewsBackingBean implements Serializable{
       
-    private List<String> status ;
+    
     @Inject
     ReviewsJpaController reviewController;
-
+    
+    private List<String> status ;
     private List<Reviews> reviews;
     private Reviews oneReview;
     private List<Reviews> filteredReviews;
@@ -85,8 +83,5 @@ public class AdminNotApprovalReviewsBackingBean implements Serializable{
     }
      
     public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-        System.out.println(((Client) event.getObject()).getId());
     }   
 }

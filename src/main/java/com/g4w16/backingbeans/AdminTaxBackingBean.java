@@ -5,7 +5,6 @@
  */
 package com.g4w16.backingbeans;
 
-import com.g4w16.entities.Poll;
 import java.io.Serializable;
 import java.util.List;
 import com.g4w16.entities.TaxeRates;
@@ -13,10 +12,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.g4w16.persistence.TaxeRatesJpaController;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -53,31 +50,11 @@ public class AdminTaxBackingBean implements Serializable {
         this.filteredTaxeRates = filteredTaxeRates;
     }
     
-    public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //       System.out.println(((Client) event.getObject()).getId());
+    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
+        taxeRatesJpaController.edit((TaxeRates) event.getObject());
     }
      
     public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //    System.out.println(((Client) event.getObject()).getId());
     }
-    
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
-    
-    
-    
-    
-    
-    
+        
 }

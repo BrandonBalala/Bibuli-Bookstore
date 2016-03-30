@@ -33,12 +33,7 @@
                     <div class="row">
                         <div class="col-xs-12">
 
-
-                            <p><p:commandButton id="create" value="New Tax Rates" icon="fa fa-plus" type="button"/></p>
-
                             <h:form id="form">
-                              
-
                                 <p:growl id="msgs"/>
 
                                 <p:dataTable id="table" var="tax" value="#{taxBB.taxeRates}" rows="10"
@@ -79,8 +74,6 @@
                                             <f:facet name="input"><p:inputText value="#{tax.pst}" /></f:facet>
                                         </p:cellEditor>
                                     </p:column> 
-
-                                    
 
                                 </p:dataTable>
                             </h:form>
