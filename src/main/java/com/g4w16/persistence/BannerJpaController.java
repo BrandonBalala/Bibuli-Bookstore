@@ -129,4 +129,6 @@ public class BannerJpaController implements Serializable {
 		return ((Long) q.getSingleResult()).intValue();
     }
     
+    
+    
 }

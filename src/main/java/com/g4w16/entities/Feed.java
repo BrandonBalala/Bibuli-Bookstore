@@ -17,15 +17,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author BRANDON-PC
+ * @author wangdan
  */
 @Entity
 @Table(name = "feed", catalog = "g4w16", schema = "")
-//@NamedQueries({
-//    @NamedQuery(name = "Feed.findAll", query = "SELECT f FROM Feed f")})
 public class Feed implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +43,10 @@ public class Feed implements Serializable {
     @Size(min = 1, max = 254)
     @Column(name = "URI")
     private String uri;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "SELECTED")
+    private boolean selected;
 
     public Feed() {
     }
@@ -52,10 +55,11 @@ public class Feed implements Serializable {
         this.id = id;
     }
 
-    public Feed(Integer id, String name, String uri) {
+    public Feed(Integer id, String name, String uri, boolean selected) {
         this.id = id;
         this.name = name;
         this.uri = uri;
+        this.selected = selected;
     }
 
     public Integer getId() {
@@ -80,6 +84,14 @@ public class Feed implements Serializable {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     @Override

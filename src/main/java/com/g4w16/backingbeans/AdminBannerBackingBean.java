@@ -7,6 +7,7 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Banner;
 import com.g4w16.persistence.BannerJpaController;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ public class AdminBannerBackingBean implements Serializable {
     private List<Integer> ids ;
     private int bannerId;
     private List<Banner> filteredBanners;
-    private Banner selected=new Banner();
+    
+    private Banner selected;
     
     @Inject
     BannerJpaController bannerJpaController;
@@ -38,6 +40,7 @@ public class AdminBannerBackingBean implements Serializable {
     @PostConstruct
     public void init() {
         banners = bannerJpaController.findBannerEntities();
+        
     }
     
     public List<Banner> getBanners(){
@@ -49,14 +52,14 @@ public class AdminBannerBackingBean implements Serializable {
     }
 
     public Banner getSelected() {
+        if(selected==null)
+           selected= new Banner();
         return selected;
     }
 
     public void setSelected(Banner selected) {
         this.selected = selected;
     }
-    
-    
     
     public List<Integer> getIds() {
         ids=new ArrayList<>();
@@ -82,17 +85,17 @@ public class AdminBannerBackingBean implements Serializable {
         this.filteredBanners = filteredBanners;
     }
     
-    public void onRowEdit(RowEditEvent event) {
-        System.out.println(((Banner) event.getObject()).getId());
+    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
+        bannerJpaController.edit((Banner) event.getObject());
     }
      
     public void onRowCancel(RowEditEvent event) {
     }
     
-   public void changeStatus(){
-//       bannerJpaController.
-//       selected.getId())
-       
+   public void changeStatus(Banner b) throws RollbackFailureException, Exception{
+      selected=bannerJpaController.findBanner(b.getId());
+       selected.setSelected(b.getSelected());
+       bannerJpaController.edit(selected);
    }
     
 }
