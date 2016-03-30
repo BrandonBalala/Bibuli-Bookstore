@@ -7,6 +7,7 @@ import com.g4w16.entities.ReviewsPK;
 import com.g4w16.persistence.BooksJpaController;
 import com.g4w16.persistence.ClientJpaController;
 import com.g4w16.persistence.ReviewsJpaController;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,6 +26,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,8 +36,10 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class ProductPageBackingBean implements Serializable {
 
+    private HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     private Books book;
     private Reviews review;
+    private boolean edit;
     private List<Books> recommendedBookList;
     
     private static final int NUM_BOOKS = 4;
@@ -67,6 +71,10 @@ public class ProductPageBackingBean implements Serializable {
         this.review = review;
     }
 
+    public boolean getEdit() {
+        return edit;
+    }
+    
     public Books getBook() {
         if (book == null) {
             book = new Books();
@@ -77,18 +85,29 @@ public class ProductPageBackingBean implements Serializable {
 
     public void setBook(Books book) {
         this.book = book;
-
+        session.setAttribute("lastGenre", book.getGenreList());
         //Set recommended books
         setRecommendedBookList(NUM_BOOKS);
         
         //Clear previous review if existed
+        if(session.getAttribute("authenticated") != null && (boolean)session.getAttribute("authenticated"))
+        {
+         edit=true;
+         review = reviewController.findReviewByUserAndBook(book.getId(),(int)session.getAttribute("client"));
+        }
+        
+        if(review == null)
+        {
+        edit=false;
         review = new Reviews();
+        }
+        
     }
 
     public void createReview() {
         ReviewsPK pk = new ReviewsPK();
         pk.setBook(book.getId());
-        pk.setClient(69); //CHANGE LATER
+        pk.setClient((int)session.getAttribute("client"));
 
         if (!reviewController.reviewExists(pk)) {
             review.setCreationDate(Date.from(Instant.now()));
@@ -102,7 +121,13 @@ public class ProductPageBackingBean implements Serializable {
                 Logger.getLogger(ProductPageBackingBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            Logger.getLogger(ProductPageBackingBean.class.getName()).log(Level.SEVERE, "You already wrote a review for this book");
+            try{
+            review.setApproval(false);
+            reviewController.edit(review);
+            } catch (Exception ex) {
+                Logger.getLogger(ProductPageBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           // Logger.getLogger(ProductPageBackingBean.class.getName()).log(Level.SEVERE, "You already wrote a review for this book");
         }
     }
 

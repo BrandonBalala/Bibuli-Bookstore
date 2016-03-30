@@ -6,6 +6,7 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Books;
+import com.g4w16.entities.Genre;
 import com.g4w16.persistence.BooksJpaController;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,9 +14,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.NoResultException;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -151,6 +153,12 @@ public class SearchBean implements Serializable {
     }
 
     public List<Books> findBooksByGenre(String genre) {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        List<Genre> list = new ArrayList();
+        Genre g = new Genre();
+        g.setType(genre);
+        list.add(g);
+        session.setAttribute("lastGenre",list);
         return bookController.findBooksByGenre(genre);
     }
 
