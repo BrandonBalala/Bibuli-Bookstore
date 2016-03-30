@@ -5,9 +5,6 @@
  */
 package com.g4w16.entities;
 
-import com.g4w16.entities.Books;
-import com.g4w16.entities.Client;
-import com.g4w16.entities.ReviewsPK;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

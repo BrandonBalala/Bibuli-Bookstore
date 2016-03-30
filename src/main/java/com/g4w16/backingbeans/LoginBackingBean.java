@@ -58,27 +58,26 @@ public class LoginBackingBean implements Serializable {
 
         // Used to contain that will be displayed on the login form after Login button is pressed
         FacesMessage message;
-        boolean loggedIn = false;
+        boolean authenticated = false;
 
         // Is there a client with these credentials
         Client client = clientJPAController.findClientByEmailAndPassword(email, password);
 
         // There is a client so login was successful
         if (client != null) {
-            loggedIn = true;
+            authenticated = true;
             message = MessageUtil.getMessage(
                     "messages", "welcome", new Object[]{email});
             message.setSeverity(FacesMessage.SEVERITY_INFO);
+            session.setAttribute("client", client.getId());
         } else {
-            // Unsuccessful login
-            loggedIn = false;
             // MessagesUtil simplifies creating localized messages
             message = MessageUtil.getMessage(
                     "messages", "loginerror", new Object[]{email});
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
         }
         // Store the outcome in the session object
-        session.setAttribute("loggedIn", loggedIn);
+        session.setAttribute("authenticated", authenticated);
 
         // Place the message in the context so that it will be displayed
         FacesContext.getCurrentInstance().addMessage(null, message);
