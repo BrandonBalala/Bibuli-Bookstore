@@ -27,15 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "billingaddress", catalog = "g4w16", schema = "")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "BillingAddress.findAll", query = "SELECT b FROM BillingAddress b"),
-//    @NamedQuery(name = "BillingAddress.findById", query = "SELECT b FROM BillingAddress b WHERE b.id = :id"),
-//    @NamedQuery(name = "BillingAddress.findByName", query = "SELECT b FROM BillingAddress b WHERE b.name = :name"),
-//    @NamedQuery(name = "BillingAddress.findByProvince", query = "SELECT b FROM BillingAddress b WHERE b.province = :province"),
-//    @NamedQuery(name = "BillingAddress.findByCity", query = "SELECT b FROM BillingAddress b WHERE b.city = :city"),
-//    @NamedQuery(name = "BillingAddress.findByFirstCivicAddress", query = "SELECT b FROM BillingAddress b WHERE b.firstCivicAddress = :firstCivicAddress"),
-//    @NamedQuery(name = "BillingAddress.findBySecondCivicAddress", query = "SELECT b FROM BillingAddress b WHERE b.secondCivicAddress = :secondCivicAddress"),
-//    @NamedQuery(name = "BillingAddress.findByPostalCode", query = "SELECT b FROM BillingAddress b WHERE b.postalCode = :postalCode")})
 public class BillingAddress implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,7 +36,7 @@ public class BillingAddress implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 128)
     @Column(name = "Name")
     private String name;
@@ -65,7 +56,7 @@ public class BillingAddress implements Serializable {
     @Column(name = "FirstCivicAddress")
     private String firstCivicAddress;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 250)
     @Column(name = "SecondCivicAddress")
     private String secondCivicAddress;
@@ -79,10 +70,14 @@ public class BillingAddress implements Serializable {
     private Client client;
 
     public BillingAddress() {
+        this.name = "";
+        this.secondCivicAddress = "";
     }
 
     public BillingAddress(Integer id) {
         this.id = id;
+        this.name = "";
+        this.secondCivicAddress = "";
     }
 
     public BillingAddress(Integer id, String name, String province, String city, String firstCivicAddress, String secondCivicAddress, String postalCode) {
@@ -183,5 +178,5 @@ public class BillingAddress implements Serializable {
     public String toString() {
         return "com.g4w16.bookstoreg4w16.entities.BillingAddress[ id=" + id + " ]";
     }
-    
+
 }

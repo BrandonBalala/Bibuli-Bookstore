@@ -93,7 +93,7 @@
                                 <h4>Subtotal <small><h:outputText value="(#{cartBB.bookList.size()} books)"/></small></h4>
                                 <p><h:outputText value="#{cartBB.subtotal}$"/></p>
                                 <h:form>
-                                    <h:commandLink type="submit" class="button expanded success step fi-credit-card size-12" value=" Proceed to Checkout" action="#{cartBB.proceedToCheckout()}"/>
+                                    <h:commandLink type="submit" class="button expanded success step fi-credit-card size-12" value=" Proceed to Checkout" action="#{checkoutBB.displayCheckoutPage()}"/>
                                 </h:form>
                                 <br/>
                                 <hr/>

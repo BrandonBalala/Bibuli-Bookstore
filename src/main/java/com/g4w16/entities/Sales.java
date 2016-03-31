@@ -7,6 +7,7 @@ package com.g4w16.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -43,7 +44,7 @@ public class Sales implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "DateEntered")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateEntered;
@@ -57,7 +58,7 @@ public class Sales implements Serializable {
     @Column(name = "NetValue")
     private BigDecimal netValue;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "Removed")
     private boolean removed;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sale")
@@ -67,10 +68,14 @@ public class Sales implements Serializable {
     private Client client;
 
     public Sales() {
+        this.dateEntered = Date.from(Instant.now());
+        this.removed = false;
     }
 
     public Sales(Integer id) {
         this.id = id;
+        this.dateEntered = Date.from(Instant.now());
+        this.removed = false;
     }
 
     public Sales(Integer id, Date dateEntered, BigDecimal grossValue, BigDecimal netValue, boolean removed) {
@@ -161,5 +166,5 @@ public class Sales implements Serializable {
     public String toString() {
         return "com.g4w16.entities.Sales[ id=" + id + " ]";
     }
-    
+
 }

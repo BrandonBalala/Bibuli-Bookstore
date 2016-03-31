@@ -54,6 +54,10 @@ table tr:nth-of-type(even) {
     border-collapse: separate;
 }
 
+table tr:nth-of-type(even) {
+    background-color: transparent !important;
+}
+
 .strikethrough {
     position: relative;
 }
@@ -148,7 +152,7 @@ table tr:nth-of-type(even) {
 }
 #carousels{
     height: 100px;
-    
+
 }
 
 .carouselImage{
@@ -399,10 +403,13 @@ body{
     width: 200px;
     height: 35px;
     text-align: right;
+    margin-right: 15px !important;
 }
 
 .searchButton{
-    background: #1e1b1b !important; 
+    background: #1e1b1b !important;
+    margin: 0px !important;
+    padding: 0px !important;
 }
 
 .searchBar:hover{
@@ -410,14 +417,24 @@ body{
 }
 
 #formNoStyle {
-  all: initial;
-  * {
-    all: unset;
-  }
+    all: initial;
+    * {
+        all: unset;
+    }
 }
 
 .carousels{
     height:50%;
     width: 80%;
     align-content: center;
+}
+
+.divHeader{
+    max-width: 100% !important;
+    width:100% !important;
+    background-color: #1e1b1b;
+    top: 0px !important;
+    bottom: auto !important;
+    position: fixed !important;
+    z-index: 10 !important;
 }

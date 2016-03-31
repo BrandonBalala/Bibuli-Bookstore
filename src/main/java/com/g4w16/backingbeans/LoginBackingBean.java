@@ -9,6 +9,7 @@ import com.g4w16.entities.Client;
 import com.g4w16.jsf.util.MessageUtil;
 import com.g4w16.persistence.ClientJpaController;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -30,7 +31,9 @@ public class LoginBackingBean implements Serializable {
     private String email;
 
     private String password;
-    
+
+    private boolean loggedIn;
+
     public String getEmail() {
         return email;
     }
@@ -48,6 +51,14 @@ public class LoginBackingBean implements Serializable {
 
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
     /**
      * Action
      */
@@ -58,7 +69,7 @@ public class LoginBackingBean implements Serializable {
 
         // Used to contain that will be displayed on the login form after Login button is pressed
         FacesMessage message;
-        boolean loggedIn = false;
+        loggedIn = false;
 
         // Is there a client with these credentials
         Client client = clientJPAController.findClientByEmailAndPassword(email, password);
@@ -82,5 +93,15 @@ public class LoginBackingBean implements Serializable {
 
         // Place the message in the context so that it will be displayed
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    //REMOVE LATER, USED FOR TESTING ONLY 
+    //FASHFASFHOASIFHOIOASOIH
+    @PostConstruct
+    public void init() {
+        email = "cbutler1@a8.net";
+        password = "a";
+        loggedIn = true;
+        
     }
 }

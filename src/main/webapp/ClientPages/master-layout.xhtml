@@ -14,14 +14,12 @@
         <link rel="stylesheet" type="text/css" href="#{resource['css:mycss.css']}"/>
         <link rel="stylesheet" type="text/css" href="#{resource['css:fluidity/fluidity.css']}"/>
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
-        <link rel="icon" href="resources/images/logo.png"/>
+        <link rel="icon" href="#{resource['images:logo.png']}"/>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
     </h:head>
     <h:body>
-        <!--        <h:outputStylesheet library="css" name="mycss.css" />-->
-
         <div data-sticky-container="" id="header">
-            <div class="title-bar removeMarginTop" data-sticky="" style="width:100%;background-color: #1e1b1b">
+            <div class="title-bar removeMarginTop divHeader" data-sticky="" data-options="marginTop:0;">
                 <div class="title-bar-left">
                     <ul class="dropdown menu inline-list" data-dropdown-menu=""> 
                         <!--homepage.xhtml pas define / change img to graphicimg-->

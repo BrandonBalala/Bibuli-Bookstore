@@ -13,11 +13,116 @@
     </h:head>
     <h:body>
         <ui:composition template="./master-layout.xhtml">
-            <ui:define name="title">Bibuli | Advanced Search</ui:define>
+            <ui:define name="title">Bibuli | Shipping Address</ui:define>
 
             <ui:define name="content">
                 <hr/>
-                    
+
+                <div class="row">
+                    <div class="panel large-12 columns text-left">
+                        <h3>Select a shipping address</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 medium-12 large-6 columns">
+                        <div class="row small-up-1 medium-up-2 large-up-3">
+                            <ui:repeat value="#{checkoutBB.clientAddressList}" var="address">
+                                <div class="column callout radius text-center">
+                                    <p>
+                                        <b><h:outputText value="#{address.name}" /></b>
+                                        <br/><h:outputText value="#{address.firstCivicAddress}"/>
+                                        <c:if test="#{not empty address.secondCivicAddress}">
+                                            <br/><h:outputText value="#{address.secondCivicAddress}"/>
+                                        </c:if>
+                                        <br/><h:outputText value="#{address.city}, #{address.province} #{address.postalCode}"/>
+                                        <br/>Canada
+                                        <h:form>
+                                            <h:commandLink class="button expanded hollow" value="Ship to this address" action="#{checkoutBB.proceedToPayment(address)}"/>
+                                        </h:form>
+                                    </p>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                    <div class="small-12 medium-12 large-6 columns text-center">
+                        <div class="callout secondary">
+                            <hr/>
+                            <br/>
+                            <h4>Order Summary</h4>
+                            <div class="row">
+                                <div class="large-6 columns text-left">
+                                    Total before tax:
+                                </div>
+                                <div class="large-6 columns text-right">
+                                    <h:outputText value="#{cartBB.subtotal}$"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+
+                <div class="row">
+                    <div class="panel large-12 columns text-center">
+                        <h3>Add a new address</h3>
+                    </div>
+                </div>
+                <h:form>
+                    <div class="row large-6">
+                        <hr/>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Location Name (eg. My Home, Cousin's Treehouse) 
+                                    <h:inputText value="#{checkoutBB.choiceAddress.name}"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Address Line 1 
+                                    <h:inputText value="#{checkoutBB.choiceAddress.firstCivicAddress}"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Address Line 2 
+                                    <h:inputText value="#{checkoutBB.choiceAddress.secondCivicAddress}"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label>City
+                                    <h:inputText value="#{checkoutBB.choiceAddress.city}"/>
+                                </label>
+                            </div>
+                            <div class="large-6 columns">
+                                <label>Province
+                                    <h:selectOneMenu value="#{checkoutBB.choiceAddress.province}" >
+                                        <f:selectItems value="#{checkoutBB.provinceList}" var="theProvince" 
+                                                       itemLabel="#{theProvince.id}" itemValue="#{theProvince.id}" />
+                                    </h:selectOneMenu>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Postal Code 
+                                    <h:inputText value="#{checkoutBB.choiceAddress.postalCode}"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <h:commandLink class="button expanded hollow" value="Ship to this address" action="#{checkoutBB.createNewBillingAddress()}"/>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+
                 <hr/>
             </ui:define>
         </ui:composition>

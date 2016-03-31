@@ -16,32 +16,34 @@ import com.g4w16.entities.SalesDetails;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 /**
  *
  * @author BRANDON-PC
  */
+@Named
+@RequestScoped
 public class SalesDetailsJpaController implements Serializable {
 
-    public SalesDetailsJpaController(UserTransaction utx, EntityManagerFactory emf) {
-        this.utx = utx;
-        this.emf = emf;
-    }
-    private UserTransaction utx = null;
-    private EntityManagerFactory emf = null;
+    @Resource
+    private UserTransaction utx;
 
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+    @PersistenceContext(unitName = "bookstorePU")
+    private EntityManager em;
+
+    public SalesDetailsJpaController() {
     }
 
     public void create(SalesDetails salesDetails) throws RollbackFailureException, Exception {
-        EntityManager em = null;
         try {
             utx.begin();
-            em = getEntityManager();
             Sales sale = salesDetails.getSale();
             if (sale != null) {
                 sale = em.getReference(sale.getClass(), sale.getId());
@@ -69,18 +71,12 @@ public class SalesDetailsJpaController implements Serializable {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
     public void edit(SalesDetails salesDetails) throws NonexistentEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
         try {
             utx.begin();
-            em = getEntityManager();
             SalesDetails persistentSalesDetails = em.find(SalesDetails.class, salesDetails.getId());
             Sales saleOld = persistentSalesDetails.getSale();
             Sales saleNew = salesDetails.getSale();
@@ -126,18 +122,12 @@ public class SalesDetailsJpaController implements Serializable {
                 }
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
         try {
             utx.begin();
-            em = getEntityManager();
             SalesDetails salesDetails;
             try {
                 salesDetails = em.getReference(SalesDetails.class, id);
@@ -164,10 +154,6 @@ public class SalesDetailsJpaController implements Serializable {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
@@ -180,41 +166,26 @@ public class SalesDetailsJpaController implements Serializable {
     }
 
     private List<SalesDetails> findSalesDetailsEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(SalesDetails.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            em.close();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(SalesDetails.class));
+        Query q = em.createQuery(cq);
+        if (!all) {
+            q.setMaxResults(maxResults);
+            q.setFirstResult(firstResult);
         }
+        return q.getResultList();
     }
 
     public SalesDetails findSalesDetails(Integer id) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(SalesDetails.class, id);
-        } finally {
-            em.close();
-        }
+        return em.find(SalesDetails.class, id);
     }
 
     public int getSalesDetailsCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<SalesDetails> rt = cq.from(SalesDetails.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<SalesDetails> rt = cq.from(SalesDetails.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        return ((Long) q.getSingleResult()).intValue();
     }
-    
+
 }
