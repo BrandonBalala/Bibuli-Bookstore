@@ -5,41 +5,50 @@
  */
 package com.g4w16.backingbeans;
 
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
- 
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
+ 
 
 /**
  *
  * @author wangdan
  */
-@Named("reprotBB")
+@Named("reportBB")
 @ManagedBean
-public class AdminReportBackingBean {
+public class AdminReportBackingBean implements Serializable { 
     
-    private Date date1;
-    private Date date2;    
+    private Date start;
+    private Date end;     
     
     
-    public Date getDate1() {
-        return date1;
+    public Date getStart() {
+        return start;
     }
  
-    public void setDate1(Date date1) {
-        this.date1 = date1;
+    public void setStart(Date start) {
+        this.start = start;
     }
     
-    public Date getDate2() {
-        return date2;
+    public Date getEnd() {
+        return end;
     }
  
-    public void setDate2(Date date2) {
-        this.date2 = date2;
+    public void setEnd(Date end) {
+        this.end = end;
     }
+    
+    public void onDateSelect(SelectEvent event) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("Date Selected"+format.format(event.getObject()));
+    }
+    
+    public void click() {
+        System.out.println("click");
+    }
+ 
 }

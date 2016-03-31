@@ -44,13 +44,17 @@
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
-                                             editable="true" style="margin-bottom:20px"
-                                             selection="#{poll.selected}"  rowKey="#{poll.id}">
+                                             editable="true" style="margin-bottom:20px">
 
                                     <p:ajax event="rowEdit" listener="#{pollsBB.onRowEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{pollsBB.onRowCancel}" update=":form:msgs" />
 
-                                    <p:column selectionMode="single" style="width:40px;text-align:center" />
+                                     <p:column headerText="Selected" style="width:30px">
+                                        <p:selectBooleanCheckbox value="#{poll.selected}">
+                                            <p:ajax update="form" listener="#{pollsBB.changeStatus(poll)}" />
+                                        </p:selectBooleanCheckbox>
+                                    </p:column>
+                                    
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
                                     </p:column>

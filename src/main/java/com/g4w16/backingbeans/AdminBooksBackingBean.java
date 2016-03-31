@@ -6,7 +6,9 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Books;
+import com.g4w16.entities.TaxeRates;
 import com.g4w16.persistence.BooksJpaController;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.util.List;
@@ -90,14 +92,11 @@ public class AdminBooksBackingBean {
         System.out.println(selectedBook.getId());
     }
     
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
+    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
+        booksJpaController.edit((Books) event.getObject());
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
     }
     
     

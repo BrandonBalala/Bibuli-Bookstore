@@ -43,13 +43,18 @@
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
-                                             editable="true" style="margin-bottom:20px"
-                                             selection="#{feedBB.selected}"  rowKey="#{feed.id}">
+                                             editable="true" style="margin-bottom:20px">
+                                             
 
                                     <p:ajax event="rowEdit" listener="#{feedBB.onRowEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{feedBB.onRowCancel}" update=":form:msgs" />
 
-                                    <p:column selectionMode="single" style="width:30px;text-align:center"/>
+                                    <p:column headerText="Selected" style="width:30px">
+                                        <p:selectBooleanCheckbox value="#{feed.selected}">
+                                            <p:ajax update="form" listener="#{feedBB.changeStatus(feed)}" />
+                                        </p:selectBooleanCheckbox>
+                                    </p:column>
+                                    
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
                                     </p:column>

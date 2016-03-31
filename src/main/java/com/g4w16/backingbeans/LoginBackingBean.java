@@ -9,6 +9,7 @@ import com.g4w16.entities.Client;
 import com.g4w16.jsf.util.MessageUtil;
 import com.g4w16.persistence.ClientJpaController;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -30,7 +31,9 @@ public class LoginBackingBean implements Serializable {
     private String email;
 
     private String password;
-    
+
+    private boolean loggedIn;
+
     public String getEmail() {
         return email;
     }
@@ -46,6 +49,14 @@ public class LoginBackingBean implements Serializable {
     public void setPassword(String password) {
         this.password = password;
 
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     /**
@@ -81,5 +92,15 @@ public class LoginBackingBean implements Serializable {
 
         // Place the message in the context so that it will be displayed
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    //REMOVE LATER, USED FOR TESTING ONLY 
+    //FASHFASFHOASIFHOIOASOIH
+    @PostConstruct
+    public void init() {
+        email = "cbutler1@a8.net";
+        password = "a";
+        loggedIn = true;
+        
     }
 }

@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="./master-layout.xhtml">
+            <ui:define name="title">Bibuli | Payment &#38; Overview</ui:define>
+
+            <ui:define name="content">
+                <hr/>
+
+                <div class="row">
+                    <div class="large-12 columns text-left">
+                        <h3>Purchase Overview</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-6 columns">
+                        <table class="noborder">
+                            <thead>
+                                <tr>
+                                    <th width="1000">Title</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ui:repeat value="#{cartBB.bookList}" var="theBook">
+                                    <tr>
+                                        <td><b><h:outputText value="#{theBook.title}"/></b></td>
+                                        <c:if test="#{theBook.salePrice eq 0}">
+                                            <td><h:outputText value="#{theBook.listPrice}"/></td>
+                                        </c:if>
+                                        <c:if test="#{theBook.salePrice ne 0}">
+                                            <td><h:outputText value="#{theBook.salePrice}"/></td> 
+                                        </c:if>
+                                    </tr>
+                                </ui:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="large-6 columns text-center">
+                        <div class="callout secondary">
+                            <hr/>
+                            <h4>Order Summary</h4>
+                            <div class="row">
+                                <div class="large-6 columns text-left">
+                                    Total before tax:
+                                </div>
+                                <div class="large-6 columns text-right">
+                                    <h:outputText value="#{cartBB.subtotal}$"/>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="large-6 columns text-left">
+                                    Estimated PST:
+                                </div>
+                                <div class="large-6 columns text-right">
+                                    <h:outputText value="#{checkoutBB.calculatePST()}$"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-6 columns text-left">
+                                    Estimated HST:
+                                </div>
+                                <div class="large-6 columns text-right">
+                                    <h:outputText value="#{checkoutBB.calculateHST()}$"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-6 columns text-left">
+                                    Estimated GST:
+                                </div>
+                                <div class="large-6 columns text-right">
+                                    <h:outputText value="#{checkoutBB.calculateGST()}$"/>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row redFont">
+                                <div class="large-6 columns text-left">
+                                    <b>Order Total:</b>
+                                </div>
+                                <div class="large-6 columns text-right">
+                                    <b><h:outputText value="#{checkoutBB.calculateOrderTotal()}$"/> </b>
+                                </div>
+                            </div>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="large-12 columns text-center">
+                        <h3>Select payment method</h3>
+                    </div>
+                </div>
+
+                <h:form>
+                    <div class="row large-6">
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Card Number 
+                                    <h:inputText value="#{checkoutBB.cardNumber}"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-4 columns">
+                                <label>Expiry Month (MM)
+                                    <h:inputText value="#{checkoutBB.expiryMonth}"/>
+                                </label>
+                            </div>
+                            <div class="large-4 columns">
+                                <label>Expiry Year (YYYY)
+                                    <h:inputText value="#{checkoutBB.expiryYear}"/>
+                                </label>
+                            </div>
+                            <div class="large-4 columns">
+                                <label>Security Code (###) 
+                                    <h:inputText value="#{checkoutBB.securityCode}"/>
+                                </label>
+                            </div>
+                        </div>                        
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Cardholder Name 
+                                    <h:inputText value="#{checkoutBB.nameOnCard}"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <h:commandLink class="button expanded hollow" value="Place Order" action="#{checkoutBB.placeOrder()}"/>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+
+                <hr/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -30,13 +30,13 @@ import javax.transaction.UserTransaction;
 @RequestScoped
 public class TaxeRatesJpaController implements Serializable {
 
-	@Resource
+    @Resource
     private UserTransaction utx;
 
-	@PersistenceContext(unitName = "bookstorePU")
+    @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
 
-    public TaxeRatesJpaController(){
+    public TaxeRatesJpaController() {
     }
 
     public void create(TaxeRates taxeRates) throws PreexistingEntityException, RollbackFailureException, Exception {
@@ -111,32 +111,32 @@ public class TaxeRatesJpaController implements Serializable {
     }
 
     private List<TaxeRates> findTaxeRatesEntities(boolean all, int maxResults, int firstResult) {
-		CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-		cq.select(cq.from(TaxeRates.class));
-		Query q = em.createQuery(cq);
-		if (!all) {
-			q.setMaxResults(maxResults);
-			q.setFirstResult(firstResult);
-		}
-		return q.getResultList();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(TaxeRates.class));
+        Query q = em.createQuery(cq);
+        if (!all) {
+            q.setMaxResults(maxResults);
+            q.setFirstResult(firstResult);
+        }
+        return q.getResultList();
     }
 
     public TaxeRates findTaxeRates(String id) {
-		return em.find(TaxeRates.class, id);
+        return em.find(TaxeRates.class, id);
     }
 
     public int getTaxeRatesCount() {
-		CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-		Root<TaxeRates> rt = cq.from(TaxeRates.class);
-		cq.select(em.getCriteriaBuilder().count(rt));
-		Query q = em.createQuery(cq);
-		return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<TaxeRates> rt = cq.from(TaxeRates.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        return ((Long) q.getSingleResult()).intValue();
     }
 
     public TaxeRates getTaxeRateByProvince(String province) {
-	Query q = em.createQuery("SELECT p FROM Province p WHERE p.id = :province");
-        q.setParameter("province",province);
-        return (TaxeRates)q.getSingleResult();
+        Query q = em.createQuery("SELECT p FROM Province p WHERE p.id = :province");
+        q.setParameter("province", province);
+        return (TaxeRates) q.getSingleResult();
     }
 
 }

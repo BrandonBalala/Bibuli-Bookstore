@@ -8,16 +8,14 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Poll;
 import com.g4w16.persistence.PollJpaController;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -34,7 +32,6 @@ public class AdminPollBackingBean implements Serializable {
     private List<Poll> filteredPolls;
     private Poll selected;
 
-    
     
     @Inject
     PollJpaController pollJpaController;
@@ -84,31 +81,17 @@ public class AdminPollBackingBean implements Serializable {
         this.filteredPolls = filteredPolls;
     }
     
-    public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //       System.out.println(((Client) event.getObject()).getId());
+    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
+        pollJpaController.edit((Poll) event.getObject());
     }
      
-    public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //    System.out.println(((Client) event.getObject()).getId());
-    }
+    public void onRowCancel(RowEditEvent event) {}
     
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
-    
-    public void changeSurvey(){
-        
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+pollId);
+   
+    public void changeStatus(Poll p) throws RollbackFailureException, Exception{
+       selected=pollJpaController.findPollByID(p.getId());
+       selected.setSelected(p.getSelected());
+       pollJpaController.edit(selected);
     }
     
 }

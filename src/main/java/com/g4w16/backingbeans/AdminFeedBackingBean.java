@@ -7,6 +7,7 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Feed;
 import com.g4w16.persistence.FeedJpaController;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +57,6 @@ public class AdminFeedBackingBean implements Serializable {
         this.selected = selected;
     }
     
-    
-    
     public List<Integer> getIds() {
         ids=new ArrayList<>();
          for(int i=0;i<feeds.size();i++){
@@ -82,26 +81,17 @@ public class AdminFeedBackingBean implements Serializable {
         this.filteredFeeds = filteredFeeds;
     }
     
-    public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //       System.out.println(((Client) event.getObject()).getId());
+    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
+          feedJpaController.edit((Feed) event.getObject());
     }
      
     public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //    System.out.println(((Client) event.getObject()).getId());
     }
     
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
+    public void changeStatus(Feed f) throws RollbackFailureException, Exception{
+      selected=feedJpaController.findFeedByID(f.getId());
+       selected.setSelected(f.getSelected());
+       feedJpaController.edit(selected);
+   }
     
 }

@@ -15,8 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -48,7 +46,7 @@ public class SalesDetails implements Serializable {
     @Column(name = "QST")
     private BigDecimal qst;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "Removed")
     private boolean removed;
     @JoinColumn(name = "Sale", referencedColumnName = "ID")
@@ -59,10 +57,12 @@ public class SalesDetails implements Serializable {
     private Books book;
 
     public SalesDetails() {
+        this.removed = false;
     }
 
     public SalesDetails(Integer id) {
         this.id = id;
+        this.removed = false;
     }
 
     public SalesDetails(Integer id, BigDecimal price, boolean removed) {
