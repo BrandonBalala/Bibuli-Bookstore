@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -32,6 +29,8 @@ public class AdminFeedBackingBean implements Serializable {
     private int feedId;
     private List<Feed> filteredFeeds;
     private Feed selected;
+    private String uri;
+    private String name;
     
     @Inject
     FeedJpaController feedJpaController;
@@ -56,6 +55,24 @@ public class AdminFeedBackingBean implements Serializable {
     public void setSelected(Feed selected) {
         this.selected = selected;
     }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
     
     public List<Integer> getIds() {
         ids=new ArrayList<>();
@@ -94,4 +111,12 @@ public class AdminFeedBackingBean implements Serializable {
        feedJpaController.edit(selected);
    }
     
+    public void addAction(String name, String uri) throws Exception{
+        Feed f=new Feed();
+        f.setName(name);
+        f.setUri(uri);
+        f.setSelected(false);
+        feedJpaController.create(f);
+        init();
+    }
 }

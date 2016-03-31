@@ -34,13 +34,19 @@
                         <div class="col-xs-12">
 
 
-                            <p><p:commandButton id="create" value="New Poll" icon="fa fa-plus" type="button"/></p>
-
                             <h:form id="form">
 
                                 <p:growl id="msgs"/>
+                                
+                                <p>New Survey Question: <h:inputText size="100" value="#{pollsBB.question}" /><br/></p>
+                                <p>Option1 : <h:inputText size="50" value="#{pollsBB.option1}" /><br/> 
+                                    Option2 : <h:inputText size="50" value="#{pollsBB.option2}" /><br/>
+                                    Option3 : <h:inputText size="50" value="#{pollsBB.option3}" /><br/>
+                                    Option4 : <h:inputText size="50" value="#{pollsBB.option4}" />                           
+                                <h:commandButton value="Add" action="#{pollsBB.addAction(pollsBB.question,pollsBB.option1,pollsBB.option2,pollsBB.option3,pollsBB.option4)}" /></p>    
+                                 
 
-                                <p:dataTable id="table" var="poll" value="#{pollsBB.polls}" rows="10"
+                                <p:dataTable id="table" var="poll" value="#{pollsBB.polls}" rows="5"
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
