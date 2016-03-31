@@ -75,7 +75,8 @@ public class SearchBean implements Serializable {
 
     public String advancedSearchBooks() {
         List<Books> books = new ArrayList<Books>();
-
+        keywords = keywords.trim();
+        
         switch (searchBy) {
             case "all":
                 return searchBooks();
@@ -115,6 +116,8 @@ public class SearchBean implements Serializable {
             return "advanced-search";
         }
 
+        keywords = keywords.trim();
+        
         List<List<Books>> listOfLists = new ArrayList<List<Books>>();
         listOfLists.add(findBooksByGenre(keywords));
         listOfLists.add(findBooksByIdentifier(keywords));

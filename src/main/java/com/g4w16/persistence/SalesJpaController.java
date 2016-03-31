@@ -222,4 +222,12 @@ public class SalesJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
+    public List<Sales> findSalesByClientId(int clientId) {
+        Query q = em.createQuery("SELECT s FROM Sales s WHERE s.Client = :clientId");
+        q.setParameter("clientId", clientId);
+        List<Sales> results = (List<Sales>) q.getResultList();
+
+        return results;
+    }
+
 }

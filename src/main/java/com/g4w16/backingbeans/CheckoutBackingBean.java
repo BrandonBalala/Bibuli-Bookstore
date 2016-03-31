@@ -31,9 +31,7 @@ import javax.inject.Named;
 @SessionScoped
 public class CheckoutBackingBean implements Serializable {
 
-    private List<BillingAddress> clientAddressList;
     private BillingAddress choiceAddress;
-    private Client client;
 
     private String cardNumber;
     private String nameOnCard;
@@ -58,12 +56,15 @@ public class CheckoutBackingBean implements Serializable {
 
     @Inject
     private TaxeRatesJpaController taxeRatesController;
-    
+
     @Inject
     private SalesJpaController salesController;
-    
+
     @Inject
     private SalesDetailsJpaController salesDetailController;
+
+    @Inject
+    private ClientUtil clientUtil;
 
     public BillingAddress getChoiceAddress() {
         return choiceAddress;
@@ -74,8 +75,14 @@ public class CheckoutBackingBean implements Serializable {
     }
 
     public List<BillingAddress> getClientAddressList() {
-        
-        return clientAddressList;
+
+        Client client = clientController.findClientById(clientUtil.getUserId());
+
+        if (client == null) {
+            return new ArrayList<BillingAddress>();
+        }
+
+        return client.getBillingAddressList();
     }
 
     /**
@@ -153,37 +160,25 @@ public class CheckoutBackingBean implements Serializable {
     }
 
     public String createNewBillingAddress() throws Exception {
-        choiceAddress.setClient(client);
-        choiceAddress.setId(client.getId());
+        choiceAddress.setClient(clientController.findClientById(clientUtil.getUserId()));
+        choiceAddress.setId(clientUtil.getUserId());
         billingController.create(choiceAddress);
         return "payment";
     }
 
     public String displayCheckoutPage() {
-        if (!loginBB.isLoggedIn()) {
+        if (!validateAuthenticated()) {
             return "login";
         }
-
-        List<Client> clientList = clientController.findClientByEmail(loginBB.getEmail());
-
-        if (clientList == null || clientList.isEmpty()) {
-            return "login";
-        }
-
-        client = clientList.get(0);
-
-        List<BillingAddress> tempAddressList = client.getBillingAddressList();
-
-        if (tempAddressList == null) {
-            tempAddressList = new ArrayList<BillingAddress>();
-        }
-
-        clientAddressList = tempAddressList;
 
         return "shipping-address";
     }
 
     public String proceedToPayment(BillingAddress address) {
+        if (!validateAuthenticated()) {
+            return "login";
+        }
+
         choiceAddress = address;
 
         return "payment";
@@ -225,7 +220,7 @@ public class CheckoutBackingBean implements Serializable {
             return BigDecimal.ZERO;
         }
 
-        //Calculate QST & Round to 2 decimal points
+        //Calculate GST & Round to 2 decimal points
         BigDecimal qst = subTotal.multiply(rate).setScale(2, RoundingMode.CEILING);
         return qst;
     }
@@ -239,33 +234,72 @@ public class CheckoutBackingBean implements Serializable {
 
         return total;
     }
-    
-    public String placeOrder() throws Exception{
+
+    public String placeOrder() throws Exception {
+        if (!validateAuthenticated()) {
+            return "login";
+        }
+
         Sales sale = new Sales();
-        sale.setClient(client);
+        sale.setClient(clientController.findClientById(clientUtil.getUserId()));
         sale.setNetValue(cartBB.getSubtotal());
         sale.setGrossValue(calculateOrderTotal());
         salesController.create(sale);
-        
+
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());
-        
+
         for (Books book : cartBB.getBookList()) {
             SalesDetails saleDetail = new SalesDetails();
             saleDetail.setBook(book);
             saleDetail.setSale(sale);
             saleDetail.setPst(tax.getPst());
             saleDetail.setHst(tax.getHst());
-            saleDetail.setQst(tax.getGst());
-            
-            if(book.getSalePrice().equals(BigDecimal.ZERO))
+            saleDetail.setGst(tax.getGst());
+
+            if (book.getSalePrice().equals(BigDecimal.ZERO)) {
                 saleDetail.setPrice(book.getListPrice());
-            else
+            } else {
                 saleDetail.setPrice(book.getSalePrice());
-            
+            }
+
             salesDetailController.create(saleDetail);
         }
-        
+
+        clearCreditCardInfo();
+        clearCart();
+
         return null;
+    }
+
+    private void clearCreditCardInfo() {
+        cardNumber = "";
+        nameOnCard = "";
+        expiryMonth = "";
+        expiryYear = "";
+        securityCode = "";
+    }
+
+    private void clearCart() {
+        cartBB.getBookList().clear();
+    }
+
+    private boolean validateAuthenticated() {
+        try {
+            if (!clientUtil.isAuthenticated()) {
+                return false;
+            }
+
+            int clientID = clientUtil.getUserId();
+            Client client = clientController.findClientById(clientID);
+
+            if (client == null) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 
     @PostConstruct

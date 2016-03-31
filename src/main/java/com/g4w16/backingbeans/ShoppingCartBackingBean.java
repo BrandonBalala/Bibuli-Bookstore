@@ -9,6 +9,7 @@ import com.g4w16.entities.Books;
 import com.g4w16.persistence.BooksJpaController;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -79,7 +80,7 @@ public class ShoppingCartBackingBean implements Serializable {
             subtotal = subtotal.add(temp);
         }
         
-        return subtotal;
+        return subtotal.setScale(2, RoundingMode.CEILING);
     }
     
     public String proceedToCheckout(){
