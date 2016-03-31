@@ -23,75 +23,95 @@ import org.primefaces.event.RowEditEvent;
  */
 @Named("bannerBB")
 @RequestScoped
-public class AdminBannerBackingBean implements Serializable { 
+public class AdminBannerBackingBean implements Serializable {
+
     private List<Banner> banners;
-    private List<Integer> ids ;
+    private List<Integer> ids;
     private int bannerId;
     private List<Banner> filteredBanners;
     private Banner selected;
-    
+    private String uri;
+
     @Inject
     BannerJpaController bannerJpaController;
-    
+
     @PostConstruct
     public void init() {
         banners = bannerJpaController.findBannerEntities();
-        
+
     }
-    
-    public List<Banner> getBanners(){
+
+    public List<Banner> getBanners() {
         return banners;
     }
-    
-    public int getBannerCount(){
+
+    public int getBannerCount() {
         return bannerJpaController.getBannerCount();
     }
 
     public Banner getSelected() {
-        if(selected==null)
-           selected= new Banner();
+        if (selected == null) {
+            selected = new Banner();
+        }
         return selected;
     }
 
     public void setSelected(Banner selected) {
         this.selected = selected;
     }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    
     
     public List<Integer> getIds() {
-        ids=new ArrayList<>();
-         for(int i=0;i<banners.size();i++){
-            ids.add(i+1);
-         }
-         return ids;
+        ids = new ArrayList<>();
+        for (int i = 0; i < banners.size(); i++) {
+            ids.add(i + 1);
+        }
+        return ids;
     }
-    
+
     public int getBannerId() {
         return bannerId;
     }
- 
+
     public void setBannerId(int bannerId) {
         this.bannerId = bannerId;
     }
-    
+
     public List<Banner> getFilteredBanners() {
         return filteredBanners;
     }
- 
+
     public void setFilteredBanners(List<Banner> filteredBanners) {
         this.filteredBanners = filteredBanners;
     }
-    
+
     public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
         bannerJpaController.edit((Banner) event.getObject());
     }
-     
+
     public void onRowCancel(RowEditEvent event) {
     }
-    
-   public void changeStatus(Banner b) throws RollbackFailureException, Exception{
-      selected=bannerJpaController.findBanner(b.getId());
-       selected.setSelected(b.getSelected());
-       bannerJpaController.edit(selected);
-   }
-    
+
+    public void changeStatus(Banner b) throws RollbackFailureException, Exception {
+        selected = bannerJpaController.findBanner(b.getId());
+        selected.setSelected(b.getSelected());
+        bannerJpaController.edit(selected);
+    }
+
+    public void addAction(String uri) throws Exception {
+        Banner b=new Banner();
+        b.setUri(uri);
+        b.setSelected(false);
+        bannerJpaController.create(b);
+        init();
+    }
 }

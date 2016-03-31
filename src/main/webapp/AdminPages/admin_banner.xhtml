@@ -34,11 +34,12 @@
                         <div class="col-xs-12">
 
 
-
-                            <p><p:commandButton id="create" value="New Ad" icon="fa fa-plus" type="button" /></p>
-
                             <h:form id="form">
                                 <p:growl id="msgs"/>
+
+                                New Ad uri : <h:inputText size="100" value="#{bannerBB.uri}" />
+                                <h:commandButton value="Add" action="#{bannerBB.addAction(bannerBB.uri)}" />
+                                    
 
                                 <p:dataTable id="table" var="ad" value="#{bannerBB.banners}" rows="10"
                                              paginator="true"
@@ -49,9 +50,6 @@
 
                                     <p:ajax event="rowEdit" listener="#{bannerBB.onRowEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{bannerBB.onRowCancel}" update=":form:msgs" />
-
-
-
 
                                     <p:column headerText="Selected" style="width:30px">
                                         <p:selectBooleanCheckbox value="#{ad.selected}">
@@ -76,6 +74,7 @@
                                     </p:column>
 
                                 </p:dataTable>
+
                             </h:form>
 
                         </div>
