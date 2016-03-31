@@ -6,9 +6,13 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Books;
+import com.g4w16.entities.TaxeRates;
 import com.g4w16.persistence.BooksJpaController;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
+import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -29,6 +33,10 @@ public class AdminBooksBackingBean {
     private List<Books> books;
     private List<Books> saleBooks;
     private List<Books> filteredBooks;
+    private Books selectedBook;
+
+    
+    
     
     @Inject 
     BooksJpaController booksJpaController;
@@ -42,6 +50,7 @@ public class AdminBooksBackingBean {
         BigDecimal min=new BigDecimal(0);
         BigDecimal max=new BigDecimal(999999999);
         saleBooks=booksJpaController.findBookByPriceRange(min,max);
+        
     }
     
     public List<Books> getBooks() {
@@ -68,26 +77,26 @@ public class AdminBooksBackingBean {
         this.filteredBooks = filteredBooks;
     }
     
-    public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-           System.out.println(((Books) event.getObject()).getId());
+    public Books getSelectedBook() {
+        System.out.println(">>>>>>>>>>> getSelectedBook");
+        return selectedBook;
+    }
+
+    public void setSelectedBook(Books selectedBook) {
+        System.out.println(">>>>>>>>>>> setSelectedBook");
+        this.selectedBook = selectedBook;
+    }
+    
+    public void onDelete(Books selectedBook){
+        System.out.println(">>>>>>>>>>> setSelectedBook");
+        System.out.println(selectedBook.getId());
+    }
+    
+    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
+        booksJpaController.edit((Books) event.getObject());
     }
      
     public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-        System.out.println(((Books) event.getObject()).getId());
-    }
-    
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
     }
     
     

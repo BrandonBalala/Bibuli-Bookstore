@@ -32,19 +32,15 @@ public class PollBackingBean {
     public Poll getPoll(){
         List<Poll> polls = pollController.findSelectedPolls();
         if(polls.isEmpty()){
-            poll = new Poll();
+            this.poll = new Poll();
         }
         else
         {
             Random randomGenerator = new Random();
             int index = randomGenerator.nextInt(polls.size());
-            poll = polls.get(index);
+            this.poll = polls.get(index);
         }
         return poll;
-    }
-    
-    public void setPoll(Poll poll){
-        this.poll = poll;
     }
     
     public int getChoice(){

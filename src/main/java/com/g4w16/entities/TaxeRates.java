@@ -38,12 +38,12 @@ public class TaxeRates implements Serializable {
     @Column(name = "Province")
     private String province;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "PST")
-    private BigDecimal pst;
+    @Column(name = "GST")
+    private BigDecimal gst;
     @Column(name = "HST")
     private BigDecimal hst;
-    @Column(name = "QST")
-    private BigDecimal qst;
+    @Column(name = "PST")
+    private BigDecimal pst;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Updated")
@@ -70,12 +70,12 @@ public class TaxeRates implements Serializable {
         this.province = province;
     }
 
-    public BigDecimal getPst() {
-        return pst;
+    public BigDecimal getGst() {
+        return gst;
     }
 
-    public void setPst(BigDecimal pst) {
-        this.pst = pst;
+    public void setGst(BigDecimal gst) {
+        this.gst = gst;
     }
 
     public BigDecimal getHst() {
@@ -86,12 +86,12 @@ public class TaxeRates implements Serializable {
         this.hst = hst;
     }
 
-    public BigDecimal getQst() {
-        return qst;
+    public BigDecimal getPst() {
+        return pst;
     }
 
-    public void setQst(BigDecimal qst) {
-        this.qst = qst;
+    public void setPst(BigDecimal pst) {
+        this.pst = pst;
     }
 
     public Date getUpdated() {

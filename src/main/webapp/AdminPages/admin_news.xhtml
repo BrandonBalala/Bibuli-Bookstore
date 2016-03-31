@@ -37,25 +37,24 @@
                             <p><p:commandButton id="create" value="New Feed" icon="fa fa-plus" type="button"/></p>
 
                             <h:form id="form">
-                                <p:outputLabel for="feedId" value="Select feed id: " />
-                                <p:selectOneRadio id="feedId" value="#{feedBB.feedId}"  layout="grid" columns="10">
-                                    <f:selectItems value="#{feedBB.ids}" var="c" itemLabel="#{feedId}" itemValue="#{feedId}"/>
-                                </p:selectOneRadio>
-                                <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
-                                <h:message for="pollId" errorStyle="color:red display:block"/>
-
                                 <p:growl id="msgs"/>
 
                                 <p:dataTable id="table" var="feed" value="#{feedBB.feeds}" rows="10"
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
-                                             editable="true" style="margin-bottom:20px"
-                                             selection="#{feed}" selectionMode="single" rowKey="#{feed.id}">
+                                             editable="true" style="margin-bottom:20px">
+                                             
 
                                     <p:ajax event="rowEdit" listener="#{feedBB.onRowEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{feedBB.onRowCancel}" update=":form:msgs" />
 
+                                    <p:column headerText="Selected" style="width:30px">
+                                        <p:selectBooleanCheckbox value="#{feed.selected}">
+                                            <p:ajax update="form" listener="#{feedBB.changeStatus(feed)}" />
+                                        </p:selectBooleanCheckbox>
+                                    </p:column>
+                                    
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
                                     </p:column>

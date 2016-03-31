@@ -12,20 +12,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
  *
- * @author BRANDON-PC
+ * @author 1232048
  */
 @Entity
 @Table(name = "banner", catalog = "g4w16", schema = "")
-//@NamedQueries({
-//    @NamedQuery(name = "Banner.findAll", query = "SELECT b FROM Banner b")})
 public class Banner implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +35,10 @@ public class Banner implements Serializable {
     @Size(min = 1, max = 254)
     @Column(name = "URI")
     private String uri;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "SELECTED")
+    private boolean selected;
 
     public Banner() {
     }
@@ -47,9 +47,10 @@ public class Banner implements Serializable {
         this.id = id;
     }
 
-    public Banner(Integer id, String uri) {
+    public Banner(Integer id, String uri, boolean selected) {
         this.id = id;
         this.uri = uri;
+        this.selected = selected;
     }
 
     public Integer getId() {
@@ -66,6 +67,14 @@ public class Banner implements Serializable {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     @Override

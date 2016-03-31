@@ -1,83 +1,88 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
     <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
         <title>Admin Tax Rates</title>
     </head>
+
     <body>
         <ui:composition template="admin_template.xhtml">
             <ui:define name="title">
-                Tax Rates
+                <h:outputText value="Tax Rates"></h:outputText>
             </ui:define>
 
             <ui:define name="body">
                 <!-- Content Wrapper. Contains page content -->
-                <div>
-                    <!-- Content Header (Page header) -->
-                    <section class="content-header">
-                        <h1>
-                            Data Tables
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li><a href="#"><i class="fa fa-dashboard"></i> Tax Rates</a></li>
-                        </ol>
-                    </section>
-                    <section class="content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="box box-primary">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="box">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Tax Rates ( <h:outputText value="#{taxBB.taxeRatesCount}"/>  Tax Rates )
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Tax Rates</a></li>
+                    </ol>
+                </section>
 
-                                                <div class="box-body">
-                                                    <h1>Coming Soon!</h1>
-                                                    
-                                                </div><!-- /.box-body -->
-                                            </div><!-- /.box --> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <h:form id="form">
+                                <p:growl id="msgs"/>
+
+                                <p:dataTable id="table" var="tax" value="#{taxBB.taxeRates}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{tax}" selectionMode="single" rowKey="#{tax.province}">
+
+                                    <p:ajax event="rowEdit" listener="#{taxBB.onRowEdit}" update=":form:msgs" />
+                                    <p:ajax event="rowEditCancel" listener="#{taxBB.onRowCancel}" update=":form:msgs" />
+
+                                    <p:column  headerText="Edit" style="width:50px">
+                                        <p:rowEditor />
+                                    </p:column>
+
+                                    <p:column headerText="Province" sortBy="#{tax.province}" filterBy="#{tax.province}" filterMatchMode="contains" style="width:120px">
+                                        <h:outputText value="#{tax.province}" />
+                                    </p:column>
+
+                                    <p:column headerText="GST" sortBy="#{tax.gst}" filterBy="#{tax.gst}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{tax.gst}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{tax.gst}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="HST" sortBy="#{tax.hst}" filterBy="#{tax.hst}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{tax.hst}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{tax.hst}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="PST" sortBy="#{tax.pst}" filterBy="#{tax.pst}" filterMatchMode="contains" style="width:200px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{tax.pst}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{tax.pst}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column> 
+
+                                </p:dataTable>
+                            </h:form>
+
                         </div>
-                    </section>
-
-                </div>
+                    </div>
+                </section>
             </ui:define>
         </ui:composition>
-
-        <!-- jQuery 2.1.4 -->
-        <script src="/resources/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <!-- Bootstrap 3.3.5 -->
-        <script src="/resources/admin/bootstrap/js/bootstrap.min.js"></script>
-        <!-- DataTables -->
-        <script src="/resources/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="/resources/admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <!-- SlimScroll -->
-        <script src="/resources/admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-        <!-- FastClick -->
-        <script src="/resources/admin/plugins/fastclick/fastclick.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="/resources/admin/dist/js/app.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="/resources/admin/dist/js/demo.js"></script>
-        <!-- page script -->
-        <script>
-            $(function () {
-                $("#example1").DataTable();
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false
-                });
-            });
-        </script>
     </body>
+
 </html>

@@ -4,75 +4,91 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui" 
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
-        <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
-        <link rel="stylesheet" href="../resources/css/foundation/foundation-icons.css"/>
-        <link rel="stylesheet" type="text/css" href="../resources/css/mycss.css"/>
-        <link rel="stylesheet" type="text/css" href="../resources/css/fluidity/fluidity.css"/>
-        <link rel="stylesheet" type="text/css" href="../resources/css/owl.carousel.css"  />
-        <link rel="stylesheet" href="../resources/css/owl-carousel/owl.theme.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="../resources/js/owl.carousel.min.js" type="text/javascript"></script>
     </h:head>
     <h:body>
-        <div id="carousels">
-                    <div class="bestSellers carousel owl-carousel" rendered="#{ClientMainBB.bestSellers()}">
-                        <ui:repeat var="bestSeller" value="#{ClientMainBB.bestSellersBooks}">
-                              <div class="column">
-                                       <div class="image-wrapper overlay-fade-in-new-background">
-                                            <img class="carouselImage" src="../resources/images/#{bestSeller.id}.jpg" alt="Book cover"/>
-                                            <div class="image-overlay-content">
-                                                <h2><h:outputText value="#{bestSeller.title}"/></h2>
+        <ui:composition template="./master-layout.xhtml">
+             <ui:define name="title">Bibuli | #{bundle.ClientMain}</ui:define>
+             
+        <ui:define name="content">
+            <link rel="stylesheet" type="text/css" href="#{resource['css:owl.carousel.css']}"  />
+        <link rel="stylesheet" href="#{resource['css:owl-carousel/owl.theme.css']}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="#{resource['js/owl.carousel.min.js']}" type="text/javascript"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
 
-                                                <c:if test="#{bestSeller.salePrice eq 0}">
-                                                    <p class="price"><h:outputText value="#{bestSeller.listPrice}"/></p>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous" />
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+ 
+                <div class="container">
+            <h:form>
+                <p:panel id="basic" class="container">
+                    <h3>#{bundle.bestSellers}</h3>
+                    <div class="recentlyAdded owlcarousel" rendered="#{ClientMainBB.bestSellers()}">
+                        <ui:repeat var="book" value="#{ClientMainBB.bestSellersBooks}">
+                                    <div class="column">
+                                       <div class="image-wrapper overlay-fade-in-new-background">
+                                <img class="carouselImage" src="../resources/images/#{book.id}.jpg" alt="Book cover"/>
+                                <div class="image-overlay-content">
+                                                <h2><h:outputText value="#{book.title}"/></h2>
+
+                                                <c:if test="#{book.salePrice eq 0}">
+                                                    <p class="price"><h:outputText value="#{book.listPrice}"/></p>
                                                 </c:if>
-                                                <c:if test="#{bestSeller.salePrice ne 0}">
+                                                <c:if test="#{book.salePrice ne 0}">
                                                     <p class="price">
-                                                        <h:outputText value="#{bestSeller.listPrice}$" class="strikethrough"/>&nbsp;
-                                                        <h:outputText value="#{bestSeller.salePrice}$" class="redFont"/>
+                                                        <h:outputText value="#{book.listPrice}$" class="strikethrough"/>&nbsp;
+                                                        <h:outputText value="#{book.salePrice}$" class="redFont"/>
                                                     </p>
                                                 </c:if>
 
                                                 <br/>
-                                                <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{ClientMainBB.displayProductPage(theBook)}"/>
+                                                <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{ClientMainBB.displayProductPage(book)}"/>
                                             </div>
-                                        </div>
+                                  </div>
                                     </div>
-                        </ui:repeat>
-                    </div>
-                    <div class="recentlyAdded carousel owl-carousel" rendered="#{ClientMainBB.recentlyAdded()}">
-                        <ui:repeat var="recentlyAdded" value="#{ClientMainBB.recentlyAddedBooks}">
-                              <div class="column">
+                               </ui:repeat>
+                        </div>
+                </p:panel>
+                
+                <p:panel id="bestSeller" class="centered">
+                    <h3>#{bundle.recentlyadded}</h3>
+                       <div class="recentlyAdded owlcarousel" rendered="#{ClientMainBB.recentlyAdded()}">
+                               <ui:repeat var="book" value="#{ClientMainBB.recentlyAddedBooks}">
+                                    <div class="column">
                                        <div class="image-wrapper overlay-fade-in-new-background">
-                                            <img class="carouselImage" src="../resources/images/#{recentlyAdded.id}.jpg" alt="Book cover"/>
-                                            <div class="image-overlay-content">
-                                                <h2><h:outputText value="#{recentlyAdded.title}"/></h2>
+                                <img class="carouselImage" src="../resources/images/#{book.id}.jpg" alt="Book cover"/>
+                                <div class="image-overlay-content">
+                                                <h2><h:outputText value="#{book.title}"/></h2>
 
-                                                <c:if test="#{recentlyAdded.salePrice eq 0}">
-                                                    <p class="price"><h:outputText value="#{recentlyAdded.listPrice}"/></p>
+                                                <c:if test="#{book.salePrice eq 0}">
+                                                    <p class="price"><h:outputText value="#{book.listPrice}"/></p>
                                                 </c:if>
-                                                <c:if test="#{recentlyAdded.salePrice ne 0}">
+                                                <c:if test="#{book.salePrice ne 0}">
                                                     <p class="price">
-                                                        <h:outputText value="#{recentlyAdded.listPrice}$" class="strikethrough"/>&nbsp;
-                                                        <h:outputText value="#{recentlyAdded.salePrice}$" class="redFont"/>
+                                                        <h:outputText value="#{book.listPrice}$" class="strikethrough"/>&nbsp;
+                                                        <h:outputText value="#{book.salePrice}$" class="redFont"/>
                                                     </p>
                                                 </c:if>
 
                                                 <br/>
-                                                <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{ClientMainBB.displayProductPage(theBook)}"/>
+                                                <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{ClientMainBB.displayProductPage(book)}"/>
                                             </div>
-                                        </div>
+                                  </div>
                                     </div>
-                        </ui:repeat>
-                    </div>
-        </div>
-         <div id="poll">
-                    
-        </div>
-        <script src="../resources/js/script.js" type="text/javascript"></script>
+                               </ui:repeat>
+                        </div>
+                </p:panel>
+                
+            </h:form></div>
+           <script src="../resources/js/script.js" type="text/javascript"></script>
+        </ui:define>
+        </ui:composition>
     </h:body>
 </html>
-

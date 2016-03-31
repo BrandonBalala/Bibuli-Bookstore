@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -263,6 +264,16 @@ public class Books implements Serializable {
 
     public List<Reviews> getReviewsList() {
         return reviewsList;
+    }
+    
+     public List<Reviews> getApprovedReviewsList() {
+         List<Reviews> list = new ArrayList();
+         for(Reviews review : reviewsList)
+         {
+             if(review.getApproval())
+                 list.add(review);
+         }
+        return list;
     }
 
     public void setReviewsList(List<Reviews> reviewsList) {

@@ -184,19 +184,21 @@ CREATE TABLE Admin (
 CREATE TABLE Feed (
   ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   Name varchar(254) NOT NULL UNIQUE,
-  URI varchar(254) NOT NULL
+  URI varchar(254) NOT NULL,
+  SELECTED BOOLEAN NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE Banner (
   ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  URI varchar(254) NOT NULL
+  URI varchar(254) NOT NULL,
+  SELECTED BOOLEAN NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE TaxeRates (
   Province varchar(128) PRIMARY KEY,
-  PST DECIMAL(12,2) DEFAULT 0,
+  GST DECIMAL(12,2) DEFAULT 0,
   HST DECIMAL(12,2) DEFAULT 0,
-  QST DECIMAL(12,2) DEFAULT 0,
+  PST DECIMAL(12,2) DEFAULT 0,
   Updated timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 )ENGINE=InnoDB;
 
@@ -1389,17 +1391,16 @@ VALUES (1,"What is your native language?", "English", "French", "Spanish", "Othe
         (0,"Which e-book format do you prefer?","PDF","EPUB","Mobi","Other",46,24,39,27);
 
 
-INSERT INTO `feed` (`Name`, `URI`) 
+INSERT INTO `feed` (`Name`, `URI`, `SELECTED`)
 VALUES
-('Librarians fight rise of precarious work', 'http://www.cbc.ca/news/canada/toronto/precarious-work-librarians-1.3508778'),
-('CBC FORUM\r\nWhat''s the best way forward for Canadian health care?', 'http://www.cbc.ca/news/politics/health-care-forum-1.3508132');
+('Librarians fight rise of precarious work', 'http://www.cbc.ca/news/canada/toronto/precarious-work-librarians-1.3508778', '1'),
+('CBC FORUM\r\nWhat''s the best way forward for Canadian health care?', 'http://www.cbc.ca/news/politics/health-care-forum-1.3508132', '0');
 
-INSERT INTO `banner` (`URI`) 
+INSERT INTO `banner` (`URI`, `SELECTED`)
 VALUES
-('https://www.amazon.ca/'),
-('http://www.ebay.ca/'),
-('https://www.dawsoncollege.qc.ca/');
-
+('https://www.amazon.ca/', '1'),
+('http://www.ebay.ca/', '0'),
+('https://www.dawsoncollege.qc.ca/', '0');
 
 INSERT INTO `Sales` (`ID`,`DateEntered`,`Client`,`GrossValue`,`NetValue`,`Removed`) 
 VALUES
@@ -1416,19 +1417,17 @@ VALUES
 ("7","1","23","15.99","0.14","0.14","0.14","1"),
 ("8","1","34","16.99","0.14","0.14","0.14","1");
 
-
-INSERT INTO `taxerates`(`Province`, `PST`, `QST`, `HST`) 
-VALUES 
-("AB","0.00","5.00","0.00"),
-("BC","7.00","5.00","0.00"),
-("MB","8.00","5.00","0.00"),
-("NB","0.00","5.00","8.00"),
-("NL","0.00","5.00","9.00"),
-("NT","0.00","5.00","0.00"),
-("NS","0.00","5.00","10.00"),
-("NU","0.00","5.00","0.00"),
-("ON","0.00","5.00","8.00"),
-("PE","0.00","5.00","9.00"),
-("QC","10.00","5.00","0.00"),
-("SK","5.00","5.00","0.00"),
-("YT","0.00","5.00","0.00");
+INSERT INTO `TaxeRates` (`Province`, `HST`, `GST`, `PST`, `Updated`) 
+VALUES ('AB', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('BC', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('MA', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('NB', '0.05','0.00',  '0.00', CURRENT_TIMESTAMP),
+ ('NL', '0.05','0.00',  '0.00', CURRENT_TIMESTAMP),
+ ('NT', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('NS', '0.05', '0.00', '0.00', CURRENT_TIMESTAMP),
+ ('NU', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('ON', '0.05','0.00',  '0.00', CURRENT_TIMESTAMP),
+ ('PI', '0.05','0.00',  '0.00', CURRENT_TIMESTAMP),
+ ('QC', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('SA', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
+ ('YU', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP);

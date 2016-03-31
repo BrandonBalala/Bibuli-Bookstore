@@ -74,6 +74,7 @@ public class CheckoutBackingBean implements Serializable {
     }
 
     public List<BillingAddress> getClientAddressList() {
+        
         return clientAddressList;
     }
 
@@ -191,7 +192,7 @@ public class CheckoutBackingBean implements Serializable {
     public BigDecimal calculatePST() {
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());
         BigDecimal subTotal = cartBB.getSubtotal();
-        BigDecimal rate = tax.getPst().divide(BigDecimal.valueOf(100));
+        BigDecimal rate = tax.getPst();
 
         if (rate.equals(BigDecimal.ZERO)) {
             return BigDecimal.ZERO;
@@ -204,7 +205,7 @@ public class CheckoutBackingBean implements Serializable {
     public BigDecimal calculateHST() {
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());
         BigDecimal subTotal = cartBB.getSubtotal();
-        BigDecimal rate = tax.getHst().divide(BigDecimal.valueOf(100));
+        BigDecimal rate = tax.getHst();
 
         if (rate.equals(BigDecimal.ZERO)) {
             return BigDecimal.ZERO;
@@ -215,10 +216,10 @@ public class CheckoutBackingBean implements Serializable {
         return hst;
     }
 
-    public BigDecimal calculateQST() {
+    public BigDecimal calculateGST() {
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());
         BigDecimal subTotal = cartBB.getSubtotal();
-        BigDecimal rate = tax.getQst().divide(BigDecimal.valueOf(100));
+        BigDecimal rate = tax.getGst();
 
         if (rate.equals(BigDecimal.ZERO)) {
             return BigDecimal.ZERO;
@@ -233,7 +234,7 @@ public class CheckoutBackingBean implements Serializable {
         BigDecimal subtotal = cartBB.getSubtotal();
         BigDecimal pst = calculatePST();
         BigDecimal hst = calculateHST();
-        BigDecimal qst = calculateQST();
+        BigDecimal qst = calculateGST();
         BigDecimal total = subtotal.add(pst).add(hst).add(qst);
 
         return total;
@@ -254,7 +255,7 @@ public class CheckoutBackingBean implements Serializable {
             saleDetail.setSale(sale);
             saleDetail.setPst(tax.getPst());
             saleDetail.setHst(tax.getHst());
-            saleDetail.setQst(tax.getQst());
+            saleDetail.setQst(tax.getGst());
             
             if(book.getSalePrice().equals(BigDecimal.ZERO))
                 saleDetail.setPrice(book.getListPrice());

@@ -6,24 +6,25 @@
 package com.g4w16.persistence;
 
 import com.g4w16.entities.Banner;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.annotation.Resource;
-import javax.transaction.UserTransaction;
-import java.io.Serializable;
-import java.util.List;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
+import java.io.Serializable;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.UserTransaction;
 
 /**
  *
- * @author BRANDON-PC
+ * @author 1232048
  */
 @Named
 @RequestScoped
@@ -74,7 +75,7 @@ public class BannerJpaController implements Serializable {
             throw ex;
         }
     }
-
+    
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
@@ -96,7 +97,7 @@ public class BannerJpaController implements Serializable {
             throw ex;
         }
     }
-
+    
     public List<Banner> findBannerEntities() {
         return findBannerEntities(true, -1, -1);
     }
@@ -127,5 +128,7 @@ public class BannerJpaController implements Serializable {
 		Query q = em.createQuery(cq);
 		return ((Long) q.getSingleResult()).intValue();
     }
-
+    
+    
+    
 }

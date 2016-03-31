@@ -37,12 +37,6 @@
                             <p><p:commandButton id="create" value="New Poll" icon="fa fa-plus" type="button"/></p>
 
                             <h:form id="form">
-                                <p:outputLabel for="pollId" value="Select survey id: " />
-                                <p:selectOneRadio id="pollId" value="#{pollsBB.pollId}"  layout="grid" columns="10">
-                                    <f:selectItems value="#{pollsBB.ids}" var="c" itemLabel="#{pollId}" itemValue="#{pollId}"/>
-                                </p:selectOneRadio>
-                                <p:commandButton value="Submit"  icon="ui-icon-check" oncomplete="changeSurvey"/>
-                                <h:message for="pollId" errorStyle="color:red display:block"/>
 
                                 <p:growl id="msgs"/>
 
@@ -50,12 +44,17 @@
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
-                                             editable="true" style="margin-bottom:20px"
-                                             selection="#{poll}" selectionMode="single" rowKey="#{poll.id}">
+                                             editable="true" style="margin-bottom:20px">
 
                                     <p:ajax event="rowEdit" listener="#{pollsBB.onRowEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{pollsBB.onRowCancel}" update=":form:msgs" />
 
+                                     <p:column headerText="Selected" style="width:30px">
+                                        <p:selectBooleanCheckbox value="#{poll.selected}">
+                                            <p:ajax update="form" listener="#{pollsBB.changeStatus(poll)}" />
+                                        </p:selectBooleanCheckbox>
+                                    </p:column>
+                                    
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
                                     </p:column>

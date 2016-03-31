@@ -109,7 +109,7 @@ and open the template in the editor.
                         </div>
                         <div class="tabs-panel" id="panel2">
                             <h4>Reviews</h4>
-                            <ui:repeat value="#{productPageBB.book.reviewsList}" var="theReview">
+                            <ui:repeat value="#{productPageBB.book.approvedReviewsList}" var="theReview">
                                 <div class="media-object stack-for-small">
                                     <div class="media-object-section">
                                         <p:rating value="#{theReview.rating}" readonly="true"/><br/>
@@ -119,14 +119,14 @@ and open the template in the editor.
                                     </div>
                                 </div>
                             </ui:repeat>
-                            <h:form id="reviewForm">
+                            <h:form id="reviewForm" rendered="#{session.getAttribute('authenticated')}">
                                 <label>
-                                    My Review
-                                    <p:inputTextarea value="#{productPageBB.review.text}" placeholder="Write a review..." autoResize="false" />
+                                    #{bundle.myReview}
+                                    <p:inputTextarea value="#{productPageBB.review.text}" placeholder="#{bundle.writeReview}" autoResize="false" />
                                     <p:rating value="#{productPageBB.review.rating}" cancel="false" /><br/>
                                 </label>
                                 <!--                        <button class="button">Submit Review <i class="step fi-pencil size-12"></i></button>-->
-                                <p:commandLink class="button hollow step fi-pencil size-12" value="Submit Review" action="#{productPageBB.createReview()}" update="reviewForm" ajax="false" />
+                                <p:commandLink class="button hollow step fi-pencil size-12" value="#{productPageBB.edit?bundle.editReview:bundle.submitReview}" action="#{productPageBB.createReview()}" update="reviewForm" ajax="false" />
                             </h:form>
                         </div>
                         <div class="tabs-panel is-active" id="panel3">

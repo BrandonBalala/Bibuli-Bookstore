@@ -7,16 +7,14 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Banner;
 import com.g4w16.persistence.BannerJpaController;
+import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -30,6 +28,7 @@ public class AdminBannerBackingBean implements Serializable {
     private List<Integer> ids ;
     private int bannerId;
     private List<Banner> filteredBanners;
+    private Banner selected;
     
     @Inject
     BannerJpaController bannerJpaController;
@@ -37,6 +36,7 @@ public class AdminBannerBackingBean implements Serializable {
     @PostConstruct
     public void init() {
         banners = bannerJpaController.findBannerEntities();
+        
     }
     
     public List<Banner> getBanners(){
@@ -45,6 +45,16 @@ public class AdminBannerBackingBean implements Serializable {
     
     public int getBannerCount(){
         return bannerJpaController.getBannerCount();
+    }
+
+    public Banner getSelected() {
+        if(selected==null)
+           selected= new Banner();
+        return selected;
+    }
+
+    public void setSelected(Banner selected) {
+        this.selected = selected;
     }
     
     public List<Integer> getIds() {
@@ -71,26 +81,17 @@ public class AdminBannerBackingBean implements Serializable {
         this.filteredBanners = filteredBanners;
     }
     
-    public void onRowEdit(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Edited", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //       System.out.println(((Client) event.getObject()).getId());
+    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
+        bannerJpaController.edit((Banner) event.getObject());
     }
      
     public void onRowCancel(RowEditEvent event) {
-//        FacesMessage msg = new FacesMessage("Client Cancelled", ((Client) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-    //    System.out.println(((Client) event.getObject()).getId());
     }
     
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
+   public void changeStatus(Banner b) throws RollbackFailureException, Exception{
+      selected=bannerJpaController.findBanner(b.getId());
+       selected.setSelected(b.getSelected());
+       bannerJpaController.edit(selected);
+   }
     
 }

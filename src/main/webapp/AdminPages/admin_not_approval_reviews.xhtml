@@ -28,50 +28,59 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
+                            <f:ajax>
+                            <h:form id="form">
+                                <p:growl id="msgs" showDetail="true"/>
+                                <p:dataTable id="dataTable" var="review" value="#{notApprovalReviewBB.reviews}" rows="5"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{review}" selectionMode="single" rowKey="#{review.reviewsPK}">
+                                    
+                                    <p:ajax event="rowEdit" listener="#{notApprovalReviewBB.onRowEdit}" update=":form:msgs"/>
+                                    <p:ajax event="rowEditCancel" listener="#{notApprovalReviewBB.onRowCancel}" update=":form:msgs" />
 
-                                    <h:form id="form">
-                                        <p:growl id="msgs" showDetail="true"/>
-                                        <p:dataTable var="review" value="#{notApprovalReviewBB.reviews}" rows="5"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" editMode="cell" widgetVar="cellReviews">
-                                            
-                                            <p:ajax event="cellEdit" listener="#{notApprovalReviewBB.onCellEdit}" update=":form:msgs" />  
+                                    <p:column  headerText="Edit" style="width:50px">
+                                        <p:rowEditor />
+                                    </p:column>
+                                    
+                                      <p:column headerText="Approval Status" sortBy="#{review.approval}" filterBy="#{review.approval}" filterMatchMode="contains" style="width:115px">
+                                        <p:cellEditor>
+                                            <f:facet name="output"> <h:outputText value="#{review.approval}" /></f:facet>
+                                            <f:facet name="input">
+                                                <h:selectOneMenu value="#{review.approval}" style="width:100%">
+                                                    <f:selectItems value="#{notApprovalReviewBB.status}" var="status" itemLabel="#{status}" itemValue="#{status}" />
+                                                </h:selectOneMenu>
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
 
-                                            <p:column headerText="Book Id" sortBy="#{review.reviewsPK.book}" filterBy="#{review.reviewsPK.book}" filterMatchMode="contains" style="width:115px">
-                                                <h:outputText value="#{review.reviewsPK.book}" />
-                                            </p:column>
+                                    <p:column headerText="Book Id" sortBy="#{review.reviewsPK.book}" filterBy="#{review.reviewsPK.book}" filterMatchMode="contains" style="width:115px">
+                                        <h:outputText value="#{review.reviewsPK.book}" />
+                                    </p:column>
 
-                                            <p:column headerText="Creation Date" sortBy="#{review.creationDate}" filterBy="#{review.creationDate}" filterMatchMode="contains" style="width:140px">
-                                                <h:outputText value="#{review.creationDate}" />
-                                            </p:column>
+                                    <p:column headerText="Creation Date" sortBy="#{review.creationDate}" filterBy="#{review.creationDate}" filterMatchMode="contains" style="width:140px">
+                                        <h:outputText value="#{review.creationDate}" />
+                                    </p:column>
 
-                                            <p:column headerText="Client Id" sortBy="#{review.reviewsPK.client}" filterBy="#{review.reviewsPK.client}" filterMatchMode="contains" style="width:115px">
-                                                <h:outputText value="#{review.reviewsPK.client}" />
-                                            </p:column>
+                                    <p:column headerText="Client Id" sortBy="#{review.reviewsPK.client}" filterBy="#{review.reviewsPK.client}" filterMatchMode="contains" style="width:115px">
+                                        <h:outputText value="#{review.reviewsPK.client}" />
+                                    </p:column>
 
-                                            <p:column headerText="Rating" sortBy="#{review.rating}" filterBy="#{review.rating}" filterMatchMode="contains" style="width:115px">
-                                                <h:outputText value="#{review.rating}" />
-                                            </p:column>
+                                    <p:column headerText="Rating" sortBy="#{review.rating}" filterBy="#{review.rating}" filterMatchMode="contains" style="width:115px">
+                                        <h:outputText value="#{review.rating}" />
+                                    </p:column>
 
-                                            <p:column headerText="Review Text" sortBy="#{review.text}" filterBy="#{review.text}" filterMatchMode="contains" style="width:900px">
-                                                <h:outputText value="#{review.text}" />
-                                            </p:column>
+                                    <p:column headerText="Review Text" sortBy="#{review.text}" filterBy="#{review.text}" filterMatchMode="contains" style="width:900px">
+                                        <h:outputText value="#{review.text}" />
+                                    </p:column>
 
-                                            <p:column headerText="Approval Status" sortBy="#{review.approval}" filterBy="#{review.approval}" filterMatchMode="contains" style="width:115px">
-                                                <p:cellEditor>
-                                                    <f:facet name="output"> <h:outputText value="#{review.approval}" /></f:facet>
-                                                    <f:facet name="input">
-                                                        <h:selectOneMenu value="#{review.approval}" style="width:100%">
-                                                            <f:selectItems value="#{notApprovalReviewBB.status}" var="status" itemLabel="#{status}" itemValue="#{status}" />
-                                                        </h:selectOneMenu>
-                                                    </f:facet>
-                                                </p:cellEditor>
-                                            </p:column>
-                                           
-                                        </p:dataTable>
-                                    </h:form>
+                                  
+
+                                </p:dataTable>
+                            </h:form>
+                            </f:ajax>
 
                         </div>
                     </div>

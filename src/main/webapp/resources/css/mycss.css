@@ -150,15 +150,8 @@ table tr:nth-of-type(even) {
     max-width: 275px;
     height: 300px
 }
-#carousels{
-    height: 100px;
-
-}
-
 .carouselImage{
-    margin:10px;
-    height:100%;
-    width:100%;
+    height:400px;
 }
 .ui-growl {
     top:80px;
