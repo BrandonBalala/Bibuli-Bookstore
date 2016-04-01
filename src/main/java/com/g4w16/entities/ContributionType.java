@@ -84,7 +84,7 @@ public class ContributionType implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.ContributionType[ type=" + type + " ]";
+        return type;
     }
     
 }

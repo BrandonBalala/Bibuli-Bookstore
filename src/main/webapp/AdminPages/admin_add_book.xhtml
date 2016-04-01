@@ -3,75 +3,98 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <head>
-        <!-- DataTables -->
-        <link rel="stylesheet" href="/resources/admin/plugins/datatables/dataTables.bootstrap.css"></link>
         <title>Admin Add A New Book</title>
     </head>
     <body>
         <ui:composition template="admin_template.xhtml">
             <ui:define name="title">
-                <h:outputText value="#{bundle.CreateBooksTitle}"></h:outputText>
+                <h:outputText value="Add A New Book"></h:outputText>
             </ui:define>
 
             <ui:define name="body">
                 <!-- Content Wrapper. Contains page content -->
-                <div class="content-wrapper">
+                <div>
                     <!-- Content Header (Page header) -->
                     <section class="content-header">
                         <h1>
-                            Add New Book
+                            Add A New Book
                         </h1>
                         <ol class="breadcrumb">
+                            <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                            <li><a href="admin_books.xhtml"><i class="fa fa-dashboard"></i> Inventory</a></li>
                             <li><a href="#"><i class="fa fa-dashboard"></i> Add New Book</a></li>
                         </ol>
                     </section>
                     <section class="content">
-                        
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-body">
 
-         
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{booksController.selected.id}" title="#{bundle.CreateBooksTitle_id}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_title}" for="title" />
-                    <h:inputText id="title" value="#{booksController.selected.title}" title="#{bundle.CreateBooksTitle_title}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_title}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_publisher}" for="publisher" />
-                    <h:inputText id="publisher" value="#{booksController.selected.publisher}" title="#{bundle.CreateBooksTitle_publisher}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_publisher}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_description}" for="description" />
-                    <h:inputTextarea rows="4" cols="30" id="description" value="#{booksController.selected.description}" title="#{bundle.CreateBooksTitle_description}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_description}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_pages}" for="pages" />
-                    <h:inputText id="pages" value="#{booksController.selected.pages}" title="#{bundle.CreateBooksTitle_pages}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_pages}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_wholesalePrice}" for="wholesalePrice" />
-                    <h:inputText id="wholesalePrice" value="#{booksController.selected.wholesalePrice}" title="#{bundle.CreateBooksTitle_wholesalePrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_wholesalePrice}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_listPrice}" for="listPrice" />
-                    <h:inputText id="listPrice" value="#{booksController.selected.listPrice}" title="#{bundle.CreateBooksTitle_listPrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_listPrice}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_salePrice}" for="salePrice" />
-                    <h:inputText id="salePrice" value="#{booksController.selected.salePrice}" title="#{bundle.CreateBooksTitle_salePrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_salePrice}"/>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_pubDate}" for="pubDate" />
-                    <h:inputText id="pubDate" value="#{booksController.selected.pubDate}" title="#{bundle.CreateBooksTitle_pubDate}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_pubDate}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_dateEntered}" for="dateEntered" />
-                    <h:inputText id="dateEntered" value="#{booksController.selected.dateEntered}" title="#{bundle.CreateBooksTitle_dateEntered}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_dateEntered}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateBooksLabel_removalStatus}" for="removalStatus" />
-                    <h:inputText id="removalStatus" value="#{booksController.selected.removalStatus}" title="#{bundle.CreateBooksTitle_removalStatus}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_removalStatus}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{booksController.create}" value="#{bundle.CreateBooksSaveLink}" />
-                
-            </h:form>
-       
-                                        
-                                    </div><!-- /.box-body -->
-                                </div><!-- /.box --> 
+
+
+                                <h:form>
+                                    <h:panelGrid columns="3" cellpadding="5">
+<!--                                        <p:outputLabel value="#{bundle.CreateBooksLabel_title}" for="title" />
+                                        <p:inputText id="title" value="#{booksController.selected.title}" title="#{bundle.CreateBooksTitle_title}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_title}"/>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_publisher}" for="publisher" />                    
+                                        <p:inputText id="publisher" value="#{booksController.selected.publisher}" title="#{bundle.CreateBooksTitle_publisher}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_publisher}"/>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_description}" for="description" />
+                                        <p:inputTextarea rows="4" cols="30" id="description" value="#{booksController.selected.description}" title="#{bundle.CreateBooksTitle_description}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_description}"/>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_pages}" for="pages" />
+                                        <p:inputText id="pages" value="#{booksController.selected.pages}" title="#{bundle.CreateBooksTitle_pages}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_pages}"/>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_wholesalePrice}" for="wholesalePrice" />
+                                        <p:inputText id="wholesalePrice" value="#{booksController.selected.wholesalePrice}" title="#{bundle.CreateBooksTitle_wholesalePrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_wholesalePrice}"/>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_listPrice}" for="listPrice" />
+                                        <p:inputText id="listPrice" value="#{booksController.selected.listPrice}" title="#{bundle.CreateBooksTitle_listPrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_listPrice}"/>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_salePrice}" for="salePrice" />
+                                        <p:inputText id="salePrice" value="#{booksController.selected.salePrice}" title="#{bundle.CreateBooksTitle_salePrice}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_salePrice}"/>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_pubDate}" for="pubDate" />
+                                        <p:inputText id="pubDate" value="#{booksController.selected.pubDate}" title="#{bundle.CreateBooksTitle_pubDate}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_pubDate}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </p:inputText>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_dateEntered}" for="dateEntered" />
+                                        <p:inputText id="dateEntered" value="#{booksController.selected.dateEntered}" title="#{bundle.CreateBooksTitle_dateEntered}" required="true" requiredMessage="#{bundle.CreateBooksRequiredMessage_dateEntered}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </p:inputText>
+                                        <br/>
+                                        <p:outputLabel value="#{bundle.CreateBooksLabel_removalStatus}" for="removalStatus" ></p:outputLabel>
+                                        <p:selectOneRadio id="removalStatus" layout="lineDirection" value="#{booksController.selected.removalStatus}">
+                                            <f:selectItem itemValue="True" itemLabel="True"/>
+                                            <f:selectItem itemValue="False" itemLabel="False"/>
+                                        </p:selectOneRadio>
+                                        <br/>-->
+
+<!--                                        <h:outputLabel for="menu" value="Format:" />-->
+                                        <p:selectCheckboxMenu id="menu" value="#{booksBB.selectedFormats}" label="Formats"
+                                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px" converter="com.g4w16.jsf.util.FormatConverter">
+                                            <f:selectItems value="#{booksBB.formats}" />
+                                        </p:selectCheckboxMenu>
+                                        <p:commandLink value="Submit" update="display" />
+                                    </h:panelGrid>
+
+                                    <p:outputPanel id="display" style="width:250px;padding-left:5px;margin-top:10px">
+                                        <p:dataList value="#{booksBB.selectedFormats}" var="format" emptyMessage="No format selected">
+                                            #{format}
+                                        </p:dataList>
+                                    </p:outputPanel>
+
+                                    <br />
+                                    <h:commandLink action="#{booksController.create}" value="#{bundle.CreateBooksSaveLink}" />
+
+                                </h:form>
+
+
+
                             </div>
                         </div>
                     </section>
