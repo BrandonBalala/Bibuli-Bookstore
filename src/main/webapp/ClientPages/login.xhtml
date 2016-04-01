@@ -1,35 +1,67 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <h:form id="loginForm" >
-            <h:panelGrid columns="1" styleClass="centered-panel">
-                <p:panel id="primepanel" header="#{bundle.login}">
+        <ui:composition template="./master-layout.xhtml">
+            <ui:define name="title">Bibuli | Login Page</ui:define>
 
-                    <h:panelGrid columns="3" cellpadding="1" border="0">                       
-                        
-                        <p:outputLabel for="email" value="#{bundle.emailLabel}"/>
-                        <p:inputText id="email" value="#{loginBB.email}"
-                                     requiredMessage="#{bundle.emailRequired}"/>
-                        <p:message for="email" style="color:red"/>
+            <ui:define name="content">
+                <hr/>
+                <div class="row">
+                    <div class="large-5 columns callout large-centered large">
+                        <div class="row">
+                            <div class="large-12 text-center">
+                                <h3>#{bundle.login}</h3>
+                            </div>                  
+                        </div>
+                        <h:form>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>#{bundle.emailLabel}
+                                        <p:inputText id="email" value="#{loginBB.email}"
+                                                     requiredMessage="#{bundle.emailRequired}"/>
+                                    </label>
+                                </div>
+                                <div class="large-12 text-left">
+                                    <p:message for="email" style="color:red"/>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>#{bundle.passwordLabel}
+                                        <p:password id="password" value="#{loginBB.password}"
+                                                    requiredMessage="#{bundle.passwordRequired}" />
+                                    </label>
+                                </div>
+                                <div class="large-12 text-left">
+                                    <p:message for="password" style="color:red"/>
+                                </div>                  
+                            </div>
 
-                        <p:outputLabel for="password" value="#{bundle.passwordLabel}"/>
-                        <p:password id="password" value="#{loginBB.password}"
-                                    requiredMessage="#{bundle.passwordRequired}" />
-                        <p:message for="password" style="color:red"/>
-                    </h:panelGrid>
-                    <p:commandButton id="primebutton" value="#{bundle.loginButton}"
-                                     style="display: block;margin: 0 auto;"
-                                     action="#{loginBB.login}" ajax="false" />
-
-                </p:panel>
-            </h:panelGrid>
-        </h:form>
+                            <div class="row">
+                                <br/>
+                                <div class="large-12 columns">
+                                    <p:commandButton id="primebutton" value="#{bundle.loginButton}"
+                                                     class="button expanded radius"
+                                                     action="#{loginBB.login}" ajax="false" />
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+                <hr/>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 
