@@ -20,10 +20,78 @@
 
                 <div class="row">
                     <div class="large-12 columns text-left">
-                        <h3>Purchased Books</h3>
+                        <h3>Purchases</h3>
                     </div>
                 </div>
 
+                <div class="column row">
+                    <ul class="tabs" data-tabs="" id="example-tabs">
+                        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">My Books</a></li>
+                        <li class="tabs-title"><a href="#panel2">My Invoices</a></li>
+                    </ul>
+                    <div class="tabs-content" data-tabs-content="example-tabs">
+                        <div class="tabs-panel is-active" id="panel1">
+                            <c:if test="#{purchasedBooksBB.purchasedBooks.size() eq 0}">
+                                <h4>No books owned, get shopping!</h4>
+                            </c:if>
+                            <c:if test="#{purchasedBooksBB.purchasedBooks.size() ne 0}">
+                                <h4><h:outputText value="#{purchasedBooksBB.purchasedBooks.size()} books owned"/></h4>
+                                <div class="row small-up-1 medium-up-2 large-up-4">
+                                    <ui:repeat value="#{purchasedBooksBB.purchasedBooks}" var="theBook">
+                                        <div class="column">
+                                            <div class="image-wrapper overlay-fade-in-new-background">
+                                                <img class="thumbnail recommendedImage" src="../resources/images/#{theBook.id}.jpg" alt="Book cover"/>
+                                                <div class="image-overlay-content">
+                                                    <br/>
+                                                    <h5><b>Download</b></h5>
+                                                    <hr/>
+                                                    <h:form>
+                                                        <ui:repeat value="#{theBook.bookFormatsList}" var="theBookFormat">
+                                                            <!--                                                            <h:commandLink type="submit" class="button secondary expanded hollow tiny" action="{purchasedBooksBB.downloadBook(theBookFormat)}" value="{theBookFormat.format1.type}"/>-->
+                                                            <h:outputLink class="button secondary expanded hollow tiny" value="../resources/books/#{theBookFormat.file}">
+                                                                #{theBookFormat.format1.type}
+                                                            </h:outputLink>
+                                                        </ui:repeat>
+                                                    </h:form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                            </c:if>
+                        </div>
+                        <div class="tabs-panel" id="panel2">
+                            <h4>Purchase History</h4>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <table class="noborder">
+                                        <thead>
+                                            <tr>
+                                                <th>Invoice #</th>
+                                                <th>Purchase Date</th>
+                                                <th>Total Spent</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat value="#{purchasedBooksBB.salesList}" var="theSale">
+                                                <tr>
+                                                    <td><h:outputText value="#{theSale.id}"/></td>
+                                                    <td><h:outputText value="#{purchasedBooksBB.getFormattedDate(theSale.dateEntered)}"/></td>
+                                                    <td><h:outputText value="#{theSale.grossValue}$"/></td>
+                                                    <h:form>
+                                                        <td><h:commandLink type="submit" class="button" action="#{purchasedBooksBB.displayInvoice(theSale)}" value="Complete Invoice"/></td>
+                                                    </h:form>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
                 <hr/>
             </ui:define>
         </ui:composition>
