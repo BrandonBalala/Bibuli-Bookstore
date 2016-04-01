@@ -71,7 +71,7 @@ public class Title implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.Title[ id=" + id + " ]";
+        return id;
     }
     
 }

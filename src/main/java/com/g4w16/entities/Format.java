@@ -84,7 +84,7 @@ public class Format implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.Format[ type=" + type + " ]";
+        return type;
     }
     
 }

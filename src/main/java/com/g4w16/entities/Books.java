@@ -317,5 +317,37 @@ public class Books implements Serializable {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         return dateFormat.format(pubDate);
     }
+    
+    public String getBookGenre(){
+        ArrayList<String> genres=new ArrayList<String>();
+        for(Genre g:this.getGenreList()){
+            genres.add(g.getType());
+        }
+        return String.join(",", genres);
+    }
+    
+    public String getBookFormat(){
+        ArrayList<String> formats=new ArrayList<String>();
+        for(BookFormats f: this.getBookFormatsList()){
+            formats.add(f.getBookFormatsPK().getFormat());
+        }
+        return String.join(",", formats);
+    }
+    
+    public String getBookIdentifiers(){
+        ArrayList<String> bookIdentifiers=new ArrayList<String>();
+        for(BookIdentifiers i: this.getBookIdentifiersList()){
+            bookIdentifiers.add(i.getCode());
+        }
+        return String.join(",", bookIdentifiers);
+    }
+    
+    public String getBookContributor(){
+        ArrayList<String> bookContributor=new ArrayList<String>();
+        for(Contributor c: this.getContributorList()){
+            bookContributor.add(c.getName());
+        }
+        return String.join(",", bookContributor);
+    }
 
 }

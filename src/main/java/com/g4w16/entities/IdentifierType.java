@@ -84,7 +84,7 @@ public class IdentifierType implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.IdentifierType[ type=" + type + " ]";
+        return type;
     }
     
 }
