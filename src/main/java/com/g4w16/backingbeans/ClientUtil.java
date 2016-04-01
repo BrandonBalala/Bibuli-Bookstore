@@ -5,6 +5,7 @@
  */
 package com.g4w16.backingbeans;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -12,16 +13,16 @@ import javax.servlet.http.HttpSession;
  *
  * @author ofern
  */
+@RequestScoped
 public class ClientUtil {
-     private HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-    
-    public int getUserId()
-    {
-        return (int)session.getAttribute("client");
+
+    private HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+    public int getUserId() {
+        return (int) session.getAttribute("client");
     }
-    
-    public boolean isAuthenticated()
-    {
-        return (boolean)session.getAttribute("authenticated");
+
+    public boolean isAuthenticated() {
+        return (boolean) session.getAttribute("authenticated");
     }
 }

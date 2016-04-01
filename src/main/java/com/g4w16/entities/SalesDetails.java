@@ -43,8 +43,8 @@ public class SalesDetails implements Serializable {
     private BigDecimal pst;
     @Column(name = "HST")
     private BigDecimal hst;
-    @Column(name = "QST")
-    private BigDecimal qst;
+    @Column(name = "GST")
+    private BigDecimal gst;
     @Basic(optional = false)
     //@NotNull
     @Column(name = "Removed")
@@ -103,12 +103,12 @@ public class SalesDetails implements Serializable {
         this.hst = hst;
     }
 
-    public BigDecimal getQst() {
-        return qst;
+    public BigDecimal getGst() {
+        return gst;
     }
 
-    public void setQst(BigDecimal qst) {
-        this.qst = qst;
+    public void setGst(BigDecimal gst) {
+        this.gst = gst;
     }
 
     public boolean getRemoved() {
