@@ -113,7 +113,7 @@ public class BookFormats implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.BookFormats[ bookFormatsPK=" + bookFormatsPK + " ]";
+        return format1.toString();
     }
     
 }

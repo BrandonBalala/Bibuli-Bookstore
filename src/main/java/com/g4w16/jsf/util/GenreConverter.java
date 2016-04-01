@@ -16,7 +16,7 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Dan
  */
-@FacesConverter("com.g4w16.jsf.util.FormatConverter")
+@FacesConverter("com.g4w16.jsf.util.GenreConverter")
 public class GenreConverter implements Converter {
 
     @Override

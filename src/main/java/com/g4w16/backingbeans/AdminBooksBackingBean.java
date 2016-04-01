@@ -6,27 +6,28 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Books;
+import com.g4w16.entities.ContributionType;
+import com.g4w16.entities.Contributor;
 import com.g4w16.entities.Format;
 import com.g4w16.entities.Genre;
-import com.g4w16.entities.Reviews;
-import com.g4w16.entities.TaxeRates;
+import com.g4w16.entities.IdentifierType;
 import com.g4w16.persistence.BooksJpaController;
+import com.g4w16.persistence.ContributionTypeJpaController;
+import com.g4w16.persistence.ContributorJpaController;
 import com.g4w16.persistence.FormatJpaController;
 import com.g4w16.persistence.GenreJpaController;
+import com.g4w16.persistence.IdentifierTypeJpaController;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
-import java.awt.print.Book;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -34,16 +35,30 @@ import org.primefaces.event.RowEditEvent;
  * @author wangd
  */
 @Named("booksBB")
-@RequestScoped
-public class AdminBooksBackingBean {
+@SessionScoped
+public class AdminBooksBackingBean implements Serializable{
 
     private List<Books> books;
     private List<Books> saleBooks;
     private List<Books> filteredBooks;
     private Books selectedBook;
     private List<String> status;
-    private List<Format> formats;
-    private List<Format> selectedFormats;
+    private List<Format> allFormats;
+    private List<ContributionType> allContributionType;
+    private List<Genre> allGenre;
+    private List<Contributor> allAuthors;
+    private List<IdentifierType> allIdentifierTypes;
+
+    
+    
+
+    
+
+
+    private Books newBook;
+    
+
+    
 
     @Inject
     BooksJpaController booksJpaController;
@@ -53,6 +68,16 @@ public class AdminBooksBackingBean {
     
     @Inject
     FormatJpaController formatJpaController;
+    
+    @Inject
+    ContributionTypeJpaController contributionTypeJpaController;
+    
+    @Inject
+    ContributorJpaController contributorJpaController;
+    
+    @Inject
+    IdentifierTypeJpaController identifierTypeJpaController;
+    
 
     /**
      * For Inventory page
@@ -63,10 +88,15 @@ public class AdminBooksBackingBean {
         BigDecimal min = new BigDecimal(0);
         BigDecimal max = new BigDecimal(999999999);
         saleBooks = booksJpaController.findBookByPriceRange(min, max);
-        
-        formats=formatJpaController.findAllFormats();
+        allFormats=formatJpaController.findAllFormats();
+        allContributionType=contributionTypeJpaController.findAllContributionTypes();
+        allGenre=genreJpaController.findAllGenres();
+        allAuthors=contributorJpaController.findAllContributors();
+        allIdentifierTypes=identifierTypeJpaController.findAllIdentifierTypes();
+        newBook=new Books();
     }
 
+    /******************All books***********************/
     public List<Books> getBooks() {
         return books;
     }
@@ -98,45 +128,54 @@ public class AdminBooksBackingBean {
     }
 
     public Books getSelectedBook() {
-        System.out.println(">>>>>>>>>>> getSelectedBook");
         return selectedBook;
     }
 
     public void setSelectedBook(Books selectedBook) {
-        System.out.println(">>>>>>>>>>> setSelectedBook");
         this.selectedBook = selectedBook;
     }
 
-    public List<Format> getFormats() {
-        return formats;
-    }
 
-    public List<Format> getSelectedFormats() {
-        return selectedFormats;
-    }
 
-    public void setSelectedFormats(List<Format> selectedFormats) {
-        this.selectedFormats = selectedFormats;
-    }
-
-    
-
-    
-
-    
-    
-    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
-        Books editedBook = (Books) event.getObject();
-        booksJpaController.edit(editedBook);
-    }
-
-    public void onRowCancel(RowEditEvent event) {
+ 
+   
+    public String showDetail(Books book){
+        selectedBook=book;
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>id: "+selectedBook.getId());
+        return "admin_edit_book";
     }
     
-    public String showDetail(int id){
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>"+id);
-        return "admin_add_book";
+    /******************New Book**********************/
+    public Books getNewBook() {
+        return newBook;
+    }
+
+    public void setNewBook(Books newBook) {
+        this.newBook = newBook;
+    }
+    
+    
+        /******************Edit a Book**********************/
+
+    public List<ContributionType> getAllContributionType() {
+        return allContributionType;
+    }
+    
+    public List<Format> getAllFormats() {
+        return allFormats;
+    }
         
+    public List<Genre> getAllGenre() {
+        return allGenre;
     }
+    
+    public List<Contributor> getAllAuthors() {
+        return allAuthors;
+    }
+    
+    public List<IdentifierType> getAllIdentifierTypes() {
+        return allIdentifierTypes;
+    }
+
 
 }

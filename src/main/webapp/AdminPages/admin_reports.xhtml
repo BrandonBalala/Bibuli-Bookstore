@@ -32,14 +32,10 @@
                             <h:panelGrid columns="5" cellpadding="20">
                                 
                                 <p:outputLabel for="event1" value="Start Date:" />
-                                <p:calendar id="event1" value="#{reportBB.start}" pattern="dd-MM-yyyy">
-                                    <p:ajax event="dateSelect" listener="#{reportBB.onDateSelect}" />
-                                </p:calendar>
-                                
+                                <p:calendar id="event1" value="#{reportBB.start}" />
+
                                 <p:outputLabel for="event2" value="End Date:" />
-                                <p:calendar id="event2" value="#{reportBB.end}">
-                                    <p:ajax event="dateSelect" listener="#{reportBB.onDateSelect}" />
-                                </p:calendar>
+                                <p:calendar id="event2" value="#{reportBB.end}" />
 
                                 <p:commandButton value="Submit"  actionListener="#{reportBB.click}" icon="ui-icon-check" />
                             </h:panelGrid>
