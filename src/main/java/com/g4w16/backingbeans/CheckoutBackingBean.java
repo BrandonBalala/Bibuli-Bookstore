@@ -244,6 +244,7 @@ public class CheckoutBackingBean implements Serializable {
         sale.setClient(clientController.findClientById(clientUtil.getUserId()));
         sale.setNetValue(cartBB.getSubtotal());
         sale.setGrossValue(calculateOrderTotal());
+        sale.setBillingAddress(choiceAddress);
         salesController.create(sale);
 
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());

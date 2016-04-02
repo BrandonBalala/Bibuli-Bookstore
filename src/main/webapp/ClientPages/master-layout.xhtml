@@ -82,7 +82,7 @@
                                     <a href="#" class="whiteFont anchorFontSize"><i class="fi-torso-business"></i></a>
                                     <ul class="menu vertical whiteFont blackBackgroundColor" >
                                         <li><a href="#" class="whiteFont blackBackgroundColor">Login</a></li>
-                                        <li><a href="#" class="whiteFont blackBackgroundColor">Logout</a></li>
+                                        <li><h:form rendered="#{session.getAttribute('authenticated')}"><h:commandLink  value="Logout" action="#{loginBB.logout()}"></h:commandLink></h:form></li>
                                         <li><a href="#" class="whiteFont blackBackgroundColor">Register</a></li> 
                                     </ul>
                                 </li>

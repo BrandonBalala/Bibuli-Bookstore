@@ -7,7 +7,6 @@ package com.g4w16.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,13 +18,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -36,7 +32,6 @@ import javax.validation.constraints.NotNull;
 //@NamedQueries({
 //    @NamedQuery(name = "Sales.findAll", query = "SELECT s FROM Sales s")})
 public class Sales implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,38 +39,33 @@ public class Sales implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    //@NotNull
     @Column(name = "DateEntered")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateEntered;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @NotNull
     @Column(name = "GrossValue")
     private BigDecimal grossValue;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "NetValue")
     private BigDecimal netValue;
     @Basic(optional = false)
-    //@NotNull
     @Column(name = "Removed")
     private boolean removed;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sale")
     private List<SalesDetails> salesDetailsList;
+    @JoinColumn(name = "BillingAddress", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private BillingAddress billingAddress;
     @JoinColumn(name = "Client", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Client client;
 
     public Sales() {
-        this.dateEntered = Date.from(Instant.now());
-        this.removed = false;
     }
 
     public Sales(Integer id) {
         this.id = id;
-        this.dateEntered = Date.from(Instant.now());
-        this.removed = false;
     }
 
     public Sales(Integer id, Date dateEntered, BigDecimal grossValue, BigDecimal netValue, boolean removed) {
@@ -126,12 +116,20 @@ public class Sales implements Serializable {
         this.removed = removed;
     }
 
-    public List<SalesDetails> getSalesDetailsList() {
+   public List<SalesDetails> getSalesDetailsList() {
         return salesDetailsList;
     }
 
     public void setSalesDetailsList(List<SalesDetails> salesDetailsList) {
         this.salesDetailsList = salesDetailsList;
+    }
+
+    public BillingAddress getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
     }
 
     public Client getClient() {
@@ -164,7 +162,7 @@ public class Sales implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.Sales[ id=" + id + " ]";
+        return "javaapplication1.Sales[ id=" + id + " ]";
     }
-
+    
 }
