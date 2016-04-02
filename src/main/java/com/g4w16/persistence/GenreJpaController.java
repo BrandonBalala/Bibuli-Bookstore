@@ -23,6 +23,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.UserTransaction;
 
 /**
@@ -45,7 +46,7 @@ public class GenreJpaController implements Serializable, GenreJpaInterface {
     public GenreJpaController() {
     }
 
-	@Override
+    @Override
     public void create(Genre genre) throws PreexistingEntityException, RollbackFailureException, Exception {
         System.out.println("In genre create method");
         if (genreExists(genre.getType())) {
@@ -90,7 +91,7 @@ public class GenreJpaController implements Serializable, GenreJpaInterface {
         System.out.println("Genre created");
     }
 
-	@Override
+    @Override
     public void edit(Genre genre) throws NonexistentEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
@@ -135,7 +136,7 @@ public class GenreJpaController implements Serializable, GenreJpaInterface {
         }
     }
 
-	@Override
+    @Override
     public void destroy(String id) throws NonexistentEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
@@ -163,12 +164,12 @@ public class GenreJpaController implements Serializable, GenreJpaInterface {
         }
     }
 
-	@Override
+    @Override
     public List<Genre> findAllGenres() {
         return findGenreEntities(true, -1, -1);
     }
 
-	@Override
+    @Override
     public List<Genre> findGenreEntities(int maxResults, int firstResult) {
         return findGenreEntities(false, maxResults, firstResult);
     }
@@ -184,20 +185,29 @@ public class GenreJpaController implements Serializable, GenreJpaInterface {
         return q.getResultList();
     }
 
-	@Override
+    @Override
     public Genre findGenreByID(String id) {
 
         return em.find(Genre.class, id);
 
     }
 
-	@Override
+    @Override
     public int getGenreCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Genre> rt = cq.from(Genre.class);
         cq.select(em.getCriteriaBuilder().count(rt));
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+
+    public List<Genre> findAllUsedGenres() {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Books> rt = cq.from(Books.class);
+        cq.select(rt.get("genreList")).distinct(true);
+        TypedQuery<Genre> query = em.createQuery(cq);
+
+        return (List<Genre>) query.getResultList();
     }
 
     @Override

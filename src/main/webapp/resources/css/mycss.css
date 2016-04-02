@@ -151,7 +151,8 @@ table tr:nth-of-type(even) {
     height: 300px
 }
 .carouselImage{
-    height:400px;
+    max-width:325px;
+    height:350px;
 }
 .ui-growl {
     top:80px;
@@ -430,4 +431,8 @@ body{
     bottom: auto !important;
     position: fixed !important;
     z-index: 10 !important;
+}
+
+.carouselRow:hover{
+    cursor: w-resize;
 }

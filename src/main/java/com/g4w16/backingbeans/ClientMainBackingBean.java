@@ -21,59 +21,64 @@ import javax.inject.Named;
  */
 @Named("ClientMainBB")
 @SessionScoped
-public class ClientMainBackingBean implements Serializable{
-    
+public class ClientMainBackingBean implements Serializable {
+
     @Inject
     private BooksJpaController bookJpaController;
-    
+
     @Inject
     private PollJpaController pollJpaController;
-    
+
     @Inject
     private ProductPageBackingBean productBB;
-    
+
     private List<Books> bestSellerBooks = new ArrayList<Books>();
     private List<Books> recentlyAddedBooks = new ArrayList<Books>();
-    
-    public boolean bestSellers()
-    {
-       List<Books> container = bookJpaController.findBestSellingBook(12);
-       if(container.isEmpty())
-       {
+    private List<Books> newestReleases = new ArrayList<Books>();
+
+    public boolean bestSellers() {
+        List<Books> container = bookJpaController.findBestSellingBook(12);
+        if (container.isEmpty()) {
             return false;
-       }
-       else
-       {
-           bestSellerBooks = container;
-           return true;
-       }
+        } else {
+            bestSellerBooks = container;
+            return true;
+        }
 
     }
-    
-     public List<Books> getBestSellersBooks()
-    {
-      return bestSellerBooks;
+
+    public List<Books> getBestSellersBooks() {
+        return bestSellerBooks;
     }
-    
-    public boolean recentlyAdded()
-    {
-      List<Books> container = bookJpaController.findRecentlyAddedBooks(12);
-      if(container.isEmpty())
-       {
+
+    public boolean recentlyAdded() {
+        List<Books> container = bookJpaController.findRecentlyAddedBooks(12);
+        if (container.isEmpty()) {
             return false;
-       }
-       else
-       {
-           recentlyAddedBooks = container;
-           return true;
-       }
+        } else {
+            recentlyAddedBooks = container;
+            return true;
+        }
     }
-    
-    public List<Books> getRecentlyAddedBooks()
-    {
-      return recentlyAddedBooks;
+
+    public List<Books> getRecentlyAddedBooks() {
+        return recentlyAddedBooks;
     }
-    
+
+    public boolean newestReleases() {
+        List<Books> container = bookJpaController.findNewestBooks(12);
+        if (container.isEmpty()) {
+            return false;
+        } else {
+            newestReleases = container;
+            return true;
+        }
+    }
+
+    public List<Books> getNewestReleases() {
+        return newestReleases;
+    }
+
     public String displayProductPage(Books book) {
         productBB.setBook(book);
 

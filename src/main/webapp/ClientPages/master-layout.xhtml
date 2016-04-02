@@ -14,9 +14,9 @@
         <link rel="stylesheet" type="text/css" href="#{resource['css:mycss.css']}"/>
         <link rel="stylesheet" type="text/css" href="#{resource['css:fluidity/fluidity.css']}"/>
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
-        <link rel="icon" href="#{resource['images:logo.png']}"/>
+        <link rel="icon" href="#{resource['images:logos/logo.png']}"/>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
-           </h:head>
+    </h:head>
     <h:body>
         <div data-sticky-container="" id="header">
             <div class="title-bar removeMarginTop divHeader" data-sticky="" data-options="marginTop:0;">
@@ -24,7 +24,7 @@
                     <ul class="dropdown menu inline-list" data-dropdown-menu=""> 
                         <!--homepage.xhtml pas define / change img to graphicimg-->
                         <li class="menu-text">
-                            <img id="logoHeader" src="#{resource['images:logo.png']}"/> 
+                            <img id="logoHeader" src="#{resource['images:logos/logo.png']}"/> 
                         </li>
                         <li class="menu-text bibuliFont removePaddingLeft whiteFont">
                             <a class="removePaddingLeft anchorBibuli" href="#{request.contextPath}"> Bibuli</a>
@@ -70,7 +70,7 @@
                         <li>
                             <h:form class="inlineClass">
                                 <h:inputText class="searchBar inlineClass" value="#{searchBean.keywords}" a:placeholder="Search..."/>
-                                    <h:commandLink class="button fi-magnifying-glass searchButton iconLarge inlineClass" action="#{searchBean.searchBooks()}"/>
+                                <h:commandLink class="button fi-magnifying-glass searchButton iconLarge inlineClass" action="#{searchBean.searchBooks()}"/>
                             </h:form>
                         </li>
                         <li class="divider"/>
@@ -106,7 +106,7 @@
                 <div class="row full-width">
                     <div class="small-12 medium-3 large-4 columns">
                         <br/>
-                        <img id="logoFooter" src="#{resource['images:logo.png']}"/>
+                        <img id="logoFooter" src="#{resource['images:logos/logo.png']}"/>
                         <br/><br/>
                         <h6>
                             &#169; 2016 - Bibuli e-Books, Inc.<br/>
@@ -146,6 +146,7 @@
             </div>
         </footer>
 
+        <!--        Foundation-->
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>

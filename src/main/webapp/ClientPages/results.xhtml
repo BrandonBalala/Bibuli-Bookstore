@@ -54,24 +54,26 @@
                                     <div class="column">
                                         <div class="image-wrapper overlay-fade-in-new-background">
                                             <img class="thumbnail resultImage" src="../resources/images/#{theBook.id}.jpg" alt="Book cover"/>
-                                            <div class="image-overlay-content">
-                                                <h2><h:outputText value="#{theBook.title}"/></h2>
+                                            <h:commandLink action="#{resultBB.displayProductPage(theBook)}"> 
+                                                <div class="image-overlay-content">
+                                                    <h2><h:outputText value="#{theBook.title}"/></h2>
 
-                                                <c:if test="#{theBook.salePrice eq 0}">
-                                                    <p class="price"><h:outputText value="#{theBook.listPrice}"/></p>
-                                                </c:if>
-                                                <c:if test="#{theBook.salePrice ne 0}">
-                                                    <p class="price">
-                                                        <h:outputText value="#{theBook.listPrice}$" class="strikethrough"/>&nbsp;
-                                                        <h:outputText value="#{theBook.salePrice}$" class="redFont"/>
-                                                    </p>
-                                                </c:if>
+                                                    <c:if test="#{theBook.salePrice eq 0}">
+                                                        <p class="price"><h:outputText value="#{theBook.listPrice}"/></p>
+                                                    </c:if>
+                                                    <c:if test="#{theBook.salePrice ne 0}">
+                                                        <p class="price">
+                                                            <h:outputText value="#{theBook.listPrice}$" class="strikethrough"/>&nbsp;
+                                                            <h:outputText value="#{theBook.salePrice}$" class="redFont"/>
+                                                        </p>
+                                                    </c:if>
 
-                                                <br/>
-                                                <!--                                    <h:form>-->
-                                                <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{resultBB.displayProductPage(theBook)}"/>
-                                                <!--</h:form>-->
-                                            </div>
+                                                    <!--                                                <br/>
+                                                                                                                                        <h:form>
+                                                                                                    <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="{resultBB.displayProductPage(theBook)}"/>
+                                                                                                    </h:form>-->
+                                                </div>
+                                            </h:commandLink>
                                         </div>
                                     </div>
                                 </ui:repeat>

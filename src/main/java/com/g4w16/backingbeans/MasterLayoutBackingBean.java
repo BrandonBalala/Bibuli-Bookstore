@@ -62,7 +62,8 @@ public class MasterLayoutBackingBean implements Serializable {
     
     @PostConstruct
     public void init() {
-        genreList = genreController.findAllGenres();
+        //genreList = genreController.findAllGenres();
+        genreList = genreController.findAllUsedGenres();
         formatList = formatController.findAllFormats();
     }
     

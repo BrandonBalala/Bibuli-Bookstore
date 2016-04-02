@@ -6,7 +6,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.g4w16.entities.BookFormats;
+import com.g4w16.entities.Books;
 import com.g4w16.entities.Format;
+import com.g4w16.entities.Genre;
 import com.g4w16.interfaces.FormatJpaInterface;
 import com.g4w16.persistence.exceptions.IllegalOrphanException;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
@@ -20,6 +22,7 @@ import javax.transaction.UserTransaction;
 import javax.inject.Named;
 import javax.persistence.PersistenceContext;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.TypedQuery;
 
 /**
  *

@@ -34,6 +34,8 @@ import javax.persistence.criteria.Join;
 import javax.transaction.UserTransaction;
 import javax.inject.Named;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Tuple;
+import javax.persistence.criteria.Expression;
 
 /**
  *
@@ -618,7 +620,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
     @Override
     public List<Books> findBooksByTitle(String title) {
         Query q = em.createQuery("SELECT b FROM Books b WHERE UPPER(b.title) LIKE :title");
-        q.setParameter("title", "%"+title.toUpperCase()+"%");
+        q.setParameter("title", "%" + title.toUpperCase() + "%");
         List<Books> results = (List<Books>) q.getResultList();
 
         return results;
@@ -627,7 +629,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
     @Override
     public List<Books> findBooksByPublisher(String publisher) {
         Query q = em.createQuery("SELECT b FROM Books b WHERE UPPER(b.publisher) LIKE :publisher");
-        q.setParameter("publisher", "%"+publisher.toUpperCase()+"%");
+        q.setParameter("publisher", "%" + publisher.toUpperCase() + "%");
         List<Books> results = (List<Books>) q.getResultList();
 
         return results;
@@ -660,7 +662,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
         Root<Books> books = cq.from(Books.class);
         Join identifiers = books.join("bookIdentifiersList");
         cq.select(books).distinct(true);
-        cq.where(cb.equal(cb.upper(identifiers.get("code")), "%"+code.toUpperCase()+"%"));
+        cq.where(cb.equal(cb.upper(identifiers.get("code")), "%" + code.toUpperCase() + "%"));
         TypedQuery<Books> query = em.createQuery(cq);
 
         return (Books) query.getSingleResult();
@@ -674,7 +676,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
         Root<Books> books = cq.from(Books.class);
         Join contributors = books.join("contributorList");
         cq.select(books).distinct(true);
-        cq.where(cb.like(cb.upper(contributors.get("name")), "%"+name.toUpperCase()+"%"));
+        cq.where(cb.like(cb.upper(contributors.get("name")), "%" + name.toUpperCase() + "%"));
         TypedQuery<Books> query = em.createQuery(cq);
 
         return (List<Books>) query.getResultList();
@@ -689,7 +691,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
         Join bookformats = books.join("bookFormatsList");
         Join formats = bookformats.join("format1");
         cq.select(books).distinct(true);
-        cq.where(cb.like(cb.upper(formats.get("type")), "%"+format.toUpperCase()+"%"));
+        cq.where(cb.like(cb.upper(formats.get("type")), "%" + format.toUpperCase() + "%"));
         TypedQuery<Books> query = em.createQuery(cq);
 
         return (List<Books>) query.getResultList();
@@ -703,7 +705,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
         Root<Books> books = cq.from(Books.class);
         Join genres = books.join("genreList");
         cq.select(books).distinct(true);
-        cq.where(cb.like(cb.upper(genres.get("type")), "%"+genre.toUpperCase()+"%"));
+        cq.where(cb.like(cb.upper(genres.get("type")), "%" + genre.toUpperCase() + "%"));
         TypedQuery<Books> query = em.createQuery(cq);
 
         return (List<Books>) query.getResultList();
@@ -743,15 +745,24 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
 
     @Override
     public List<Books> findBestSellingBook(int amount) {
+//        Query q = em.createNativeQuery("SELECT * FROM Books AS b, SalesDetails AS s WHERE (s.book = b.ID) GROUP BY s.book ORDER BY COUNT(s.book) DESC");
+//        q.setMaxResults(amount);
+//        List<Books> results = (List<Books>) q.getResultList();
+//
+//        return results;
         
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         CriteriaQuery cq = cb.createQuery();
+        //CriteriaQuery<Tuple> cq = cb.createTupleQuery();
         Root<Books> books = cq.from(Books.class);
         Join salesDetails = books.join("salesDetailsList");
-        cq.select(books).distinct(true);
-        cq.groupBy(salesDetails.get("book"));
-        cq.orderBy(cb.desc(cb.count(salesDetails)));
+        Expression<Integer> bookID = salesDetails.get("book");
+        Expression<Long> count = cb.count(bookID);
+        
+        cq.multiselect(books, count.alias("count"));
+        cq.groupBy(bookID);
+        cq.orderBy(cb.desc(count));
         TypedQuery<Books> query = em.createQuery(cq);
         query.setMaxResults(amount);
 

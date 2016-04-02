@@ -135,24 +135,28 @@ and open the template in the editor.
                                     <div class="column">
                                         <div class="image-wrapper overlay-fade-in-new-background">
                                             <img class="thumbnail recommendedImage" src="../resources/images/#{theRecommendedBook.id}.jpg" alt="Book cover"/>
-                                            <div class="image-overlay-content">
-                                                <h2><h:outputText value="#{theRecommendedBook.title}"/></h2>
+                                            <h:form>
+                                                <h:commandLink action="#{productPageBB.displayProductPageRecommended(theRecommendedBook)}">
+                                                    <div class="image-overlay-content">
+                                                        <h2><h:outputText value="#{theRecommendedBook.title}"/></h2>
 
-                                                <c:if test="#{theRecommendedBook.salePrice eq 0}">
-                                                    <p class="price"><h:outputText value="#{theRecommendedBook.listPrice}"/></p>
-                                                </c:if>
-                                                <c:if test="#{theRecommendedBook.salePrice ne 0}">
-                                                    <p class="price">
-                                                        <h:outputText value="#{theRecommendedBook.listPrice}$" class="strikethrough"/>
-                                                        <h:outputText value=" #{theRecommendedBook.salePrice}$" class="redFont"/>
-                                                    </p>
-                                                </c:if>
+                                                        <c:if test="#{theRecommendedBook.salePrice eq 0}">
+                                                            <p class="price"><h:outputText value="#{theRecommendedBook.listPrice}"/></p>
+                                                        </c:if>
+                                                        <c:if test="#{theRecommendedBook.salePrice ne 0}">
+                                                            <p class="price">
+                                                                <h:outputText value="#{theRecommendedBook.listPrice}$" class="strikethrough"/>
+                                                                <h:outputText value=" #{theRecommendedBook.salePrice}$" class="redFont"/>
+                                                            </p>
+                                                        </c:if>
 
-                                                <br/>
-                                                <h:form>
-                                                    <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="#{productPageBB.displayProductPageRecommended(theRecommendedBook)}" />
-                                                </h:form>
-                                            </div>
+                                                        <br/>
+                                                        <!--                                                <h:form>
+                                                                                                            <h:commandLink type="submit" class="button secondary expanded hollow step fi-eye iconLarge" action="{productPageBB.displayProductPageRecommended(theRecommendedBook)}" />
+                                                                                                        </h:form>-->
+                                                    </div>
+                                                </h:commandLink>
+                                            </h:form>
                                         </div>
                                     </div>
                                 </ui:repeat>
