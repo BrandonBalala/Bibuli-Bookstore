@@ -87,7 +87,7 @@
                             <br />
                             <h:panelGrid columns="3">
                                 <h:outputLabel for="format" value="formats" />
-                                <p:selectCheckboxMenu id="format" value="#{booksBB.selectedBook.}" label="format" scrollHeight="150"
+                                <p:selectCheckboxMenu id="format" value="#{booksBB.selectedBook.bookFormatsList}" label="format" scrollHeight="150"
                                                       filter="true" filterMatchMode="startsWith" panelStyle="width:250px" converter="com.g4w16.jsf.util.FormatConverter">
                                     <f:selectItems value="#{booksBB.allFormats}" />
                                 </p:selectCheckboxMenu>
