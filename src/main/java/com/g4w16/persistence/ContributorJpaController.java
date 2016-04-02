@@ -243,4 +243,11 @@ public class ContributorJpaController implements Serializable, ContributorJpaInt
 
         return contributorID;
     }
+
+    public Contributor findContributorByName(String name, String contribution) {
+        Query q = em.createQuery("SELECT c FROM Contributor c WHERE c.name = :name AND c.contribution = :contribution");
+        q.setParameter("name", name);
+        q.setParameter("contribution", new ContributionType(contribution));
+        return (Contributor) q.getSingleResult();
+    }
 }

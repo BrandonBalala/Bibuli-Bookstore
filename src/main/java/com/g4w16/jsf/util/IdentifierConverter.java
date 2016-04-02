@@ -5,8 +5,9 @@
  */
 package com.g4w16.jsf.util;
 
-import com.g4w16.persistence.BookFormatsJpaController;
+import com.g4w16.persistence.BookIdentifiersJpaController;
 import com.g4w16.persistence.FormatJpaController;
+import com.g4w16.persistence.IdentifierTypeJpaController;
 import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -17,14 +18,15 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Dan
  */
-@FacesConverter("com.g4w16.jsf.util.FormatConverter")
-public class FormatConverter implements Converter {
+@FacesConverter("com.g4w16.jsf.util.IdentifierConverter")
+public class IdentifierConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         System.out.println(">>>>>>>>>>>>format" + value);
-        BookFormatsJpaController formatJpa = CDI.current().select(BookFormatsJpaController.class).get();
-        return formatJpa.findBookFormatByID(new );
+        IdentifierTypeJpaController identifierJpa = CDI.current().select(IdentifierTypeJpaController.class).get();
+        //return identifierJpa.findIdentifierTypeByID(value);
+        return null;
     }
 
     @Override
