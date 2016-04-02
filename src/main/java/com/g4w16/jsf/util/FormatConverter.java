@@ -24,7 +24,7 @@ public class FormatConverter implements Converter {
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         System.out.println(">>>>>>>>>>>>format" + value);
         BookFormatsJpaController formatJpa = CDI.current().select(BookFormatsJpaController.class).get();
-        return formatJpa.findBookFormatByID(new );
+        return null;
     }
 
     @Override
