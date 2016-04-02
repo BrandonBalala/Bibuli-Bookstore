@@ -115,7 +115,7 @@ public class Contributor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.Contributor[ id=" + id + " ]";
+        return name;
     }
     
 }

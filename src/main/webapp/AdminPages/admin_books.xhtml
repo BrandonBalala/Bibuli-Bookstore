@@ -37,33 +37,26 @@
                                          paginator="true"
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15"
-                                         editable="true" style="margin-bottom:20px"
+                                         editable="false" style="margin-bottom:20px"
                                          scrollable="true" scrollWidth="100%" scrollHeight="100%"
                                          selection="#{booksBB.selectedBook}" selectionMode="single" rowKey="#{book}">
 
 
-                                <p:ajax event="rowEdit" listener="#{booksBB.onRowEdit}" update=":form:msgs"/>
-                                <p:ajax event="rowEditCancel" listener="#{booksBB.onRowCancel}" update=":form:msgs" />
+<!--                                <p:ajax event="rowEdit" listener="#{booksBB.onRowEdit}" update=":form:msgs"/>
+                                <p:ajax event="rowEditCancel" listener="#{booksBB.onRowCancel}" update=":form:msgs" />-->
 
-                                <p:column  headerText="Edit Status" style="width:50px">
+<!--                                <p:column  headerText="Edit Status" style="width:50px">
                                     <p:rowEditor />
-                                </p:column>
+                                </p:column>-->
 
 
 
                                 <p:column headerText="Removal Status" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" filterMatchMode="contains" style="width:70px">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{book.removalStatus}" /></f:facet>
-                                        <f:facet name="input">
-                                            <h:selectOneMenu value="#{book.removalStatus}" style="width:100%">
-                                                <f:selectItems value="#{booksBB.status}" var="man" itemLabel="#{status}" itemValue="#{status}" />
-                                            </h:selectOneMenu>
-                                        </f:facet>
-                                    </p:cellEditor>
+                                    <h:outputText value="#{book.removalStatus}" />
                                 </p:column>
 
                                 <p:column headerText="Details" style="width:70px">
-                                    <p:commandButton process="form" value="Show" icon="ui-icon-search" action="#{booksBB.showDetail(booksBB.selectedBook.id.intValue())}"/>
+                                    <p:commandButton process="form" value="Show" icon="ui-icon-search" action="#{booksBB.showDetail(book)}"/>
                                 </p:column>
 
                                 <p:column headerText="Book Identifier " sortBy="#{book.bookIdentifiers}" filterBy="#{book.bookIdentifiers}" filterMatchMode="contains" style="width:70px">

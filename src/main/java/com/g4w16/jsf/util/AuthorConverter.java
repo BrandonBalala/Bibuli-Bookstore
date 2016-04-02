@@ -6,9 +6,6 @@
 package com.g4w16.jsf.util;
 
 import com.g4w16.persistence.ContributorJpaController;
-import com.g4w16.persistence.ContributionTypeJpaController;
-import java.util.Arrays;
-import java.util.List;
 import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -24,9 +21,9 @@ public class AuthorConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        System.out.println(">>>>>>>>author"+value);
-        ContributionTypeJpaController typeJpa = CDI.current().select(ContributionTypeJpaController.class).get();
-        return typeJpa.findContributionTypeByID(value);
+        System.out.println(">>>>>>>>author     "+value);
+        ContributorJpaController typeJpa = CDI.current().select(ContributorJpaController.class).get();
+        return typeJpa.findContributorByName(value, "Author");
     }
 
     @Override

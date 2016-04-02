@@ -7,25 +7,29 @@ package com.g4w16.backingbeans;
 
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
-import org.primefaces.event.SelectEvent;
  
 
 /**
  *
  * @author wangdan
  */
-@Named("reportBB")
-@ManagedBean
+
+@ManagedBean(name="reportBB")
+@SessionScoped
 public class AdminReportBackingBean implements Serializable { 
     
     private Date start;
     private Date end;     
     
-    
+    @PostConstruct
+    public void init(){
+        start=new Date();
+        end=new Date();
+    }
     public Date getStart() {
         return start;
     }
@@ -42,13 +46,11 @@ public class AdminReportBackingBean implements Serializable {
         this.end = end;
     }
     
-    public void onDateSelect(SelectEvent event) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("Date Selected"+format.format(event.getObject()));
-    }
+   
     
     public void click() {
-        System.out.println("click");
+        System.out.println("start:"+start);
+        System.out.println("end:"+end);
     }
  
 }

@@ -5,7 +5,9 @@
  */
 package com.g4w16.jsf.util;
 
-import com.g4w16.persistence.GenreJpaController;
+import com.g4w16.persistence.BookIdentifiersJpaController;
+import com.g4w16.persistence.FormatJpaController;
+import com.g4w16.persistence.IdentifierTypeJpaController;
 import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -16,13 +18,15 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Dan
  */
-@FacesConverter("com.g4w16.jsf.util.GenreConverter")
-public class GenreConverter implements Converter {
+@FacesConverter("com.g4w16.jsf.util.IdentifierConverter")
+public class IdentifierConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        GenreJpaController genreJpa = CDI.current().select(GenreJpaController.class).get();
-        return genreJpa.findGenreByID(value);
+        System.out.println(">>>>>>>>>>>>format" + value);
+        IdentifierTypeJpaController identifierJpa = CDI.current().select(IdentifierTypeJpaController.class).get();
+        //return identifierJpa.findIdentifierTypeByID(value);
+        return null;
     }
 
     @Override
