@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title><ui:insert name="title" /></title>
+        <link href="#{resource['pizza-master:dist/css/vendor/normalize.css']}" media="screen" rel="stylesheet" type="text/css" />
+        <link href="#{resource['pizza-master:dist/css/vendor/foundation.css']}" media="screen" rel="stylesheet" type="text/css" />
+        <link href="#{resource['pizza-master:dist/css/pizza.css']}" media="screen, projector, print" rel="stylesheet" type="text/css" />
+        <script src="#{resource['pizza-master:dist/js/vendor/modernizr.js']}"></script>
+    </h:head>
+    <h:body>
+        <br/>
+        <div class="row">
+            <div class="large-12 columns">
+                <h3>Poll Result</h3>
+                <h4><h:outputText value="#{pollBB.poll.question}"/></h4>
+            </div>
+        </div>
+        <div class="row callout">
+            <div class="large-4 small-4 columns">
+                <ul data-pie-id="pie">
+                    <c:if test="#{not empty pollBB.poll.firstAnswer}">
+                        <li data-value="#{pollBB.poll.firstCount}">
+                            <h:outputText value="#{pollBB.poll.firstAnswer} (#{pollBB.poll.firstCount})"/>
+                        </li>
+                    </c:if>
+                    <c:if test="#{not empty pollBB.poll.secondAnswer}">
+                        <li data-value="#{pollBB.poll.secondCount}">
+                            <h:outputText value="#{pollBB.poll.secondAnswer} (#{pollBB.poll.secondCount})"/>
+                        </li>
+                    </c:if>
+                    <c:if test="#{not empty pollBB.poll.thirdAnswer}">
+                        <li data-value="#{pollBB.poll.thirdCount}">
+                            <h:outputText value="#{pollBB.poll.thirdAnswer} (#{pollBB.poll.thirdCount})"/>
+                        </li>
+                    </c:if>
+                    <c:if test="#{not empty pollBB.poll.fourthAnswer}">
+                        <li data-value="#{pollBB.poll.fourthCount}">
+                            <h:outputText value="#{pollBB.poll.fourthAnswer} (#{pollBB.poll.fourthCount})"/>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
+            <div class="medium-8 medium-8 columns">
+                <div id="pie"></div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+        <script src="#{resource['pizza-master:dist/js/vendor/dependencies.js']}"></script>
+        <script src="#{resource['pizza-master:dist/js/pizza.js']}"></script>
+
+        <script>
+            $(window).load(function () {
+                Pizza.init();
+                $(document).foundation();
+            });
+        </script>
+    </h:body>
+</html>
+

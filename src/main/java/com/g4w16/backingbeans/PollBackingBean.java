@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -40,6 +41,7 @@ public class PollBackingBean {
             int index = randomGenerator.nextInt(polls.size());
             this.poll = polls.get(index);
         }
+        
         return poll;
     }
     
@@ -58,4 +60,10 @@ public class PollBackingBean {
             Logger.getLogger(PollBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @PostConstruct
+    public void init(){
+        this.poll = getPoll();
+    }
+    
 }
