@@ -682,6 +682,19 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
         return (List<Books>) query.getResultList();
     }
 
+    public List<Books> findBooksByContributorName(String name, int bookID) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        CriteriaQuery cq = cb.createQuery();
+        Root<Books> books = cq.from(Books.class);
+        Join contributors = books.join("contributorList");
+        cq.select(books).distinct(true);
+        cq.where(cb.equal(contributors.get("name"),name), cb.notEqual(books.get("id"), bookID));
+        TypedQuery<Books> query = em.createQuery(cq);
+
+        return (List<Books>) query.getResultList();
+    }
+
     @Override
     public List<Books> findBooksByFormat(String format) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -750,23 +763,30 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
 //        List<Books> results = (List<Books>) q.getResultList();
 //
 //        return results;
-        
+
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         CriteriaQuery cq = cb.createQuery();
-        //CriteriaQuery<Tuple> cq = cb.createTupleQuery();
         Root<Books> books = cq.from(Books.class);
         Join salesDetails = books.join("salesDetailsList");
         Expression<Integer> bookID = salesDetails.get("book");
         Expression<Long> count = cb.count(bookID);
-        
+
         cq.multiselect(books, count.alias("count"));
         cq.groupBy(bookID);
         cq.orderBy(cb.desc(count));
-        TypedQuery<Books> query = em.createQuery(cq);
+        TypedQuery<Object[]> query = em.createQuery(cq);
         query.setMaxResults(amount);
 
-        return (List<Books>) query.getResultList();
+        List<Object[]> results = (List<Object[]>) query.getResultList();
+
+        List<Books> bookList = new ArrayList<Books>();
+        for (int cntr = 0; cntr < results.size(); cntr++) {
+            Object[] obj = results.get(cntr);
+            bookList.add((Books) obj[0]);
+        }
+
+        return bookList;
     }
 
 //    @Override

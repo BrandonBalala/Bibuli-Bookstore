@@ -152,7 +152,8 @@ table tr:nth-of-type(even) {
 }
 .carouselImage{
     max-width:325px;
-    height:350px;
+    min-width: 200px;
+    height:330px;
 }
 .ui-growl {
     top:80px;
@@ -334,6 +335,11 @@ table tr:nth-of-type(even) {
     font-family: pacifico;
 }
 
+.carouselTitle{
+    font-size: 25px !important;
+    font-family: pacifico;
+}
+
 .removePaddingLeft{
     padding-left: 0px !important;
     margin-left: 0px !important;
@@ -435,4 +441,31 @@ body{
 
 .carouselRow:hover{
     cursor: w-resize;
+}
+
+.ui-selectoneradio{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border: none !important;
+    border-collapse: separate !important;
+    margin-bottom: 0rem !important;
+}
+
+.adImages{
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.rowFlex{
+    display: flex;
+}
+
+hr{ 
+    border: 0 !important; 
+    height: 1px !important; 
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)) !important;
 }
