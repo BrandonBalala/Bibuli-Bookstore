@@ -65,7 +65,7 @@ public class LoginBackingBean implements Serializable {
     public void login() {
 
         // Get Session object so that the status of the individual who just logged in
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
         // Used to contain that will be displayed on the login form after Login button is pressed
         FacesMessage message;
@@ -93,7 +93,14 @@ public class LoginBackingBean implements Serializable {
         // Place the message in the context so that it will be displayed
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-
+    
+    public String logout() {
+     ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+         .getSession(false)).invalidate();
+     return "/ClientPages/mainPage.xhtml";
+    }
+    
+    
     //REMOVE LATER, USED FOR TESTING ONLY 
     //FASHFASFHOASIFHOIOASOIH
     @PostConstruct
