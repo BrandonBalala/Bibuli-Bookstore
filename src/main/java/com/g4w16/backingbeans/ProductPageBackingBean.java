@@ -7,7 +7,6 @@ import com.g4w16.entities.ReviewsPK;
 import com.g4w16.persistence.BooksJpaController;
 import com.g4w16.persistence.ClientJpaController;
 import com.g4w16.persistence.ReviewsJpaController;
-import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,7 +24,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -85,7 +86,13 @@ public class ProductPageBackingBean implements Serializable {
 
     public void setBook(Books book) {
         this.book = book;
-        session.setAttribute("lastGenre", book.getGenreList());
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        String cookie = "";
+        for(Genre g :book.getGenreList())
+        {
+            cookie += g.getType();
+        }
+        response.addCookie(new Cookie("lastGenre",cookie));
         //Set recommended books
         setRecommendedBookList(NUM_BOOKS);
         

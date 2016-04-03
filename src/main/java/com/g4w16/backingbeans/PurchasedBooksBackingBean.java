@@ -42,6 +42,9 @@ public class PurchasedBooksBackingBean implements Serializable {
 
     @Inject
     private ClientJpaController clientController;
+    
+    @Inject
+    private InvoiceBackingBean invoiceBB;
 
     public List<Books> getPurchasedBooks() {
         List<Sales> salesList = client.getSalesList();
@@ -70,7 +73,8 @@ public class PurchasedBooksBackingBean implements Serializable {
     }
     
     public String displayInvoice(Sales sale){
-        return null;
+        invoiceBB.setSale(sale);
+        return "invoice";
     }
 
 //    private boolean validateAuthenticated() {

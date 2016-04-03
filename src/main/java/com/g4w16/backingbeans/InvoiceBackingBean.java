@@ -8,7 +8,8 @@ package com.g4w16.backingbeans;
 import com.g4w16.entities.Sales;
 import com.g4w16.persistence.SalesJpaController;
 import java.io.Serializable;
-import javax.faces.view.ViewScoped;
+import java.text.DecimalFormat;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,17 +18,22 @@ import javax.inject.Named;
  * @author ofern
  */
 @Named("invoiceBB")
-@ViewScoped
+@SessionScoped
 public class InvoiceBackingBean implements Serializable {
     private Sales sale;
     @Inject
     private SalesJpaController salesJPAController;
+    private DecimalFormat formatter = new DecimalFormat("#0.##");
     
+    public DecimalFormat getFormatter()
+    {
+        return formatter;
+    }
     public Sales getSale(){
-        if(sale == null)
-        {
-            sale = salesJPAController.findSalesEntities(1,0).get(0);
-        }
         return sale;
+    }
+    
+    public void setSale(Sales sale){
+        this.sale = sale;
     }
 }
