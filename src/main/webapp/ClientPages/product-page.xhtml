@@ -29,7 +29,7 @@ and open the template in the editor.
                     </div>
                     <div class="medium-12 large-7 columns">
                         <p:rating value="#{productPageBB.averageRating}" readonly="true"/>
-                        <h6><small><h:outputText value=" #{productPageBB.book.reviewsList.size()} customer reviews" class="inline paddingLeft"/></small></h6>
+                        <h6><small><h:outputText value=" #{productPageBB.book.approvedReviewsList.size()} customer reviews" class="inline paddingLeft"/></small></h6>
                         <h3><h:outputText value="#{productPageBB.book.title}"/></h3>
                         <h5>
                             <ul>
@@ -110,7 +110,6 @@ and open the template in the editor.
 
                         </div>
                         <div class="tabs-panel" id="panel2">
-                            <h4>Reviews</h4>
                             <ui:repeat value="#{productPageBB.book.approvedReviewsList}" var="theReview">
                                 <div class="media-object stack-for-small">
                                     <div class="media-object-section">
@@ -121,6 +120,13 @@ and open the template in the editor.
                                     </div>
                                 </div>
                             </ui:repeat>
+                            <c:if test="#{empty productPageBB.book.approvedReviewsList}">
+                                <div class="row text-center">
+                                    <div class="large-12">
+                                        <h4><h:outputText value="No reviews found, be the first!"/></h4>
+                                    </div>
+                                </div>
+                            </c:if>
                             <h:form id="reviewForm" rendered="#{session.getAttribute('authenticated')}">
                                 <label>
                                     #{bundle.myReview}

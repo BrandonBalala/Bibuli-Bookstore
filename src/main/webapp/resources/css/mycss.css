@@ -317,7 +317,7 @@ table tr:nth-of-type(even) {
 }
 
 .blackBackgroundColor{
-    background-color: #1e1b1b;
+    background-color: #1e1b1b !important;
 }
 
 .removeMarginTop{
@@ -367,20 +367,15 @@ table tr:nth-of-type(even) {
 {
     color:orange; 
     text-decoration:none; 
-    cursor:pointer;  
+    cursor:pointer;
+    outline: 0;
 }
 
 li a:hover{
     color:orange; 
     text-decoration:none; 
     cursor:pointer;
-}
-
-.twoColumns{
-    background: #1e1b1b !important;
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
+    outline: 0;
 }
 
 .anchorFontSize{
@@ -468,4 +463,12 @@ hr{
     border: 0 !important; 
     height: 1px !important; 
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)) !important;
+}
+
+a {
+    outline: none !important;
+}
+
+a:hover, a:active, a:focus {
+    outline: none !important;
 }

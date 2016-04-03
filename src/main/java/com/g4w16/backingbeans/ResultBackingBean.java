@@ -6,12 +6,14 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Books;
+import com.g4w16.entities.Reviews;
 import com.g4w16.persistence.BooksJpaController;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -50,6 +52,7 @@ public class ResultBackingBean implements Serializable {
 
     public void setBookList(List<Books> bookList) {
         this.bookList = bookList;
+        sortBy = "";
     }
 
     public void setBook(Books book) {
@@ -85,31 +88,56 @@ public class ResultBackingBean implements Serializable {
     }
 
     public void sortBooks() {
-        this.sortBy = "SHEEEEITTTTTTTT";
         switch (sortBy) {
             case "cheapestFirst":
-                Collections.sort(bookList, new Comparator<Books>() {
-                    public int compare(Books b1, Books b2) {
-                        BigDecimal priceB1 = (b1.getSalePrice() == BigDecimal.ZERO) ? b1.getListPrice() : b1.getSalePrice();
-                        BigDecimal priceB2 = (b2.getSalePrice() == BigDecimal.ZERO) ? b2.getListPrice() : b2.getSalePrice();
-                        return priceB2.compareTo(priceB1);
-                    }
+                Collections.sort(bookList, (Books b1, Books b2) -> {
+                    BigDecimal priceB1 = (b1.getSalePrice().equals(BigDecimal.ZERO)) ? b1.getListPrice() : b1.getSalePrice();
+                    BigDecimal priceB2 = (b2.getSalePrice().equals(BigDecimal.ZERO)) ? b2.getListPrice() : b2.getSalePrice();
+                    return priceB1.compareTo(priceB2);
                 });
                 break;
             case "expensiveFirst":
+                Collections.sort(bookList, (Books b1, Books b2) -> {
+                    BigDecimal priceB1 = (b1.getSalePrice().equals(BigDecimal.ZERO)) ? b1.getListPrice() : b1.getSalePrice();
+                    BigDecimal priceB2 = (b2.getSalePrice().equals(BigDecimal.ZERO)) ? b2.getListPrice() : b2.getSalePrice();
+                    return priceB2.compareTo(priceB1);
+                });
                 break;
             case "newestFirst":
+                Collections.sort(bookList, (Books b1, Books b2) -> {
+                    Date date1 = b1.getPubDate();
+                    Date date2 = b2.getPubDate();
+                    return date2.compareTo(date1);
+                });
                 break;
             case "oldestFirst":
+                Collections.sort(bookList, (Books b1, Books b2) -> {
+                    Date date1 = b1.getPubDate();
+                    Date date2 = b2.getPubDate();
+                    return date1.compareTo(date2);
+                });
                 break;
             case "highestRatingFirst":
+                Collections.sort(bookList, (Books b1, Books b2) -> {
+                    Double rating1 = getAverageRating(b1.getApprovedReviewsList());
+                    Double rating2 = getAverageRating(b2.getApprovedReviewsList());
+                    return rating2.compareTo(rating1);
+                });
                 break;
         }
+    }
 
-        bookList.remove(0);
-
-        for (Books book : bookList) {
-            sortBy += ", " + book.getSalePrice();
+    private double getAverageRating(List<Reviews> reviewList) {
+        if (reviewList.isEmpty()) {
+            return 0.0;
         }
+
+        int numBooks = reviewList.size();
+        int sum = 0;
+        for (Reviews rev : reviewList) {
+            sum += rev.getRating();
+        }
+
+        return sum / numBooks;
     }
 }
