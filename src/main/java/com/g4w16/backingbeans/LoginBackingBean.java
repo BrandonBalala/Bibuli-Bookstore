@@ -5,10 +5,14 @@
  */
 package com.g4w16.backingbeans;
 
+import com.g4w16.entities.Books;
 import com.g4w16.entities.Client;
+import com.g4w16.entities.Sales;
+import com.g4w16.entities.SalesDetails;
 import com.g4w16.jsf.util.MessageUtil;
 import com.g4w16.persistence.ClientJpaController;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
@@ -33,6 +37,15 @@ public class LoginBackingBean implements Serializable {
     private String password;
 
     private boolean loggedIn;
+    
+    @Inject
+    private ClientJpaController clientController;
+    
+    @Inject
+    private ClientUtil clientUtil;
+    
+    @Inject
+    private ShoppingCartBackingBean cartBB;
 
     public String getEmail() {
         return email;
@@ -93,13 +106,15 @@ public class LoginBackingBean implements Serializable {
         // Place the message in the context so that it will be displayed
         FacesContext.getCurrentInstance().addMessage(null, message);
 
+        removeOwnedBooksFromCart();
+
         return "mainPage?faces-redirect=true";
     }
 
     public String logout() {
         ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
                 .getSession(false)).invalidate();
-        
+
         return "mainPage?faces-redirect=true";
     }
 
@@ -111,5 +126,22 @@ public class LoginBackingBean implements Serializable {
         password = "a";
         loggedIn = true;
 
+    }
+
+    private void removeOwnedBooksFromCart() {
+        Client client = clientController.findClientById(clientUtil.getUserId());
+        List<Books> bookList = cartBB.getBookList();
+        
+        salesLoop:
+        for (Sales sale : client.getSalesList()) {
+            for (SalesDetails salesDetail : sale.getSalesDetailsList()) {
+                Books temp = salesDetail.getBook();
+                if (bookList.contains(temp)) {
+                    bookList.remove(temp);
+                }
+            }
+        }
+        
+        cartBB.setBookList(bookList);
     }
 }

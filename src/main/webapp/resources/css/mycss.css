@@ -466,9 +466,9 @@ hr{
 }
 
 a {
-    outline: none !important;
+    outline: medium none !important;
 }
 
 a:hover, a:active, a:focus {
-    outline: none !important;
+    outline: medium none !important;
 }

@@ -1,10 +1,13 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Books;
+import com.g4w16.entities.Client;
 import com.g4w16.entities.Contributor;
 import com.g4w16.entities.Genre;
 import com.g4w16.entities.Reviews;
 import com.g4w16.entities.ReviewsPK;
+import com.g4w16.entities.Sales;
+import com.g4w16.entities.SalesDetails;
 import com.g4w16.persistence.BooksJpaController;
 import com.g4w16.persistence.ClientJpaController;
 import com.g4w16.persistence.ReviewsJpaController;
@@ -63,6 +66,9 @@ public class ProductPageBackingBean implements Serializable {
     @Inject
     private MessageManagedBean messageBean;
 
+    @Inject
+    private ClientUtil clientUtil;
+
     public Reviews getReview() {
         if (review == null) {
             review = new Reviews();
@@ -91,11 +97,10 @@ public class ProductPageBackingBean implements Serializable {
         this.book = book;
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         String cookie = "";
-        for(Genre g :book.getGenreList())
-        {
-            cookie += g.getType()+",";
+        for (Genre g : book.getGenreList()) {
+            cookie += g.getType() + ",";
         }
-        response.addCookie(new Cookie("lastGenre",cookie));
+        response.addCookie(new Cookie("lastGenre", cookie));
         //Set recommended books
         setRecommendedBookList(NUM_BOOKS);
         setSameContributorsBookList(NUM_BOOKS);
@@ -231,12 +236,30 @@ public class ProductPageBackingBean implements Serializable {
 
     public void addBookToCart() {
         List<Books> bookList = cartBB.getBookList();
+        boolean owned = false;
 
-        if (!bookList.contains(book)) {
-            cartBB.addBookToCart(book);
-            messageBean.setMessage(book.getTitle() + " has been added to your cart!");
-        } else {
-            messageBean.setMessage(book.getTitle() + " is already in your cart!");
+        if (clientUtil.isAuthenticated()) {
+            Client client = clientController.findClientById(clientUtil.getUserId());
+
+            salesLoop:
+            for (Sales sale : client.getSalesList()) {
+                for (SalesDetails salesDetail : sale.getSalesDetailsList()) {
+                    if (salesDetail.getBook().equals(book)) {
+                        messageBean.setMessage("You already own " + book.getTitle() + "!");
+                        owned = true;
+                        break salesLoop;
+                    }
+                }
+            }
+        }
+
+        if (!owned) {
+            if (!bookList.contains(book)) {
+                cartBB.addBookToCart(book);
+                messageBean.setMessage(book.getTitle() + " has been added to your cart!");
+            } else {
+                messageBean.setMessage(book.getTitle() + " is already in your cart!");
+            }
         }
     }
 

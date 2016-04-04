@@ -19,89 +19,90 @@
                 <hr/>
 
                 <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
                             <div class="invoice-title">
+                                <h:link value="Download Books" outcome="my-books" />
                                 <h3>#{(bundle.invoiceNum).concat(invoiceBB.sale.id)}</h3>
                             </div>
-                        <small>#{bundle.bibuli}</small>
+                            <small>#{bundle.bibuli}</small>
                             <hr />
-                                    <div class="col-xs-6">
-                                            <address>
-                                            <strong>#{bundle.billedTo}</strong> <strong class="pull-right">#{bundle.saleDate}</strong><br/>
-                                            #{(invoiceBB.sale.client.firstName).concat(" ").concat(invoiceBB.sale.client.lastName)}<div class="pull-right">#{invoiceBB.sale.dateEntered.date}/#{invoiceBB.sale.dateEntered.month}/#{invoiceBB.sale.dateEntered.year+1900}</div><br/>
-                                            #{invoiceBB.sale.billingAddress.firstCivicAddress}<br/>
-                                            <div rendered="#{invoiceBB.sale.billingAddress.secondCivicAddress != null}">#{invoiceBB.sale.billingAddress.secondCivicAddress}</div>
-                                            #{invoiceBB.sale.billingAddress.city} #{invoiceBB.sale.billingAddress.province}, #{invoiceBB.sale.billingAddress.postalCode}
-                                            </address>
-                                        <address>
-                                               <br/>
-                                                <br/><br/>
-                                            </address>
-                                        
-                                    </div>
-                                    <div class="col-xs-6 text-right">
-                                            
-                                    </div>
-                    </div>
-                </div>
+                            <div class="col-xs-6">
+                                <address>
+                                    <strong>#{bundle.billedTo}</strong> <strong class="pull-right">#{bundle.saleDate}</strong><br/>
+                                    #{(invoiceBB.sale.client.firstName).concat(" ").concat(invoiceBB.sale.client.lastName)}<div class="pull-right">#{invoiceBB.sale.dateEntered.date}/#{invoiceBB.sale.dateEntered.month}/#{invoiceBB.sale.dateEntered.year+1900}</div><br/>
+                                    #{invoiceBB.sale.billingAddress.firstCivicAddress}<br/>
+                                    <div rendered="#{invoiceBB.sale.billingAddress.secondCivicAddress != null}">#{invoiceBB.sale.billingAddress.secondCivicAddress}</div>
+                                    #{invoiceBB.sale.billingAddress.city} #{invoiceBB.sale.billingAddress.province}, #{invoiceBB.sale.billingAddress.postalCode}
+                                </address>
+                                <address>
+                                    <br/>
+                                    <br/><br/>
+                                </address>
 
-                <div class="row">
-                    <div class="col-md-12">
-                            <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                            <h3 class="panel-title"><strong>#{bundle.saleSummary}</strong></h3>
-                                    </div>
-                                    <div class="panel-body">
-                                            <div class="table-responsive">
-                                                    <table class="table table-condensed">
-                                                            <thead>
-                                            <tr>
-                                                                            <td><strong>#{bundle.saleItem}</strong></td>
-                                                                            <td class="text-center"><strong>#{bundle.saleBasePrice}</strong></td>
-                                                                            <td class="text-center"><strong>#{bundle.pst}</strong></td>
-                                                                            <td class="text-center"><strong>#{bundle.hst}</strong></td>
-                                                                            <td class="text-center"><strong>#{bundle.gst}</strong></td>
-                                                                            <td class="text-right"><strong>#{bundle.saleTotals}</strong></td>
-                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                    <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                                                    <ui:repeat var="item" value="#{invoiceBB.sale.salesDetailsList}">
-                                                                    <tr>
-                                                                        <td>#{item.book.title}</td>
-                                                                        <td class="text-center">#{item.price}</td>
-                                                                        <td class="text-center">#{invoiceBB.formatter.format(item.pst.doubleValue() * item.price)}</td>
-                                                                        <td class="text-center">#{invoiceBB.formatter.format(item.hst.doubleValue() * item.price)}</td>
-                                                                        <td class="text-center">#{invoiceBB.formatter.format(item.gst.doubleValue() * item.price)}</td>
-                                                                        <td class="text-right">#{invoiceBB.formatter.format(((item.pst.doubleValue() + item.hst.doubleValue() + item.gst.doubleValue()) * item.price) + item.price)}</td>
-                                                                    </tr>
-                                                                    </ui:repeat>
-                                                                    <tr>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line text-center"><strong>#{bundle.saleBeforeTaxTotal}</strong></td>
-                                                                            <td class="thick-line text-right">#{invoiceBB.sale.grossValue}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line text-center"><strong>#{bundle.saleTotal}</strong></td>
-                                                                            <td class="thick-line text-right">#{invoiceBB.sale.netValue}</td>
-                                                                    </tr>
-                                    
-                                                            </tbody>
-                                                    </table>
-                                            </div>
-                                    </div>
                             </div>
+                            <div class="col-xs-6 text-right">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>#{bundle.saleSummary}</strong></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>#{bundle.saleItem}</strong></td>
+                                                    <td class="text-center"><strong>#{bundle.saleBasePrice}</strong></td>
+                                                    <td class="text-center"><strong>#{bundle.pst}</strong></td>
+                                                    <td class="text-center"><strong>#{bundle.hst}</strong></td>
+                                                    <td class="text-center"><strong>#{bundle.gst}</strong></td>
+                                                    <td class="text-right"><strong>#{bundle.saleTotals}</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                                <ui:repeat var="item" value="#{invoiceBB.sale.salesDetailsList}">
+                                                    <tr>
+                                                        <td>#{item.book.title}</td>
+                                                        <td class="text-center">#{item.price}</td>
+                                                        <td class="text-center">#{invoiceBB.formatter.format(item.pst.doubleValue() * item.price)}</td>
+                                                        <td class="text-center">#{invoiceBB.formatter.format(item.hst.doubleValue() * item.price)}</td>
+                                                        <td class="text-center">#{invoiceBB.formatter.format(item.gst.doubleValue() * item.price)}</td>
+                                                        <td class="text-right">#{invoiceBB.formatter.format(((item.pst.doubleValue() + item.hst.doubleValue() + item.gst.doubleValue()) * item.price) + item.price)}</td>
+                                                    </tr>
+                                                </ui:repeat>
+                                                <tr>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line text-center"><strong>#{bundle.saleBeforeTaxTotal}</strong></td>
+                                                    <td class="thick-line text-right">#{invoiceBB.sale.grossValue}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line text-center"><strong>#{bundle.saleTotal}</strong></td>
+                                                    <td class="thick-line text-right">#{invoiceBB.sale.netValue}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
                 <hr/>
             </ui:define>

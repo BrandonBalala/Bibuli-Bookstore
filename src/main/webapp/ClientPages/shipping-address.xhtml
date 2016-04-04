@@ -26,22 +26,24 @@
                 <div class="row">
                     <div class="small-12 medium-12 large-6 columns">
                         <div class="row small-up-1 medium-up-2 large-up-3">
-                            <ui:repeat value="#{checkoutBB.clientAddressList}" var="address">
-                                <div class="column callout radius text-center">
-                                    <p>
-                                        <b><h:outputText value="#{address.name}" /></b>
-                                        <br/><h:outputText value="#{address.firstCivicAddress}"/>
-                                        <c:if test="#{not empty address.secondCivicAddress}">
-                                            <br/><h:outputText value="#{address.secondCivicAddress}"/>
-                                        </c:if>
-                                        <br/><h:outputText value="#{address.city}, #{address.province} #{address.postalCode}"/>
-                                        <br/>Canada
-                                        <h:form>
-                                            <h:commandLink class="button expanded hollow" value="Ship to this address" action="#{checkoutBB.proceedToPayment(address)}"/>
-                                        </h:form>
-                                    </p>
-                                </div>
-                            </ui:repeat>
+                            <h:panelGroup layout="block" id="billingListPanel">
+                                <ui:repeat value="#{checkoutBB.clientAddressList}" var="address">
+                                    <div class="column callout radius text-center">
+                                        <p>
+                                            <b><h:outputText value="#{address.name}" /></b>
+                                            <br/><h:outputText value="#{address.firstCivicAddress}"/>
+                                            <c:if test="#{not empty address.secondCivicAddress}">
+                                                <br/><h:outputText value="#{address.secondCivicAddress}"/>
+                                            </c:if>
+                                            <br/><h:outputText value="#{address.city}, #{address.province} #{address.postalCode}"/>
+                                            <br/>Canada
+                                            <h:form>
+                                                <h:commandLink class="button expanded hollow" value="Ship to this address" action="#{checkoutBB.proceedToPayment(address)}"/>
+                                            </h:form>
+                                        </p>
+                                    </div>
+                                </ui:repeat>
+                            </h:panelGroup>
                         </div>
                     </div>
                     <div class="small-12 medium-12 large-6 columns text-center">
@@ -69,39 +71,39 @@
                         <h3>Add a new address</h3>
                     </div>
                 </div>
-                <h:form>
+                <h:form id="billingForm">
                     <div class="row large-6">
                         <hr/>
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>Location Name (eg. My Home, Cousin's Treehouse) 
-                                    <h:inputText value="#{checkoutBB.choiceAddress.name}"/>
+                                    <h:inputText value="#{checkoutBB.newAddress.name}"/>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>Address Line 1 
-                                    <h:inputText value="#{checkoutBB.choiceAddress.firstCivicAddress}"/>
+                                    <h:inputText value="#{checkoutBB.newAddress.firstCivicAddress}"/>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>Address Line 2 
-                                    <h:inputText value="#{checkoutBB.choiceAddress.secondCivicAddress}"/>
+                                    <h:inputText value="#{checkoutBB.newAddress.secondCivicAddress}"/>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-6 columns">
                                 <label>City
-                                    <h:inputText value="#{checkoutBB.choiceAddress.city}"/>
+                                    <h:inputText value="#{checkoutBB.newAddress.city}"/>
                                 </label>
                             </div>
                             <div class="large-6 columns">
                                 <label>Province
-                                    <h:selectOneMenu value="#{checkoutBB.choiceAddress.province}" >
+                                    <h:selectOneMenu value="#{checkoutBB.newAddress.province}" >
                                         <f:selectItems value="#{checkoutBB.provinceList}" var="theProvince" 
                                                        itemLabel="#{theProvince.id}" itemValue="#{theProvince.id}" />
                                     </h:selectOneMenu>
@@ -111,13 +113,13 @@
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>Postal Code 
-                                    <h:inputText value="#{checkoutBB.choiceAddress.postalCode}"/>
+                                    <h:inputText value="#{checkoutBB.newAddress.postalCode}"/>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <h:commandLink class="button expanded hollow" value="Ship to this address" action="#{checkoutBB.createNewBillingAddress()}"/>
+                                <p:commandButton update="billingListPanel billingForm" class="button expanded hollow" value="Create" action="#{checkoutBB.createNewBillingAddress()}"/>
                             </div>
                         </div>
                     </div>

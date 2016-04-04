@@ -34,6 +34,7 @@ import javax.inject.Named;
 public class CheckoutBackingBean implements Serializable {
 
     private BillingAddress choiceAddress;
+    private BillingAddress newAddress;
 
     private String cardNumber;
     private String nameOnCard;
@@ -68,12 +69,23 @@ public class CheckoutBackingBean implements Serializable {
     @Inject
     private ClientUtil clientUtil;
 
+    @Inject
+    private InvoiceBackingBean invoiceBB;
+
     public BillingAddress getChoiceAddress() {
         return choiceAddress;
     }
 
     public void setChoiceAddress(BillingAddress choiceAddress) {
         this.choiceAddress = choiceAddress;
+    }
+
+    public BillingAddress getNewAddress() {
+        return newAddress;
+    }
+
+    public void setNewAddress(BillingAddress newAddress) {
+        this.newAddress = newAddress;
     }
 
     public List<BillingAddress> getClientAddressList() {
@@ -161,11 +173,13 @@ public class CheckoutBackingBean implements Serializable {
         return provinceController.findProvinceEntities();
     }
 
-    public String createNewBillingAddress() throws Exception {
-        choiceAddress.setClient(clientController.findClientById(clientUtil.getUserId()));
-        choiceAddress.setId(clientUtil.getUserId());
-        billingController.create(choiceAddress);
-        return "payment";
+    public void createNewBillingAddress() throws Exception {
+        newAddress.setClient(clientController.findClientById(clientUtil.getUserId()));
+        newAddress.setId(clientUtil.getUserId());
+        billingController.create(newAddress);
+        clearAddressInfo();
+
+        //return "payment";
     }
 
     public String displayCheckoutPage() {
@@ -275,7 +289,12 @@ public class CheckoutBackingBean implements Serializable {
         clearCreditCardInfo();
         clearCart();
 
-        return null;
+        return displayInvoice(salesController.findSales(sale.getId()));
+    }
+
+    private String displayInvoice(Sales sale) {
+        invoiceBB.setSale(sale);
+        return "invoice";
     }
 
     private void clearCreditCardInfo() {
@@ -284,6 +303,10 @@ public class CheckoutBackingBean implements Serializable {
         expiryMonth = "";
         expiryYear = "";
         securityCode = "";
+    }
+
+    private void clearAddressInfo() {
+        newAddress = new BillingAddress();
     }
 
     private void clearCart() {
@@ -312,5 +335,6 @@ public class CheckoutBackingBean implements Serializable {
     @PostConstruct
     public void init() {
         choiceAddress = new BillingAddress();
+        newAddress = new BillingAddress();
     }
 }

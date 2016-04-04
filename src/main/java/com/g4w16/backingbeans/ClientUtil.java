@@ -23,6 +23,13 @@ public class ClientUtil {
     }
 
     public boolean isAuthenticated() {
-        return (boolean) session.getAttribute("authenticated");
+        boolean authentic = false;
+        try {
+            authentic = (boolean) session.getAttribute("authenticated");
+        } catch (Exception e) {
+            return false;
+        }
+
+        return authentic;
     }
 }
