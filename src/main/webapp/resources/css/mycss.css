@@ -431,7 +431,7 @@ body{
     top: 0px !important;
     bottom: auto !important;
     position: fixed !important;
-    z-index: 10 !important;
+    z-index: 55 !important;
 }
 
 .carouselRow:hover{
@@ -471,4 +471,43 @@ a {
 
 a:hover, a:active, a:focus {
     outline: medium none !important;
+}
+
+.sliderImages{
+    max-height: 600px !important;
+    width: 100% !important;
+    overflow: hidden;
+}
+
+.bibuliTitleOuter{
+    width:100%;
+    text-align: center;
+}
+
+.bibuliTitle{
+    font-size: 200px !important;
+    font-family: pacifico; 
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 25%;
+    z-index: 50;
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-shadow:
+        3px 3px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+@media screen and (max-width: 750px) {
+    .bibuliTitle {
+        display: none !important;
+    }
+    .orbit{
+        display: none !important;
+    }
 }
