@@ -200,298 +200,192 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
     }
 
     @Override
-    public void edit(Books books) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-        validateBook(books);
-
-        Books persistentBooks = em.find(Books.class, books.getId());
-
-        List<Contributor> contributorListOld = persistentBooks.getContributorList();
-        List<Genre> genreListOld = persistentBooks.getGenreList();
-        List<BookIdentifiers> bookIdentifiersListOld = persistentBooks.getBookIdentifiersList();
-        //List<SalesDetails> salesDetailsListOld = persistentBooks.getSalesDetailsList();
-        //List<Reviews> reviewsListOld = persistentBooks.getReviewsList();
-        List<BookFormats> bookformatsListOld = persistentBooks.getBookFormatsList();
-
-        List<Contributor> contributorListNew = books.getContributorList();
-        List<Genre> genreListNew = books.getGenreList();
-        List<BookIdentifiers> bookIdentifiersListNew = books.getBookIdentifiersList();
-        //List<SalesDetails> salesDetailsListNew = books.getSalesDetailsList();      
-        //List<Reviews> reviewsListNew = books.getReviewsList();       
-        List<BookFormats> bookformatsListNew = books.getBookFormatsList();
-
-        books.setBookFormatsList(new ArrayList<BookFormats>());
-        books.setBookIdentifiersList(new ArrayList<BookIdentifiers>());
-
+    public void edit(Books books) throws newpackage.exceptions.IllegalOrphanException, newpackage.exceptions.NonexistentEntityException, newpackage.exceptions.RollbackFailureException, Exception {
+        
         try {
             utx.begin();
-//            Books persistentBooks = em.find(Books.class, books.getId());
-//
-//            List<Contributor> contributorListOld = persistentBooks.getContributorList();
-//            List<Genre> genreListOld = persistentBooks.getGenreList();
-//            List<BookIdentifiers> bookIdentifiersListOld = persistentBooks.getBookIdentifiersList();
-//            //List<SalesDetails> salesDetailsListOld = persistentBooks.getSalesDetailsList();
-//            //List<Reviews> reviewsListOld = persistentBooks.getReviewsList();
-//            List<BookFormats> bookformatsListOld = persistentBooks.getBookFormatsList();
-//
-//            List<Contributor> contributorListNew = books.getContributorList();
-//            List<Genre> genreListNew = books.getGenreList();
-//            List<BookIdentifiers> bookIdentifiersListNew = books.getBookIdentifiersList();
-//            //List<SalesDetails> salesDetailsListNew = books.getSalesDetailsList();      
-//            //List<Reviews> reviewsListNew = books.getReviewsList();       
-//            List<BookFormats> bookformatsListNew = books.getBookFormatsList();
-//
-//            List<String> illegalOrphanMessages = null;
-
-//            
-//            for (BookIdentifiers bookIdentifiersListOldBookIdentifiers : bookIdentifiersListOld) {
-//                if (!bookIdentifiersListNew.contains(bookIdentifiersListOldBookIdentifiers)) {
-//                    if (illegalOrphanMessages == null) {
-//                        illegalOrphanMessages = new ArrayList<String>();
-//                    }
-//                    illegalOrphanMessages.add("You must retain BookIdentifiers " + bookIdentifiersListOldBookIdentifiers + " since its books field is not nullable.");
-//                }
-//            }
-//            for (SalesDetails salesDetailsListOldSalesDetails : salesDetailsListOld) {
-//                if (!salesDetailsListNew.contains(salesDetailsListOldSalesDetails)) {
-//                    if (illegalOrphanMessages == null) {
-//                        illegalOrphanMessages = new ArrayList<String>();
-//                    }
-//                    illegalOrphanMessages.add("You must retain SalesDetails " + salesDetailsListOldSalesDetails + " since its book field is not nullable.");
-//                }
-//            }
-//            for (Reviews reviewsListOldReviews : reviewsListOld) {
-//                if (!reviewsListNew.contains(reviewsListOldReviews)) {
-//                    if (illegalOrphanMessages == null) {
-//                        illegalOrphanMessages = new ArrayList<String>();
-//                    }
-//                    illegalOrphanMessages.add("You must retain Reviews " + reviewsListOldReviews + " since its books field is not nullable.");
-//                }
-//            }
-//            for (BookFormats bookformatsListOldBookformats : bookformatsListOld) {
-//                if (!bookformatsListNew.contains(bookformatsListOldBookformats)) {
-//                    if (illegalOrphanMessages == null) {
-//                        illegalOrphanMessages = new ArrayList<String>();
-//                    }
-//                    illegalOrphanMessages.add("You must retain Bookformats " + bookformatsListOldBookformats + " since its books field is not nullable.");
-//                }
-//
-//            }
+            Books persistentBooks = em.find(Books.class, books.getId());
+            System.out.println("+++++++++++++++++++"+persistentBooks.toString());
+            List<Contributor> contributorListOld = persistentBooks.getContributorList();
+            List<Contributor> contributorListNew = books.getContributorList();
+            List<Genre> genreListOld = persistentBooks.getGenreList();
+            List<Genre> genreListNew = books.getGenreList();
+            List<BookIdentifiers> bookIdentifiersListOld = persistentBooks.getBookIdentifiersList();
+            List<BookIdentifiers> bookIdentifiersListNew = books.getBookIdentifiersList();
+            List<SalesDetails> salesDetailsListOld = persistentBooks.getSalesDetailsList();
+            List<SalesDetails> salesDetailsListNew = books.getSalesDetailsList();
+            List<Reviews> reviewsListOld = persistentBooks.getReviewsList();
+            List<Reviews> reviewsListNew = books.getReviewsList();
+            List<BookFormats> bookFormatsListOld = persistentBooks.getBookFormatsList();
+            List<BookFormats> bookFormatsListNew = books.getBookFormatsList();
+            List<String> illegalOrphanMessages = null;
+            for (BookIdentifiers bookIdentifiersListOldBookIdentifiers : bookIdentifiersListOld) {
+                if (!bookIdentifiersListNew.contains(bookIdentifiersListOldBookIdentifiers)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain BookIdentifiers " + bookIdentifiersListOldBookIdentifiers + " since its books field is not nullable.");
+                }
+            }
+            System.out.println("###########################BookIdentifiers");
+            for (SalesDetails salesDetailsListOldSalesDetails : salesDetailsListOld) {
+                if (!salesDetailsListNew.contains(salesDetailsListOldSalesDetails)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain SalesDetails " + salesDetailsListOldSalesDetails + " since its book field is not nullable.");
+                }
+            }
+            System.out.println("###########################SalesDetails");
+            for (Reviews reviewsListOldReviews : reviewsListOld) {
+                if (!reviewsListNew.contains(reviewsListOldReviews)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Reviews " + reviewsListOldReviews + " since its books field is not nullable.");
+                }
+            }
+            System.out.println("###########################Reviews");
+            for (BookFormats bookFormatsListOldBookFormats : bookFormatsListOld) {
+                if (!bookFormatsListNew.contains(bookFormatsListOldBookFormats)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain BookFormats " + bookFormatsListOldBookFormats + " since its books field is not nullable.");
+                }
+            }
+            System.out.println("###########################BookFormats");
+            if (illegalOrphanMessages != null) {
+                throw new newpackage.exceptions.IllegalOrphanException(illegalOrphanMessages);
+            }
+            List<Contributor> attachedContributorListNew = new ArrayList<Contributor>();
+            for (Contributor contributorListNewContributorToAttach : contributorListNew) {
+                contributorListNewContributorToAttach = em.getReference(contributorListNewContributorToAttach.getClass(), contributorListNewContributorToAttach.getId());
+                attachedContributorListNew.add(contributorListNewContributorToAttach);
+            }
+            contributorListNew = attachedContributorListNew;
+            books.setContributorList(contributorListNew);
+            List<Genre> attachedGenreListNew = new ArrayList<Genre>();
+            for (Genre genreListNewGenreToAttach : genreListNew) {
+                genreListNewGenreToAttach = em.getReference(genreListNewGenreToAttach.getClass(), genreListNewGenreToAttach.getType());
+                attachedGenreListNew.add(genreListNewGenreToAttach);
+            }
+            genreListNew = attachedGenreListNew;
+            books.setGenreList(genreListNew);
+            List<BookIdentifiers> attachedBookIdentifiersListNew = new ArrayList<BookIdentifiers>();
+            for (BookIdentifiers bookIdentifiersListNewBookIdentifiersToAttach : bookIdentifiersListNew) {
+                bookIdentifiersListNewBookIdentifiersToAttach = em.getReference(bookIdentifiersListNewBookIdentifiersToAttach.getClass(), bookIdentifiersListNewBookIdentifiersToAttach.getBookIdentifiersPK());
+                attachedBookIdentifiersListNew.add(bookIdentifiersListNewBookIdentifiersToAttach);
+            }
+            bookIdentifiersListNew = attachedBookIdentifiersListNew;
+            books.setBookIdentifiersList(bookIdentifiersListNew);
+            List<SalesDetails> attachedSalesDetailsListNew = new ArrayList<SalesDetails>();
+            for (SalesDetails salesDetailsListNewSalesDetailsToAttach : salesDetailsListNew) {
+                salesDetailsListNewSalesDetailsToAttach = em.getReference(salesDetailsListNewSalesDetailsToAttach.getClass(), salesDetailsListNewSalesDetailsToAttach.getId());
+                attachedSalesDetailsListNew.add(salesDetailsListNewSalesDetailsToAttach);
+            }
+            salesDetailsListNew = attachedSalesDetailsListNew;
+            books.setSalesDetailsList(salesDetailsListNew);
+            List<Reviews> attachedReviewsListNew = new ArrayList<Reviews>();
+            for (Reviews reviewsListNewReviewsToAttach : reviewsListNew) {
+                reviewsListNewReviewsToAttach = em.getReference(reviewsListNewReviewsToAttach.getClass(), reviewsListNewReviewsToAttach.getReviewsPK());
+                attachedReviewsListNew.add(reviewsListNewReviewsToAttach);
+            }
+            reviewsListNew = attachedReviewsListNew;
+            books.setReviewsList(reviewsListNew);
+            List<BookFormats> attachedBookFormatsListNew = new ArrayList<BookFormats>();
+            for (BookFormats bookFormatsListNewBookFormatsToAttach : bookFormatsListNew) {
+                bookFormatsListNewBookFormatsToAttach = em.getReference(bookFormatsListNewBookFormatsToAttach.getClass(), bookFormatsListNewBookFormatsToAttach.getBookFormatsPK());
+                attachedBookFormatsListNew.add(bookFormatsListNewBookFormatsToAttach);
+            }
+            bookFormatsListNew = attachedBookFormatsListNew;
+            books.setBookFormatsList(bookFormatsListNew);
+            books = em.merge(books);
             for (Contributor contributorListOldContributor : contributorListOld) {
                 if (!contributorListNew.contains(contributorListOldContributor)) {
                     contributorListOldContributor.getBooksList().remove(books);
                     contributorListOldContributor = em.merge(contributorListOldContributor);
                 }
             }
-
+            for (Contributor contributorListNewContributor : contributorListNew) {
+                if (!contributorListOld.contains(contributorListNewContributor)) {
+                    contributorListNewContributor.getBooksList().add(books);
+                    contributorListNewContributor = em.merge(contributorListNewContributor);
+                }
+            }
             for (Genre genreListOldGenre : genreListOld) {
                 if (!genreListNew.contains(genreListOldGenre)) {
                     genreListOldGenre.getBooksList().remove(books);
                     genreListOldGenre = em.merge(genreListOldGenre);
                 }
             }
-//            
-//            ////////////////////////////////
-//            
-            for (Contributor contributorListNewContributor : contributorListNew) {
-                //New contributor
-                if (contributorListOld.contains(contributorListNewContributor)) {
-//                    int contributorID = contributorController.findContributorIdByNameAndType(contributorListNewContributor.getName(), contributorListNewContributor.getContribution().getType());
-//
-//                    if (contributorID == -1) {
-//                        contributorController.create(contributorListNewContributor);
-//                    }
-//
-//                    Contributor contributorRef = em.getReference(Contributor.class, contributorListNewContributor.getId());
-//                    contributorRef.getBooksList().add(books);
-//                    contributorController.edit(contributorRef);
-//                    contributorListNewContributor = contributorRef;
-//                } else {
-                    contributorListNewContributor.getBooksList().add(books);
-                    contributorListNewContributor = em.merge(contributorListNewContributor);
+            for (Genre genreListNewGenre : genreListNew) {
+                if (!genreListOld.contains(genreListNewGenre)) {
+                    genreListNewGenre.getBooksList().add(books);
+                    genreListNewGenre = em.merge(genreListNewGenre);
                 }
             }
-
             for (BookIdentifiers bookIdentifiersListNewBookIdentifiers : bookIdentifiersListNew) {
-                if (bookIdentifiersListOld.contains(bookIdentifiersListNewBookIdentifiers)) {
+                if (!bookIdentifiersListOld.contains(bookIdentifiersListNewBookIdentifiers)) {
+                    Books oldBooksOfBookIdentifiersListNewBookIdentifiers = bookIdentifiersListNewBookIdentifiers.getBooks();
                     bookIdentifiersListNewBookIdentifiers.setBooks(books);
                     bookIdentifiersListNewBookIdentifiers = em.merge(bookIdentifiersListNewBookIdentifiers);
+                    if (oldBooksOfBookIdentifiersListNewBookIdentifiers != null && !oldBooksOfBookIdentifiersListNewBookIdentifiers.equals(books)) {
+                        oldBooksOfBookIdentifiersListNewBookIdentifiers.getBookIdentifiersList().remove(bookIdentifiersListNewBookIdentifiers);
+                        oldBooksOfBookIdentifiersListNewBookIdentifiers = em.merge(oldBooksOfBookIdentifiersListNewBookIdentifiers);
+                    }
                 }
             }
-
-            for (BookFormats bookformatsListNewBookformats : bookformatsListNew) {
-                if (bookformatsListOld.contains(bookformatsListNewBookformats)) {
-                    bookformatsListNewBookformats.setBooks(books);
-                    bookformatsListNewBookformats = em.merge(bookformatsListNewBookformats);
+            for (SalesDetails salesDetailsListNewSalesDetails : salesDetailsListNew) {
+                if (!salesDetailsListOld.contains(salesDetailsListNewSalesDetails)) {
+                    Books oldBookOfSalesDetailsListNewSalesDetails = salesDetailsListNewSalesDetails.getBook();
+                    salesDetailsListNewSalesDetails.setBook(books);
+                    salesDetailsListNewSalesDetails = em.merge(salesDetailsListNewSalesDetails);
+                    if (oldBookOfSalesDetailsListNewSalesDetails != null && !oldBookOfSalesDetailsListNewSalesDetails.equals(books)) {
+                        oldBookOfSalesDetailsListNewSalesDetails.getSalesDetailsList().remove(salesDetailsListNewSalesDetails);
+                        oldBookOfSalesDetailsListNewSalesDetails = em.merge(oldBookOfSalesDetailsListNewSalesDetails);
+                    }
                 }
             }
-
-//            for (Genre genreListNewGenre : genreListNew) {
-//                System.out.println("Type: " + genreListNewGenre.getType());
-//                boolean test = !genreListOld.contains(genreListNewGenre);
-//                System.out.println("Is new not in old: " + test);
-//                if (!genreListOld.contains(genreListNewGenre)) {
-//                    if (!genreController.genreExists(genreListNewGenre.getType())) {
-//                        genreController.create(genreListNewGenre);
-//                    }
-//
-//                    Genre genreRef = em.getReference(Genre.class, genreListNewGenre.getType());
-//
-//                    genreRef.getBooksList().add(books);
-//                    genreController.edit(genreRef);
-//                    genreListNewGenre = genreRef;
-//                } else {
-//                    genreListNewGenre.getBooksList().remove(books);
-//                    genreListNewGenre = em.merge(genreListNewGenre);
-//                }
-//            }
-//            for (Contributor contributorListNewContributor : contributorListNew) {
-//                if (!contributorListOld.contains(contributorListNewContributor)) {
-//                    contributorListNewContributor.getBooksList().add(books);
-//                    contributorListNewContributor = em.merge(contributorListNewContributor);
-//                }
-//            }
-//            for (Genre genreListOldGenre : genreListOld) {
-//                if (!genreListNew.contains(genreListOldGenre)) {
-//                    genreListOldGenre.getBooksList().remove(books);
-//                    genreListOldGenre = em.merge(genreListOldGenre);
-//                }
-//            }
-//            for (Genre genreListNewGenre : genreListNew) {
-//                if (!genreListOld.contains(genreListNewGenre)) {
-//                    genreListNewGenre.getBooksList().add(books);
-//                    genreListNewGenre = em.merge(genreListNewGenre);
-//                }
-//            }
-//            for (BookIdentifiers bookIdentifiersListNewBookIdentifiers : bookIdentifiersListNew) {
-//                if (!bookIdentifiersListOld.contains(bookIdentifiersListNewBookIdentifiers)) {
-//                    Books oldBooksOfBookIdentifiersListNewBookIdentifiers = bookIdentifiersListNewBookIdentifiers.getBooks();
-//                    bookIdentifiersListNewBookIdentifiers.setBooks(books);
-//                    bookIdentifiersListNewBookIdentifiers = em.merge(bookIdentifiersListNewBookIdentifiers);
-//                    if (oldBooksOfBookIdentifiersListNewBookIdentifiers != null && !oldBooksOfBookIdentifiersListNewBookIdentifiers.equals(books)) {
-//                        oldBooksOfBookIdentifiersListNewBookIdentifiers.getBookIdentifiersList().remove(bookIdentifiersListNewBookIdentifiers);
-//                        oldBooksOfBookIdentifiersListNewBookIdentifiers = em.merge(oldBooksOfBookIdentifiersListNewBookIdentifiers);
-//                    }
-//                }
-//            }
-//            for (SalesDetails salesDetailsListNewSalesDetails : salesDetailsListNew) {
-//                if (!salesDetailsListOld.contains(salesDetailsListNewSalesDetails)) {
-//                    Books oldBookOfSalesDetailsListNewSalesDetails = salesDetailsListNewSalesDetails.getBook();
-//                    salesDetailsListNewSalesDetails.setBook(books);
-//                    salesDetailsListNewSalesDetails = em.merge(salesDetailsListNewSalesDetails);
-//                    if (oldBookOfSalesDetailsListNewSalesDetails != null && !oldBookOfSalesDetailsListNewSalesDetails.equals(books)) {
-//                        oldBookOfSalesDetailsListNewSalesDetails.getSalesDetailsList().remove(salesDetailsListNewSalesDetails);
-//                        oldBookOfSalesDetailsListNewSalesDetails = em.merge(oldBookOfSalesDetailsListNewSalesDetails);
-//                    }
-//                }
-//            }
-//            for (Reviews reviewsListNewReviews : reviewsListNew) {
-//                if (!reviewsListOld.contains(reviewsListNewReviews)) {
-//                    Books oldBooksOfReviewsListNewReviews = reviewsListNewReviews.getBooks();
-//                    reviewsListNewReviews.setBooks(books);
-//                    reviewsListNewReviews = em.merge(reviewsListNewReviews);
-//                    if (oldBooksOfReviewsListNewReviews != null && !oldBooksOfReviewsListNewReviews.equals(books)) {
-//                        oldBooksOfReviewsListNewReviews.getReviewsList().remove(reviewsListNewReviews);
-//                        oldBooksOfReviewsListNewReviews = em.merge(oldBooksOfReviewsListNewReviews);
-//                    }
-//                }
-//            }
-//            for (BookFormats bookformatsListNewBookformats : bookformatsListNew) {
-//                if (!bookformatsListOld.contains(bookformatsListNewBookformats)) {
-//                    Books oldBooksOfBookformatsListNewBookformats = bookformatsListNewBookformats.getBooks();
-//                    bookformatsListNewBookformats.setBooks(books);
-//                    bookformatsListNewBookformats = em.merge(bookformatsListNewBookformats);
-//                    if (oldBooksOfBookformatsListNewBookformats != null && !oldBooksOfBookformatsListNewBookformats.equals(books)) {
-//                        oldBooksOfBookformatsListNewBookformats.getBookFormatsList().remove(bookformatsListNewBookformats);
-//                        oldBooksOfBookformatsListNewBookformats = em.merge(oldBooksOfBookformatsListNewBookformats);
-//                    }
-//                }
-//            }
-            System.out.println("IN EDIT: " + books.getTitle());
-            //em.merge(books);
+            for (Reviews reviewsListNewReviews : reviewsListNew) {
+                if (!reviewsListOld.contains(reviewsListNewReviews)) {
+                    Books oldBooksOfReviewsListNewReviews = reviewsListNewReviews.getBooks();
+                    reviewsListNewReviews.setBooks(books);
+                    reviewsListNewReviews = em.merge(reviewsListNewReviews);
+                    if (oldBooksOfReviewsListNewReviews != null && !oldBooksOfReviewsListNewReviews.equals(books)) {
+                        oldBooksOfReviewsListNewReviews.getReviewsList().remove(reviewsListNewReviews);
+                        oldBooksOfReviewsListNewReviews = em.merge(oldBooksOfReviewsListNewReviews);
+                    }
+                }
+            }
+            for (BookFormats bookFormatsListNewBookFormats : bookFormatsListNew) {
+                if (!bookFormatsListOld.contains(bookFormatsListNewBookFormats)) {
+                    Books oldBooksOfBookFormatsListNewBookFormats = bookFormatsListNewBookFormats.getBooks();
+                    bookFormatsListNewBookFormats.setBooks(books);
+                    bookFormatsListNewBookFormats = em.merge(bookFormatsListNewBookFormats);
+                    if (oldBooksOfBookFormatsListNewBookFormats != null && !oldBooksOfBookFormatsListNewBookFormats.equals(books)) {
+                        oldBooksOfBookFormatsListNewBookFormats.getBookFormatsList().remove(bookFormatsListNewBookFormats);
+                        oldBooksOfBookFormatsListNewBookFormats = em.merge(oldBooksOfBookFormatsListNewBookFormats);
+                    }
+                }
+            }
             utx.commit();
         } catch (Exception ex) {
             try {
                 utx.rollback();
             } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+                throw new newpackage.exceptions.RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = books.getId();
                 if (findBookByID(id) == null) {
-                    throw new NonexistentEntityException("The books with id " + id + " no longer exists.");
+                    throw new newpackage.exceptions.NonexistentEntityException("The books with id " + id + " no longer exists.");
                 }
             }
             throw ex;
-        }
-
-        try {
-            for (BookIdentifiers bookIdentifiersListNewBookIdentifiers : bookIdentifiersListNew) {
-                if (!bookIdentifiersListOld.contains(bookIdentifiersListNewBookIdentifiers)) {
-                    BookIdentifiersPK pk = bookIdentifiersListNewBookIdentifiers.getBookIdentifiersPK();
-                    pk.setBook(books.getId());
-                    bookIdentifiersListNewBookIdentifiers.setBookIdentifiersPK(pk);
-
-                    if (!bookIdentifierController.bookIdentifierExists(pk)) {
-                        bookIdentifierController.create(bookIdentifiersListNewBookIdentifiers);
-                    }
-
-                    BookIdentifiers bookIdentifierRef = em.getReference(BookIdentifiers.class, pk);
-
-                    bookIdentifierRef.setBooks(books);
-                    //String type = bookIdentifierRef.getBookIdentifiersPK().getType();
-                    IdentifierType identifierTypeRef = em.getReference(IdentifierType.class, bookIdentifierRef.getBookIdentifiersPK().getType());
-                    bookIdentifierRef.setIdentifierType(identifierTypeRef);
-
-                    bookIdentifierController.edit(bookIdentifierRef);
-                    bookIdentifiersListNewBookIdentifiers = bookIdentifierRef;
-                }
-            }
-
-            for (BookFormats bookformatsListNewBookformats : bookformatsListNew) {
-                if (!bookformatsListOld.contains(bookformatsListNewBookformats)) {
-                    BookFormatsPK pk = bookformatsListNewBookformats.getBookFormatsPK();
-                    pk.setBook(books.getId());
-                    bookformatsListNewBookformats.setBookFormatsPK(pk);
-                    if (!bookFormatController.bookFormatExists(pk)) {
-                        bookFormatController.create(bookformatsListNewBookformats);
-                    }
-
-                    BookFormats bookFormatRef = em.getReference(BookFormats.class, pk);
-                    bookFormatRef.setBooks(books);
-                    //String format = bookFormatRef.getBookFormatsPK().getFormat();
-                    Format formatRef = em.getReference(Format.class, bookFormatRef.getBookFormatsPK().getFormat());
-                    bookFormatRef.setFormat1(formatRef);
-
-                    bookFormatController.edit(bookFormatRef);
-                    bookformatsListNewBookformats = bookFormatRef;
-                }
-            }
-
-            for (BookIdentifiers bookIdentifierOldBookIdentifier : bookIdentifiersListOld) {
-                if (!bookIdentifiersListNew.contains(bookIdentifierOldBookIdentifier)) {
-                    bookIdentifierController.destroy(bookIdentifierOldBookIdentifier.getBookIdentifiersPK());
-                }
-            }
-
-            for (BookFormats bookformatsListOldBookFormat : bookformatsListOld) {
-                if (!bookformatsListNew.contains(bookformatsListOldBookFormat)) {
-                    System.out.println("BOOK FORMAT TO DELETE: " + bookformatsListOldBookFormat.getBookFormatsPK().getFormat());
-                    bookFormatController.destroy(bookformatsListOldBookFormat.getBookFormatsPK());
-                }
-            }
-
-            System.out.println("Book format list new size: " + bookformatsListNew.size());
-            books.setBookFormatsList(bookformatsListNew);
-            books.setBookIdentifiersList(bookIdentifiersListNew);
-
-            utx.begin();
-            em.merge(books);
-            utx.commit();
-        } catch (Exception ex) {
-            utx.rollback();
-            ex.printStackTrace();
-            throw ex;
+        } finally {
+            
         }
     }
 

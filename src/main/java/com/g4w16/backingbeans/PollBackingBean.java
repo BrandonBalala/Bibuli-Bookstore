@@ -26,6 +26,7 @@ public class PollBackingBean {
     private Poll poll;
     
     private int choice;
+    private boolean resultsActive;
     
     @Inject
     private PollJpaController pollController;
@@ -53,9 +54,19 @@ public class PollBackingBean {
         this.choice = choice;
     }
     
+    public boolean isResultsActive(){
+        return resultsActive;
+    }
+    
+    public void setResultsActive(boolean isActive){
+        this.resultsActive = isActive;
+    }
+    
+    
     public void submitResult(){
         try {
             pollController.updatePoll(poll.getId(), choice);
+            resultsActive = true;
         } catch (Exception ex) {
             Logger.getLogger(PollBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,6 +75,7 @@ public class PollBackingBean {
     @PostConstruct
     public void init(){
         this.poll = getPoll();
+        resultsActive = false;
     }
     
 }

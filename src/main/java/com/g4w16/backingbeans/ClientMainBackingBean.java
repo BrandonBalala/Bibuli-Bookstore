@@ -5,8 +5,10 @@
  */
 package com.g4w16.backingbeans;
 
+import com.g4w16.entities.Banner;
 import com.g4w16.entities.Books;
 import com.g4w16.entities.Genre;
+import com.g4w16.persistence.BannerJpaController;
 import com.g4w16.persistence.BooksJpaController;
 import com.g4w16.persistence.PollJpaController;
 import java.io.Serializable;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -41,10 +44,14 @@ public class ClientMainBackingBean implements Serializable {
     @Inject
     private ProductPageBackingBean productBB;
 
-    private List<Books> bestSellerBooks = new ArrayList<Books>();
-    private List<Books> recentlyAddedBooks = new ArrayList<Books>();
-    private List<Books> newestReleases = new ArrayList<Books>();
-    private List<Books> recommendedBooks = new ArrayList<Books>();
+    @Inject
+    private BannerJpaController bannerControler;
+
+    private List<Books> bestSellerBooks;
+    private List<Books> recentlyAddedBooks;
+    private List<Books> newestReleases;
+    private List<Books> recommendedBooks;
+    private List<Banner> bannerList;
 
     private static final int NUM_BOOKS = 12;
 
@@ -130,7 +137,7 @@ public class ClientMainBackingBean implements Serializable {
         //GET x AMOUNT OF BOOKS
         Collections.shuffle(container);
         int numBooks = NUM_BOOKS;
-        
+
         //To avoid index out of bounds exception
         if (numBooks > container.size()) {
             numBooks = container.size();
@@ -143,10 +150,25 @@ public class ClientMainBackingBean implements Serializable {
     public List<Books> getRecommendedBooks() {
         return recommendedBooks;
     }
+    
+    public List<Banner> getBannerList(){
+        return bannerList;
+    }
 
     public String displayProductPage(Books book) {
         productBB.setBook(book);
 
         return "product-page";
+    }
+
+    @PostConstruct
+    public void init() {
+        bestSellerBooks = new ArrayList<Books>();
+        recentlyAddedBooks = new ArrayList<Books>();
+        newestReleases = new ArrayList<Books>();
+        recommendedBooks = new ArrayList<Books>();
+        bannerList = new ArrayList<Banner>();
+        
+        bannerList = bannerControler.findSelectedBanners();
     }
 }

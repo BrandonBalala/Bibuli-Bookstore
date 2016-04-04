@@ -191,7 +191,9 @@
                         </div>
                         <div class="row callout small text-center">
                             <div class="large-12 columns">
-                                <img class="adImages" src="../resources/images/johniewalker_ad.JPG" alt="ad"/>
+                                <a href="#{ClientMainBB.bannerList.get(0).uri}">
+                                    <img class="adImages" src="../resources/images/johniewalker_ad.JPG" alt="ad"/>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -203,7 +205,9 @@
                         </div>
                         <div class="row callout small text-center">
                             <div class="large-12 columns">
-                                <img class="adImages" src="../resources/images/osheaga_ad.jpg" alt="ad"/>
+                                <a href="#{ClientMainBB.bannerList.get(1).uri}">
+                                    <img class="adImages" src="../resources/images/osheaga_ad.jpg" alt="ad"/>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -211,75 +215,83 @@
 
                 <br/><br/>
 
-                <div class="row large-9">
-                    <div class="large-12 columns">
-                        <div class="row text-center">
+                <h:panelGroup layout="block" id="pollPanel">
+                    <c:if test="#{!pollBB.resultsActive}">
+                        <div class="row large-9">
                             <div class="large-12 columns">
-                                <h4 class="carouselTitle">- Poll -</h4>
+                                <div class="row text-center">
+                                    <div class="large-12 columns">
+                                        <h4 class="carouselTitle">- Poll -</h4>
+                                    </div>
+                                </div>
+                                <div class="row callout text-center">
+                                    <div class="large-12 columns">
+                                        <h:form id="pollForm">
+                                            <h5><p:outputLabel for="pollChoices" value="#{pollBB.poll.question}" /></h5>
+                                            <p:selectOneRadio id="pollChoices" value="#{pollBB.choice}">
+                                                <f:selectItem  itemLabel="#{pollBB.poll.firstAnswer}" itemValue="1" rendered="#{not empty pollBB.poll.firstAnswer}"/>
+                                                <f:selectItem itemLabel="#{pollBB.poll.secondAnswer}" itemValue="2" rendered="#{not empty pollBB.poll.secondAnswer}"/>
+                                                <f:selectItem itemLabel="#{pollBB.poll.thirdAnswer}" itemValue="3" rendered="#{not empty pollBB.poll.thirdAnswer}"/>
+                                                <f:selectItem itemLabel="#{pollBB.poll.fourthAnswer}" itemValue="4" rendered="#{not empty pollBB.poll.fourthAnswer}"/>
+                                            </p:selectOneRadio>
+                                            <p:commandButton class="button radius hollow" value="Submit" update="pollPanel" action="#{pollBB.submitResult()}"/>
+                                        </h:form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row callout text-center">
-                            <div class="large-12 columns">
-                                <h:form id="pollForm">
-                                    <h5><p:outputLabel for="pollChoices" value="#{pollBB.poll.question}" /></h5>
-                                    <p:selectOneRadio id="pollChoices" value="#{pollBB.choice}">
-                                        <f:selectItem  itemLabel="#{pollBB.poll.firstAnswer}" itemValue="1" rendered="#{not empty pollBB.poll.firstAnswer}"/>
-                                        <f:selectItem itemLabel="#{pollBB.poll.secondAnswer}" itemValue="2" rendered="#{not empty pollBB.poll.secondAnswer}"/>
-                                        <f:selectItem itemLabel="#{pollBB.poll.thirdAnswer}" itemValue="3" rendered="#{not empty pollBB.poll.thirdAnswer}"/>
-                                        <f:selectItem itemLabel="#{pollBB.poll.fourthAnswer}" itemValue="4" rendered="#{not empty pollBB.poll.fourthAnswer}"/>
-                                    </p:selectOneRadio>
-                                    <p:commandButton class="button radius hollow" value="Submit" update="pollForm" ajax="false" action="#{pollBB.submitResult()}"/>
-                                </h:form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <br/><br/>
+                        <br/><br/>
+                    </c:if>
 
-                <div class="row large-9">
-                    <div class="large-12 columns">
-                        <div class="row text-center">
+                    <c:if test="#{pollBB.resultsActive}">
+                        <div class="row large-9">
                             <div class="large-12 columns">
-                                <h4 class="carouselTitle">- Poll Results -</h4>
+                                <div class="row text-center">
+                                    <div class="large-12 columns">
+                                        <h4 class="carouselTitle">- Poll Results -</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="large-12 columns">
+                                <div class="row callout">
+                                    <div class="large-12">
+                                        <h5><h:outputText value="#{pollBB.poll.question}"/></h5>
+                                    </div>
+                                    <div class="large-4 medium-4 small-12 columns">
+                                        <ul data-pie-id="pie">
+                                            <c:if test="#{not empty pollBB.poll.firstAnswer}">
+                                                <li data-value="#{pollBB.poll.firstCount}">
+                                                    <h:outputText value="#{pollBB.poll.firstAnswer} (#{pollBB.poll.firstCount})"/>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="#{not empty pollBB.poll.secondAnswer}">
+                                                <li data-value="#{pollBB.poll.secondCount}">
+                                                    <h:outputText value="#{pollBB.poll.secondAnswer} (#{pollBB.poll.secondCount})"/>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="#{not empty pollBB.poll.thirdAnswer}">
+                                                <li data-value="#{pollBB.poll.thirdCount}">
+                                                    <h:outputText value="#{pollBB.poll.thirdAnswer} (#{pollBB.poll.thirdCount})"/>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="#{not empty pollBB.poll.fourthAnswer}">
+                                                <li data-value="#{pollBB.poll.fourthCount}">
+                                                    <h:outputText value="#{pollBB.poll.fourthAnswer} (#{pollBB.poll.fourthCount})"/>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </div>
+                                    <div class="large-8 medium-8 small-12 columns">
+                                        <div id="pie"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="large-12 columns">
-                        <div class="row callout">
-                            <div class="large-12">
-                                <h5><h:outputText value="#{pollBB.poll.question}"/></h5>
-                            </div>
-                            <div class="large-4 medium-4 small-12 columns">
-                                <ul data-pie-id="pie">
-                                    <c:if test="#{not empty pollBB.poll.firstAnswer}">
-                                        <li data-value="#{pollBB.poll.firstCount}">
-                                            <h:outputText value="#{pollBB.poll.firstAnswer} (#{pollBB.poll.firstCount})"/>
-                                        </li>
-                                    </c:if>
-                                    <c:if test="#{not empty pollBB.poll.secondAnswer}">
-                                        <li data-value="#{pollBB.poll.secondCount}">
-                                            <h:outputText value="#{pollBB.poll.secondAnswer} (#{pollBB.poll.secondCount})"/>
-                                        </li>
-                                    </c:if>
-                                    <c:if test="#{not empty pollBB.poll.thirdAnswer}">
-                                        <li data-value="#{pollBB.poll.thirdCount}">
-                                            <h:outputText value="#{pollBB.poll.thirdAnswer} (#{pollBB.poll.thirdCount})"/>
-                                        </li>
-                                    </c:if>
-                                    <c:if test="#{not empty pollBB.poll.fourthAnswer}">
-                                        <li data-value="#{pollBB.poll.fourthCount}">
-                                            <h:outputText value="#{pollBB.poll.fourthAnswer} (#{pollBB.poll.fourthCount})"/>
-                                        </li>
-                                    </c:if>
-                                </ul>
-                            </div>
-                            <div class="large-8 medium-8 small-12 columns">
-                                <div id="pie"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                        <br/><br/>
+                    </c:if>
+                </h:panelGroup>
 
                 <hr/>
 

@@ -134,7 +134,7 @@ public class TaxeRatesJpaController implements Serializable {
     }
 
     public TaxeRates getTaxeRateByProvince(String province) {
-        Query q = em.createQuery("SELECT p FROM Province p WHERE p.id = :province");
+        Query q = em.createQuery("SELECT t FROM TaxeRates t WHERE t.province = :province");
         q.setParameter("province", province);
         return (TaxeRates) q.getSingleResult();
     }
