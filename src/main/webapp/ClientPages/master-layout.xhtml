@@ -23,12 +23,11 @@
             <div class="title-bar removeMarginTop divHeader" data-sticky="" data-options="marginTop:0;">
                 <div class="title-bar-left">
                     <ul class="dropdown menu inline-list" data-dropdown-menu=""> 
-                        <!--homepage.xhtml pas define / change img to graphicimg-->
                         <li class="menu-text">
                             <img id="logoHeader" src="#{resource['images:logos/logo.png']}"/> 
                         </li>
                         <li class="menu-text bibuliFont removePaddingLeft whiteFont">
-                            <a class="removePaddingLeft anchorBibuli" href="#{request.contextPath}"> Bibuli</a>
+                            <a class="removePaddingLeft anchorBibuli" href="mainPage.xhtml"> Bibuli</a>
                         </li>
                         <li>
                             <a href="#" class="whiteFont anchorFontSize"><i class="fi-eye"></i>Browse</a>
@@ -41,7 +40,7 @@
                                 </li>
                                 <li>
                                     <a href="#" class="whiteFont blackBackgroundColor">By Genre</a>
-                                    <ul class="menu blackBackgroundColor twoColumns">
+                                    <ul class="menu blackBackgroundColor">
                                         <ui:repeat value="#{masterLayoutBB.genreList}" var="theGenre">
                                             <li>
                                                 <h:form>
@@ -63,7 +62,9 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="my-books.xhtml" class="whiteFont anchorFontSize"><i class="fi-book"></i>My Books</a></li>
+                        <h:panelGroup rendered="#{session.getAttribute('authenticated')}">
+                            <li><a href="my-books.xhtml" class="whiteFont anchorFontSize"><i class="fi-book"></i>My Books</a></li>
+                        </h:panelGroup>
                     </ul>
                 </div>
                 <div class="title-bar-right">
@@ -82,9 +83,11 @@
                                 <li>
                                     <a href="#" class="whiteFont anchorFontSize"><i class="fi-torso-business"></i></a>
                                     <ul class="menu vertical whiteFont blackBackgroundColor" >
-                                        <li><a href="#" class="whiteFont blackBackgroundColor">Login</a></li>
-                                        <li><h:form rendered="#{session.getAttribute('authenticated')}"><h:commandLink  value="Logout" action="#{loginBB.logout()}"></h:commandLink></h:form></li>
-                                        <li><a href="#" class="whiteFont blackBackgroundColor">Register</a></li> 
+                                        <h:panelGroup rendered="#{!session.getAttribute('authenticated')}">
+                                            <li><h:link class="whiteFont blackBackgroundColor" value="Login" outcome="login"/></li>
+                                            <li><h:link class="whiteFont blackBackgroundColor" value="Register" outcome="register" /></li> 
+                                        </h:panelGroup>
+                                        <li><h:form rendered="#{session.getAttribute('authenticated')}"><h:commandLink  class="whiteFont blackBackgroundColor" value="Logout" action="#{loginBB.logout()}"></h:commandLink></h:form></li>
                                     </ul>
                                 </li>
                             </ul>

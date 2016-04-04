@@ -70,19 +70,19 @@ public class MasterLayoutBackingBean implements Serializable {
     public String displayAllBooks(){
         resultBB.setBookList(bookController.findAllBooks());
         
-        return "results";
+        return "results?faces-redirect=true";
     }
     
     public String displayBooksByGenre(String genre){
         resultBB.setBookList(bookController.findBooksByGenre(genre));
         
-        return "results";
+        return "results?faces-redirect=true";
     }
     
     public String displayBooksByFormat(String format){
         resultBB.setBookList(bookController.findBooksByFormat(format));
         
-        return "results";
+        return "results?faces-redirect=true";
     }
     
     

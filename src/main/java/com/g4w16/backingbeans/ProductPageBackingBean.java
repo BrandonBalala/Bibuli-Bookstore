@@ -150,7 +150,7 @@ public class ProductPageBackingBean implements Serializable {
     }
 
     public int getAverageRating() {
-        if (book.getReviewsList().isEmpty()) {
+        if (book.getApprovedReviewsList().isEmpty()) {
             return 0;
         }
 
@@ -223,11 +223,10 @@ public class ProductPageBackingBean implements Serializable {
         this.sameContributorsBookList = booksByContributors.subList(0, numBooks);
     }
 
-    public void displayProductPageRecommended(Books book) throws IOException {
+    public String displayProductPageRecommended(Books book) throws IOException {
         setBook(book);
 
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        return "product-page?faces-redirect=true";
     }
 
     public void addBookToCart() {
@@ -241,10 +240,9 @@ public class ProductPageBackingBean implements Serializable {
         }
     }
 
-    public void displayProductPageSameContrib(Books book) throws IOException {
+    public String displayProductPageSameContrib(Books book) throws IOException {
         setBook(book);
 
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        return "product-page?faces-redirect=true";
     }
 }

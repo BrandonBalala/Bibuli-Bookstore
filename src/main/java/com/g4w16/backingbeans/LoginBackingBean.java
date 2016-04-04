@@ -62,7 +62,7 @@ public class LoginBackingBean implements Serializable {
     /**
      * Action
      */
-    public void login() {
+    public String login() {
 
         // Get Session object so that the status of the individual who just logged in
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -92,15 +92,17 @@ public class LoginBackingBean implements Serializable {
 
         // Place the message in the context so that it will be displayed
         FacesContext.getCurrentInstance().addMessage(null, message);
+
+        return "mainPage?faces-redirect=true";
     }
-    
+
     public String logout() {
-     ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
-         .getSession(false)).invalidate();
-     return "/ClientPages/mainPage.xhtml";
+        ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+                .getSession(false)).invalidate();
+        
+        return "mainPage?faces-redirect=true";
     }
-    
-    
+
     //REMOVE LATER, USED FOR TESTING ONLY 
     //FASHFASFHOASIFHOIOASOIH
     @PostConstruct
@@ -108,6 +110,6 @@ public class LoginBackingBean implements Serializable {
         email = "cbutler1@a8.net";
         password = "a";
         loggedIn = true;
-        
+
     }
 }

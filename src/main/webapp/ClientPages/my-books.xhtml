@@ -19,8 +19,8 @@
                 <hr/>
 
                 <div class="row">
-                    <div class="large-12 columns text-left">
-                        <h3>Purchases</h3>
+                    <div class="large-12 columns text-center">
+                        <h3 class="bibuliFont">Purchases</h3>
                     </div>
                 </div>
 
@@ -32,7 +32,11 @@
                     <div class="tabs-content" data-tabs-content="example-tabs">
                         <div class="tabs-panel is-active" id="panel1">
                             <c:if test="#{purchasedBooksBB.purchasedBooks.size() eq 0}">
-                                <h4>No books owned, get shopping!</h4>
+                                <div class="row text-center">
+                                    <div class="large-12 columns">
+                                        <h4>No books owned, get shopping!</h4>
+                                    </div>
+                                </div>
                             </c:if>
                             <c:if test="#{purchasedBooksBB.purchasedBooks.size() ne 0}">
                                 <h4><h:outputText value="#{purchasedBooksBB.purchasedBooks.size()} books owned"/></h4>
@@ -61,33 +65,42 @@
                             </c:if>
                         </div>
                         <div class="tabs-panel" id="panel2">
-                            <h4>Purchase History</h4>
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <table class="noborder">
-                                        <thead>
-                                            <tr>
-                                                <th>Invoice #</th>
-                                                <th>Purchase Date</th>
-                                                <th>Total Spent</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <ui:repeat value="#{purchasedBooksBB.salesList}" var="theSale">
-                                                <tr>
-                                                    <td><h:outputText value="#{theSale.id}"/></td>
-                                                    <td><h:outputText value="#{purchasedBooksBB.getFormattedDate(theSale.dateEntered)}"/></td>
-                                                    <td><h:outputText value="#{theSale.grossValue}$"/></td>
-                                                    <h:form>
-                                                        <td><h:commandLink type="submit" class="button" action="#{purchasedBooksBB.displayInvoice(theSale)}" value="Complete Invoice"/></td>
-                                                    </h:form>
-                                                </tr>
-                                            </ui:repeat>
-                                        </tbody>
-                                    </table>
+                            <c:if test="#{empty purchasedBooksBB.salesList}">
+                                <div class="row text-center">
+                                    <div class="large-12 columns">
+                                        <h4>No purchase History</h4>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
+                            <c:if test="#{not empty purchasedBooksBB.salesList}">
+                                <h4>Purchase History</h4>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <table class="noborder">
+                                            <thead>
+                                                <tr>
+                                                    <th>Invoice #</th>
+                                                    <th>Purchase Date</th>
+                                                    <th>Total Spent</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ui:repeat value="#{purchasedBooksBB.salesList}" var="theSale">
+                                                    <tr>
+                                                        <td><h:outputText value="#{theSale.id}"/></td>
+                                                        <td><h:outputText value="#{purchasedBooksBB.getFormattedDate(theSale.dateEntered)}"/></td>
+                                                        <td><h:outputText value="#{theSale.grossValue}$"/></td>
+                                                        <h:form>
+                                                            <td><h:commandLink type="submit" class="button" action="#{purchasedBooksBB.displayInvoice(theSale)}" value="Complete Invoice"/></td>
+                                                        </h:form>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>

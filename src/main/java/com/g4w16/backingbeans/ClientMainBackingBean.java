@@ -110,6 +110,7 @@ public class ClientMainBackingBean implements Serializable {
         //GET x AMOUNT OF BOOKS
         Collections.shuffle(container);
         int numBooks = NUM_BOOKS;
+        
         //To avoid index out of bounds exception
         if (numBooks > container.size()) {
             numBooks = container.size();
