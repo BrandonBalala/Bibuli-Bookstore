@@ -38,18 +38,18 @@ public class Sales implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "DateEntered")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateEntered;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "GrossValue")
     private BigDecimal grossValue;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "NetValue")
     private BigDecimal netValue;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "Removed")
     private boolean removed;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sale")
@@ -62,6 +62,10 @@ public class Sales implements Serializable {
     private Client client;
 
     public Sales() {
+        this.dateEntered = new Date();
+        this.netValue = BigDecimal.ZERO;
+        this.grossValue = BigDecimal.ZERO;
+        this.removed = false;
     }
 
     public Sales(Integer id) {

@@ -46,7 +46,6 @@ public class SalesDetails implements Serializable {
     @Column(name = "GST")
     private BigDecimal gst;
     @Basic(optional = false)
-    //@NotNull
     @Column(name = "Removed")
     private boolean removed;
     @JoinColumn(name = "Sale", referencedColumnName = "ID")
