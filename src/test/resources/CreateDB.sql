@@ -1405,673 +1405,660 @@ VALUES
 ('http://www.osheaga.com/', '1'),
 ('https://www.dawsoncollege.qc.ca/', '0');
 
--- INSERT INTO `Sales` (`ID`,`DateEntered`,`Client`,`GrossValue`,`NetValue`,`Removed`) 
--- VALUES
--- ("1","2015-12-25 00:00:00","1","19.99","15.99","1");
--- 
--- INSERT INTO `SalesDetails` (`ID`,`Sale`,`Book`,`Price`,`PST`,`HST`,`GST`,`Removed`) 
--- VALUES
--- ("1","1","1","19.99","0.14","0.14","0.14","1"),
--- ("2","1","5","13.99","0.14","0.14","0.14","1"),
--- ("3","1","2","15.99","0.14","0.14","0.14","1"),
--- ("4","1","3","16.99","0.14","0.14","0.14","1"),
--- ("5","1","45","19.99","0.14","0.14","0.14","1"),
--- ("6","1","93","13.99","0.14","0.14","0.14","1"),
--- ("7","1","23","15.99","0.14","0.14","0.14","1"),
--- ("8","1","34","16.99","0.14","0.14","0.14","1");
-
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (1, "2015-12-25 00:00:00", 37, 86.47, 3.77, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (2, "2015-12-25 00:00:00", 100, 93.3, 92.78, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (3, "2015-12-25 00:00:00", 99, 59.24, 91.52, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (4, "2015-12-25 00:00:00", 25, 80.81, 98.18, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (5, "2015-12-25 00:00:00", 72, 24.97, 97.07, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (6, "2015-12-25 00:00:00", 41, 55.44, 11.43, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (7, "2015-12-25 00:00:00", 90, 66.31, 99.29, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (8, "2015-12-25 00:00:00", 30, 32.3, 22.0, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (9, "2015-12-25 00:00:00", 19, 37.18, 76.0, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (10, "2015-12-25 00:00:00", 89, 38.75, 17.32, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (11, "2016-1-05 00:00:00", 98, 27.03, 3.15, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (12, "2016-1-05 00:00:00", 58, 63.47, 66.63, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (13, "2016-1-05 00:00:00", 96, 89.98, 19.18, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (14, "2016-1-05 00:00:00", 37, 27.34, 73.2, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (15, "2016-1-05 00:00:00", 81, 3.65, 72.22, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (16, "2016-1-05 00:00:00", 100, 93.29, 23.8, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (17, "2016-1-05 00:00:00", 98, 70.84, 1.28, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (18, "2016-1-05 00:00:00", 66, 67.23, 76.44, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (19, "2016-1-05 00:00:00", 63, 77.19, 56.85, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (20, "2016-1-05 00:00:00", 73, 58.64, 42.12, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (21, "2016-1-15 00:00:00", 45, 83.14, 34.74, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (22, "2016-1-15 00:00:00", 19, 1.02, 19.02, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (23, "2016-1-15 00:00:00", 50, 20.05, 25.79, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (24, "2016-1-15 00:00:00", 58, 35.08, 62.39, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (25, "2016-1-15 00:00:00", 33, 34.96, 89.76, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (26, "2016-1-15 00:00:00", 94, 83.17, 9.47, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (27, "2016-1-15 00:00:00", 47, 97.6, 23.47, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (28, "2016-1-15 00:00:00", 72, 64.43, 49.48, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (29, "2016-1-15 00:00:00", 30, 58.12, 86.54, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (30, "2016-1-15 00:00:00", 21, 59.58, 86.4, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (31, "2016-1-25 00:00:00", 52, 90.57, 23.4, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (32, "2016-1-25 00:00:00", 29, 36.39, 53.31, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (33, "2016-1-25 00:00:00", 19, 53.86, 23.3, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (34, "2016-1-25 00:00:00", 33, 65.64, 8.84, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (35, "2016-1-25 00:00:00", 33, 56.3, 50.77, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (36, "2016-1-25 00:00:00", 6, 45.76, 24.15, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (37, "2016-1-25 00:00:00", 16, 68.21, 70.11, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (38, "2016-1-25 00:00:00", 52, 61.45, 79.44, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (39, "2016-1-25 00:00:00", 7, 14.8, 75.53, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (40, "2016-1-25 00:00:00", 11, 7.58, 47.82, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (41, "2016-2-05 00:00:00", 99, 34.39, 13.06, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (42, "2016-2-05 00:00:00", 24, 1.64, 49.13, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (43, "2016-2-05 00:00:00", 4, 19.2, 86.4, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (44, "2016-2-05 00:00:00", 1, 20.98, 92.44, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (45, "2016-2-05 00:00:00", 70, 23.17, 19.69, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (46, "2016-2-05 00:00:00", 19, 97.33, 45.53, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (47, "2016-2-05 00:00:00", 66, 95.46, 7.82, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (48, "2016-2-05 00:00:00", 67, 58.03, 8.92, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (49, "2016-2-05 00:00:00", 74, 53.7, 16.38, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (50, "2016-2-05 00:00:00", 95, 36.89, 74.53, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (51, "2016-2-15 00:00:00", 50, 90.81, 71.01, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (52, "2016-2-15 00:00:00", 34, 50.64, 20.16, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (53, "2016-2-15 00:00:00", 29, 22.2, 25.98, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (54, "2016-2-15 00:00:00", 85, 68.98, 19.57, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (55, "2016-2-15 00:00:00", 64, 98.34, 80.69, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (56, "2016-2-15 00:00:00", 92, 71.49, 19.97, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (57, "2016-2-15 00:00:00", 66, 3.68, 48.91, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (58, "2016-2-15 00:00:00", 11, 14.01, 68.02, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (59, "2016-2-15 00:00:00", 86, 54.25, 51.52, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (60, "2016-2-15 00:00:00", 24, 42.93, 41.31, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (61, "2016-2-25 00:00:00", 8, 20.24, 95.73, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (62, "2016-2-25 00:00:00", 31, 31.27, 52.26, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (63, "2016-2-25 00:00:00", 49, 28.92, 44.41, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (64, "2016-2-25 00:00:00", 93, 64.46, 19.6, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (65, "2016-2-25 00:00:00", 40, 67.57, 86.3, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (66, "2016-2-25 00:00:00", 10, 29.28, 70.95, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (67, "2016-2-25 00:00:00", 81, 88.57, 18.23, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (68, "2016-2-25 00:00:00", 86, 75.55, 6.08, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (69, "2016-2-25 00:00:00", 61, 37.14, 31.81, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (70, "2016-2-25 00:00:00", 41, 82.77, 23.33, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (71, "2016-3-05 00:00:00", 57, 8.58, 96.29, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (72, "2016-3-05 00:00:00", 85, 94.45, 98.43, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (73, "2016-3-05 00:00:00", 7, 79.68, 71.91, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (74, "2016-3-05 00:00:00", 20, 22.13, 86.83, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (75, "2016-3-05 00:00:00", 39, 50.35, 49.22, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (76, "2016-3-05 00:00:00", 76, 25.43, 51.92, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (77, "2016-3-05 00:00:00", 57, 2.13, 13.31, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (78, "2016-3-05 00:00:00", 56, 87.51, 32.04, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (79, "2016-3-05 00:00:00", 60, 93.85, 54.55, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (80, "2016-3-05 00:00:00", 34, 68.48, 87.96, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (81, "2016-3-10 00:00:00", 49, 53.88, 89.0, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (82, "2016-3-10 00:00:00", 48, 72.6, 18.69, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (83, "2016-3-10 00:00:00", 99, 63.52, 55.68, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (84, "2016-3-10 00:00:00", 16, 74.48, 28.72, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (85, "2016-3-10 00:00:00", 86, 67.62, 42.87, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (86, "2016-3-10 00:00:00", 56, 57.27, 33.99, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (87, "2016-3-10 00:00:00", 21, 70.65, 37.17, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (88, "2016-3-10 00:00:00", 92, 55.98, 87.69, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (89, "2016-3-10 00:00:00", 70, 82.98, 15.16, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (90, "2016-3-10 00:00:00", 44, 71.97, 27.62, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (91, "2016-3-15 00:00:00", 90, 41.67, 57.46, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (92, "2016-3-15 00:00:00", 34, 60.91, 86.78, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (93, "2016-3-15 00:00:00", 56, 59.61, 18.53, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (94, "2016-3-15 00:00:00", 32, 44.38, 63.77, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (95, "2016-3-15 00:00:00", 79, 86.69, 67.46, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (96, "2016-3-15 00:00:00", 34, 71.37, 33.62, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (97, "2016-3-15 00:00:00", 95, 87.5, 18.83, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (98, "2016-3-15 00:00:00", 95, 38.31, 81.04, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (99, "2016-3-15 00:00:00", 12, 43.27, 40.47, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (100, "2016-3-15 00:00:00", 8, 27.91, 71.94, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (101, "2016-3-20 00:00:00", 71, 89.31, 50.08, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (102, "2016-3-20 00:00:00", 83, 35.08, 19.78, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (103, "2016-3-20 00:00:00", 93, 24.93, 8.5, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (104, "2016-3-20 00:00:00", 64, 77.42, 74.1, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (105, "2016-3-20 00:00:00", 3, 26.48, 49.73, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (106, "2016-3-20 00:00:00", 63, 14.63, 78.6, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (107, "2016-3-20 00:00:00", 23, 16.27, 93.32, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (108, "2016-3-20 00:00:00", 97, 66.05, 91.56, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (109, "2016-3-20 00:00:00", 89, 40.29, 79.05, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (110, "2016-3-20 00:00:00", 18, 27.13, 88.1, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (111, "2016-3-20 00:00:00", 82, 80.46, 39.12, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (112, "2016-3-20 00:00:00", 43, 75.58, 54.76, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (113, "2016-3-20 00:00:00", 66, 81.41, 55.36, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (114, "2016-3-20 00:00:00", 34, 96.61, 23.62, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (115, "2016-3-20 00:00:00", 30, 52.97, 83.28, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (116, "2016-3-25 00:00:00", 49, 51.04, 35.74, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (117, "2016-3-25 00:00:00", 23, 54.27, 82.72, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (118, "2016-3-25 00:00:00", 80, 32.43, 22.88, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (119, "2016-3-25 00:00:00", 74, 31.28, 65.21, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (120, "2016-3-25 00:00:00", 25, 31.86, 97.27, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (121, "2016-3-25 00:00:00", 56, 64.73, 29.68, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (122, "2016-3-25 00:00:00", 99, 63.17, 57.35, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (123, "2016-3-25 00:00:00", 71, 71.25, 27.6, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (124, "2016-3-25 00:00:00", 10, 67.66, 33.17, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (125, "2016-3-25 00:00:00", 89, 24.39, 3.89, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (126, "2016-3-25 00:00:00", 24, 86.26, 3.17, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (127, "2016-3-25 00:00:00", 69, 75.09, 17.9, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (128, "2016-3-25 00:00:00", 85, 9.99, 24.95, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (129, "2016-3-25 00:00:00", 22, 39.15, 61.07, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (130, "2016-3-25 00:00:00", 94, 75.02, 57.86, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (131, "2016-3-30 00:00:00", 86, 35.88, 12.13, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (132, "2016-3-30 00:00:00", 81, 46.6, 74.64, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (133, "2016-3-30 00:00:00", 94, 27.47, 21.02, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (134, "2016-3-30 00:00:00", 4, 35.65, 73.44, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (135, "2016-3-30 00:00:00", 31, 42.41, 12.94, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (136, "2016-3-30 00:00:00", 26, 33.07, 9.11, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (137, "2016-3-30 00:00:00", 48, 89.51, 45.12, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (138, "2016-3-30 00:00:00", 89, 56.99, 84.1, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (139, "2016-3-30 00:00:00", 53, 10.6, 23.22, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (140, CURRENT_TIMESTAMP, 64, 65.81, 8.77, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (141, CURRENT_TIMESTAMP, 29, 69.08, 93.91, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (142, CURRENT_TIMESTAMP, 45, 36.37, 16.74, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (143, CURRENT_TIMESTAMP, 36, 90.52, 68.93, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (144, CURRENT_TIMESTAMP, 90, 39.46, 67.04, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (145, CURRENT_TIMESTAMP, 11, 38.12, 39.75, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (146, CURRENT_TIMESTAMP, 37, 59.67, 43.21, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (147, CURRENT_TIMESTAMP, 30, 36.54, 40.51, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (148, CURRENT_TIMESTAMP, 27, 53.21, 17.26, 0, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (149, CURRENT_TIMESTAMP, 46, 4.39, 50.28, 1, 1);
-insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values (150, CURRENT_TIMESTAMP, 74, 84.21, 38.46, 1, 1);
+insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values 
+(1, "2015-12-25 00:00:00", 37, 86.47, 3.77, 1, 1),
+(2, "2015-12-25 00:00:00", 100, 93.3, 92.78, 0, 1),
+(3, "2015-12-25 00:00:00", 99, 59.24, 91.52, 0, 1),
+(4, "2015-12-25 00:00:00", 25, 80.81, 98.18, 1, 1),
+(5, "2015-12-25 00:00:00", 72, 24.97, 97.07, 1, 1),
+(6, "2015-12-25 00:00:00", 41, 55.44, 11.43, 0, 1),
+(7, "2015-12-25 00:00:00", 90, 66.31, 99.29, 1, 1),
+(8, "2015-12-25 00:00:00", 30, 32.3, 22.0, 1, 1),
+(9, "2015-12-25 00:00:00", 19, 37.18, 76.0, 0, 1),
+(10, "2015-12-25 00:00:00", 89, 38.75, 17.32, 1, 1),
+(11, "2016-1-05 00:00:00", 98, 27.03, 3.15, 1, 1),
+(12, "2016-1-05 00:00:00", 58, 63.47, 66.63, 1, 1),
+(13, "2016-1-05 00:00:00", 96, 89.98, 19.18, 1, 1),
+(14, "2016-1-05 00:00:00", 37, 27.34, 73.2, 0, 1),
+(15, "2016-1-05 00:00:00", 81, 3.65, 72.22, 1, 1),
+(16, "2016-1-05 00:00:00", 100, 93.29, 23.8, 1, 1),
+(17, "2016-1-05 00:00:00", 98, 70.84, 1.28, 1, 1),
+(18, "2016-1-05 00:00:00", 66, 67.23, 76.44, 0, 1),
+(19, "2016-1-05 00:00:00", 63, 77.19, 56.85, 0, 1),
+(20, "2016-1-05 00:00:00", 73, 58.64, 42.12, 1, 1),
+(21, "2016-1-15 00:00:00", 45, 83.14, 34.74, 0, 1),
+(22, "2016-1-15 00:00:00", 19, 1.02, 19.02, 0, 1),
+(23, "2016-1-15 00:00:00", 50, 20.05, 25.79, 1, 1),
+(24, "2016-1-15 00:00:00", 58, 35.08, 62.39, 0, 1),
+(25, "2016-1-15 00:00:00", 33, 34.96, 89.76, 0, 1),
+(26, "2016-1-15 00:00:00", 94, 83.17, 9.47, 0, 1),
+(27, "2016-1-15 00:00:00", 47, 97.6, 23.47, 1, 1),
+(28, "2016-1-15 00:00:00", 72, 64.43, 49.48, 1, 1),
+(29, "2016-1-15 00:00:00", 30, 58.12, 86.54, 1, 1),
+(30, "2016-1-15 00:00:00", 21, 59.58, 86.4, 1, 1),
+(31, "2016-1-25 00:00:00", 52, 90.57, 23.4, 0, 1),
+(32, "2016-1-25 00:00:00", 29, 36.39, 53.31, 1, 1),
+(33, "2016-1-25 00:00:00", 19, 53.86, 23.3, 0, 1),
+(34, "2016-1-25 00:00:00", 33, 65.64, 8.84, 0, 1),
+(35, "2016-1-25 00:00:00", 33, 56.3, 50.77, 1, 1),
+(36, "2016-1-25 00:00:00", 6, 45.76, 24.15, 0, 1),
+(37, "2016-1-25 00:00:00", 16, 68.21, 70.11, 0, 1),
+(38, "2016-1-25 00:00:00", 52, 61.45, 79.44, 1, 1),
+(39, "2016-1-25 00:00:00", 7, 14.8, 75.53, 0, 1),
+(40, "2016-1-25 00:00:00", 11, 7.58, 47.82, 0, 1),
+(41, "2016-2-05 00:00:00", 99, 34.39, 13.06, 1, 1),
+(42, "2016-2-05 00:00:00", 24, 1.64, 49.13, 0, 1),
+(43, "2016-2-05 00:00:00", 4, 19.2, 86.4, 1, 1),
+(44, "2016-2-05 00:00:00", 1, 20.98, 92.44, 1, 1),
+(45, "2016-2-05 00:00:00", 70, 23.17, 19.69, 1, 1),
+(46, "2016-2-05 00:00:00", 19, 97.33, 45.53, 0, 1),
+(47, "2016-2-05 00:00:00", 66, 95.46, 7.82, 1, 1),
+(48, "2016-2-05 00:00:00", 67, 58.03, 8.92, 0, 1),
+(49, "2016-2-05 00:00:00", 74, 53.7, 16.38, 1, 1),
+(50, "2016-2-05 00:00:00", 95, 36.89, 74.53, 1, 1),
+(51, "2016-2-15 00:00:00", 50, 90.81, 71.01, 1, 1),
+(52, "2016-2-15 00:00:00", 34, 50.64, 20.16, 1, 1),
+(53, "2016-2-15 00:00:00", 29, 22.2, 25.98, 1, 1),
+(54, "2016-2-15 00:00:00", 85, 68.98, 19.57, 1, 1),
+(55, "2016-2-15 00:00:00", 64, 98.34, 80.69, 0, 1),
+(56, "2016-2-15 00:00:00", 92, 71.49, 19.97, 1, 1),
+(57, "2016-2-15 00:00:00", 66, 3.68, 48.91, 1, 1),
+(58, "2016-2-15 00:00:00", 11, 14.01, 68.02, 1, 1),
+(59, "2016-2-15 00:00:00", 86, 54.25, 51.52, 1, 1),
+(60, "2016-2-15 00:00:00", 24, 42.93, 41.31, 1, 1),
+(61, "2016-2-25 00:00:00", 8, 20.24, 95.73, 1, 1),
+(62, "2016-2-25 00:00:00", 31, 31.27, 52.26, 1, 1),
+(63, "2016-2-25 00:00:00", 49, 28.92, 44.41, 1, 1),
+(64, "2016-2-25 00:00:00", 93, 64.46, 19.6, 0, 1),
+(65, "2016-2-25 00:00:00", 40, 67.57, 86.3, 0, 1),
+(66, "2016-2-25 00:00:00", 10, 29.28, 70.95, 0, 1),
+(67, "2016-2-25 00:00:00", 81, 88.57, 18.23, 0, 1),
+(68, "2016-2-25 00:00:00", 86, 75.55, 6.08, 0, 1),
+(69, "2016-2-25 00:00:00", 61, 37.14, 31.81, 1, 1),
+(70, "2016-2-25 00:00:00", 41, 82.77, 23.33, 1, 1),
+(71, "2016-3-05 00:00:00", 57, 8.58, 96.29, 0, 1),
+(72, "2016-3-05 00:00:00", 85, 94.45, 98.43, 1, 1),
+(73, "2016-3-05 00:00:00", 7, 79.68, 71.91, 1, 1),
+(74, "2016-3-05 00:00:00", 20, 22.13, 86.83, 0, 1),
+(75, "2016-3-05 00:00:00", 39, 50.35, 49.22, 1, 1),
+(76, "2016-3-05 00:00:00", 76, 25.43, 51.92, 1, 1),
+(77, "2016-3-05 00:00:00", 57, 2.13, 13.31, 1, 1),
+(78, "2016-3-05 00:00:00", 56, 87.51, 32.04, 1, 1),
+(79, "2016-3-05 00:00:00", 60, 93.85, 54.55, 0, 1),
+(80, "2016-3-05 00:00:00", 34, 68.48, 87.96, 0, 1),
+(81, "2016-3-10 00:00:00", 49, 53.88, 89.0, 1, 1),
+(82, "2016-3-10 00:00:00", 48, 72.6, 18.69, 0, 1),
+(83, "2016-3-10 00:00:00", 99, 63.52, 55.68, 1, 1),
+(84, "2016-3-10 00:00:00", 16, 74.48, 28.72, 0, 1),
+(85, "2016-3-10 00:00:00", 86, 67.62, 42.87, 1, 1),
+(86, "2016-3-10 00:00:00", 56, 57.27, 33.99, 0, 1),
+(87, "2016-3-10 00:00:00", 21, 70.65, 37.17, 0, 1),
+(88, "2016-3-10 00:00:00", 92, 55.98, 87.69, 0, 1),
+(89, "2016-3-10 00:00:00", 70, 82.98, 15.16, 1, 1),
+(90, "2016-3-10 00:00:00", 44, 71.97, 27.62, 1, 1),
+(91, "2016-3-15 00:00:00", 90, 41.67, 57.46, 1, 1),
+(92, "2016-3-15 00:00:00", 34, 60.91, 86.78, 0, 1),
+(93, "2016-3-15 00:00:00", 56, 59.61, 18.53, 0, 1),
+(94, "2016-3-15 00:00:00", 32, 44.38, 63.77, 1, 1),
+(95, "2016-3-15 00:00:00", 79, 86.69, 67.46, 0, 1),
+(96, "2016-3-15 00:00:00", 34, 71.37, 33.62, 1, 1),
+(97, "2016-3-15 00:00:00", 95, 87.5, 18.83, 0, 1),
+(98, "2016-3-15 00:00:00", 95, 38.31, 81.04, 0, 1),
+(99, "2016-3-15 00:00:00", 12, 43.27, 40.47, 0, 1),
+(100, "2016-3-15 00:00:00", 8, 27.91, 71.94, 0, 1),
+(101, "2016-3-20 00:00:00", 71, 89.31, 50.08, 0, 1),
+(102, "2016-3-20 00:00:00", 83, 35.08, 19.78, 1, 1),
+(103, "2016-3-20 00:00:00", 93, 24.93, 8.5, 0, 1),
+(104, "2016-3-20 00:00:00", 64, 77.42, 74.1, 0, 1),
+(105, "2016-3-20 00:00:00", 3, 26.48, 49.73, 0, 1),
+(106, "2016-3-20 00:00:00", 63, 14.63, 78.6, 0, 1),
+(107, "2016-3-20 00:00:00", 23, 16.27, 93.32, 1, 1),
+(108, "2016-3-20 00:00:00", 97, 66.05, 91.56, 0, 1),
+(109, "2016-3-20 00:00:00", 89, 40.29, 79.05, 0, 1),
+(110, "2016-3-20 00:00:00", 18, 27.13, 88.1, 1, 1),
+(111, "2016-3-20 00:00:00", 82, 80.46, 39.12, 1, 1),
+(112, "2016-3-20 00:00:00", 43, 75.58, 54.76, 0, 1),
+(113, "2016-3-20 00:00:00", 66, 81.41, 55.36, 0, 1),
+(114, "2016-3-20 00:00:00", 34, 96.61, 23.62, 1, 1),
+(115, "2016-3-20 00:00:00", 30, 52.97, 83.28, 0, 1),
+(116, "2016-3-25 00:00:00", 49, 51.04, 35.74, 1, 1),
+(117, "2016-3-25 00:00:00", 23, 54.27, 82.72, 1, 1),
+(118, "2016-3-25 00:00:00", 80, 32.43, 22.88, 0, 1),
+(119, "2016-3-25 00:00:00", 74, 31.28, 65.21, 1, 1),
+(120, "2016-3-25 00:00:00", 25, 31.86, 97.27, 1, 1),
+(121, "2016-3-25 00:00:00", 56, 64.73, 29.68, 0, 1),
+(122, "2016-3-25 00:00:00", 99, 63.17, 57.35, 1, 1),
+(123, "2016-3-25 00:00:00", 71, 71.25, 27.6, 1, 1),
+(124, "2016-3-25 00:00:00", 10, 67.66, 33.17, 1, 1),
+(125, "2016-3-25 00:00:00", 89, 24.39, 3.89, 1, 1),
+(126, "2016-3-25 00:00:00", 24, 86.26, 3.17, 1, 1),
+(127, "2016-3-25 00:00:00", 69, 75.09, 17.9, 1, 1),
+(128, "2016-3-25 00:00:00", 85, 9.99, 24.95, 1, 1),
+(129, "2016-3-25 00:00:00", 22, 39.15, 61.07, 0, 1),
+(130, "2016-3-25 00:00:00", 94, 75.02, 57.86, 1, 1),
+(131, "2016-3-30 00:00:00", 86, 35.88, 12.13, 0, 1),
+(132, "2016-3-30 00:00:00", 81, 46.6, 74.64, 1, 1),
+(133, "2016-3-30 00:00:00", 94, 27.47, 21.02, 0, 1),
+(134, "2016-3-30 00:00:00", 4, 35.65, 73.44, 1, 1),
+(135, "2016-3-30 00:00:00", 31, 42.41, 12.94, 1, 1),
+(136, "2016-3-30 00:00:00", 26, 33.07, 9.11, 0, 1),
+(137, "2016-3-30 00:00:00", 48, 89.51, 45.12, 1, 1),
+(138, "2016-3-30 00:00:00", 89, 56.99, 84.1, 1, 1),
+(139, "2016-3-30 00:00:00", 53, 10.6, 23.22, 0, 1),
+(140, CURRENT_TIMESTAMP, 64, 65.81, 8.77, 1, 1),
+(141, CURRENT_TIMESTAMP, 29, 69.08, 93.91, 0, 1),
+(142, CURRENT_TIMESTAMP, 45, 36.37, 16.74, 1, 1),
+(143, CURRENT_TIMESTAMP, 36, 90.52, 68.93, 1, 1),
+(144, CURRENT_TIMESTAMP, 90, 39.46, 67.04, 0, 1),
+(145, CURRENT_TIMESTAMP, 11, 38.12, 39.75, 1, 1),
+(146, CURRENT_TIMESTAMP, 37, 59.67, 43.21, 0, 1),
+(147, CURRENT_TIMESTAMP, 30, 36.54, 40.51, 0, 1),
+(148, CURRENT_TIMESTAMP, 27, 53.21, 17.26, 0, 1),
+(149, CURRENT_TIMESTAMP, 46, 4.39, 50.28, 1, 1),
+(150, CURRENT_TIMESTAMP, 74, 84.21, 38.46, 1, 1);
 
 
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (1, 9, 72, 30.28, 0.11, 0.0, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (2, 60, 32, 57.52, 0.12, 0.09, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (3, 135, 30, 44.96, 0.13, 0.13, 0.15, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (4, 99, 25, 14.39, 0.13, 0.06, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (5, 22, 50, 14.35, 0.13, 0.08, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (6, 111, 29, 34.3, 0.13, 0.12, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (7, 45, 53, 41.26, 0.07, 0.03, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (8, 122, 7, 39.87, 0.12, 0.09, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (9, 40, 58, 25.09, 0.03, 0.12, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (10, 38, 61, 43.45, 0.02, 0.07, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (11, 34, 22, 9.89, 0.13, 0.01, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (12, 35, 6, 28.49, 0.12, 0.07, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (13, 6, 38, 56.81, 0.13, 0.07, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (14, 131, 21, 36.45, 0.05, 0.01, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (15, 67, 3, 41.6, 0.03, 0.13, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (16, 88, 48, 55.41, 0.09, 0.03, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (17, 59, 96, 52.69, 0.14, 0.01, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (18, 78, 79, 49.0, 0.06, 0.06, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (19, 115, 16, 30.28, 0.12, 0.01, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (20, 128, 19, 5.67, 0.03, 0.11, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (21, 25, 45, 3.48, 0.02, 0.05, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (22, 34, 15, 57.48, 0.08, 0.11, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (23, 96, 9, 30.68, 0.05, 0.11, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (24, 64, 82, 58.61, 0.03, 0.03, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (25, 98, 77, 38.44, 0.04, 0.08, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (26, 2, 26, 3.65, 0.06, 0.05, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (27, 13, 50, 57.58, 0.0, 0.07, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (28, 48, 23, 17.86, 0.05, 0.01, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (29, 110, 4, 27.46, 0.04, 0.14, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (30, 49, 60, 48.06, 0.1, 0.13, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (31, 43, 89, 23.37, 0.03, 0.12, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (32, 102, 88, 17.83, 0.13, 0.08, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (33, 17, 22, 44.55, 0.11, 0.13, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (34, 12, 13, 57.55, 0.0, 0.09, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (35, 143, 6, 47.48, 0.07, 0.08, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (36, 59, 80, 26.92, 0.04, 0.11, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (37, 65, 30, 19.68, 0.11, 0.11, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (38, 125, 96, 29.15, 0.07, 0.01, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (39, 22, 50, 39.6, 0.14, 0.03, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (40, 48, 41, 11.91, 0.0, 0.09, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (41, 16, 52, 30.65, 0.12, 0.05, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (42, 101, 60, 48.55, 0.02, 0.07, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (43, 8, 74, 31.86, 0.12, 0.11, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (44, 107, 2, 8.59, 0.02, 0.15, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (45, 43, 43, 10.16, 0.01, 0.09, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (46, 19, 48, 28.98, 0.08, 0.02, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (47, 146, 10, 47.92, 0.05, 0.02, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (48, 58, 21, 24.01, 0.09, 0.01, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (49, 18, 15, 44.6, 0.1, 0.07, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (50, 31, 81, 42.25, 0.0, 0.01, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (51, 147, 62, 41.11, 0.08, 0.01, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (52, 109, 80, 13.32, 0.14, 0.13, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (53, 147, 6, 26.33, 0.14, 0.14, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (54, 8, 74, 54.67, 0.01, 0.13, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (55, 79, 10, 41.17, 0.11, 0.03, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (56, 5, 90, 37.65, 0.13, 0.08, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (57, 57, 18, 34.55, 0.13, 0.03, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (58, 112, 77, 41.09, 0.11, 0.13, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (59, 72, 51, 40.04, 0.01, 0.04, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (60, 52, 44, 58.61, 0.12, 0.05, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (61, 101, 64, 50.51, 0.01, 0.0, 0.15, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (62, 66, 38, 12.63, 0.14, 0.04, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (63, 74, 37, 20.04, 0.08, 0.03, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (64, 95, 61, 34.73, 0.06, 0.04, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (65, 148, 61, 28.01, 0.04, 0.12, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (66, 31, 85, 6.59, 0.1, 0.07, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (67, 150, 63, 24.87, 0.07, 0.12, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (68, 24, 27, 12.86, 0.12, 0.12, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (69, 45, 37, 53.66, 0.1, 0.08, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (70, 38, 60, 28.85, 0.03, 0.12, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (71, 124, 80, 19.29, 0.08, 0.1, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (72, 94, 4, 54.36, 0.05, 0.04, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (73, 144, 65, 56.07, 0.02, 0.14, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (74, 44, 13, 44.11, 0.13, 0.03, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (75, 115, 86, 23.21, 0.05, 0.06, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (76, 39, 5, 24.14, 0.03, 0.11, 0.15, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (77, 62, 11, 48.09, 0.12, 0.14, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (78, 140, 93, 4.88, 0.14, 0.09, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (79, 62, 9, 16.56, 0.02, 0.07, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (80, 15, 31, 21.15, 0.1, 0.13, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (81, 140, 61, 46.79, 0.09, 0.11, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (82, 20, 84, 11.47, 0.1, 0.06, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (83, 103, 19, 53.63, 0.04, 0.07, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (84, 118, 79, 41.83, 0.12, 0.09, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (85, 48, 33, 20.31, 0.11, 0.02, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (86, 74, 30, 34.29, 0.12, 0.08, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (87, 42, 70, 5.16, 0.0, 0.03, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (88, 130, 76, 32.41, 0.02, 0.12, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (89, 19, 99, 43.27, 0.01, 0.06, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (90, 106, 90, 51.04, 0.02, 0.1, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (91, 15, 39, 34.72, 0.05, 0.03, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (92, 56, 1, 8.94, 0.05, 0.12, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (93, 35, 55, 13.0, 0.04, 0.09, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (94, 150, 79, 48.36, 0.12, 0.13, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (95, 145, 21, 30.36, 0.12, 0.07, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (96, 39, 84, 56.44, 0.11, 0.02, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (97, 128, 26, 30.33, 0.02, 0.05, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (98, 129, 40, 36.72, 0.13, 0.02, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (99, 103, 5, 20.7, 0.0, 0.04, 0.0, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (100, 100, 62, 54.2, 0.03, 0.13, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (101, 77, 48, 6.72, 0.11, 0.01, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (102, 95, 33, 27.25, 0.12, 0.04, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (103, 27, 50, 23.92, 0.0, 0.05, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (104, 65, 79, 20.0, 0.15, 0.02, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (105, 109, 11, 8.51, 0.03, 0.01, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (106, 24, 61, 4.88, 0.01, 0.12, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (107, 3, 77, 27.47, 0.03, 0.09, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (108, 13, 36, 38.15, 0.11, 0.01, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (109, 101, 11, 56.78, 0.12, 0.12, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (110, 90, 42, 42.2, 0.14, 0.1, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (111, 113, 40, 48.44, 0.02, 0.11, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (112, 57, 31, 14.42, 0.01, 0.13, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (113, 109, 100, 54.57, 0.15, 0.14, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (114, 62, 14, 4.2, 0.07, 0.13, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (115, 47, 25, 29.65, 0.1, 0.09, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (116, 128, 8, 7.31, 0.04, 0.09, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (117, 25, 92, 8.55, 0.13, 0.1, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (118, 3, 6, 34.3, 0.13, 0.07, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (119, 137, 30, 57.71, 0.14, 0.1, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (120, 48, 92, 13.06, 0.14, 0.14, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (121, 139, 30, 14.08, 0.03, 0.05, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (122, 125, 82, 36.54, 0.02, 0.1, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (123, 20, 57, 46.86, 0.11, 0.06, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (124, 133, 60, 6.15, 0.12, 0.04, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (125, 36, 74, 41.77, 0.12, 0.14, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (126, 131, 39, 13.59, 0.14, 0.03, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (127, 125, 1, 27.04, 0.14, 0.14, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (128, 32, 3, 29.37, 0.02, 0.05, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (129, 137, 19, 49.27, 0.11, 0.07, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (130, 108, 54, 12.16, 0.06, 0.1, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (131, 60, 89, 28.18, 0.03, 0.02, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (132, 48, 49, 42.49, 0.11, 0.13, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (133, 19, 28, 40.56, 0.0, 0.14, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (134, 91, 59, 24.42, 0.05, 0.13, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (135, 3, 19, 53.96, 0.03, 0.0, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (136, 32, 76, 16.37, 0.07, 0.1, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (137, 87, 62, 24.05, 0.15, 0.12, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (138, 117, 67, 12.26, 0.09, 0.07, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (139, 45, 45, 55.18, 0.15, 0.09, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (140, 143, 7, 56.34, 0.02, 0.1, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (141, 124, 88, 52.93, 0.13, 0.1, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (142, 36, 100, 28.56, 0.09, 0.11, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (143, 68, 1, 50.41, 0.03, 0.03, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (144, 138, 50, 58.75, 0.11, 0.06, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (145, 97, 35, 20.88, 0.02, 0.12, 0.15, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (146, 64, 15, 35.85, 0.04, 0.06, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (147, 118, 52, 24.86, 0.08, 0.15, 0.15, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (148, 22, 100, 17.04, 0.15, 0.02, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (149, 123, 40, 40.74, 0.14, 0.0, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (150, 75, 100, 20.99, 0.12, 0.07, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (151, 110, 6, 43.07, 0.05, 0.11, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (152, 89, 33, 29.52, 0.14, 0.13, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (153, 50, 56, 53.54, 0.08, 0.04, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (154, 139, 22, 55.9, 0.09, 0.07, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (155, 109, 49, 31.59, 0.02, 0.09, 0.0, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (156, 45, 5, 56.36, 0.09, 0.02, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (157, 94, 9, 5.62, 0.08, 0.14, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (158, 52, 12, 9.95, 0.13, 0.08, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (159, 28, 31, 37.54, 0.03, 0.13, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (160, 33, 66, 1.71, 0.05, 0.13, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (161, 100, 56, 13.83, 0.04, 0.0, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (162, 89, 49, 55.15, 0.09, 0.01, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (163, 104, 10, 49.27, 0.07, 0.05, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (164, 138, 18, 50.1, 0.13, 0.12, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (165, 137, 92, 26.35, 0.06, 0.04, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (166, 93, 48, 21.36, 0.07, 0.15, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (167, 35, 85, 15.89, 0.1, 0.09, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (168, 33, 25, 25.51, 0.05, 0.04, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (169, 28, 14, 26.96, 0.1, 0.11, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (170, 79, 53, 45.9, 0.1, 0.06, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (171, 15, 85, 31.13, 0.01, 0.1, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (172, 65, 81, 1.46, 0.08, 0.14, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (173, 23, 91, 48.78, 0.04, 0.15, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (174, 106, 45, 24.17, 0.06, 0.14, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (175, 95, 1, 16.01, 0.09, 0.04, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (176, 47, 31, 37.08, 0.03, 0.08, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (177, 120, 84, 49.34, 0.15, 0.01, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (178, 50, 38, 16.89, 0.09, 0.13, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (179, 121, 78, 31.63, 0.0, 0.15, 0.0, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (180, 105, 68, 9.25, 0.12, 0.15, 0.0, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (181, 82, 90, 5.92, 0.02, 0.05, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (182, 60, 73, 53.96, 0.0, 0.07, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (183, 138, 18, 2.55, 0.04, 0.03, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (184, 56, 43, 8.65, 0.03, 0.09, 0.0, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (185, 54, 54, 53.97, 0.15, 0.04, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (186, 108, 68, 4.86, 0.14, 0.02, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (187, 83, 61, 38.41, 0.05, 0.07, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (188, 53, 92, 43.42, 0.14, 0.11, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (189, 86, 61, 7.55, 0.09, 0.03, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (190, 17, 96, 29.01, 0.07, 0.08, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (191, 24, 5, 10.67, 0.11, 0.03, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (192, 87, 30, 14.11, 0.1, 0.13, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (193, 9, 73, 25.82, 0.05, 0.06, 0.15, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (194, 149, 54, 51.27, 0.02, 0.06, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (195, 34, 79, 20.07, 0.11, 0.09, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (196, 110, 27, 34.62, 0.02, 0.08, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (197, 105, 44, 49.17, 0.06, 0.07, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (198, 135, 21, 41.19, 0.12, 0.1, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (199, 138, 53, 6.66, 0.1, 0.06, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (200, 32, 51, 39.64, 0.0, 0.13, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (201, 72, 23, 30.8, 0.1, 0.13, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (202, 125, 70, 50.33, 0.1, 0.13, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (203, 145, 48, 41.48, 0.07, 0.04, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (204, 147, 5, 5.3, 0.11, 0.01, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (205, 39, 66, 53.37, 0.05, 0.06, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (206, 20, 40, 28.13, 0.08, 0.02, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (207, 89, 49, 14.46, 0.14, 0.12, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (208, 46, 78, 8.71, 0.01, 0.01, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (209, 105, 1, 33.67, 0.15, 0.08, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (210, 49, 25, 53.03, 0.15, 0.01, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (211, 12, 30, 42.46, 0.06, 0.01, 0.0, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (212, 148, 76, 14.31, 0.12, 0.03, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (213, 141, 13, 26.23, 0.05, 0.05, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (214, 19, 17, 23.45, 0.07, 0.02, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (215, 59, 53, 11.53, 0.14, 0.12, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (216, 118, 7, 32.93, 0.13, 0.06, 0.15, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (217, 35, 98, 18.81, 0.04, 0.03, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (218, 41, 48, 13.8, 0.06, 0.12, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (219, 29, 69, 59.41, 0.12, 0.12, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (220, 106, 23, 49.86, 0.09, 0.01, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (221, 49, 31, 15.44, 0.09, 0.05, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (222, 88, 74, 28.05, 0.15, 0.02, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (223, 146, 95, 9.74, 0.06, 0.09, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (224, 43, 80, 9.46, 0.02, 0.13, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (225, 146, 71, 43.09, 0.05, 0.15, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (226, 85, 18, 46.15, 0.03, 0.15, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (227, 92, 19, 24.18, 0.08, 0.0, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (228, 52, 55, 51.62, 0.05, 0.13, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (229, 57, 57, 25.13, 0.13, 0.11, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (230, 20, 67, 29.8, 0.0, 0.14, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (231, 118, 31, 38.42, 0.01, 0.12, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (232, 147, 38, 22.12, 0.09, 0.13, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (233, 12, 100, 43.13, 0.1, 0.03, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (234, 34, 75, 6.2, 0.1, 0.05, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (235, 8, 8, 17.5, 0.09, 0.12, 0.15, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (236, 69, 43, 56.83, 0.02, 0.1, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (237, 38, 53, 3.56, 0.1, 0.04, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (238, 102, 45, 6.75, 0.03, 0.08, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (239, 112, 41, 22.75, 0.08, 0.07, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (240, 54, 65, 30.7, 0.13, 0.02, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (241, 74, 2, 45.94, 0.08, 0.09, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (242, 124, 4, 2.51, 0.02, 0.1, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (243, 29, 36, 48.12, 0.0, 0.04, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (244, 123, 85, 23.13, 0.06, 0.06, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (245, 62, 30, 23.83, 0.14, 0.07, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (246, 86, 21, 4.41, 0.1, 0.06, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (247, 41, 56, 38.83, 0.1, 0.07, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (248, 20, 48, 19.93, 0.14, 0.09, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (249, 37, 55, 35.85, 0.02, 0.06, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (250, 90, 65, 10.45, 0.03, 0.11, 0.15, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (251, 43, 71, 52.99, 0.12, 0.15, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (252, 108, 89, 50.02, 0.05, 0.08, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (253, 40, 97, 53.96, 0.05, 0.13, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (254, 128, 93, 5.19, 0.09, 0.08, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (255, 50, 41, 43.29, 0.1, 0.09, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (256, 5, 31, 34.28, 0.07, 0.0, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (257, 131, 50, 42.66, 0.03, 0.01, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (258, 67, 92, 18.39, 0.06, 0.01, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (259, 52, 14, 25.12, 0.11, 0.13, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (260, 74, 80, 6.43, 0.12, 0.0, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (261, 54, 42, 36.04, 0.0, 0.02, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (262, 82, 32, 5.85, 0.03, 0.08, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (263, 112, 36, 34.02, 0.06, 0.06, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (264, 127, 32, 4.05, 0.07, 0.13, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (265, 73, 71, 49.89, 0.01, 0.07, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (266, 57, 29, 7.76, 0.09, 0.03, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (267, 129, 92, 51.81, 0.12, 0.06, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (268, 73, 5, 42.85, 0.1, 0.1, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (269, 30, 48, 48.35, 0.13, 0.13, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (270, 68, 27, 17.11, 0.08, 0.0, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (271, 61, 91, 7.57, 0.14, 0.02, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (272, 92, 8, 26.45, 0.01, 0.15, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (273, 142, 58, 13.28, 0.05, 0.1, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (274, 76, 62, 25.56, 0.08, 0.06, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (275, 6, 95, 55.34, 0.1, 0.03, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (276, 137, 57, 14.22, 0.11, 0.03, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (277, 11, 60, 14.52, 0.08, 0.03, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (278, 143, 66, 54.27, 0.09, 0.06, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (279, 129, 37, 7.1, 0.07, 0.13, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (280, 49, 92, 49.55, 0.1, 0.13, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (281, 86, 33, 47.88, 0.08, 0.03, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (282, 42, 13, 55.12, 0.04, 0.05, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (283, 103, 33, 35.23, 0.05, 0.12, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (284, 7, 22, 19.26, 0.06, 0.05, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (285, 11, 91, 27.53, 0.12, 0.05, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (286, 99, 80, 41.44, 0.11, 0.1, 0.0, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (287, 85, 51, 52.32, 0.15, 0.15, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (288, 136, 43, 10.0, 0.0, 0.12, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (289, 60, 90, 20.42, 0.04, 0.15, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (290, 60, 91, 40.99, 0.14, 0.13, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (291, 51, 85, 52.63, 0.08, 0.11, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (292, 109, 85, 23.12, 0.1, 0.02, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (293, 148, 38, 27.8, 0.03, 0.03, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (294, 135, 100, 19.12, 0.13, 0.1, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (295, 78, 10, 31.53, 0.08, 0.01, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (296, 16, 27, 50.98, 0.04, 0.15, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (297, 82, 23, 45.92, 0.07, 0.01, 0.0, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (298, 60, 85, 22.56, 0.04, 0.02, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (299, 109, 86, 32.29, 0.04, 0.08, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (300, 42, 29, 4.95, 0.06, 0.03, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (301, 5, 41, 37.56, 0.13, 0.07, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (302, 90, 59, 19.84, 0.02, 0.13, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (303, 148, 19, 14.72, 0.11, 0.14, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (304, 67, 94, 9.27, 0.09, 0.04, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (305, 62, 38, 57.13, 0.03, 0.07, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (306, 104, 78, 1.18, 0.06, 0.13, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (307, 29, 86, 58.67, 0.13, 0.1, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (308, 36, 60, 22.45, 0.09, 0.08, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (309, 122, 61, 29.73, 0.05, 0.13, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (310, 67, 75, 15.96, 0.07, 0.09, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (311, 148, 59, 52.31, 0.04, 0.01, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (312, 99, 30, 12.68, 0.13, 0.11, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (313, 131, 61, 11.54, 0.03, 0.08, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (314, 113, 46, 10.04, 0.03, 0.0, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (315, 70, 41, 36.62, 0.05, 0.04, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (316, 28, 53, 9.16, 0.02, 0.04, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (317, 75, 69, 50.98, 0.1, 0.02, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (318, 97, 58, 52.97, 0.1, 0.15, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (319, 49, 98, 49.31, 0.01, 0.08, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (320, 81, 46, 55.34, 0.11, 0.04, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (321, 105, 25, 17.18, 0.08, 0.11, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (322, 86, 93, 19.47, 0.13, 0.15, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (323, 10, 26, 37.61, 0.09, 0.02, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (324, 97, 93, 17.29, 0.06, 0.14, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (325, 15, 9, 40.36, 0.0, 0.12, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (326, 144, 52, 48.58, 0.11, 0.11, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (327, 82, 84, 44.84, 0.05, 0.09, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (328, 113, 15, 33.26, 0.06, 0.14, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (329, 108, 62, 18.71, 0.06, 0.05, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (330, 150, 52, 10.79, 0.14, 0.08, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (331, 106, 65, 54.1, 0.11, 0.05, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (332, 77, 43, 20.2, 0.01, 0.02, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (333, 129, 7, 1.36, 0.1, 0.02, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (334, 67, 95, 11.92, 0.11, 0.1, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (335, 131, 29, 41.44, 0.13, 0.02, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (336, 4, 61, 3.72, 0.07, 0.12, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (337, 2, 93, 28.52, 0.07, 0.04, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (338, 140, 44, 48.21, 0.04, 0.1, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (339, 120, 14, 17.73, 0.03, 0.12, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (340, 18, 31, 50.12, 0.11, 0.11, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (341, 4, 7, 37.01, 0.03, 0.06, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (342, 5, 42, 15.39, 0.07, 0.14, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (343, 59, 69, 58.82, 0.06, 0.1, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (344, 27, 13, 10.25, 0.07, 0.14, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (345, 150, 4, 49.84, 0.08, 0.13, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (346, 1, 2, 45.26, 0.01, 0.13, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (347, 86, 91, 47.52, 0.1, 0.03, 0.0, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (348, 76, 34, 29.67, 0.09, 0.14, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (349, 50, 11, 6.85, 0.03, 0.14, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (350, 117, 92, 11.8, 0.13, 0.11, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (351, 28, 23, 47.77, 0.04, 0.12, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (352, 68, 36, 46.82, 0.11, 0.05, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (353, 140, 4, 59.46, 0.05, 0.13, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (354, 137, 4, 10.73, 0.05, 0.15, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (355, 129, 72, 33.63, 0.14, 0.04, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (356, 104, 68, 41.47, 0.08, 0.06, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (357, 16, 93, 9.11, 0.09, 0.12, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (358, 138, 70, 23.14, 0.05, 0.01, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (359, 41, 81, 13.17, 0.09, 0.07, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (360, 120, 11, 35.86, 0.12, 0.04, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (361, 12, 20, 16.06, 0.1, 0.0, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (362, 93, 100, 30.96, 0.14, 0.13, 0.12, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (363, 88, 69, 20.62, 0.04, 0.09, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (364, 28, 95, 58.37, 0.09, 0.01, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (365, 133, 86, 3.23, 0.15, 0.07, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (366, 63, 42, 16.4, 0.03, 0.09, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (367, 108, 59, 44.85, 0.05, 0.06, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (368, 101, 8, 9.21, 0.1, 0.12, 0.15, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (369, 93, 23, 20.15, 0.05, 0.04, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (370, 4, 28, 46.87, 0.02, 0.01, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (371, 20, 44, 17.61, 0.11, 0.1, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (372, 77, 72, 54.08, 0.12, 0.04, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (373, 89, 49, 15.61, 0.03, 0.01, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (374, 85, 45, 3.61, 0.02, 0.14, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (375, 97, 22, 56.31, 0.01, 0.08, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (376, 61, 96, 20.94, 0.08, 0.02, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (377, 103, 21, 29.44, 0.14, 0.09, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (378, 54, 11, 40.04, 0.07, 0.03, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (379, 5, 19, 11.2, 0.04, 0.08, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (380, 78, 9, 28.98, 0.05, 0.02, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (381, 135, 52, 35.46, 0.09, 0.14, 0.15, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (382, 77, 41, 16.03, 0.1, 0.07, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (383, 102, 48, 46.91, 0.1, 0.05, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (384, 140, 93, 44.92, 0.05, 0.11, 0.15, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (385, 124, 75, 45.56, 0.04, 0.12, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (386, 106, 44, 55.64, 0.08, 0.11, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (387, 61, 41, 5.29, 0.12, 0.07, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (388, 16, 65, 46.66, 0.07, 0.01, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (389, 50, 98, 14.17, 0.0, 0.07, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (390, 18, 18, 59.21, 0.05, 0.01, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (391, 31, 56, 48.81, 0.07, 0.03, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (392, 86, 44, 21.65, 0.06, 0.13, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (393, 36, 38, 21.93, 0.09, 0.06, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (394, 101, 73, 21.03, 0.11, 0.11, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (395, 63, 9, 21.58, 0.11, 0.02, 0.15, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (396, 16, 31, 11.66, 0.01, 0.1, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (397, 150, 84, 46.3, 0.01, 0.14, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (398, 44, 99, 10.44, 0.14, 0.15, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (399, 137, 78, 56.33, 0.05, 0.14, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (400, 74, 79, 17.45, 0.14, 0.06, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (401, 16, 26, 57.86, 0.14, 0.11, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (402, 95, 50, 44.02, 0.02, 0.05, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (403, 142, 29, 38.8, 0.0, 0.12, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (404, 32, 40, 6.14, 0.07, 0.05, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (405, 67, 13, 31.28, 0.13, 0.03, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (406, 146, 71, 49.49, 0.03, 0.12, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (407, 126, 1, 38.32, 0.09, 0.02, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (408, 94, 15, 22.76, 0.08, 0.04, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (409, 147, 11, 47.24, 0.1, 0.1, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (410, 136, 39, 31.34, 0.04, 0.1, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (411, 8, 94, 28.93, 0.06, 0.11, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (412, 25, 50, 49.76, 0.14, 0.06, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (413, 49, 75, 20.95, 0.14, 0.11, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (414, 70, 51, 46.45, 0.06, 0.01, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (415, 19, 31, 1.92, 0.07, 0.04, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (416, 68, 52, 6.28, 0.12, 0.05, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (417, 134, 60, 56.75, 0.12, 0.08, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (418, 3, 83, 27.45, 0.04, 0.13, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (419, 68, 61, 5.26, 0.11, 0.01, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (420, 86, 27, 46.58, 0.14, 0.05, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (421, 41, 34, 19.95, 0.0, 0.13, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (422, 72, 54, 20.99, 0.02, 0.07, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (423, 132, 92, 46.26, 0.1, 0.14, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (424, 148, 22, 37.86, 0.11, 0.11, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (425, 132, 100, 39.93, 0.15, 0.05, 0.0, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (426, 49, 65, 39.41, 0.03, 0.09, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (427, 78, 41, 54.82, 0.08, 0.05, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (428, 145, 70, 20.73, 0.01, 0.06, 0.02, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (429, 98, 56, 25.5, 0.07, 0.1, 0.14, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (430, 86, 37, 20.03, 0.0, 0.14, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (431, 16, 86, 32.17, 0.05, 0.06, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (432, 97, 84, 2.15, 0.09, 0.02, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (433, 47, 82, 27.71, 0.02, 0.07, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (434, 146, 90, 1.85, 0.14, 0.1, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (435, 6, 31, 13.77, 0.01, 0.02, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (436, 54, 84, 57.37, 0.13, 0.01, 0.04, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (437, 62, 61, 51.56, 0.13, 0.04, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (438, 89, 12, 21.69, 0.15, 0.02, 0.07, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (439, 122, 90, 41.93, 0.02, 0.08, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (440, 98, 84, 23.95, 0.09, 0.15, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (441, 76, 36, 8.36, 0.1, 0.07, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (442, 10, 78, 54.8, 0.01, 0.07, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (443, 44, 99, 28.3, 0.05, 0.1, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (444, 148, 19, 48.53, 0.08, 0.03, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (445, 65, 94, 35.4, 0.14, 0.0, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (446, 83, 23, 42.97, 0.0, 0.12, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (447, 78, 32, 20.89, 0.06, 0.02, 0.01, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (448, 100, 63, 15.26, 0.02, 0.02, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (449, 55, 39, 51.15, 0.11, 0.04, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (450, 142, 41, 41.32, 0.03, 0.14, 0.09, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (451, 127, 60, 47.86, 0.12, 0.14, 0.0, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (452, 78, 36, 39.82, 0.02, 0.13, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (453, 27, 57, 11.78, 0.1, 0.12, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (454, 134, 6, 57.78, 0.12, 0.09, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (455, 83, 84, 9.4, 0.04, 0.01, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (456, 139, 71, 31.79, 0.08, 0.04, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (457, 81, 12, 38.61, 0.03, 0.03, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (458, 3, 79, 21.24, 0.07, 0.06, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (459, 88, 91, 33.94, 0.01, 0.05, 0.1, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (460, 48, 37, 17.91, 0.13, 0.06, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (461, 85, 29, 31.0, 0.12, 0.02, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (462, 64, 94, 26.06, 0.06, 0.13, 0.08, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (463, 111, 29, 58.28, 0.02, 0.03, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (464, 135, 81, 58.48, 0.1, 0.06, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (465, 139, 37, 33.14, 0.02, 0.09, 0.0, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (466, 114, 56, 49.51, 0.11, 0.08, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (467, 100, 70, 58.86, 0.05, 0.09, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (468, 52, 39, 51.36, 0.05, 0.09, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (469, 113, 52, 12.55, 0.13, 0.01, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (470, 102, 47, 42.33, 0.11, 0.13, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (471, 119, 80, 59.76, 0.04, 0.07, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (472, 100, 42, 21.55, 0.14, 0.11, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (473, 8, 39, 29.64, 0.08, 0.02, 0.1, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (474, 39, 32, 43.71, 0.11, 0.02, 0.03, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (475, 69, 47, 22.91, 0.05, 0.13, 0.07, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (476, 81, 55, 36.98, 0.11, 0.15, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (477, 30, 48, 53.12, 0.12, 0.02, 0.08, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (478, 7, 6, 19.0, 0.08, 0.03, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (479, 144, 7, 58.2, 0.0, 0.03, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (480, 147, 91, 5.98, 0.06, 0.03, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (481, 138, 65, 7.18, 0.1, 0.01, 0.13, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (482, 85, 26, 18.97, 0.08, 0.03, 0.12, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (483, 48, 76, 46.8, 0.11, 0.04, 0.06, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (484, 53, 74, 28.33, 0.14, 0.07, 0.01, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (485, 31, 44, 54.24, 0.13, 0.12, 0.13, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (486, 47, 84, 21.06, 0.0, 0.01, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (487, 141, 94, 18.05, 0.05, 0.05, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (488, 20, 23, 4.49, 0.08, 0.01, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (489, 132, 17, 23.07, 0.01, 0.14, 0.14, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (490, 90, 4, 30.32, 0.01, 0.12, 0.04, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (491, 127, 49, 57.12, 0.03, 0.14, 0.09, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (492, 58, 53, 48.54, 0.0, 0.03, 0.11, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (493, 42, 52, 32.59, 0.14, 0.07, 0.06, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (494, 135, 12, 49.51, 0.04, 0.12, 0.11, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (495, 28, 21, 44.01, 0.07, 0.1, 0.02, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (496, 119, 73, 59.74, 0.08, 0.06, 0.0, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (497, 77, 99, 10.1, 0.07, 0.07, 0.05, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (498, 11, 20, 9.06, 0.01, 0.01, 0.03, 1);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (499, 78, 25, 1.04, 0.06, 0.03, 0.05, 0);
-insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values (500, 115, 59, 3.08, 0.01, 0.14, 0.0, 0);
+insert into SalesDetails (id, Sale, Book, Price, PST, HST, GST, Removed) values
+(1, 9, 72, 30.28, 0.11, 0.0, 0.03, 1)
+, (2, 60, 32, 57.52, 0.12, 0.09, 0.07, 0)
+, (3, 135, 30, 44.96, 0.13, 0.13, 0.15, 0)
+, (4, 99, 25, 14.39, 0.13, 0.06, 0.11, 1)
+, (5, 22, 50, 14.35, 0.13, 0.08, 0.1, 0)
+, (6, 111, 29, 34.3, 0.13, 0.12, 0.06, 1)
+, (7, 45, 53, 41.26, 0.07, 0.03, 0.03, 1)
+, (8, 122, 7, 39.87, 0.12, 0.09, 0.01, 1)
+, (9, 40, 58, 25.09, 0.03, 0.12, 0.05, 1)
+, (10, 38, 61, 43.45, 0.02, 0.07, 0.07, 0)
+, (11, 34, 22, 9.89, 0.13, 0.01, 0.11, 0)
+, (12, 35, 6, 28.49, 0.12, 0.07, 0.04, 1)
+, (13, 6, 38, 56.81, 0.13, 0.07, 0.04, 1)
+, (14, 131, 21, 36.45, 0.05, 0.01, 0.03, 0)
+, (15, 67, 3, 41.6, 0.03, 0.13, 0.03, 1)
+, (16, 88, 48, 55.41, 0.09, 0.03, 0.05, 0)
+, (17, 59, 96, 52.69, 0.14, 0.01, 0.01, 0)
+, (18, 78, 79, 49.0, 0.06, 0.06, 0.14, 1)
+, (19, 115, 16, 30.28, 0.12, 0.01, 0.09, 1)
+, (20, 128, 19, 5.67, 0.03, 0.11, 0.14, 0)
+, (21, 25, 45, 3.48, 0.02, 0.05, 0.1, 0)
+, (22, 34, 15, 57.48, 0.08, 0.11, 0.11, 1)
+, (23, 96, 9, 30.68, 0.05, 0.11, 0.13, 1)
+, (24, 64, 82, 58.61, 0.03, 0.03, 0.02, 0)
+, (25, 98, 77, 38.44, 0.04, 0.08, 0.04, 1)
+, (26, 2, 26, 3.65, 0.06, 0.05, 0.12, 0)
+, (27, 13, 50, 57.58, 0.0, 0.07, 0.13, 1)
+, (28, 48, 23, 17.86, 0.05, 0.01, 0.05, 1)
+, (29, 110, 4, 27.46, 0.04, 0.14, 0.14, 0)
+, (30, 49, 60, 48.06, 0.1, 0.13, 0.11, 0)
+, (31, 43, 89, 23.37, 0.03, 0.12, 0.09, 1)
+, (32, 102, 88, 17.83, 0.13, 0.08, 0.13, 1)
+, (33, 17, 22, 44.55, 0.11, 0.13, 0.13, 1)
+, (34, 12, 13, 57.55, 0.0, 0.09, 0.07, 0)
+, (35, 143, 6, 47.48, 0.07, 0.08, 0.14, 0)
+, (36, 59, 80, 26.92, 0.04, 0.11, 0.01, 0)
+, (37, 65, 30, 19.68, 0.11, 0.11, 0.04, 0)
+, (38, 125, 96, 29.15, 0.07, 0.01, 0.12, 1)
+, (39, 22, 50, 39.6, 0.14, 0.03, 0.09, 1)
+, (40, 48, 41, 11.91, 0.0, 0.09, 0.09, 1)
+, (41, 16, 52, 30.65, 0.12, 0.05, 0.09, 1)
+, (42, 101, 60, 48.55, 0.02, 0.07, 0.09, 1)
+, (43, 8, 74, 31.86, 0.12, 0.11, 0.14, 0)
+, (44, 107, 2, 8.59, 0.02, 0.15, 0.14, 1)
+, (45, 43, 43, 10.16, 0.01, 0.09, 0.13, 1)
+, (46, 19, 48, 28.98, 0.08, 0.02, 0.05, 0)
+, (47, 146, 10, 47.92, 0.05, 0.02, 0.07, 0)
+, (48, 58, 21, 24.01, 0.09, 0.01, 0.14, 1)
+, (49, 18, 15, 44.6, 0.1, 0.07, 0.11, 1)
+, (50, 31, 81, 42.25, 0.0, 0.01, 0.14, 0)
+, (51, 147, 62, 41.11, 0.08, 0.01, 0.03, 0)
+, (52, 109, 80, 13.32, 0.14, 0.13, 0.07, 0)
+, (53, 147, 6, 26.33, 0.14, 0.14, 0.11, 1)
+, (54, 8, 74, 54.67, 0.01, 0.13, 0.09, 1)
+, (55, 79, 10, 41.17, 0.11, 0.03, 0.02, 0)
+, (56, 5, 90, 37.65, 0.13, 0.08, 0.08, 0)
+, (57, 57, 18, 34.55, 0.13, 0.03, 0.07, 0)
+, (58, 112, 77, 41.09, 0.11, 0.13, 0.04, 0)
+, (59, 72, 51, 40.04, 0.01, 0.04, 0.13, 1)
+, (60, 52, 44, 58.61, 0.12, 0.05, 0.04, 1)
+, (61, 101, 64, 50.51, 0.01, 0.0, 0.15, 0)
+, (62, 66, 38, 12.63, 0.14, 0.04, 0.04, 0)
+, (63, 74, 37, 20.04, 0.08, 0.03, 0.03, 0)
+, (64, 95, 61, 34.73, 0.06, 0.04, 0.05, 0)
+, (65, 148, 61, 28.01, 0.04, 0.12, 0.14, 0)
+, (66, 31, 85, 6.59, 0.1, 0.07, 0.09, 1)
+, (67, 150, 63, 24.87, 0.07, 0.12, 0.05, 0)
+, (68, 24, 27, 12.86, 0.12, 0.12, 0.09, 1)
+, (69, 45, 37, 53.66, 0.1, 0.08, 0.14, 1)
+, (70, 38, 60, 28.85, 0.03, 0.12, 0.05, 1)
+, (71, 124, 80, 19.29, 0.08, 0.1, 0.11, 1)
+, (72, 94, 4, 54.36, 0.05, 0.04, 0.09, 0)
+, (73, 144, 65, 56.07, 0.02, 0.14, 0.13, 1)
+, (74, 44, 13, 44.11, 0.13, 0.03, 0.03, 0)
+, (75, 115, 86, 23.21, 0.05, 0.06, 0.09, 0)
+, (76, 39, 5, 24.14, 0.03, 0.11, 0.15, 1)
+, (77, 62, 11, 48.09, 0.12, 0.14, 0.13, 0)
+, (78, 140, 93, 4.88, 0.14, 0.09, 0.02, 0)
+, (79, 62, 9, 16.56, 0.02, 0.07, 0.07, 0)
+, (80, 15, 31, 21.15, 0.1, 0.13, 0.07, 1)
+, (81, 140, 61, 46.79, 0.09, 0.11, 0.07, 0)
+, (82, 20, 84, 11.47, 0.1, 0.06, 0.04, 0)
+, (83, 103, 19, 53.63, 0.04, 0.07, 0.01, 1)
+, (84, 118, 79, 41.83, 0.12, 0.09, 0.02, 1)
+, (85, 48, 33, 20.31, 0.11, 0.02, 0.06, 1)
+, (86, 74, 30, 34.29, 0.12, 0.08, 0.13, 0)
+, (87, 42, 70, 5.16, 0.0, 0.03, 0.08, 0)
+, (88, 130, 76, 32.41, 0.02, 0.12, 0.11, 0)
+, (89, 19, 99, 43.27, 0.01, 0.06, 0.03, 0)
+, (90, 106, 90, 51.04, 0.02, 0.1, 0.07, 1)
+, (91, 15, 39, 34.72, 0.05, 0.03, 0.06, 1)
+, (92, 56, 1, 8.94, 0.05, 0.12, 0.05, 1)
+, (93, 35, 55, 13.0, 0.04, 0.09, 0.11, 1)
+, (94, 150, 79, 48.36, 0.12, 0.13, 0.01, 1)
+, (95, 145, 21, 30.36, 0.12, 0.07, 0.11, 1)
+, (96, 39, 84, 56.44, 0.11, 0.02, 0.13, 1)
+, (97, 128, 26, 30.33, 0.02, 0.05, 0.06, 0)
+, (98, 129, 40, 36.72, 0.13, 0.02, 0.12, 1)
+, (99, 103, 5, 20.7, 0.0, 0.04, 0.0, 1)
+, (100, 100, 62, 54.2, 0.03, 0.13, 0.1, 0)
+, (101, 77, 48, 6.72, 0.11, 0.01, 0.13, 0)
+, (102, 95, 33, 27.25, 0.12, 0.04, 0.11, 1)
+, (103, 27, 50, 23.92, 0.0, 0.05, 0.02, 1)
+, (104, 65, 79, 20.0, 0.15, 0.02, 0.14, 1)
+, (105, 109, 11, 8.51, 0.03, 0.01, 0.08, 0)
+, (106, 24, 61, 4.88, 0.01, 0.12, 0.02, 1)
+, (107, 3, 77, 27.47, 0.03, 0.09, 0.09, 1)
+, (108, 13, 36, 38.15, 0.11, 0.01, 0.14, 1)
+, (109, 101, 11, 56.78, 0.12, 0.12, 0.13, 0)
+, (110, 90, 42, 42.2, 0.14, 0.1, 0.07, 1)
+, (111, 113, 40, 48.44, 0.02, 0.11, 0.07, 0)
+, (112, 57, 31, 14.42, 0.01, 0.13, 0.07, 1)
+, (113, 109, 100, 54.57, 0.15, 0.14, 0.09, 1)
+, (114, 62, 14, 4.2, 0.07, 0.13, 0.12, 1)
+, (115, 47, 25, 29.65, 0.1, 0.09, 0.11, 0)
+, (116, 128, 8, 7.31, 0.04, 0.09, 0.12, 0)
+, (117, 25, 92, 8.55, 0.13, 0.1, 0.02, 1)
+, (118, 3, 6, 34.3, 0.13, 0.07, 0.13, 1)
+, (119, 137, 30, 57.71, 0.14, 0.1, 0.07, 0)
+, (120, 48, 92, 13.06, 0.14, 0.14, 0.12, 1)
+, (121, 139, 30, 14.08, 0.03, 0.05, 0.03, 1)
+, (122, 125, 82, 36.54, 0.02, 0.1, 0.14, 0)
+, (123, 20, 57, 46.86, 0.11, 0.06, 0.05, 0)
+, (124, 133, 60, 6.15, 0.12, 0.04, 0.08, 1)
+, (125, 36, 74, 41.77, 0.12, 0.14, 0.07, 1)
+, (126, 131, 39, 13.59, 0.14, 0.03, 0.02, 0)
+, (127, 125, 1, 27.04, 0.14, 0.14, 0.13, 0)
+, (128, 32, 3, 29.37, 0.02, 0.05, 0.03, 1)
+, (129, 137, 19, 49.27, 0.11, 0.07, 0.11, 1)
+, (130, 108, 54, 12.16, 0.06, 0.1, 0.01, 1)
+, (131, 60, 89, 28.18, 0.03, 0.02, 0.05, 0)
+, (132, 48, 49, 42.49, 0.11, 0.13, 0.11, 0)
+, (133, 19, 28, 40.56, 0.0, 0.14, 0.07, 0)
+, (134, 91, 59, 24.42, 0.05, 0.13, 0.09, 1)
+, (135, 3, 19, 53.96, 0.03, 0.0, 0.01, 0)
+, (136, 32, 76, 16.37, 0.07, 0.1, 0.08, 1)
+, (137, 87, 62, 24.05, 0.15, 0.12, 0.03, 1)
+, (138, 117, 67, 12.26, 0.09, 0.07, 0.03, 1)
+, (139, 45, 45, 55.18, 0.15, 0.09, 0.09, 1)
+, (140, 143, 7, 56.34, 0.02, 0.1, 0.01, 0)
+, (141, 124, 88, 52.93, 0.13, 0.1, 0.1, 1)
+, (142, 36, 100, 28.56, 0.09, 0.11, 0.09, 1)
+, (143, 68, 1, 50.41, 0.03, 0.03, 0.12, 0)
+, (144, 138, 50, 58.75, 0.11, 0.06, 0.13, 0)
+, (145, 97, 35, 20.88, 0.02, 0.12, 0.15, 0)
+, (146, 64, 15, 35.85, 0.04, 0.06, 0.13, 1)
+, (147, 118, 52, 24.86, 0.08, 0.15, 0.15, 1)
+, (148, 22, 100, 17.04, 0.15, 0.02, 0.07, 1)
+, (149, 123, 40, 40.74, 0.14, 0.0, 0.12, 0)
+, (150, 75, 100, 20.99, 0.12, 0.07, 0.07, 0)
+, (151, 110, 6, 43.07, 0.05, 0.11, 0.01, 1)
+, (152, 89, 33, 29.52, 0.14, 0.13, 0.07, 1)
+, (153, 50, 56, 53.54, 0.08, 0.04, 0.09, 1)
+, (154, 139, 22, 55.9, 0.09, 0.07, 0.12, 1)
+, (155, 109, 49, 31.59, 0.02, 0.09, 0.0, 1)
+, (156, 45, 5, 56.36, 0.09, 0.02, 0.01, 0)
+, (157, 94, 9, 5.62, 0.08, 0.14, 0.07, 1)
+, (158, 52, 12, 9.95, 0.13, 0.08, 0.04, 0)
+, (159, 28, 31, 37.54, 0.03, 0.13, 0.02, 1)
+, (160, 33, 66, 1.71, 0.05, 0.13, 0.14, 0)
+, (161, 100, 56, 13.83, 0.04, 0.0, 0.07, 0)
+, (162, 89, 49, 55.15, 0.09, 0.01, 0.12, 0)
+, (163, 104, 10, 49.27, 0.07, 0.05, 0.06, 0)
+, (164, 138, 18, 50.1, 0.13, 0.12, 0.03, 1)
+, (165, 137, 92, 26.35, 0.06, 0.04, 0.1, 0)
+, (166, 93, 48, 21.36, 0.07, 0.15, 0.02, 1)
+, (167, 35, 85, 15.89, 0.1, 0.09, 0.08, 1)
+, (168, 33, 25, 25.51, 0.05, 0.04, 0.01, 0)
+, (169, 28, 14, 26.96, 0.1, 0.11, 0.08, 0)
+, (170, 79, 53, 45.9, 0.1, 0.06, 0.11, 1)
+, (171, 15, 85, 31.13, 0.01, 0.1, 0.02, 0)
+, (172, 65, 81, 1.46, 0.08, 0.14, 0.03, 1)
+, (173, 23, 91, 48.78, 0.04, 0.15, 0.1, 1)
+, (174, 106, 45, 24.17, 0.06, 0.14, 0.12, 0)
+, (175, 95, 1, 16.01, 0.09, 0.04, 0.07, 1)
+, (176, 47, 31, 37.08, 0.03, 0.08, 0.13, 1)
+, (177, 120, 84, 49.34, 0.15, 0.01, 0.12, 1)
+, (178, 50, 38, 16.89, 0.09, 0.13, 0.01, 0)
+, (179, 121, 78, 31.63, 0.0, 0.15, 0.0, 1)
+, (180, 105, 68, 9.25, 0.12, 0.15, 0.0, 1)
+, (181, 82, 90, 5.92, 0.02, 0.05, 0.13, 0)
+, (182, 60, 73, 53.96, 0.0, 0.07, 0.06, 1)
+, (183, 138, 18, 2.55, 0.04, 0.03, 0.12, 0)
+, (184, 56, 43, 8.65, 0.03, 0.09, 0.0, 1)
+, (185, 54, 54, 53.97, 0.15, 0.04, 0.13, 0)
+, (186, 108, 68, 4.86, 0.14, 0.02, 0.05, 0)
+, (187, 83, 61, 38.41, 0.05, 0.07, 0.1, 0)
+, (188, 53, 92, 43.42, 0.14, 0.11, 0.02, 0)
+, (189, 86, 61, 7.55, 0.09, 0.03, 0.05, 0)
+, (190, 17, 96, 29.01, 0.07, 0.08, 0.13, 1)
+, (191, 24, 5, 10.67, 0.11, 0.03, 0.05, 1)
+, (192, 87, 30, 14.11, 0.1, 0.13, 0.01, 0)
+, (193, 9, 73, 25.82, 0.05, 0.06, 0.15, 1)
+, (194, 149, 54, 51.27, 0.02, 0.06, 0.05, 1)
+, (195, 34, 79, 20.07, 0.11, 0.09, 0.03, 0)
+, (196, 110, 27, 34.62, 0.02, 0.08, 0.03, 1)
+, (197, 105, 44, 49.17, 0.06, 0.07, 0.06, 1)
+, (198, 135, 21, 41.19, 0.12, 0.1, 0.05, 1)
+, (199, 138, 53, 6.66, 0.1, 0.06, 0.02, 1)
+, (200, 32, 51, 39.64, 0.0, 0.13, 0.03, 1)
+, (201, 72, 23, 30.8, 0.1, 0.13, 0.09, 1)
+, (202, 125, 70, 50.33, 0.1, 0.13, 0.12, 0)
+, (203, 145, 48, 41.48, 0.07, 0.04, 0.09, 0)
+, (204, 147, 5, 5.3, 0.11, 0.01, 0.05, 0)
+, (205, 39, 66, 53.37, 0.05, 0.06, 0.09, 0)
+, (206, 20, 40, 28.13, 0.08, 0.02, 0.09, 1)
+, (207, 89, 49, 14.46, 0.14, 0.12, 0.11, 1)
+, (208, 46, 78, 8.71, 0.01, 0.01, 0.01, 1)
+, (209, 105, 1, 33.67, 0.15, 0.08, 0.12, 0)
+, (210, 49, 25, 53.03, 0.15, 0.01, 0.13, 0)
+, (211, 12, 30, 42.46, 0.06, 0.01, 0.0, 0)
+, (212, 148, 76, 14.31, 0.12, 0.03, 0.01, 1)
+, (213, 141, 13, 26.23, 0.05, 0.05, 0.02, 0)
+, (214, 19, 17, 23.45, 0.07, 0.02, 0.12, 1)
+, (215, 59, 53, 11.53, 0.14, 0.12, 0.1, 0)
+, (216, 118, 7, 32.93, 0.13, 0.06, 0.15, 1)
+, (217, 35, 98, 18.81, 0.04, 0.03, 0.03, 0)
+, (218, 41, 48, 13.8, 0.06, 0.12, 0.12, 0)
+, (219, 29, 69, 59.41, 0.12, 0.12, 0.01, 1)
+, (220, 106, 23, 49.86, 0.09, 0.01, 0.03, 1)
+, (221, 49, 31, 15.44, 0.09, 0.05, 0.1, 1)
+, (222, 88, 74, 28.05, 0.15, 0.02, 0.02, 1)
+, (223, 146, 95, 9.74, 0.06, 0.09, 0.13, 0)
+, (224, 43, 80, 9.46, 0.02, 0.13, 0.04, 0)
+, (225, 146, 71, 43.09, 0.05, 0.15, 0.13, 0)
+, (226, 85, 18, 46.15, 0.03, 0.15, 0.13, 0)
+, (227, 92, 19, 24.18, 0.08, 0.0, 0.04, 1)
+, (228, 52, 55, 51.62, 0.05, 0.13, 0.03, 0)
+, (229, 57, 57, 25.13, 0.13, 0.11, 0.04, 0)
+, (230, 20, 67, 29.8, 0.0, 0.14, 0.13, 0)
+, (231, 118, 31, 38.42, 0.01, 0.12, 0.08, 0)
+, (232, 147, 38, 22.12, 0.09, 0.13, 0.03, 1)
+, (233, 12, 100, 43.13, 0.1, 0.03, 0.08, 1)
+, (234, 34, 75, 6.2, 0.1, 0.05, 0.07, 0)
+, (235, 8, 8, 17.5, 0.09, 0.12, 0.15, 0)
+, (236, 69, 43, 56.83, 0.02, 0.1, 0.14, 1)
+, (237, 38, 53, 3.56, 0.1, 0.04, 0.12, 1)
+, (238, 102, 45, 6.75, 0.03, 0.08, 0.02, 1)
+, (239, 112, 41, 22.75, 0.08, 0.07, 0.03, 1)
+, (240, 54, 65, 30.7, 0.13, 0.02, 0.06, 1)
+, (241, 74, 2, 45.94, 0.08, 0.09, 0.06, 0)
+, (242, 124, 4, 2.51, 0.02, 0.1, 0.08, 0)
+, (243, 29, 36, 48.12, 0.0, 0.04, 0.12, 0)
+, (244, 123, 85, 23.13, 0.06, 0.06, 0.03, 1)
+, (245, 62, 30, 23.83, 0.14, 0.07, 0.13, 1)
+, (246, 86, 21, 4.41, 0.1, 0.06, 0.11, 0)
+, (247, 41, 56, 38.83, 0.1, 0.07, 0.08, 1)
+, (248, 20, 48, 19.93, 0.14, 0.09, 0.04, 0)
+, (249, 37, 55, 35.85, 0.02, 0.06, 0.03, 0)
+, (250, 90, 65, 10.45, 0.03, 0.11, 0.15, 1)
+, (251, 43, 71, 52.99, 0.12, 0.15, 0.08, 1)
+, (252, 108, 89, 50.02, 0.05, 0.08, 0.14, 1)
+, (253, 40, 97, 53.96, 0.05, 0.13, 0.01, 0)
+, (254, 128, 93, 5.19, 0.09, 0.08, 0.08, 0)
+, (255, 50, 41, 43.29, 0.1, 0.09, 0.12, 0)
+, (256, 5, 31, 34.28, 0.07, 0.0, 0.12, 1)
+, (257, 131, 50, 42.66, 0.03, 0.01, 0.04, 0)
+, (258, 67, 92, 18.39, 0.06, 0.01, 0.05, 0)
+, (259, 52, 14, 25.12, 0.11, 0.13, 0.13, 1)
+, (260, 74, 80, 6.43, 0.12, 0.0, 0.11, 1)
+, (261, 54, 42, 36.04, 0.0, 0.02, 0.08, 0)
+, (262, 82, 32, 5.85, 0.03, 0.08, 0.01, 0)
+, (263, 112, 36, 34.02, 0.06, 0.06, 0.13, 1)
+, (264, 127, 32, 4.05, 0.07, 0.13, 0.01, 0)
+, (265, 73, 71, 49.89, 0.01, 0.07, 0.01, 1)
+, (266, 57, 29, 7.76, 0.09, 0.03, 0.1, 0)
+, (267, 129, 92, 51.81, 0.12, 0.06, 0.06, 1)
+, (268, 73, 5, 42.85, 0.1, 0.1, 0.14, 0)
+, (269, 30, 48, 48.35, 0.13, 0.13, 0.05, 0)
+, (270, 68, 27, 17.11, 0.08, 0.0, 0.07, 0)
+, (271, 61, 91, 7.57, 0.14, 0.02, 0.08, 0)
+, (272, 92, 8, 26.45, 0.01, 0.15, 0.09, 1)
+, (273, 142, 58, 13.28, 0.05, 0.1, 0.02, 1)
+, (274, 76, 62, 25.56, 0.08, 0.06, 0.08, 1)
+, (275, 6, 95, 55.34, 0.1, 0.03, 0.03, 0)
+, (276, 137, 57, 14.22, 0.11, 0.03, 0.01, 0)
+, (277, 11, 60, 14.52, 0.08, 0.03, 0.13, 0)
+, (278, 143, 66, 54.27, 0.09, 0.06, 0.14, 1)
+, (279, 129, 37, 7.1, 0.07, 0.13, 0.02, 0)
+, (280, 49, 92, 49.55, 0.1, 0.13, 0.11, 0)
+, (281, 86, 33, 47.88, 0.08, 0.03, 0.08, 1)
+, (282, 42, 13, 55.12, 0.04, 0.05, 0.06, 0)
+, (283, 103, 33, 35.23, 0.05, 0.12, 0.12, 0)
+, (284, 7, 22, 19.26, 0.06, 0.05, 0.12, 0)
+, (285, 11, 91, 27.53, 0.12, 0.05, 0.13, 1)
+, (286, 99, 80, 41.44, 0.11, 0.1, 0.0, 1)
+, (287, 85, 51, 52.32, 0.15, 0.15, 0.06, 1)
+, (288, 136, 43, 10.0, 0.0, 0.12, 0.09, 1)
+, (289, 60, 90, 20.42, 0.04, 0.15, 0.05, 0)
+, (290, 60, 91, 40.99, 0.14, 0.13, 0.09, 0)
+, (291, 51, 85, 52.63, 0.08, 0.11, 0.14, 1)
+, (292, 109, 85, 23.12, 0.1, 0.02, 0.13, 0)
+, (293, 148, 38, 27.8, 0.03, 0.03, 0.09, 1)
+, (294, 135, 100, 19.12, 0.13, 0.1, 0.01, 0)
+, (295, 78, 10, 31.53, 0.08, 0.01, 0.14, 0)
+, (296, 16, 27, 50.98, 0.04, 0.15, 0.11, 0)
+, (297, 82, 23, 45.92, 0.07, 0.01, 0.0, 1)
+, (298, 60, 85, 22.56, 0.04, 0.02, 0.13, 0)
+, (299, 109, 86, 32.29, 0.04, 0.08, 0.01, 1)
+, (300, 42, 29, 4.95, 0.06, 0.03, 0.12, 0)
+, (301, 5, 41, 37.56, 0.13, 0.07, 0.04, 0)
+, (302, 90, 59, 19.84, 0.02, 0.13, 0.06, 1)
+, (303, 148, 19, 14.72, 0.11, 0.14, 0.01, 0)
+, (304, 67, 94, 9.27, 0.09, 0.04, 0.04, 1)
+, (305, 62, 38, 57.13, 0.03, 0.07, 0.14, 0)
+, (306, 104, 78, 1.18, 0.06, 0.13, 0.13, 0)
+, (307, 29, 86, 58.67, 0.13, 0.1, 0.09, 1)
+, (308, 36, 60, 22.45, 0.09, 0.08, 0.07, 0)
+, (309, 122, 61, 29.73, 0.05, 0.13, 0.11, 1)
+, (310, 67, 75, 15.96, 0.07, 0.09, 0.12, 0)
+, (311, 148, 59, 52.31, 0.04, 0.01, 0.04, 1)
+, (312, 99, 30, 12.68, 0.13, 0.11, 0.09, 1)
+, (313, 131, 61, 11.54, 0.03, 0.08, 0.01, 1)
+, (314, 113, 46, 10.04, 0.03, 0.0, 0.08, 0)
+, (315, 70, 41, 36.62, 0.05, 0.04, 0.03, 0)
+, (316, 28, 53, 9.16, 0.02, 0.04, 0.11, 1)
+, (317, 75, 69, 50.98, 0.1, 0.02, 0.05, 0)
+, (318, 97, 58, 52.97, 0.1, 0.15, 0.04, 0)
+, (319, 49, 98, 49.31, 0.01, 0.08, 0.09, 0)
+, (320, 81, 46, 55.34, 0.11, 0.04, 0.03, 0)
+, (321, 105, 25, 17.18, 0.08, 0.11, 0.03, 1)
+, (322, 86, 93, 19.47, 0.13, 0.15, 0.06, 0)
+, (323, 10, 26, 37.61, 0.09, 0.02, 0.09, 0)
+, (324, 97, 93, 17.29, 0.06, 0.14, 0.14, 0)
+, (325, 15, 9, 40.36, 0.0, 0.12, 0.13, 0)
+, (326, 144, 52, 48.58, 0.11, 0.11, 0.11, 0)
+, (327, 82, 84, 44.84, 0.05, 0.09, 0.07, 0)
+, (328, 113, 15, 33.26, 0.06, 0.14, 0.03, 0)
+, (329, 108, 62, 18.71, 0.06, 0.05, 0.03, 1)
+, (330, 150, 52, 10.79, 0.14, 0.08, 0.01, 1)
+, (331, 106, 65, 54.1, 0.11, 0.05, 0.02, 0)
+, (332, 77, 43, 20.2, 0.01, 0.02, 0.02, 0)
+, (333, 129, 7, 1.36, 0.1, 0.02, 0.08, 1)
+, (334, 67, 95, 11.92, 0.11, 0.1, 0.1, 1)
+, (335, 131, 29, 41.44, 0.13, 0.02, 0.09, 1)
+, (336, 4, 61, 3.72, 0.07, 0.12, 0.01, 0)
+, (337, 2, 93, 28.52, 0.07, 0.04, 0.09, 0)
+, (338, 140, 44, 48.21, 0.04, 0.1, 0.14, 1)
+, (339, 120, 14, 17.73, 0.03, 0.12, 0.09, 1)
+, (340, 18, 31, 50.12, 0.11, 0.11, 0.1, 0)
+, (341, 4, 7, 37.01, 0.03, 0.06, 0.11, 1)
+, (342, 5, 42, 15.39, 0.07, 0.14, 0.06, 1)
+, (343, 59, 69, 58.82, 0.06, 0.1, 0.1, 1)
+, (344, 27, 13, 10.25, 0.07, 0.14, 0.12, 1)
+, (345, 150, 4, 49.84, 0.08, 0.13, 0.12, 0)
+, (346, 1, 2, 45.26, 0.01, 0.13, 0.02, 1)
+, (347, 86, 91, 47.52, 0.1, 0.03, 0.0, 0)
+, (348, 76, 34, 29.67, 0.09, 0.14, 0.04, 1)
+, (349, 50, 11, 6.85, 0.03, 0.14, 0.04, 0)
+, (350, 117, 92, 11.8, 0.13, 0.11, 0.14, 0)
+, (351, 28, 23, 47.77, 0.04, 0.12, 0.13, 0)
+, (352, 68, 36, 46.82, 0.11, 0.05, 0.09, 1)
+, (353, 140, 4, 59.46, 0.05, 0.13, 0.12, 1)
+, (354, 137, 4, 10.73, 0.05, 0.15, 0.03, 0)
+, (355, 129, 72, 33.63, 0.14, 0.04, 0.07, 0)
+, (356, 104, 68, 41.47, 0.08, 0.06, 0.12, 0)
+, (357, 16, 93, 9.11, 0.09, 0.12, 0.05, 0)
+, (358, 138, 70, 23.14, 0.05, 0.01, 0.07, 0)
+, (359, 41, 81, 13.17, 0.09, 0.07, 0.08, 1)
+, (360, 120, 11, 35.86, 0.12, 0.04, 0.06, 0)
+, (361, 12, 20, 16.06, 0.1, 0.0, 0.08, 1)
+, (362, 93, 100, 30.96, 0.14, 0.13, 0.12, 1)
+, (363, 88, 69, 20.62, 0.04, 0.09, 0.1, 1)
+, (364, 28, 95, 58.37, 0.09, 0.01, 0.14, 1)
+, (365, 133, 86, 3.23, 0.15, 0.07, 0.08, 0)
+, (366, 63, 42, 16.4, 0.03, 0.09, 0.02, 1)
+, (367, 108, 59, 44.85, 0.05, 0.06, 0.1, 1)
+, (368, 101, 8, 9.21, 0.1, 0.12, 0.15, 1)
+, (369, 93, 23, 20.15, 0.05, 0.04, 0.02, 1)
+, (370, 4, 28, 46.87, 0.02, 0.01, 0.05, 0)
+, (371, 20, 44, 17.61, 0.11, 0.1, 0.06, 0)
+, (372, 77, 72, 54.08, 0.12, 0.04, 0.03, 0)
+, (373, 89, 49, 15.61, 0.03, 0.01, 0.04, 1)
+, (374, 85, 45, 3.61, 0.02, 0.14, 0.01, 1)
+, (375, 97, 22, 56.31, 0.01, 0.08, 0.04, 1)
+, (376, 61, 96, 20.94, 0.08, 0.02, 0.11, 1)
+, (377, 103, 21, 29.44, 0.14, 0.09, 0.09, 0)
+, (378, 54, 11, 40.04, 0.07, 0.03, 0.08, 1)
+, (379, 5, 19, 11.2, 0.04, 0.08, 0.12, 0)
+, (380, 78, 9, 28.98, 0.05, 0.02, 0.09, 0)
+, (381, 135, 52, 35.46, 0.09, 0.14, 0.15, 1)
+, (382, 77, 41, 16.03, 0.1, 0.07, 0.08, 0)
+, (383, 102, 48, 46.91, 0.1, 0.05, 0.01, 1)
+, (384, 140, 93, 44.92, 0.05, 0.11, 0.15, 0)
+, (385, 124, 75, 45.56, 0.04, 0.12, 0.07, 1)
+, (386, 106, 44, 55.64, 0.08, 0.11, 0.03, 0)
+, (387, 61, 41, 5.29, 0.12, 0.07, 0.02, 0)
+, (388, 16, 65, 46.66, 0.07, 0.01, 0.13, 1)
+, (389, 50, 98, 14.17, 0.0, 0.07, 0.1, 1)
+, (390, 18, 18, 59.21, 0.05, 0.01, 0.14, 1)
+, (391, 31, 56, 48.81, 0.07, 0.03, 0.09, 1)
+, (392, 86, 44, 21.65, 0.06, 0.13, 0.02, 1)
+, (393, 36, 38, 21.93, 0.09, 0.06, 0.02, 1)
+, (394, 101, 73, 21.03, 0.11, 0.11, 0.06, 1)
+, (395, 63, 9, 21.58, 0.11, 0.02, 0.15, 1)
+, (396, 16, 31, 11.66, 0.01, 0.1, 0.03, 1)
+, (397, 150, 84, 46.3, 0.01, 0.14, 0.09, 1)
+, (398, 44, 99, 10.44, 0.14, 0.15, 0.05, 1)
+, (399, 137, 78, 56.33, 0.05, 0.14, 0.01, 1)
+, (400, 74, 79, 17.45, 0.14, 0.06, 0.1, 1)
+, (401, 16, 26, 57.86, 0.14, 0.11, 0.09, 0)
+, (402, 95, 50, 44.02, 0.02, 0.05, 0.05, 1)
+, (403, 142, 29, 38.8, 0.0, 0.12, 0.14, 1)
+, (404, 32, 40, 6.14, 0.07, 0.05, 0.14, 0)
+, (405, 67, 13, 31.28, 0.13, 0.03, 0.04, 0)
+, (406, 146, 71, 49.49, 0.03, 0.12, 0.01, 1)
+, (407, 126, 1, 38.32, 0.09, 0.02, 0.1, 1)
+, (408, 94, 15, 22.76, 0.08, 0.04, 0.09, 1)
+, (409, 147, 11, 47.24, 0.1, 0.1, 0.14, 0)
+, (410, 136, 39, 31.34, 0.04, 0.1, 0.07, 0)
+, (411, 8, 94, 28.93, 0.06, 0.11, 0.08, 0)
+, (412, 25, 50, 49.76, 0.14, 0.06, 0.14, 0)
+, (413, 49, 75, 20.95, 0.14, 0.11, 0.05, 0)
+, (414, 70, 51, 46.45, 0.06, 0.01, 0.02, 0)
+, (415, 19, 31, 1.92, 0.07, 0.04, 0.09, 1)
+, (416, 68, 52, 6.28, 0.12, 0.05, 0.03, 0)
+, (417, 134, 60, 56.75, 0.12, 0.08, 0.14, 1)
+, (418, 3, 83, 27.45, 0.04, 0.13, 0.08, 1)
+, (419, 68, 61, 5.26, 0.11, 0.01, 0.07, 0)
+, (420, 86, 27, 46.58, 0.14, 0.05, 0.09, 1)
+, (421, 41, 34, 19.95, 0.0, 0.13, 0.13, 0)
+, (422, 72, 54, 20.99, 0.02, 0.07, 0.04, 1)
+, (423, 132, 92, 46.26, 0.1, 0.14, 0.09, 1)
+, (424, 148, 22, 37.86, 0.11, 0.11, 0.05, 1)
+, (425, 132, 100, 39.93, 0.15, 0.05, 0.0, 1)
+, (426, 49, 65, 39.41, 0.03, 0.09, 0.06, 1)
+, (427, 78, 41, 54.82, 0.08, 0.05, 0.13, 1)
+, (428, 145, 70, 20.73, 0.01, 0.06, 0.02, 1)
+, (429, 98, 56, 25.5, 0.07, 0.1, 0.14, 1)
+, (430, 86, 37, 20.03, 0.0, 0.14, 0.01, 0)
+, (431, 16, 86, 32.17, 0.05, 0.06, 0.05, 0)
+, (432, 97, 84, 2.15, 0.09, 0.02, 0.13, 1)
+, (433, 47, 82, 27.71, 0.02, 0.07, 0.13, 1)
+, (434, 146, 90, 1.85, 0.14, 0.1, 0.05, 1)
+, (435, 6, 31, 13.77, 0.01, 0.02, 0.12, 0)
+, (436, 54, 84, 57.37, 0.13, 0.01, 0.04, 0)
+, (437, 62, 61, 51.56, 0.13, 0.04, 0.04, 1)
+, (438, 89, 12, 21.69, 0.15, 0.02, 0.07, 1)
+, (439, 122, 90, 41.93, 0.02, 0.08, 0.05, 1)
+, (440, 98, 84, 23.95, 0.09, 0.15, 0.1, 0)
+, (441, 76, 36, 8.36, 0.1, 0.07, 0.11, 1)
+, (442, 10, 78, 54.8, 0.01, 0.07, 0.05, 0)
+, (443, 44, 99, 28.3, 0.05, 0.1, 0.11, 0)
+, (444, 148, 19, 48.53, 0.08, 0.03, 0.09, 0)
+, (445, 65, 94, 35.4, 0.14, 0.0, 0.13, 0)
+, (446, 83, 23, 42.97, 0.0, 0.12, 0.01, 1)
+, (447, 78, 32, 20.89, 0.06, 0.02, 0.01, 0)
+, (448, 100, 63, 15.26, 0.02, 0.02, 0.07, 0)
+, (449, 55, 39, 51.15, 0.11, 0.04, 0.11, 0)
+, (450, 142, 41, 41.32, 0.03, 0.14, 0.09, 1)
+, (451, 127, 60, 47.86, 0.12, 0.14, 0.0, 0)
+, (452, 78, 36, 39.82, 0.02, 0.13, 0.03, 1)
+, (453, 27, 57, 11.78, 0.1, 0.12, 0.09, 0)
+, (454, 134, 6, 57.78, 0.12, 0.09, 0.02, 0)
+, (455, 83, 84, 9.4, 0.04, 0.01, 0.06, 1)
+, (456, 139, 71, 31.79, 0.08, 0.04, 0.12, 0)
+, (457, 81, 12, 38.61, 0.03, 0.03, 0.03, 0)
+, (458, 3, 79, 21.24, 0.07, 0.06, 0.11, 1)
+, (459, 88, 91, 33.94, 0.01, 0.05, 0.1, 1)
+, (460, 48, 37, 17.91, 0.13, 0.06, 0.12, 0)
+, (461, 85, 29, 31.0, 0.12, 0.02, 0.08, 0)
+, (462, 64, 94, 26.06, 0.06, 0.13, 0.08, 1)
+, (463, 111, 29, 58.28, 0.02, 0.03, 0.06, 0)
+, (464, 135, 81, 58.48, 0.1, 0.06, 0.09, 0)
+, (465, 139, 37, 33.14, 0.02, 0.09, 0.0, 0)
+, (466, 114, 56, 49.51, 0.11, 0.08, 0.04, 1)
+, (467, 100, 70, 58.86, 0.05, 0.09, 0.13, 1)
+, (468, 52, 39, 51.36, 0.05, 0.09, 0.07, 0)
+, (469, 113, 52, 12.55, 0.13, 0.01, 0.07, 0)
+, (470, 102, 47, 42.33, 0.11, 0.13, 0.12, 0)
+, (471, 119, 80, 59.76, 0.04, 0.07, 0.13, 1)
+, (472, 100, 42, 21.55, 0.14, 0.11, 0.07, 0)
+, (473, 8, 39, 29.64, 0.08, 0.02, 0.1, 0)
+, (474, 39, 32, 43.71, 0.11, 0.02, 0.03, 0)
+, (475, 69, 47, 22.91, 0.05, 0.13, 0.07, 0)
+, (476, 81, 55, 36.98, 0.11, 0.15, 0.11, 1)
+, (477, 30, 48, 53.12, 0.12, 0.02, 0.08, 0)
+, (478, 7, 6, 19.0, 0.08, 0.03, 0.13, 1)
+, (479, 144, 7, 58.2, 0.0, 0.03, 0.02, 0)
+, (480, 147, 91, 5.98, 0.06, 0.03, 0.09, 0)
+, (481, 138, 65, 7.18, 0.1, 0.01, 0.13, 1)
+, (482, 85, 26, 18.97, 0.08, 0.03, 0.12, 0)
+, (483, 48, 76, 46.8, 0.11, 0.04, 0.06, 1)
+, (484, 53, 74, 28.33, 0.14, 0.07, 0.01, 1)
+, (485, 31, 44, 54.24, 0.13, 0.12, 0.13, 0)
+, (486, 47, 84, 21.06, 0.0, 0.01, 0.11, 1)
+, (487, 141, 94, 18.05, 0.05, 0.05, 0.03, 1)
+, (488, 20, 23, 4.49, 0.08, 0.01, 0.04, 1)
+, (489, 132, 17, 23.07, 0.01, 0.14, 0.14, 0)
+, (490, 90, 4, 30.32, 0.01, 0.12, 0.04, 1)
+, (491, 127, 49, 57.12, 0.03, 0.14, 0.09, 0)
+, (492, 58, 53, 48.54, 0.0, 0.03, 0.11, 0)
+, (493, 42, 52, 32.59, 0.14, 0.07, 0.06, 0)
+, (494, 135, 12, 49.51, 0.04, 0.12, 0.11, 1)
+, (495, 28, 21, 44.01, 0.07, 0.1, 0.02, 0)
+, (496, 119, 73, 59.74, 0.08, 0.06, 0.0, 0)
+, (497, 77, 99, 10.1, 0.07, 0.07, 0.05, 1)
+, (498, 11, 20, 9.06, 0.01, 0.01, 0.03, 1)
+, (499, 78, 25, 1.04, 0.06, 0.03, 0.05, 0)
+, (500, 115, 59, 3.08, 0.01, 0.14, 0.0, 0);
 
 
 INSERT INTO `TaxeRates` (`Province`, `HST`, `GST`, `PST`, `Updated`) 
@@ -2087,4 +2074,4 @@ VALUES ('AB', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
  ('PI', '0.09','0.05',  '0.00', CURRENT_TIMESTAMP),
  ('QC', '0.00', '0.05', '0.10', CURRENT_TIMESTAMP),
  ('SA', '0.00', '0.05', '0.05', CURRENT_TIMESTAMP),
- ('YU', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP);
+ ('YU', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP)

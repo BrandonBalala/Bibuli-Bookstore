@@ -177,26 +177,96 @@ public class AdminBooksBackingBean implements Serializable {
         return "admin_edit_book";
     }
 
-    public String updateBook() {
+    public String updateBook() throws Exception {
         System.out.println(">>>>>>>>>>>>.update");
-        Books newBook = booksJpaController.findBookByID(selectedBook.getId());
 
-        try {
-            selectedBook.setBookIdentifiersList(newBook.getBookIdentifiersList());
-            selectedBook.setReviewsList(reviewsJpaController.findReviewByBookID(selectedBook.getId()));
-            selectedBook.setSalesDetailsList(newBook.getSalesDetailsList());
+        Books originalBook = booksJpaController.findBookByID(selectedBook.getId());
+        List<Contributor> oldContributorList = originalBook.getContributorList();
+        //List<Genre> oldGenreList = originalBook.getGenreList();
+        List<BookFormats> oldFormatList = originalBook.getBookFormatsList();
+        List<BookIdentifiers> oldIdentifierList = originalBook.getBookIdentifiersList();
 
+        List<Contributor> newContributorList = selectedBook.getContributorList();
+        List<BookFormats> newFormatList = selectedBook.getBookFormatsList();
+        List<BookIdentifiers> newIdentifierList = selectedBook.getBookIdentifiersList();
+        
+//        try {
+            //Delete old contributors
+            for (Contributor contributor : oldContributorList) {
+                if (!newContributorList.contains(contributor)) {
+                    contributorJpaController.destroy(contributor.getId());
+                }
+            }
+
+            //Create new contributors
+            for (Contributor contributor : newContributorList) {
+                if (!oldContributorList.contains(contributor)) {
+                    contributorJpaController.create(contributor);
+                }
+            }
+
+            //Delete old bookformats
+            for (BookFormats bookFormat : oldFormatList) {
+                if (!newFormatList.contains(bookFormat)) {
+                    bookFormatsJpaController.destroy(bookFormat.getBookFormatsPK());
+                }
+            }
+
+            //Create new bookformats
+            for (BookFormats bookFormat : newFormatList) {
+                if (!oldFormatList.contains(bookFormat)) {
+                    bookFormatsJpaController.create(bookFormat);
+                }
+            }
+
+            //Delete old bookidentifiers
+            for (BookIdentifiers bookIdentifiers : oldIdentifierList) {
+                if (!newIdentifierList.contains(bookIdentifiers)) {
+                    bookIdentifiersJpaController.destroy(bookIdentifiers.getBookIdentifiersPK());
+                }
+            }
+
+            //Create new bookidentifiers
+            for (BookIdentifiers bookIdentifiers : newIdentifierList) {
+                if (!oldIdentifierList.contains(bookIdentifiers)) {
+                    bookIdentifiersJpaController.destroy(bookIdentifiers.getBookIdentifiersPK());
+                }
+            }
+
+            selectedBook.setContributorList(newContributorList);
+            selectedBook.setBookFormatsList(newFormatList);
+            selectedBook.setBookIdentifiersList(newIdentifierList);
+            
             booksJpaController.edit(selectedBook);
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (RollbackFailureException ex) {
-            Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        books = booksJpaController.findAllBooks();
-        System.out.println("^^^^^^^^^^^^^^^^^^OK^^^^^^^^^^^^");
-        return "admin_books";
+            books = booksJpaController.findAllBooks();
+            
+//        } catch (RollbackFailureException ex) {
+//            ex.printStackTrace();
+//            //Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            //Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+//        System.out.println(">>>>>>>>>>>>.update");
+//        Books newBook = booksJpaController.findBookByID(selectedBook.getId());
+//
+//        try {
+//            selectedBook.setBookIdentifiersList(newBook.getBookIdentifiersList());
+//            selectedBook.setReviewsList(reviewsJpaController.findReviewByBookID(selectedBook.getId()));
+//            selectedBook.setSalesDetailsList(newBook.getSalesDetailsList());
+//
+//            booksJpaController.edit(selectedBook);
+//        } catch (NonexistentEntityException ex) {
+//            Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (RollbackFailureException ex) {
+//            Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        books = booksJpaController.findAllBooks();
+//        System.out.println("^^^^^^^^^^^^^^^^^^OK^^^^^^^^^^^^");
+        return "admin_books?faces-redirect=true";
     }
 
     public String cancel() {
