@@ -21,9 +21,11 @@ public class AuthorConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        System.out.println(">>>>>>>>author     "+value);
+        String [] contributor=value.split(","); 
         ContributorJpaController typeJpa = CDI.current().select(ContributorJpaController.class).get();
-        return typeJpa.findContributorByName(value, "Author");
+        System.out.println(">>>>>>>>name    "+contributor[0]);
+        System.out.println(">>>>>>>>author    "+contributor[1]);
+        return typeJpa.findContributorByName(contributor[0], contributor[1]);
     }
 
     @Override

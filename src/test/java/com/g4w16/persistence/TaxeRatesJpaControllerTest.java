@@ -47,7 +47,7 @@ import org.junit.Ignore;
  * @author ofern
  */
 @RunWith(Arquillian.class)
-@Ignore
+//@Ignore
 public class TaxeRatesJpaControllerTest {
     
     @Inject
@@ -71,7 +71,7 @@ public class TaxeRatesJpaControllerTest {
         // Actual file name is resources-mysql-ds.xml in the test/resources folder
         // The SQL script to create the database is also in this folder
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
-                .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
+                //.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                 .addPackage(AdminJpaController.class.getPackage())
                 .addPackage(Admin.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")

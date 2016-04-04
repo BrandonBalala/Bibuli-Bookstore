@@ -92,7 +92,9 @@
                                                         <td><h:outputText value="#{purchasedBooksBB.getFormattedDate(theSale.dateEntered)}"/></td>
                                                         <td><h:outputText value="#{theSale.grossValue}$"/></td>
                                                         <h:form>
-                                                            <td><h:commandLink type="submit" class="button" action="#{purchasedBooksBB.displayInvoice(theSale)}" value="Complete Invoice"/></td>
+                                                            <td><h:commandLink type="submit" class="button" action="#{purchasedBooksBB.displayInvoice(theSale)}" value="Complete Invoice"/><h:form>
+                                                                    <h:commandLink type="submit" class="button" value="Send" action="#{invoiceBB.sendInvoice(theSale)}" />
+                </h:form></td>             
                                                         </h:form>
                                                     </tr>
                                                 </ui:repeat>
@@ -102,6 +104,7 @@
                                 </div>
                             </c:if>
                         </div>
+                        #{invoiceBB.email}
                     </div>
                 </div>
                 <br/>

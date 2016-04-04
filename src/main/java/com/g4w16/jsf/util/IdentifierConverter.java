@@ -5,9 +5,8 @@
  */
 package com.g4w16.jsf.util;
 
+import com.g4w16.entities.BookIdentifiersPK;
 import com.g4w16.persistence.BookIdentifiersJpaController;
-import com.g4w16.persistence.FormatJpaController;
-import com.g4w16.persistence.IdentifierTypeJpaController;
 import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -23,10 +22,13 @@ public class IdentifierConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        System.out.println(">>>>>>>>>>>>format" + value);
-        IdentifierTypeJpaController identifierJpa = CDI.current().select(IdentifierTypeJpaController.class).get();
-        //return identifierJpa.findIdentifierTypeByID(value);
-        return null;
+        System.out.println(">>>>>>>>>>>>identifier" + value);
+        String[] str=value.split(",");
+        System.out.println(">>>>>>>>>>>>identifier" + str[0]);
+        System.out.println(">>>>>>>>>>>>identifier" + str[1]);
+        BookIdentifiersJpaController identifierJpa = CDI.current().select(BookIdentifiersJpaController.class).get();
+        return identifierJpa.findBookIdentifierByID(new BookIdentifiersPK(Integer.parseInt(str[0]),str[1]));
+        
     }
 
     @Override

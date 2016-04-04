@@ -20,13 +20,12 @@ import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 /**
  *
- * @author BRANDON-PC
+ * @author Annie So
  */
 @Named
 @RequestScoped
@@ -41,6 +40,11 @@ public class SalesDetailsJpaController implements Serializable {
     public SalesDetailsJpaController() {
     }
 
+    /**
+     * A method for creating a new sales detail.
+     *
+     * @param salesDetails The sales detail to add into the database.
+     */
     public void create(SalesDetails salesDetails) throws RollbackFailureException, Exception {
         try {
             utx.begin();
@@ -74,7 +78,15 @@ public class SalesDetailsJpaController implements Serializable {
         }
     }
 
-    public void edit(SalesDetails salesDetails) throws NonexistentEntityException, RollbackFailureException, Exception {
+    /**
+     * A method for updating a sales detail in the database.
+     *
+     * It is private because the only field that would ever change is changing
+     * removed to true. This method is used by the removeSalesDetail method.
+     *
+     * @param salesDetails The edited sales detail.
+     */
+    private void edit(SalesDetails salesDetails) throws NonexistentEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
             SalesDetails persistentSalesDetails = em.find(SalesDetails.class, salesDetails.getId());
@@ -125,7 +137,16 @@ public class SalesDetailsJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
+    /**
+     * A method for deleting a sales detail.
+     *
+     * It is private since we don't delete sales details from the database and
+     * only mark them as being removed. The method is left here in case that
+     * changes in the future.
+     *
+     * @param id The id of the sales detail to delete from the database.
+     */
+    private void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
             SalesDetails salesDetails;
@@ -157,10 +178,24 @@ public class SalesDetailsJpaController implements Serializable {
         }
     }
 
+    /**
+     * Gets a list of all the sales details.
+     *
+     * @return A list of all the sales details.
+     */
     public List<SalesDetails> findSalesDetailsEntities() {
         return findSalesDetailsEntities(true, -1, -1);
     }
 
+    /**
+     * Gets a list of a subset of all sales details.
+     *
+     * Used to do pagination.
+     *
+     * @param maxResults The number of sales details to get.
+     * @param firstResult The starting point of which sales details to get.
+     * @return A list of the sales details for doing pagination.
+     */
     public List<SalesDetails> findSalesDetailsEntities(int maxResults, int firstResult) {
         return findSalesDetailsEntities(false, maxResults, firstResult);
     }
@@ -176,10 +211,27 @@ public class SalesDetailsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     * Gets a specific sales detail based on the id.
+     *
+     * @param id The id of the sales detail to get.
+     * @return The sales detail that matches the id.
+     */
     public SalesDetails findSalesDetails(Integer id) {
         return em.find(SalesDetails.class, id);
     }
+    
+    public List<SalesDetails> findSalesDetailsByBookId(int id) {
+         Query q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.book.id = :id");
+        q.setParameter("id", id);
+        return (List<SalesDetails>) q.getResultList();
+    }
 
+    /**
+     * Gets a count of how many sales details are in the database.
+     *
+     * @return The number of sales details in the database.
+     */
     public int getSalesDetailsCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<SalesDetails> rt = cq.from(SalesDetails.class);
@@ -188,4 +240,63 @@ public class SalesDetailsJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
+    /**
+     * Marks a sales detail as removed.
+     *
+     * @param id The id of the sales detail to mark as removed.
+     */
+    public void removeSalesDetail(Integer id) throws RollbackFailureException, Exception {
+        SalesDetails removedSalesDetail = em.find(SalesDetails.class, id);
+        if (removedSalesDetail != null) {
+            removedSalesDetail.setRemoved(true);
+            edit(removedSalesDetail);
+        }
+    }
+
+    /**
+     * Returns a boolean value telling you whether or not a client owns a
+     * certain book.
+     *
+     * @param clientId The id of the client to check.
+     * @param bookId The id of the book to check.
+     * @return A boolean value telling you whether or not the client owns the
+     * book.
+     */
+    public boolean ownsBook(Integer clientId, Integer bookId) {
+        Query q = em.createQuery("SELECT sd FROM SalesDetails sd, Sales s "
+                + "WHERE sd.sale.id = s.id "
+                + "AND s.client.id = :clientId "
+                + "AND sd.book.id = :bookId "
+                + "AND sd.removed = false");
+        q.setParameter("clientId", clientId);
+        q.setParameter("bookId", bookId);
+
+        List<SalesDetails> results = (List<SalesDetails>) q.getResultList();
+
+        // If there are no results the client does not own the book.
+        if (results.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Returns a list of all the books owned by a certain client.
+     *
+     * @param clientId The id of the client.
+     * @return A list of books the client owns.
+     */
+    public List<Books> findBooksOwnedByClientId(Integer clientId) {
+        // Only select sales details that have not been removed and have a matching client id.
+        Query q = em.createQuery("SELECT sd.book FROM SalesDetails sd, Sales s "
+                + "WHERE sd.sale.id = s.id "
+                + "AND s.client.id = :clientId "
+                + "AND sd.removed = false");
+        q.setParameter("clientId", clientId);
+
+        List<Books> results = (List<Books>) q.getResultList();
+
+        return results;
+    }
 }

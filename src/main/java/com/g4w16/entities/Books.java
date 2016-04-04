@@ -310,7 +310,7 @@ public class Books implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.Books[ id=" + id + " ]";
+        return ""+id;
     }
 
     public String getFormattedPubDate() {

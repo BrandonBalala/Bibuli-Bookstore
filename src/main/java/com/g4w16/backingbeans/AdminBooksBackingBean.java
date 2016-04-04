@@ -5,12 +5,16 @@
  */
 package com.g4w16.backingbeans;
 
+import com.g4w16.entities.BookFormats;
+import com.g4w16.entities.BookIdentifiers;
 import com.g4w16.entities.Books;
 import com.g4w16.entities.ContributionType;
 import com.g4w16.entities.Contributor;
 import com.g4w16.entities.Format;
 import com.g4w16.entities.Genre;
 import com.g4w16.entities.IdentifierType;
+import com.g4w16.persistence.BookFormatsJpaController;
+import com.g4w16.persistence.BookIdentifiersJpaController;
 import com.g4w16.persistence.BooksJpaController;
 import com.g4w16.persistence.ContributionTypeJpaController;
 import com.g4w16.persistence.ContributorJpaController;
@@ -18,6 +22,7 @@ import com.g4w16.persistence.FormatJpaController;
 import com.g4w16.persistence.GenreJpaController;
 import com.g4w16.persistence.IdentifierTypeJpaController;
 import com.g4w16.persistence.ReviewsJpaController;
+import com.g4w16.persistence.SalesDetailsJpaController;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
@@ -28,11 +33,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -46,13 +49,40 @@ public class AdminBooksBackingBean implements Serializable {
     private List<Books> saleBooks;
     private List<Books> filteredBooks;
     private Books selectedBook;
+    private List<BookFormats> allBookFormats;
+
+    public List<BookFormats> getAllBookFormats() {
+        return allBookFormats;
+    }
+
+    public void setAllBookFormats(List<BookFormats> allBookFormats) {
+        this.allBookFormats = allBookFormats;
+    }
     private List<String> status;
     private List<Format> allFormats;
     private List<ContributionType> allContributionType;
     private List<Genre> allGenre;
     private List<Contributor> allAuthors;
     private List<IdentifierType> allIdentifierTypes;
-    private Books newBook;
+    private List<BookIdentifiers> allBookIdentifiers;
+
+    public List<BookIdentifiers> getAllBookIdentifiers() {
+        return allBookIdentifiers;
+    }
+
+    public void setAllBookIdentifiers(List<BookIdentifiers> allBookIdentifiers) {
+        this.allBookIdentifiers = allBookIdentifiers;
+    }
+
+    private String isbn;
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     @Inject
     BooksJpaController booksJpaController;
@@ -75,6 +105,15 @@ public class AdminBooksBackingBean implements Serializable {
     @Inject
     ReviewsJpaController reviewsJpaController;
 
+    @Inject
+    SalesDetailsJpaController salesDetailsJpaController;
+
+    @Inject
+    BookIdentifiersJpaController bookIdentifiersJpaController;
+
+    @Inject
+    BookFormatsJpaController bookFormatsJpaController;
+
     /**
      * For Inventory page
      */
@@ -89,7 +128,8 @@ public class AdminBooksBackingBean implements Serializable {
         allGenre = genreJpaController.findAllGenres();
         allAuthors = contributorJpaController.findAllContributors();
         allIdentifierTypes = identifierTypeJpaController.findAllIdentifierTypes();
-        newBook = new Books();
+        allBookFormats = bookFormatsJpaController.findAllBookFormats();
+        allBookIdentifiers = bookIdentifiersJpaController.findAllBookIdentifiers();
     }
 
     /**
@@ -133,14 +173,19 @@ public class AdminBooksBackingBean implements Serializable {
     }
 
     public String showDetail(Books book) {
-        selectedBook = book;
+        selectedBook = booksJpaController.findBookByID(book.getId());
         return "admin_edit_book";
     }
 
     public String updateBook() {
         System.out.println(">>>>>>>>>>>>.update");
+        Books newBook = booksJpaController.findBookByID(selectedBook.getId());
+
         try {
+            selectedBook.setBookIdentifiersList(newBook.getBookIdentifiersList());
             selectedBook.setReviewsList(reviewsJpaController.findReviewByBookID(selectedBook.getId()));
+            selectedBook.setSalesDetailsList(newBook.getSalesDetailsList());
+
             booksJpaController.edit(selectedBook);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,23 +194,13 @@ public class AdminBooksBackingBean implements Serializable {
         } catch (Exception ex) {
             Logger.getLogger(AdminBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        booksJpaController.findAllBooks();
+        books = booksJpaController.findAllBooks();
+        System.out.println("^^^^^^^^^^^^^^^^^^OK^^^^^^^^^^^^");
         return "admin_books";
     }
 
     public String cancel() {
         return "admin_books";
-    }
-
-    /**
-     * ****************New Book*********************
-     */
-    public Books getNewBook() {
-        return newBook;
-    }
-
-    public void setNewBook(Books newBook) {
-        this.newBook = newBook;
     }
 
     /**
