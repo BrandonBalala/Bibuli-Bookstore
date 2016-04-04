@@ -1401,8 +1401,8 @@ VALUES
 
 INSERT INTO `banner` (`URI`, `SELECTED`)
 VALUES
-('https://www.amazon.ca/', '1'),
-('http://www.ebay.ca/', '0'),
+('https://www.johnniewalker.com/', '1'),
+('http://www.osheaga.com/', '1'),
 ('https://www.dawsoncollege.qc.ca/', '0');
 
 -- INSERT INTO `Sales` (`ID`,`DateEntered`,`Client`,`GrossValue`,`NetValue`,`Removed`) 

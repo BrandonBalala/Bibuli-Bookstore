@@ -34,7 +34,8 @@ public class RegisterBackingBean implements Serializable{
     
     public String register() throws Exception {
         clientJpaController.create(client);
-        return "login";
+        
+        return "login?faces-redirect=true";
     }
     
     

@@ -16,7 +16,9 @@ import com.g4w16.persistence.TaxeRatesJpaController;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -241,10 +243,13 @@ public class CheckoutBackingBean implements Serializable {
         }
 
         Sales sale = new Sales();
+        sale.setDateEntered(Date.from(Instant.now()));
         sale.setClient(clientController.findClientById(clientUtil.getUserId()));
         sale.setNetValue(cartBB.getSubtotal());
         sale.setGrossValue(calculateOrderTotal());
         sale.setBillingAddress(choiceAddress);
+        sale.setRemoved(false);
+
         salesController.create(sale);
 
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());
@@ -256,6 +261,7 @@ public class CheckoutBackingBean implements Serializable {
             saleDetail.setPst(tax.getPst());
             saleDetail.setHst(tax.getHst());
             saleDetail.setGst(tax.getGst());
+            saleDetail.setRemoved(false);
 
             if (book.getSalePrice().equals(BigDecimal.ZERO)) {
                 saleDetail.setPrice(book.getListPrice());

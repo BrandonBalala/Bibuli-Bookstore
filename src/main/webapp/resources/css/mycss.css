@@ -152,7 +152,8 @@ table tr:nth-of-type(even) {
 }
 .carouselImage{
     max-width:325px;
-    height:350px;
+    min-width: 200px;
+    height:330px;
 }
 .ui-growl {
     top:80px;
@@ -316,7 +317,7 @@ table tr:nth-of-type(even) {
 }
 
 .blackBackgroundColor{
-    background-color: #1e1b1b;
+    background-color: #1e1b1b !important;
 }
 
 .removeMarginTop{
@@ -331,6 +332,11 @@ table tr:nth-of-type(even) {
 
 .bibuliFont{
     font-size: 30px !important;
+    font-family: pacifico;
+}
+
+.carouselTitle{
+    font-size: 25px !important;
     font-family: pacifico;
 }
 
@@ -361,20 +367,15 @@ table tr:nth-of-type(even) {
 {
     color:orange; 
     text-decoration:none; 
-    cursor:pointer;  
+    cursor:pointer;
+    outline: 0;
 }
 
 li a:hover{
     color:orange; 
     text-decoration:none; 
     cursor:pointer;
-}
-
-.twoColumns{
-    background: #1e1b1b !important;
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
+    outline: 0;
 }
 
 .anchorFontSize{
@@ -435,4 +436,39 @@ body{
 
 .carouselRow:hover{
     cursor: w-resize;
+}
+
+.ui-selectoneradio{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border: none !important;
+    border-collapse: separate !important;
+    margin-bottom: 0rem !important;
+}
+
+.adImages{
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.rowFlex{
+    display: flex;
+}
+
+hr{ 
+    border: 0 !important; 
+    height: 1px !important; 
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)) !important;
+}
+
+a {
+    outline: none !important;
+}
+
+a:hover, a:active, a:focus {
+    outline: none !important;
 }

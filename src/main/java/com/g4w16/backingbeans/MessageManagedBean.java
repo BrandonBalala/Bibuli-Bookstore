@@ -17,7 +17,6 @@ import javax.inject.Named;
  * @author Brandon Balala
  */
 @Named("messageBean")
-@ManagedBean
 @SessionScoped
 public class MessageManagedBean implements Serializable {
 
@@ -31,19 +30,9 @@ public class MessageManagedBean implements Serializable {
         this.message = message;
     }
 
-    public String doSomeAction() {
-        message = "";
-
-        if (this.message.equals("")) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message Displayed Growl", "Error Message Displayed Growl"));
-        }
-        return "";
-    }
-
     public void displayMessage() {
         FacesContext context = FacesContext.getCurrentInstance();
 
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, ""));
+        context.addMessage(null, new FacesMessage(message, ""));
     }
 }

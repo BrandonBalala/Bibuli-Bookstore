@@ -113,7 +113,7 @@ public class BookIdentifiers implements Serializable {
 
     @Override
     public String toString() {
-        return identifierType.toString();
+        return bookIdentifiersPK.toString();
     }
     
 }
