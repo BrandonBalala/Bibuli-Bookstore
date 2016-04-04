@@ -203,7 +203,7 @@
                 <version>2.18.1</version>
                 <configuration>
                      <argLine>-Dfile.encoding=UTF-8</argLine>
-                    <skipTests>false</skipTests>
+                    <skipTests>true</skipTests>
                     <systemPropertyVariables>
                         <java.util.logging.config.file>
                             src/test/resources-glassfish-remote/logging.properties
