@@ -179,6 +179,12 @@ public class SalesDetailsJpaController implements Serializable {
     public SalesDetails findSalesDetails(Integer id) {
         return em.find(SalesDetails.class, id);
     }
+    
+    public List<SalesDetails> findSalesDetailsByBookId(int id) {
+         Query q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.book.id = :id");
+        q.setParameter("id", id);
+        return (List<SalesDetails>) q.getResultList();
+    }
 
     public int getSalesDetailsCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

@@ -79,7 +79,7 @@ public class BookIdentifiersPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.g4w16.entities.BookIdentifiersPK[ book=" + book + ", type=" + type + " ]";
+        return book+","+type;
     }
     
 }
