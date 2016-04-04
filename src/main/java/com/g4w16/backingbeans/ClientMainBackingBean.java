@@ -18,6 +18,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -90,12 +92,30 @@ public class ClientMainBackingBean implements Serializable {
     }
 
     public boolean recommendedBooks() {
-        if (session.getAttribute("lastGenre") == null || ((List<Genre>) session.getAttribute("lastGenre")).isEmpty()) {
+        String[] strings = null;
+        HttpServletRequest request  = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0 ) {
+             for(Cookie c : cookies)
+                {
+                    if(c.getName().equals("lastGenre"))
+                    {
+                        strings = c.getValue().split(",");
+                        break;
+                    }
+                }
+        }
+        if (strings == null || strings.length == 0 ) {
             return false;
         }
-
+        List<Genre> genreList = new ArrayList();
+        for(String g : strings)
+        {
+            Genre aGenre = new Genre();
+            aGenre.setType(g);
+            genreList.add(aGenre);
+        }
         //GET A GENRE
-        List<Genre> genreList = (List<Genre>) session.getAttribute("lastGenre");
         Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(genreList.size());
         //If book has multipe genres pick one genre at random to display in recommended books carousel
