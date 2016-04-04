@@ -93,7 +93,7 @@ public class ProductPageBackingBean implements Serializable {
         String cookie = "";
         for(Genre g :book.getGenreList())
         {
-            cookie += g.getType();
+            cookie += g.getType()+",";
         }
         response.addCookie(new Cookie("lastGenre",cookie));
         //Set recommended books
