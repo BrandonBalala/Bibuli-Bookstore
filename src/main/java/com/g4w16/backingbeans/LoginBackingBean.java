@@ -11,6 +11,7 @@ import com.g4w16.entities.Sales;
 import com.g4w16.entities.SalesDetails;
 import com.g4w16.jsf.util.MessageUtil;
 import com.g4w16.persistence.ClientJpaController;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -29,17 +30,13 @@ import javax.servlet.http.HttpSession;
 @ViewScoped
 public class LoginBackingBean implements Serializable {
 
+     HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
     @Inject
     private ClientJpaController clientJPAController;
 
     private String email;
 
     private String password;
-
-    private boolean loggedIn;
-    
-    @Inject
-    private ClientJpaController clientController;
     
     @Inject
     private ClientUtil clientUtil;
@@ -62,14 +59,6 @@ public class LoginBackingBean implements Serializable {
     public void setPassword(String password) {
         this.password = password;
 
-    }
-
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
     }
 
     /**
@@ -111,6 +100,11 @@ public class LoginBackingBean implements Serializable {
         return "mainPage?faces-redirect=true";
     }
 
+    public void sendToLogin() throws IOException {
+         if (session.getAttribute("authenticated") == null || (boolean)session.getAttribute("authenticated")!= true)
+         FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+    }
+    
     public String logout() {
         ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
                 .getSession(false)).invalidate();
@@ -124,12 +118,10 @@ public class LoginBackingBean implements Serializable {
     public void init() {
         email = "cbutler1@a8.net";
         password = "a";
-        loggedIn = true;
-
     }
 
     private void removeOwnedBooksFromCart() {
-        Client client = clientController.findClientById(clientUtil.getUserId());
+        Client client = clientJPAController.findClientById(clientUtil.getUserId());
         List<Books> bookList = cartBB.getBookList();
         
         salesLoop:

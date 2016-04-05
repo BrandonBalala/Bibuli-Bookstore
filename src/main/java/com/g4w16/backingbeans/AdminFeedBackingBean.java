@@ -11,6 +11,8 @@ import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -23,28 +25,29 @@ import org.primefaces.event.RowEditEvent;
  */
 @Named("feedBB")
 @RequestScoped
-public class AdminFeedBackingBean implements Serializable { 
+public class AdminFeedBackingBean implements Serializable {
+
     private List<Feed> feeds;
-    private List<Integer> ids ;
+    private List<Integer> ids;
     private int feedId;
     private List<Feed> filteredFeeds;
     private Feed selected;
     private String uri;
     private String name;
-    
+
     @Inject
     FeedJpaController feedJpaController;
-    
+
     @PostConstruct
     public void init() {
         feeds = feedJpaController.findAllFeeds();
     }
-    
-    public List<Feed> getFeeds(){
+
+    public List<Feed> getFeeds() {
         return feeds;
     }
-    
-    public int getFeedCount(){
+
+    public int getFeedCount() {
         return feedJpaController.getFeedCount();
     }
 
@@ -71,52 +74,63 @@ public class AdminFeedBackingBean implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
+
     public List<Integer> getIds() {
-        ids=new ArrayList<>();
-         for(int i=0;i<feeds.size();i++){
-            ids.add(i+1);
-         }
-         return ids;
+        ids = new ArrayList<>();
+        for (int i = 0; i < feeds.size(); i++) {
+            ids.add(i + 1);
+        }
+        return ids;
     }
-    
+
     public int getFeedId() {
         return feedId;
     }
- 
+
     public void setFeedId(int feedId) {
         this.feedId = feedId;
     }
-    
+
     public List<Feed> getFilteredFeeds() {
         return filteredFeeds;
     }
- 
+
     public void setFilteredFeeds(List<Feed> filteredFeeds) {
         this.filteredFeeds = filteredFeeds;
     }
-    
-    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
-          feedJpaController.edit((Feed) event.getObject());
+
+    public void onRowEdit(RowEditEvent event) {
+        try {
+            feedJpaController.edit((Feed) event.getObject());
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        }
     }
-     
+
     public void onRowCancel(RowEditEvent event) {
     }
-    
-    public void changeStatus(Feed f) throws RollbackFailureException, Exception{
-      selected=feedJpaController.findFeedByID(f.getId());
-       selected.setSelected(f.getSelected());
-       feedJpaController.edit(selected);
-   }
-    
-    public void addAction(String name, String uri) throws Exception{
-        Feed f=new Feed();
-        f.setName(name);
-        f.setUri(uri);
-        f.setSelected(false);
-        feedJpaController.create(f);
-        init();
+
+    public void changeStatus(Feed f) throws RollbackFailureException, Exception {
+        selected = feedJpaController.findFeedByID(f.getId());
+        selected.setSelected(f.getSelected());
+        feedJpaController.edit(selected);
+    }
+
+    public void addAction(String name, String uri) {
+        try {
+            Feed f = new Feed();
+            f.setName(name);
+            f.setUri(uri);
+            f.setSelected(false);
+            init();
+            uri = "";
+            name = "";
+            feedJpaController.create(f);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

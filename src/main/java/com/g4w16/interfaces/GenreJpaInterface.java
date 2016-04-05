@@ -24,6 +24,6 @@ public interface GenreJpaInterface{
     public List<Genre> findGenreEntities(int maxResults, int firstResult);
     public Genre findGenreByID(String id);
     public int getGenreCount();
-    public boolean genreExists(String genre);
+    //public boolean genreExists(String genre);
 
 }

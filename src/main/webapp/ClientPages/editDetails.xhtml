@@ -14,6 +14,7 @@
             <ui:define name="title">Bibuli | Login Page</ui:define>
 
             <ui:define name="content">
+                <f:event type="preRenderView" listener="#{loginBB.sendToLogin()}" />
                 <h:form>
                 <hr/>
                 <div class="row">

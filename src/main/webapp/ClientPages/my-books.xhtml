@@ -14,10 +14,11 @@
     <h:body>
         <ui:composition template="./master-layout.xhtml">
             <ui:define name="title">Bibuli | My Books</ui:define>
-
-            <ui:define name="content">
+                <ui:define name="content" >
+                
                 <hr/>
-
+                <f:event type="preRenderView" listener="#{loginBB.sendToLogin()}" />
+                <f:event type="preRenderView" listener="#{purchasedBooksBB.setClient()}" />
                 <div class="row">
                     <div class="large-12 columns text-center">
                         <h3 class="bibuliFont">Purchases</h3>

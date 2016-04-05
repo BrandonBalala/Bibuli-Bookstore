@@ -152,6 +152,23 @@ public class ClientMainBackingBean implements Serializable {
     }
     
     public List<Banner> getBannerList(){
+        if(bannerList.size() == 1)
+            bannerList.add(bannerList.get(0));
+        if(bannerList.size() > 2)
+        {
+            List<Banner> banners = new ArrayList();
+            int i = 0;
+             while(i < 2 )
+             {
+             Random randomGenerator = new Random();
+                int index = randomGenerator.nextInt(bannerList.size());
+                while(banners.contains(bannerList.get(index)))
+                    index = randomGenerator.nextInt(bannerList.size());
+                banners.add(bannerList.get(index));
+                i++;
+             }
+             return banners;
+        }
         return bannerList;
     }
 

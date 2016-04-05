@@ -2,11 +2,16 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Client;
 import com.g4w16.persistence.ClientJpaController;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -32,6 +37,8 @@ public class AccountDetailsBackingBean implements Serializable{
     @PostConstruct
     public void setClient()
     {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(session.getAttribute("Authenticated") != null)
         client = clientJPAController.findClientById(clientUtil.getUserId());
     }
     
