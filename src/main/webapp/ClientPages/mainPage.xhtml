@@ -184,6 +184,8 @@
                 <br/><br/>
 
                 <div class="row large-8">
+                    <ui:repeat var="banner" value="#{ClientMainBB.bannerList}">
+                                
                     <div class="large-5 columns">
                         <div class="row text-left">
                             <div class="large-12 columns">
@@ -192,26 +194,11 @@
                         </div>
                         <div class="row callout small text-center">
                             <div class="large-12 columns">
-                                <a href="#{ClientMainBB.bannerList.get(0).uri}">
-                                    <img class="adImages" src="../resources/images/johniewalker_ad.JPG" alt="ad"/>
-                                </a>
+                                <img class="adImages" src="../resources/images/#{banner.uri}" alt="ad"/>
                             </div>
                         </div>
                     </div>
-                    <div class="large-5 columns">
-                        <div class="row text-left">
-                            <div class="large-12 columns">
-                                <h4 class="carouselTitle">Our Sponsor</h4>
-                            </div>
-                        </div>
-                        <div class="row callout small text-center">
-                            <div class="large-12 columns">
-                                <a href="#{ClientMainBB.bannerList.get(1).uri}">
-                                    <img class="adImages" src="../resources/images/osheaga_ad.jpg" alt="ad"/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    </ui:repeat>
                 </div>
 
                 <br/><br/>

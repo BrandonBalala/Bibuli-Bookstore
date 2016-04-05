@@ -55,6 +55,7 @@ public class PurchasedBooksBackingBean implements Serializable {
     private InvoiceBackingBean invoiceBB;
 
     public List<Books> getPurchasedBooks() {
+        setClient();
         List<Sales> salesList;
         if(client != null)
         salesList = client.getSalesList();
@@ -111,16 +112,10 @@ public class PurchasedBooksBackingBean implements Serializable {
 //
 //        return true;
 //    }
-    @PostConstruct
-    public void init() {
-        try {
-            loginBean.sendToLogin();
-        } catch (IOException ex) {
-            Logger.getLogger(PurchasedBooksBackingBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void setClient()
+    {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        if(session.getAttribute("Authenticated") != null)
-        {
+        if(client == null && session.getAttribute("authenticated") != null){
         int clientID = clientUtil.getUserId();
 
         client = clientController.findClientById(clientID);

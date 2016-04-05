@@ -101,7 +101,7 @@ public class LoginBackingBean implements Serializable {
     }
 
     public void sendToLogin() throws IOException {
-         if (session.getAttribute("Authenticated")== null || (boolean)session.getAttribute("Authenticated")!= true)
+         if (session.getAttribute("authenticated") == null || (boolean)session.getAttribute("authenticated")!= true)
          FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
     }
     
