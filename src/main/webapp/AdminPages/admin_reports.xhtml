@@ -28,30 +28,218 @@
 
 
                         <h:form id="form">
-                            
-                            <h:panelGrid columns="5" cellpadding="20">
-                                
-                                <p:outputLabel for="event1" value="Start Date:" />
-                                <p:calendar id="event1" value="#{reportBB.start}" />
 
-                                <p:outputLabel for="event2" value="End Date:" />
-                                <p:calendar id="event2" value="#{reportBB.end}" />
+                            <h:panelGrid columns="4" cellpadding="20">
+                                <p:outputLabel for="startDate" value="Start Date:" />
+                                <p:calendar id="startDate" value="#{reportBB.startDate}"/>
 
-                                <p:commandButton value="Submit"  actionListener="#{reportBB.click}" icon="ui-icon-check" />
+                                <p:outputLabel for="endDate" value="End Date:" />
+                                <p:calendar id="endDate" value="#{reportBB.endDate}" />
                             </h:panelGrid>
 
-
-
-                            <h3>Report</h3>
                             <p:tabView scrollable="true">
-                                <p:tab title="Total Sales">Total Sales</p:tab>
-                                <p:tab title="Sales by Client">Tab 2 Content</p:tab>
-                                <p:tab title="Sales by Author">Tab 3 Content</p:tab>
-                                <p:tab title="Sales by Publisher">Tab 4 Content</p:tab>
-                                <p:tab title="Top Sellers">Tab 5 Content</p:tab>
-                                <p:tab title="Top Clients">Tab 6 Content</p:tab>
-                                <p:tab title="Zero Sales">Tab 7 Content</p:tab>
-                                <p:tab title="Reorder Report">Tab 8 Content</p:tab>
+                                <p:tab title="Total Sales">
+                                    <p:commandButton value="Get Report" update="totalSalesTable" icon="ui-icon-check" />
+
+                                    <p:dataTable id="totalSalesTable" var="totalSale" value="#{reportBB.totalSales}"
+                                                 rows="10" paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                                        <p:column headerText="Book Id">
+                                            <h:outputText value="#{totalSale[0]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Book Title">
+                                            <h:outputText value="#{totalSale[1]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Sales">
+                                            <h:outputText value="#{totalSale[2]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Cost">
+                                            <h:outputText value="#{totalSale[3]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Profit">
+                                            <h:outputText value="#{totalSale[4]}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>
+
+                                <p:tab title="Sales by Client">
+                                    <h:panelGrid columns="3" cellpadding="20">
+                                        <p:outputLabel for="clientId" value="Client ID:" />
+                                        <p:inputText id="clientId" value="#{reportBB.clientId}" />
+
+                                        <p:commandButton value="Get Report" update="salesByClientTable" icon="ui-icon-check" />
+                                    </h:panelGrid>
+
+                                    <p:dataTable id="salesByClientTable" var="salesByClient" value="#{reportBB.salesByClient}" 
+                                                 rows="10" paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                                        <p:column headerText="Book Id">
+                                            <h:outputText value="#{salesByClient[0]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Book Title">
+                                            <h:outputText value="#{salesByClient[1]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Sales">
+                                            <h:outputText value="#{salesByClient[2]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Cost">
+                                            <h:outputText value="#{salesByClient[3]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Profit">
+                                            <h:outputText value="#{salesByClient[4]}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>
+
+                                <p:tab title="Sales by Contributor">
+                                    <h:panelGrid columns="3" cellpadding="20">
+                                        <p:outputLabel for="contributorName" value="Contributor Name:" />
+                                        <p:inputText id="contributorName" value="#{reportBB.contributorName}" />
+
+                                        <p:commandButton value="Get Report" update="salesByContributorTable" icon="ui-icon-check" />
+                                    </h:panelGrid>
+
+                                    <p:dataTable id="salesByContributorTable" var="salesByContributor" value="#{reportBB.salesByContributor}"
+                                                 rows="10" paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                                        <p:column headerText="Book Id">
+                                            <h:outputText value="#{salesByContributor[0]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Book Title">
+                                            <h:outputText value="#{salesByContributor[1]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Sales">
+                                            <h:outputText value="#{salesByContributor[2]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Cost">
+                                            <h:outputText value="#{salesByContributor[3]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Profit">
+                                            <h:outputText value="#{salesByContributor[4]}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>
+
+                                <p:tab title="Sales by Publisher">
+                                    <h:panelGrid columns="3" cellpadding="20">
+                                        <p:outputLabel for="publisherName" value="Publisher Name:" />
+                                        <p:inputText id="publisherName" value="#{reportBB.publisherName}" />
+
+                                        <p:commandButton value="Get Report" update="salesByPublisherTable" icon="ui-icon-check" />
+                                    </h:panelGrid>
+
+                                    <p:dataTable id="salesByPublisherTable" var="salesByPublisher" value="#{reportBB.salesByPublisher}"
+                                                 rows="10" paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                                        <p:column headerText="Book Id">
+                                            <h:outputText value="#{salesByPublisher[0]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Book Title">
+                                            <h:outputText value="#{salesByPublisher[1]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Sales">
+                                            <h:outputText value="#{salesByPublisher[2]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Cost">
+                                            <h:outputText value="#{salesByPublisher[3]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Profit">
+                                            <h:outputText value="#{salesByPublisher[4]}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>
+
+                                <p:tab title="Top Sellers">
+                                    <p:commandButton value="Get Report" update="topSellersTable" icon="ui-icon-check" />
+
+                                    <p:dataTable id="topSellersTable" var="topSeller" value="#{reportBB.topSellers}"
+                                                 rows="10" paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                                        <p:column headerText="Book Id">
+                                            <h:outputText value="#{topSeller[0]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Book Title">
+                                            <h:outputText value="#{topSeller[1]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Sales">
+                                            <h:outputText value="#{topSeller[2]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Cost">
+                                            <h:outputText value="#{topSeller[3]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Profit">
+                                            <h:outputText value="#{topSeller[4]}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>
+
+                                <p:tab title="Top Clients">
+                                    <p:commandButton value="Get Report" update="topClientsTable" icon="ui-icon-check" />
+
+                                    <p:dataTable id="topClientsTable" var="topClients" value="#{reportBB.topClients}"
+                                                 rows="10" paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                                        <p:column headerText="Client Id">
+                                            <h:outputText value="#{topClients[0]}" />
+                                        </p:column>
+
+                                        <p:column headerText="First Name">
+                                            <h:outputText value="#{topClients[1]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Last Name">
+                                            <h:outputText value="#{topClients[2]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Sales">
+                                            <h:outputText value="#{topClients[3]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Cost">
+                                            <h:outputText value="#{topClients[4]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Total Profit">
+                                            <h:outputText value="#{topClients[5]}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>
+
+                                <p:tab title="Zero Sales">
+                                    <p:commandButton value="Get Report" update="zeroSalesTable" icon="ui-icon-check" />
+
+                                    <p:dataTable id="zeroSalesTable" var="zeroSales" value="#{reportBB.zeroSales}"
+                                                 rows="10" paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                                        <p:column headerText="Book Id">
+                                            <h:outputText value="#{zeroSales[0]}" />
+                                        </p:column>
+
+                                        <p:column headerText="Book Title">
+                                            <h:outputText value="#{zeroSales[1]}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>
 
                             </p:tabView>
                         </h:form>
@@ -62,4 +250,3 @@
         </ui:define>
     </ui:composition>
 </html>
-
