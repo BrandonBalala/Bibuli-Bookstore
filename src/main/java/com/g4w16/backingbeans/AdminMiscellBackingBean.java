@@ -85,6 +85,7 @@ public class AdminMiscellBackingBean implements Serializable {
             genreJpaController.destroy(g.getType());
            }        
            init();
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
     
     
