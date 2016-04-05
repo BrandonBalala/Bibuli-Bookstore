@@ -210,7 +210,7 @@ public class GenreJpaController implements Serializable, GenreJpaInterface {
         return (List<Genre>) query.getResultList();
     }
 
-    @Override
+//    @Override
     public boolean genreExists(String genre) {
         Genre result = findGenreByID(genre);
         return result != null;
