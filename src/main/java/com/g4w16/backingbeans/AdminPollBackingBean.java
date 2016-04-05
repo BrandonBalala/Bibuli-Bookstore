@@ -5,13 +5,14 @@
  */
 package com.g4w16.backingbeans;
 
-
 import com.g4w16.entities.Poll;
 import com.g4w16.persistence.PollJpaController;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -24,10 +25,10 @@ import org.primefaces.event.RowEditEvent;
  */
 @Named("pollsBB")
 @RequestScoped
-public class AdminPollBackingBean implements Serializable { 
-    
+public class AdminPollBackingBean implements Serializable {
+
     private List<Poll> polls;
-    private List<Integer> ids ;
+    private List<Integer> ids;
     private int pollId;
     private List<Poll> filteredPolls;
     private Poll selected;
@@ -37,40 +38,38 @@ public class AdminPollBackingBean implements Serializable {
     private String option3;
     private String option4;
 
-    
     @Inject
     PollJpaController pollJpaController;
-    
+
     @PostConstruct
     public void init() {
         polls = pollJpaController.findAllPolls();
     }
-    
-    public List<Poll> getPolls(){
+
+    public List<Poll> getPolls() {
         return polls;
     }
-    
-    public int getPollCount(){
+
+    public int getPollCount() {
         return pollJpaController.getPollCount();
     }
-    
-    
+
     public List<Integer> getIds() {
-        ids=new ArrayList<>();
-         for(int i=0;i<polls.size();i++){
-            ids.add(i+1);
-         }
-         return ids;
+        ids = new ArrayList<>();
+        for (int i = 0; i < polls.size(); i++) {
+            ids.add(i + 1);
+        }
+        return ids;
     }
-    
+
     public int getPollId() {
         return pollId;
     }
- 
+
     public void setPollId(int pollId) {
         this.pollId = pollId;
     }
-    
+
     public Poll getSelected() {
         return selected;
     }
@@ -78,11 +77,11 @@ public class AdminPollBackingBean implements Serializable {
     public void setSelected(Poll selected) {
         this.selected = selected;
     }
-    
+
     public List<Poll> getFilteredPolls() {
         return filteredPolls;
     }
- 
+
     public void setFilteredPolls(List<Poll> filteredPolls) {
         this.filteredPolls = filteredPolls;
     }
@@ -126,36 +125,53 @@ public class AdminPollBackingBean implements Serializable {
     public void setOption4(String option4) {
         this.option4 = option4;
     }
-    
-    
-    
+
     public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
         pollJpaController.edit((Poll) event.getObject());
     }
-     
-    public void onRowCancel(RowEditEvent event) {}
-    
-   
-    public void changeStatus(Poll p) throws RollbackFailureException, Exception{
-       selected=pollJpaController.findPollByID(p.getId());
-       selected.setSelected(p.getSelected());
-       pollJpaController.edit(selected);
+
+    public void onRowCancel(RowEditEvent event) {
     }
-    
-    public void addAction(String question, String option1, String option2, String option3, String option4) throws Exception{
-        Poll p=new Poll();
-        p.setQuestion(question);
-        p.setFirstAnswer(option1);
-        p.setSecondAnswer(option2);
-        p.setThirdAnswer(option3);
-        p.setFourthAnswer(option4);
-        p.setFirstCount(0);
-        p.setSecondCount(0);
-        p.setThirdCount(0);
-        p.setFourthCount(0);
-        p.setSelected(false);
-        pollJpaController.create(p);
+
+    public void changeStatus(Poll p) throws RollbackFailureException, Exception {
+        selected = pollJpaController.findPollByID(p.getId());
+        Poll current;
+        if (!p.getSelected()) {
+            for (int i = 0; i < polls.size(); i++) {
+                current = polls.get(i);
+                if (current.getSelected()) {
+                    current.setSelected(false);
+                    pollJpaController.edit(current);
+                    break;
+                }
+            }
+            
+            selected.setSelected(true);
+            pollJpaController.edit(selected);
+            init();
+        }
+
+    }
+
+    public void addAction(String question, String option1, String option2, String option3, String option4) {
+        try {
+            Poll p = new Poll();
+            p.setQuestion(question);
+            p.setFirstAnswer(option1);
+            p.setSecondAnswer(option2);
+            p.setThirdAnswer(option3);
+            p.setFourthAnswer(option4);
+            p.setFirstCount(0);
+            p.setSecondCount(0);
+            p.setThirdCount(0);
+            p.setFourthCount(0);
+            p.setSelected(false);
+            pollJpaController.create(p);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminPollBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        }
         init();
+
     }
-    
+
 }

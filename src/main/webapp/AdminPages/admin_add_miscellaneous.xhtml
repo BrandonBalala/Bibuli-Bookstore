@@ -33,7 +33,7 @@
                                     <h:form id="form1">
                                         <h:panelGrid id="grid1" cellpadding="5" columns="3" style="margin-bottom:10px">
                                             <f:facet name="header">
-                                                <p:messages id="msgs1" showDetail="true" autoUpdate="true" closable="true"/>
+                                                <p:messages id="msgs1" autoUpdate="true" closable="true"/>
                                             </f:facet>
 
                                             <p:outputLabel for="newgenre" value="New Genre:" />
@@ -66,7 +66,7 @@
                                     <h:form id="form2">
                                         <h:panelGrid id="grid2" cellpadding="5" columns="3" style="margin-bottom:10px">
                                             <f:facet name="header">
-                                                <p:messages id="msgs2" showDetail="true" autoUpdate="true" closable="true"/>
+                                                <p:messages id="msgs2"  autoUpdate="true" closable="true"/>
                                             </f:facet>
 
                                             <p:outputLabel for="newcontribution" value="New Contribution:" />
@@ -98,7 +98,7 @@
                                     <h:form id="form3">
                                         <h:panelGrid id="grid3" cellpadding="5" columns="3" style="margin-bottom:10px">
                                             <f:facet name="header">
-                                                <p:messages id="msgs3" showDetail="true" autoUpdate="true" closable="true"/>
+                                                <p:messages id="msgs3"  autoUpdate="true" closable="true"/>
                                             </f:facet>
 
                                             <p:outputLabel for="newprovince" value="New Province:" />
@@ -130,7 +130,7 @@
                                     <h:form id="form4">
                                         <h:panelGrid id="grid4" cellpadding="5" columns="3" style="margin-bottom:10px">
                                             <f:facet name="header">
-                                                <p:messages id="msgs4" showDetail="true" autoUpdate="true" closable="true"/>
+                                                <p:messages id="msgs4"  autoUpdate="true" closable="true"/>
                                             </f:facet>
 
                                             <p:outputLabel for="newtitle" value="New Title:" />
@@ -152,6 +152,38 @@
                                             </p:column>
                                             <f:facet name="footer">
                                                 <p:commandButton process="table4" update="table4" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteTitle(miscellBB.selectedTitle)}" />
+                                            </f:facet>
+                                        </p:dataTable>
+
+                                    </h:form>
+                                </p:tab>
+                                
+                                <p:tab title="Add Format">
+                                    <h:form id="form5">
+                                        <h:panelGrid id="grid5" cellpadding="5" columns="3" style="margin-bottom:10px">
+                                            <f:facet name="header">
+                                                <p:messages id="msgs5"  autoUpdate="true" closable="true"/>
+                                            </f:facet>
+
+                                            <p:outputLabel for="newFormat" value="New Format: " />
+                                            <p:inputText id="newFormat" value="#{miscellBB.newFormat}" required="true" requiredMessage="Format is required." />
+                                            <p:commandButton value="Save" actionListener="#{miscellBB.addFormat()}" update="table5 newFormat" process="grid5" icon="ui-icon-check"/>
+                                           
+                                        </h:panelGrid>
+
+                                        <p:dataTable id="table5" var="format" value="#{miscellBB.allFormat}" rows="10"
+                                                     paginator="true"
+                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15"
+                                                     editable="true" style="margin-bottom:20px"
+                                                     selection="#{miscellBB.selectedFormat}" rowKey="#{format.type}" >
+
+                                            <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
+                                            <p:column headerText="Format" sortBy="#{format.type}" filterBy="#{format.type}" filterMatchMode="contains" style="width:200px">
+                                                <h:outputText value="#{format.type}" />
+                                            </p:column>
+                                            <f:facet name="footer">
+                                                <p:commandButton process="table5" update="table5" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteFormat(miscellBB.selectedFormat)}" />
                                             </f:facet>
                                         </p:dataTable>
 

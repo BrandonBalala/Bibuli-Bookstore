@@ -8,6 +8,7 @@ package com.g4w16.backingbeans;
 import com.g4w16.entities.BookFormats;
 import com.g4w16.entities.BookIdentifiers;
 import com.g4w16.entities.Books;
+import com.g4w16.entities.Client;
 import com.g4w16.entities.ContributionType;
 import com.g4w16.entities.Contributor;
 import com.g4w16.entities.Format;
@@ -36,6 +37,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -294,6 +296,14 @@ public class AdminBooksBackingBean implements Serializable {
 
     public List<IdentifierType> getAllIdentifierTypes() {
         return allIdentifierTypes;
+    }
+    
+    public void onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
+        Books book = (Books) event.getObject();
+        booksJpaController.edit(book);
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
     }
 
 }

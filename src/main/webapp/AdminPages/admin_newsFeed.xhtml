@@ -32,18 +32,12 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-
-
-
                             <h:form id="form">
-
                                 <h:panelGrid id="grid" cellpadding="5" columns="3" style="margin-bottom:10px">
-                                   
-
                                     <p><p:outputLabel  value="Add News:" /></p>
                                     
                                      <f:facet name="header">
-                                        <p:messages id="msgs" showDetail="true" autoUpdate="true" closable="true"/>
+                                        <p:messages id="msgs" autoUpdate="true" closable="true"/>
                                     </f:facet>
 
                                     <p:outputLabel for="name" value="New Name:" />
@@ -53,7 +47,6 @@
                                     <h:inputText id="uri" size="100" value="#{feedBB.uri}" required="true" />   
                                     
                                     <p:commandButton value="Add" action="#{feedBB.addAction(feedBB.name,feedBB.uri)}" update="table name uri" process="grid" icon="ui-icon-check"/>
-
                                 </h:panelGrid>
 
 

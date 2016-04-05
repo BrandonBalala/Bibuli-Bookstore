@@ -36,31 +36,48 @@
 
                             <h:form id="form">
 
-                                <p:growl id="msgs"/>
-                                
-                                <p>New Survey Question: <h:inputText size="100" value="#{pollsBB.question}" /><br/></p>
-                                <p>Option1 : <h:inputText size="50" value="#{pollsBB.option1}" /><br/> 
-                                    Option2 : <h:inputText size="50" value="#{pollsBB.option2}" /><br/>
-                                    Option3 : <h:inputText size="50" value="#{pollsBB.option3}" /><br/>
-                                    Option4 : <h:inputText size="50" value="#{pollsBB.option4}" />                           
-                                <h:commandButton value="Add" action="#{pollsBB.addAction(pollsBB.question,pollsBB.option1,pollsBB.option2,pollsBB.option3,pollsBB.option4)}" /></p>    
-                                 
+
+                                <h:panelGrid id="grid" cellpadding="5" columns="2" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs"  autoUpdate="true" closable="true"/>
+                                    </f:facet>
+
+                                    <p:outputLabel for="question" value="Question: " />
+                                    <h:inputText id="question"  size="100" value="#{pollsBB.question}" required="true"  />
+
+                                    <p:outputLabel for="option1" value="Option 1: " />
+                                    <h:inputText id="option1" size="50" value="#{pollsBB.option1}" required="true" />
+
+                                    <p:outputLabel for="option2" value="Option 2: " />
+                                    <h:inputText id="option2" size="50" value="#{pollsBB.option2}" required="true" />
+
+                                    <p:outputLabel for="option3" value="Option 3: " />
+                                    <h:inputText id="option3" size="50" value="#{pollsBB.option3}" required="true" />
+
+                                    <p:outputLabel for="option4" value="Option 4: " />
+                                    <h:inputText id="option4" size="50" value="#{pollsBB.option4}" required="true" />
+
+                                    <p:commandButton value="Add" action="#{pollsBB.addAction(pollsBB.question,pollsBB.option1,pollsBB.option2,pollsBB.option3,pollsBB.option4)}" update="table question option1 option2 option3 option4" process="grid" icon="ui-icon-check" /> 
+                                </h:panelGrid>
 
                                 <p:dataTable id="table" var="poll" value="#{pollsBB.polls}" rows="5"
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
-                                             editable="true" style="margin-bottom:20px">
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{pollsBB.selected}" rowKey="#{poll.id}">
 
-                                    <p:ajax event="rowEdit" listener="#{pollsBB.onRowEdit}" update=":form:msgs" />
-                                    <p:ajax event="rowEditCancel" listener="#{pollsBB.onRowCancel}" update=":form:msgs" />
+                                    <p:ajax event="rowEdit" listener="#{pollsBB.onRowEdit}" update=":form:table" />
+                                    <p:ajax event="rowEditCancel" listener="#{pollsBB.onRowCancel}" update=":form:table" />
 
-                                     <p:column headerText="Selected" style="width:30px">
-                                        <p:selectBooleanCheckbox value="#{poll.selected}">
-                                            <p:ajax update="form" listener="#{pollsBB.changeStatus(poll)}" />
-                                        </p:selectBooleanCheckbox>
-                                    </p:column>
-                                    
+                                    <!--                                    <p:column headerText="Selected" style="width:30px">
+                                                                            <p:selectBooleanCheckbox value="#{poll.selected}">
+                                                                                <p:ajax update="form" listener="#{pollsBB.changeStatus(poll)}" />
+                                                                            </p:selectBooleanCheckbox>
+                                                                        </p:column>-->
+
+                                    <p:column selectionMode="single"  style="width:30px;text-align:center" />
+
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
                                     </p:column>
@@ -69,6 +86,10 @@
                                         <h:outputText value="#{poll.id}" />
                                     </p:column>
 
+                                    <p:column headerText="Selected" sortBy="#{poll.selected}" filterBy="#{poll.selected}" filterMatchMode="contains" style="width:120px">
+                                        <h:outputText value="#{poll.selected}" />
+                                    </p:column>
+                                    
                                     <p:column headerText="Question" sortBy="#{poll.question}" filterBy="#{poll.question}" filterMatchMode="contains" style="width:200px">
                                         <p:cellEditor>
                                             <f:facet name="output"><h:outputText value="#{poll.question}" /></f:facet>
@@ -131,6 +152,10 @@
                                             <f:facet name="input"><p:inputText value="#{poll.fourthCount}" /></f:facet>
                                         </p:cellEditor>
                                     </p:column>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton  actionListener="#{pollsBB.changeStatus(pollsBB.selected)}" process="table" update="table"  icon="ui-icon-search" value="Show"  />
+                                    </f:facet>
 
                                 </p:dataTable>
                             </h:form>

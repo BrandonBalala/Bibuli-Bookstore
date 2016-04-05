@@ -9,6 +9,7 @@ import com.g4w16.entities.ContributionType;
 import com.g4w16.entities.Format;
 import com.g4w16.entities.Genre;
 import com.g4w16.entities.Province;
+import com.g4w16.entities.TaxeRates;
 import com.g4w16.entities.Title;
 import com.g4w16.persistence.ContributionTypeJpaController;
 import com.g4w16.persistence.FormatJpaController;
@@ -19,10 +20,13 @@ import javax.inject.Inject;
 
 import com.g4w16.persistence.GenreJpaController;
 import com.g4w16.persistence.ProvinceJpaController;
+import com.g4w16.persistence.TaxeRatesJpaController;
 import com.g4w16.persistence.TitleJpaController;
 
 import com.g4w16.persistence.exceptions.RollbackFailureException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -31,21 +35,21 @@ import javax.inject.Named;
 
 /**
  *
- * @author Dan
+ * @author Dan, Annie So
  */
 @Named("miscellBB")
 @RequestScoped
 public class AdminMiscellBackingBean implements Serializable {
 
     @Inject
-    GenreJpaController genreJpaController;
+    private GenreJpaController genreJpaController;
 
     private String newGenre;
     private List<Genre> allGenre;
     private List<Genre> selectedGenre;
 
     @Inject
-    ContributionTypeJpaController contributionTypeJpaController;
+    private ContributionTypeJpaController contributionTypeJpaController;
 
     private String newContributionType;
     private List<ContributionType> allContributionType;
@@ -53,18 +57,27 @@ public class AdminMiscellBackingBean implements Serializable {
     
 
     @Inject
-    ProvinceJpaController provinceJpaController;
+    private ProvinceJpaController provinceJpaController;
+    @Inject
+    private TaxeRatesJpaController taxController;
 
     private String newProvince;
     private List<Province> allProvince;
     private List<Province> selectedProvince;
     
     @Inject
-    TitleJpaController titleJpaController;
+    private TitleJpaController titleJpaController;
 
     private String newTitle;
     private List<Title> allTitle;
     private List<Title> selectedTitle;
+    
+    @Inject
+    private FormatJpaController formatController;
+    
+    private String newFormat;
+    private List<Format> allFormat;
+    private List<Format> selectedFormat;
 
     @PostConstruct
     public void init() {
@@ -76,8 +89,12 @@ public class AdminMiscellBackingBean implements Serializable {
         
         allProvince = provinceJpaController.findProvinceEntities();
         selectedProvince = new ArrayList<>();
+        
         allTitle = titleJpaController.findTitleEntities();
         selectedTitle = new ArrayList<>();
+        
+        allFormat = formatController.findAllFormats();
+        selectedFormat = new ArrayList<>();
     }
 
     /**
@@ -207,6 +224,15 @@ public class AdminMiscellBackingBean implements Serializable {
             Province p = new Province();
             p.setId(newProvince);
             provinceJpaController.create(p);
+            
+            TaxeRates tax = new TaxeRates();
+            tax.setProvince(newProvince);
+            tax.setGst(BigDecimal.ZERO);
+            tax.setHst(BigDecimal.ZERO);
+            tax.setPst(BigDecimal.ZERO);
+            tax.setUpdated(new Date());
+            taxController.create(tax);
+            
             init();
             newProvince = "";
         } catch (Exception e) {
@@ -264,6 +290,52 @@ public class AdminMiscellBackingBean implements Serializable {
     public void deleteTitle(List<Title> selected) throws RollbackFailureException, Exception {
         for (Title t : selected) {
             titleJpaController.destroy(t.getId());
+        }
+        init();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
+    }
+    
+    /**********************Format********************************/
+    public String getNewFormat() {
+        return newFormat;
+    }
+
+    public void setNewFormat(String newFormat) {
+        this.newFormat = newFormat;
+    }
+
+    public List<Format> getAllFormat() {
+        return allFormat;
+    }
+
+    public void setAllFormat(List<Format> allFormat) {
+        this.allFormat = allFormat;
+    }
+
+    public List<Format> getSelectedFormat() {
+        return selectedFormat;
+    }
+
+    public void setSelectedFormat(List<Format> selectedFormat) {
+        this.selectedFormat = selectedFormat;
+    }
+
+    public void addFormat() {
+        try {
+            Format f = new Format();
+            f.setType(newFormat);
+            formatController.create(f);
+            init();
+            newFormat = "";
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+    }
+
+    public void deleteFormat(List<Format> selected) throws RollbackFailureException, Exception {
+        for (Format f : selected) {
+            formatController.destroy(f.getType());
         }
         init();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
