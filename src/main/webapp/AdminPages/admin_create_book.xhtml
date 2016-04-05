@@ -8,46 +8,47 @@
 
     <ui:composition template="./admin_template.xhtml">
         <ui:define name="title">
-            <h:outputText value="Edit A Book"></h:outputText>
+            <h:outputText value="Create a Book"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <section class="content-header">
                 <h1>
-                    Edit A Book 
+                    Create a Book 
                 </h1>
 
                 <ol class="breadcrumb">
                     <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li><a href="admin_books.xhtml"><i class="fa fa-dashboard"></i> Inventory</a></li>
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Edit</a></li>
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Create</a></li>
                 </ol>
             </section>
+            <br/>
             <section class="content">
                 <div class="container">
                     <h:form id="theForm">
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Title</b></div>
-                            <div class="col-md-4"><p:inputText id="title" value="#{booksBB.selectedBook.title}"/></div>
+                            <div class="col-md-4"><p:inputText id="title" value="#{booksBB.newBook.title}"/></div>
                             <div class="col-md-4"><h:message for="title" errorStyle="color:red; display:block"/></div>
                         </div>
                         <br/>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Publisher</b></div>
-                            <div class="col-md-4"><p:inputText id="publisher" value="#{booksBB.selectedBook.publisher}"/></div>
+                            <div class="col-md-4"><p:inputText id="publisher" value="#{booksBB.newBook.publisher}"/></div>
                             <div class="col-md-4"><h:message for="publisher" errorStyle="color:red; display:block"/></div>
                         </div>
                         <br/>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Description</b></div>
-                            <div class="col-md-4"><p:inputTextarea id="description" value="#{booksBB.selectedBook.description}"/></div>
+                            <div class="col-md-4"><p:inputTextarea id="description" value="#{booksBB.newBook.description}"/></div>
                             <div class="col-md-4"><h:message for="description" errorStyle="color:red; display:block"/></div>
                         </div>
                         <br/>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Publication Date</b></div>
                             <div class="col-md-4">
-                                <p:calendar id="publish_date" value="#{booksBB.selectedBook.pubDate}"/>
+                                <p:calendar id="publish_date" value="#{booksBB.newBook.pubDate}"/>
                             </div>
                             <div class="col-md-4"><h:message for="publish_date" errorStyle="color:red; display:block"/></div>
                         </div>
@@ -55,7 +56,7 @@
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Number of Page</b></div>
                             <div class="col-md-4">
-                                <p:inputText id="page_number" value="#{booksBB.selectedBook.pages}">
+                                <p:inputText id="page_number" value="#{booksBB.newBook.pages}">
                                     <f:convertNumber />
                                 </p:inputText>
                             </div>
@@ -65,7 +66,7 @@
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Wholesale Price</b></div>
                             <div class="col-md-4">
-                                <p:inputText id="wholesale_price" value="#{booksBB.selectedBook.wholesalePrice}">
+                                <p:inputText id="wholesale_price" value="#{booksBB.newBook.wholesalePrice}">
                                     <f:converter converterId="javax.faces.BigDecimal"/>
                                 </p:inputText>
                             </div>
@@ -74,7 +75,7 @@
                         <div class="row row-centered">
                             <div class="col-md-4"><b>List Price</b></div>
                             <div class="col-md-4">
-                                <p:inputText id="list_price" value="#{booksBB.selectedBook.listPrice}">
+                                <p:inputText id="list_price" value="#{booksBB.newBook.listPrice}">
                                     <f:converter converterId="javax.faces.BigDecimal"/>
                                 </p:inputText>
                             </div>
@@ -83,7 +84,7 @@
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Sale Price</b></div>
                             <div class="col-md-4">
-                                <p:inputText id="sale_price" value="#{booksBB.selectedBook.salePrice}">
+                                <p:inputText id="sale_price" value="#{booksBB.newBook.salePrice}">
                                     <f:converter converterId="javax.faces.BigDecimal"/>
                                 </p:inputText>
                             </div>
@@ -93,7 +94,7 @@
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Removal Status</b></div>
                             <div class="col-md-4">
-                                <p:selectOneRadio id="available" layout="lineDirection" value="#{booksBB.selectedBook.removalStatus}">
+                                <p:selectOneRadio id="available" layout="lineDirection" value="#{booksBB.newBook.removalStatus}">
                                     <f:selectItem itemValue="True" itemLabel="True" />
                                     <f:selectItem itemValue="False" itemLabel="False" />
                                 </p:selectOneRadio>
@@ -213,10 +214,10 @@
 
                         <div class="row row-centered">
                             <div class="col-md-12">
-                                <p:commandButton value="Create" action="#{booksBB.updateBook()}" class="btn btn-success btn-xs"/>
+                                <p:commandButton value="Create" action="#{booksBB.createBook()}" class="btn btn-primary btn-xs"/>
                             </div>
                             <br/>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <p:commandButton value="Cancel" action="#{booksBB.cancel()}" class="btn btn-danger btn-xs" immediate="true"/>
                             </div>
                         </div>
