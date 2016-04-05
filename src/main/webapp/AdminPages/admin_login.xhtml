@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" >
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <link rel="stylesheet" type="text/css" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
+        <link rel="stylesheet" type="text/css" href="#{resource['css:foundation/foundation-icons.css']}"/>
+        <link rel="stylesheet" type="text/css" href="#{resource['css:mycss.css']}"/>
+        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="#{resource['css:foundation/motion-ui.css']}" />
+                <hr/>
+                <div class="row">
+                    <div class="large-5 columns callout large-centered large">
+                        <div class="row">
+                            <div class="large-12 text-center">
+                                <h3 class="bibuliFont">#{bundle.login}</h3>
+                            </div>                  
+                        </div>
+                        <h:form>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>#{bundle.username}
+                                        <p:inputText id="username" value="#{AdminLoginBB.username}"
+                                                     requiredMessage="#{bundle.usernameRequired}"/>
+                                    </label>
+                                </div>
+                                <div class="large-12 text-left">
+                                    <p:message for="username" style="color:red"/>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>#{bundle.passwordLabel}
+                                        <p:password id="password" value="#{AdminLoginBB.password}"
+                                                    requiredMessage="#{bundle.passwordRequired}" />
+                                    </label>
+                                </div>
+                                <div class="large-12 text-left">
+                                    <p:message for="password" style="color:red"/>
+                                </div>                  
+                            </div>
+
+                            <div class="row">
+                                <br/>
+                                <div class="large-12 columns">
+                                    <p:commandButton id="primebutton" value="#{bundle.loginButton}"
+                                                     class="button expanded radius"
+                                                     action="#{AdminLoginBB.login}" ajax="false" />
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+                <hr/>
+    </h:body>
+</html>
+

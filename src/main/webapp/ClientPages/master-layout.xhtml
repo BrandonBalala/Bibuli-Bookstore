@@ -87,7 +87,7 @@
                                             <li><h:link class="whiteFont blackBackgroundColor" value="Login" outcome="login"/></li>
                                             <li><h:link class="whiteFont blackBackgroundColor" value="Register" outcome="register" /></li> 
                                         </h:panelGroup>
-                                        <li><h:form rendered="#{session.getAttribute('authenticated')}"><h:commandLink  class="whiteFont blackBackgroundColor" value="Logout" action="#{loginBB.logout()}"></h:commandLink></h:form></li>
+                                        <li><h:form rendered="#{session.getAttribute('authenticated')}"><h:commandLink  class="whiteFont blackBackgroundColor" value="#{bundle.logout}" action="#{loginBB.logout()}"></h:commandLink></h:form></li>
                                     </ul>
                                 </li>
                             </ul>
