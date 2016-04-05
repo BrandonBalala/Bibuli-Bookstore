@@ -11,6 +11,8 @@ import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -98,8 +100,14 @@ public class AdminFeedBackingBean implements Serializable {
         this.filteredFeeds = filteredFeeds;
     }
     
-    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
-          feedJpaController.edit((Feed) event.getObject());
+    public void onRowEdit(RowEditEvent event) {
+        try {
+            feedJpaController.edit((Feed) event.getObject());
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        }
     }
      
     public void onRowCancel(RowEditEvent event) {
@@ -111,12 +119,19 @@ public class AdminFeedBackingBean implements Serializable {
        feedJpaController.edit(selected);
    }
     
-    public void addAction(String name, String uri) throws Exception{
+    public void addAction(String name, String uri) {
+        try {
         Feed f=new Feed();
         f.setName(name);
         f.setUri(uri);
         f.setSelected(false);
-        feedJpaController.create(f);
         init();
+        uri="";
+        name="";
+            feedJpaController.create(f);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
