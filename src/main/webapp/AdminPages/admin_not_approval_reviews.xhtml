@@ -38,7 +38,7 @@
                                              editable="true" style="margin-bottom:20px"
                                              selection="#{review}" selectionMode="single" rowKey="#{review.reviewsPK}">
                                     
-                                    <p:ajax event="rowEdit" listener="#{notApprovalReviewBB.onRowEdit}" update=":form:msgs"/>
+                                    <p:ajax event="rowEdit" listener="#{notApprovalReviewBB.onRowEdit}" update=":form:dataTable"/>
                                     <p:ajax event="rowEditCancel" listener="#{notApprovalReviewBB.onRowCancel}" update=":form:msgs" />
                                     
                                     

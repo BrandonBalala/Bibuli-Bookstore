@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,6 +42,9 @@ public class SalesJpaController implements Serializable {
 
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
+
+    @Inject
+    private SalesDetailsJpaController detailsController;
 
     public SalesJpaController() {
     }
@@ -296,9 +300,8 @@ public class SalesJpaController implements Serializable {
             //Removes all the sales details as well.
             List<SalesDetails> details = removedSale.getSalesDetailsList();
             for (SalesDetails detail : details) {
-                detail.setRemoved(true);
+                detailsController.removeSalesDetail(detail.getId());
             }
-
             edit(removedSale);
         }
     }
@@ -369,7 +372,6 @@ public class SalesJpaController implements Serializable {
 
         //TypedQuery<Object[]> q2 = em.createQuery("SELECT b.id, b.title, sd.price, b.wholesalePrice, (sd.price - b.wholesalePrice) AS profit FROM Sales s JOIN s.client c JOIN s.salesDetailsList sd JOIN sd.book b WHERE c.id = :clientId WHERE sd.removed = false AND CAST(s.dateEntered AS DATE) BETWEEN CAST(:startDate AS DATE) AND CAST(:endDate AS DATE) ORDER BY s.dateEntered ASC", Object[].class);
         //TypedQuert<Object[]> q3 = em.createQuery("SELECT b.id, b.title, sd.price, b.wholesalePrice, (sd.proce - b.wholesalePrice) AS profit FROM Sales s JOIN s.client c JOIN s.salesDetailsList sd JOIN sd.book b WHERE c.id = :clientId ")
-        
         return results;
     }
 

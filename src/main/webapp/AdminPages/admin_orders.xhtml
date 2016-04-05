@@ -5,39 +5,116 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title>Admin Orders</title>
-    </head>
-    <body>
-        <ui:composition template="admin_template.xhtml">
-            <ui:define name="title">
-                Orders
-            </ui:define>
+    <ui:composition template="admin_template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Orders"></h:outputText>
+        </ui:define>
 
-            <ui:define name="body">
-                <!-- Content Wrapper. Contains page content -->
-                <div>
-                    <!-- Content Header (Page header) -->
-                    <section class="content-header">
-                        <h1>
-                            Orders
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
-                            <li><a href="#"><i class="fa fa-dashboard"></i> Orders</a></li>
-                        </ol>
-                    </section>
+        <ui:define name="body">
+            <div>
+                <section class="content-header">
+                    <h1>
+                        Orders
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Orders</a></li>
+                    </ol>
+                </section>
 
-
+                <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h1>Coming Soon!</h1>                            
+
+                            <h:form id="form">
+                                <p:dataTable id="ordersTable" var="sale" value="#{orderBB.sales}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             style="margin-bottom:20px" selection="#{orderBB.selectedSale}" selectionMode="single" rowKey="#{sale.id}">
+                                    <p:ajax event="rowSelect" listener="#{orderBB.onRowSelect}" update=":form:detailsTable"/>
+
+                                    <f:facet name="header">
+                                        Orders
+                                    </f:facet>
+                                    <p:column headerText="Id" sortBy="#{sale.id}" filterBy="#{sale.id}" filterMatchMode="contains">
+                                        <h:outputText value="#{sale.id}" />
+                                    </p:column>
+
+                                    <p:column headerText="Client ID" sortBy="#{sale.client.id}" filterBy="#{sale.client.id}" filterMatchMode="contains">
+                                        <h:outputText value="#{sale.client.id}" />
+                                    </p:column>
+
+                                    <p:column headerText="Client First Name" sortBy="#{sale.client.firstName}" filterBy="#{sale.client.firstName}" filterMatchMode="contains">
+                                        <h:outputText value="#{sale.client.firstName}" />
+                                    </p:column>
+
+                                    <p:column headerText="Date Entered" sortBy="#{sale.dateEntered}" filterBy="#{sale.dateEntered}" filterMatchMode="contains">
+                                        <h:outputText value="#{sale.dateEntered}" />
+                                    </p:column>
+
+                                    <p:column headerText="Net Value" sortBy="#{sale.netValue}" filterBy="#{sale.netValue}" filterMatchMode="contains">
+                                        <h:outputText value="#{sale.netValue}" />
+                                    </p:column>
+
+                                    <p:column headerText="Gross Value" sortBy="#{sale.grossValue}" filterBy="#{sale.grossValue}" filterMatchMode="contains">
+                                        <h:outputText value="#{sale.grossValue}" />
+                                    </p:column>
+
+                                    <p:column headerText="Removed" sortBy="#{sale.removed}" filterBy="#{sale.removed}" filterMatchMode="contains">
+                                        <h:outputText value="#{sale.removed}" />
+                                    </p:column>                                   
+
+                                    <p:column headerText="Remove">
+                                        <p:commandButton icon="fa fa-fw fa-remove" value="Remove" action="#{orderBB.removeSale(sale)}" update=":form:ordersTable :form:detailsTable" />
+                                    </p:column>
+                                </p:dataTable>
+
+                                <p:dataTable id="detailsTable" var="detail" value="#{orderBB.details}" rows="5" 
+                                             paginator="true" 
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             style="margin-bottom:20px" selection="#{orderBB.selectedDetail}" selectionMode="single" rowKey="#{detail.id}">
+                                    <f:facet name="header">
+                                        Order Details 
+                                    </f:facet>
+                                    
+                                    <p:column headerText="Id" sortBy="#{detail.id}" filterBy="#{detail.id}" filterMatchMode="contains">
+                                        <h:outputText value="#{detail.id}" />
+                                    </p:column>
+
+                                    <p:column headerText="Book Id" sortBy="#{detail.book.id}" filterBy="#{detail.book.id}" filterMatchMode="contains">
+                                        <h:outputText value="#{detail.book.id}" />
+                                    </p:column>                                   
+
+                                    <p:column headerText="Price" sortBy="#{detail.price}" filterBy="#{detail.price}" filterMatchMode="contains">
+                                        <h:outputText value="#{detail.price}" />
+                                    </p:column>
+
+                                    <p:column headerText="GST" sortBy="#{detail.gst}" filterBy="#{detail.gst}" filterMatchMode="contains">
+                                        <h:outputText value="#{detail.gst}" />
+                                    </p:column>
+
+                                    <p:column headerText="HST" sortBy="#{detail.hst}" filterBy="#{detail.hst}" filterMatchMode="contains">
+                                        <h:outputText value="#{detail.hst}" />
+                                    </p:column>
+
+                                    <p:column headerText="PST" sortBy="#{detail.pst}" filterBy="#{detail.pst}" filterMatchMode="contains">
+                                        <h:outputText value="#{detail.pst}" />
+                                    </p:column>
+
+                                    <p:column headerText="Removed" sortBy="#{detail.removed}" filterBy="#{detail.removed}" filterMatchMode="contains">
+                                        <h:outputText value="#{detail.removed}" />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Remove">
+                                        <p:commandButton icon="fa fa-fw fa-remove" value="Remove" action="#{orderBB.removeSalesDetail(detail)}" update=":form:detailsTable" />
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+
                         </div>
                     </div>
-                </div>
-            </ui:define>
-        </ui:composition>
-
-      
-    </body>
+                </section>
+            </div>
+        </ui:define>
+    </ui:composition>      
 </html>

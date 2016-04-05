@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="admin_template.xhtml">
         <ui:define name="title">
             <h:outputText value="Admin Reports"></h:outputText>
         </ui:define>
+
         <ui:define name="body">
             <section class="content-header">
                 <h1>
@@ -25,22 +25,19 @@
             <section class="content">
                 <div class="row">
                     <div class="col-xs-12">
-
-
                         <h:form id="form">
 
-                            <h:panelGrid columns="4" cellpadding="20">
-                                <p:outputLabel for="startDate" value="Start Date:" />
-                                <p:calendar id="startDate" value="#{reportBB.startDate}"/>
+                            <p:outputLabel for="startDate" value="Start Date:" />
+                            <p:calendar id="startDate" value="#{reportBB.startDate}"/>
 
-                                <p:outputLabel for="endDate" value="End Date:" />
-                                <p:calendar id="endDate" value="#{reportBB.endDate}" />
-                            </h:panelGrid>
+                            <p:outputLabel for="endDate" value="End Date:" />
+                            <p:calendar id="endDate" value="#{reportBB.endDate}" />
 
+                            <p></p>
                             <p:tabView scrollable="true">
                                 <p:tab title="Total Sales">
                                     <p:commandButton value="Get Report" update="totalSalesTable" icon="ui-icon-check" />
-
+                                    <p></p>
                                     <p:dataTable id="totalSalesTable" var="totalSale" value="#{reportBB.totalSales}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -67,13 +64,13 @@
                                 </p:tab>
 
                                 <p:tab title="Sales by Client">
-                                    <h:panelGrid columns="3" cellpadding="20">
-                                        <p:outputLabel for="clientId" value="Client ID:" />
-                                        <p:inputText id="clientId" value="#{reportBB.clientId}" />
 
-                                        <p:commandButton value="Get Report" update="salesByClientTable" icon="ui-icon-check" />
-                                    </h:panelGrid>
+                                    <p:outputLabel for="clientId" value="Client ID:" />
+                                    <p:inputText id="clientId" value="#{reportBB.clientId}" />
 
+                                    <p:commandButton value="Get Report" update="salesByClientTable" icon="ui-icon-check" />
+
+                                    <p></p>
                                     <p:dataTable id="salesByClientTable" var="salesByClient" value="#{reportBB.salesByClient}" 
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -100,13 +97,13 @@
                                 </p:tab>
 
                                 <p:tab title="Sales by Contributor">
-                                    <h:panelGrid columns="3" cellpadding="20">
-                                        <p:outputLabel for="contributorName" value="Contributor Name:" />
-                                        <p:inputText id="contributorName" value="#{reportBB.contributorName}" />
 
-                                        <p:commandButton value="Get Report" update="salesByContributorTable" icon="ui-icon-check" />
-                                    </h:panelGrid>
+                                    <p:outputLabel for="contributorName" value="Contributor Name:" />
+                                    <p:inputText id="contributorName" value="#{reportBB.contributorName}" />
 
+                                    <p:commandButton value="Get Report" update="salesByContributorTable" icon="ui-icon-check" />
+
+                                    <p></p>
                                     <p:dataTable id="salesByContributorTable" var="salesByContributor" value="#{reportBB.salesByContributor}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -133,13 +130,13 @@
                                 </p:tab>
 
                                 <p:tab title="Sales by Publisher">
-                                    <h:panelGrid columns="3" cellpadding="20">
-                                        <p:outputLabel for="publisherName" value="Publisher Name:" />
-                                        <p:inputText id="publisherName" value="#{reportBB.publisherName}" />
 
-                                        <p:commandButton value="Get Report" update="salesByPublisherTable" icon="ui-icon-check" />
-                                    </h:panelGrid>
+                                    <p:outputLabel for="publisherName" value="Publisher Name:" />
+                                    <p:inputText id="publisherName" value="#{reportBB.publisherName}" />
 
+                                    <p:commandButton value="Get Report" update="salesByPublisherTable" icon="ui-icon-check" />
+
+                                    <p></p>
                                     <p:dataTable id="salesByPublisherTable" var="salesByPublisher" value="#{reportBB.salesByPublisher}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -167,7 +164,7 @@
 
                                 <p:tab title="Top Sellers">
                                     <p:commandButton value="Get Report" update="topSellersTable" icon="ui-icon-check" />
-
+                                    <p></p>
                                     <p:dataTable id="topSellersTable" var="topSeller" value="#{reportBB.topSellers}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -195,7 +192,7 @@
 
                                 <p:tab title="Top Clients">
                                     <p:commandButton value="Get Report" update="topClientsTable" icon="ui-icon-check" />
-
+                                    <p></p>
                                     <p:dataTable id="topClientsTable" var="topClients" value="#{reportBB.topClients}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -227,7 +224,7 @@
 
                                 <p:tab title="Zero Sales">
                                     <p:commandButton value="Get Report" update="zeroSalesTable" icon="ui-icon-check" />
-
+                                    <p></p>
                                     <p:dataTable id="zeroSalesTable" var="zeroSales" value="#{reportBB.zeroSales}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -246,7 +243,6 @@
                     </div>
                 </div>
             </section>
-
         </ui:define>
     </ui:composition>
 </html>
