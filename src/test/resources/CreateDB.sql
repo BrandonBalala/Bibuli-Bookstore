@@ -2077,3 +2077,6 @@ VALUES ('AB', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
  ('QC', '0.00', '0.05', '0.10', CURRENT_TIMESTAMP),
  ('SA', '0.00', '0.05', '0.05', CURRENT_TIMESTAMP),
  ('YU', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP)
+
+
+INSERT INTO `admin` (`username`, `Password`) VALUES ('adminG4', 'adminG4');

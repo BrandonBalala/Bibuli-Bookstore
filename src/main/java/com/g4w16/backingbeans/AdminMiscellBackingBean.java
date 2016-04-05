@@ -5,13 +5,21 @@
  */
 package com.g4w16.backingbeans;
 
+import com.g4w16.entities.ContributionType;
+import com.g4w16.entities.Format;
 import com.g4w16.entities.Genre;
+import com.g4w16.entities.Province;
+import com.g4w16.entities.Title;
+import com.g4w16.persistence.ContributionTypeJpaController;
+import com.g4w16.persistence.FormatJpaController;
 
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import com.g4w16.persistence.GenreJpaController;
+import com.g4w16.persistence.ProvinceJpaController;
+import com.g4w16.persistence.TitleJpaController;
 
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.util.ArrayList;
@@ -21,32 +29,64 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-
 /**
  *
- * @author 1232048
+ * @author Dan
  */
 @Named("miscellBB")
 @RequestScoped
-public class AdminMiscellBackingBean implements Serializable { 
+public class AdminMiscellBackingBean implements Serializable {
+
     @Inject
     GenreJpaController genreJpaController;
+
     private String newGenre;
     private List<Genre> allGenre;
     private List<Genre> selectedGenre;
 
+    @Inject
+    ContributionTypeJpaController contributionTypeJpaController;
+
+    private String newContributionType;
+    private List<ContributionType> allContributionType;
+    private List<ContributionType> selectedContributionType;
     
+
+    @Inject
+    ProvinceJpaController provinceJpaController;
+
+    private String newProvince;
+    private List<Province> allProvince;
+    private List<Province> selectedProvince;
+    
+    @Inject
+    TitleJpaController titleJpaController;
+
+    private String newTitle;
+    private List<Title> allTitle;
+    private List<Title> selectedTitle;
+
     @PostConstruct
     public void init() {
         allGenre = genreJpaController.findAllGenres();
-        selectedGenre=new ArrayList<>();
+        selectedGenre = new ArrayList<>();
+        
+        allContributionType = contributionTypeJpaController.findAllContributionTypes();
+        selectedContributionType = new ArrayList<>();
+        
+        allProvince = provinceJpaController.findProvinceEntities();
+        selectedProvince = new ArrayList<>();
+        allTitle = titleJpaController.findTitleEntities();
+        selectedTitle = new ArrayList<>();
     }
-    
-    /**************************Genre*********************************/
-      public List<Genre> getAllGenre() {
+
+    /**
+     * ************************Genre********************************
+     */
+    public List<Genre> getAllGenre() {
         return allGenre;
     }
-    
+
     public List<Genre> getSelectedGenre() {
         return selectedGenre;
     }
@@ -54,44 +94,179 @@ public class AdminMiscellBackingBean implements Serializable {
     public void setSelectedGenre(List<Genre> selectedGenre) {
         this.selectedGenre = selectedGenre;
     }
-    
+
     public String getNewGenre() {
         return newGenre;
     }
-    
+
     public void setNewGenre(String newGenre) {
         this.newGenre = newGenre;
     }
-    
+
     public void addGenre() throws RollbackFailureException, Exception {
-        try{
-        Genre g=new Genre();
-        g.setType(newGenre);
-        genreJpaController.create(g);
-        init();
-        newGenre="";
-        }
-        catch(RollbackFailureException rfe){
+        try {
+            Genre g = new Genre();
+            g.setType(newGenre);
+            genreJpaController.create(g);
+            init();
+            newGenre = "";
+        } catch (RollbackFailureException rfe) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rfe.getMessage(), rfe.getMessage()));
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
     }
 
-        public void deleteGenre(List<Genre> selected) throws RollbackFailureException, Exception{
-           for(Genre g:selected){
+    public void deleteGenre(List<Genre> selected) throws RollbackFailureException, Exception {
+        for (Genre g : selected) {
             genreJpaController.destroy(g.getType());
-           }        
-           init();
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
+        }
+        init();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
+    }
+
+    
+    /**
+     * ****************Contribution***********************
+     */
+    public String getNewContributionType() {
+        return newContributionType;
+    }
+
+    public void setNewContributionType(String newContributionType) {
+        this.newContributionType = newContributionType;
+    }
+
+    public List<ContributionType> getAllContributionType() {
+        return allContributionType;
+    }
+
+    public void setAllContributionType(List<ContributionType> allContributionType) {
+        this.allContributionType = allContributionType;
+    }
+
+    public List<ContributionType> getSelectedContributionType() {
+        return selectedContributionType;
+    }
+
+    public void setSelectedContributionType(List<ContributionType> selectedContributionType) {    
+        this.selectedContributionType = selectedContributionType;
     }
     
+    public void addContributionType() {
+        try {
+            ContributionType c = new ContributionType();
+            c.setType(newContributionType);
+            contributionTypeJpaController.create(c);
+            init();
+            newContributionType = "";
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+    }
+
+    public void deleteContributionType(List<ContributionType> selected) throws RollbackFailureException, Exception {
+        for (ContributionType c : selected) {
+            contributionTypeJpaController.destroy(c.getType());
+        }
+        init();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
+    }
+
+    /**
+     * **************************Provence***********************************
+     */
+    public String getNewProvince() {
+        return newProvince;
+    }
+
+    public void setNewProvince(String newProvince) {
+        this.newProvince = newProvince;
+    }
+
+    public List<Province> getAllProvince() {
+        return allProvince;
+    }
+
+    public void setAllProvince(List<Province> allProvince) {
+        this.allProvince = allProvince;
+    }
+
+    public List<Province> getSelectedProvince() {
+        return selectedProvince;
+    }
+
+    public void setSelectedProvince(List<Province> selectedProvince) {
+        this.selectedProvince = selectedProvince;
+    }
     
-    
-   
-    
-    
+    public void addProvince() {
+        try {
+            Province p = new Province();
+            p.setId(newProvince);
+            provinceJpaController.create(p);
+            init();
+            newProvince = "";
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+    }
+
+    public void deleteProvince(List<Province> selected) throws RollbackFailureException, Exception {
+        for (Province p : selected) {
+            provinceJpaController.destroy(p.getId());
+        }
+        init();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
+    }
+
+    /**********************Title********************************/
+    public String getNewTitle() {
+        return newTitle;
+    }
+
+    public void setNewTitle(String newTitle) {
+        this.newTitle = newTitle;
+    }
+
+    public List<Title> getAllTitle() {
+        return allTitle;
+    }
+
+    public void setAllTitle(List<Title> allTitle) {
+        this.allTitle = allTitle;
+    }
+
+    public List<Title> getSelectedTitle() {
+        return selectedTitle;
+    }
+
+    public void setSelectedTitle(List<Title> selectedTitle) {
+        this.selectedTitle = selectedTitle;
+    }
+
+    public void addTitle() {
+        try {
+            Title t = new Title();
+            t.setId(newTitle);
+            titleJpaController.create(t);
+            init();
+            newTitle = "";
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+    }
+
+    public void deleteTitle(List<Title> selected) throws RollbackFailureException, Exception {
+        for (Title t : selected) {
+            titleJpaController.destroy(t.getId());
+        }
+        init();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
+    }
     
 }
