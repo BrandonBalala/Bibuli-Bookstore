@@ -15,93 +15,95 @@
             <ui:define name="title">Bibuli | Shopping Cart</ui:define>
 
             <ui:define name="content">
-<!--                <c:set var="test" value="{cartBB.setBookList(bookController.findBooksByYear(2011))}" scope='session'/>-->
+                <!--                <c:set var="test" value="{cartBB.setBookList(bookController.findBooksByYear(2011))}" scope='session'/>-->
                 <hr/>
                 <br/>
 
-                <c:if test="#{cartBB.bookList.size() eq 0}">
-                    <div class="row">
-                        <div class="panel medium-12 columns text-left">
-                            <h4><h:outputText value="Your cart is empty!"/></h4>
-                        </div>
-                    </div>
-                </c:if>
-
-                <c:if test="#{cartBB.bookList.size() ne 0}">
-                    <div class="row">
-                        <div class="panel medium-12 columns text-left">
-                            <h3><h:outputText value="Your Cart"/></h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="small-12 medium-12 large-9 columns">
-                            <div class="row">
-                                <div class="hidden-for-small small-4 medium-9 large-9 columns text-left">&#160;</div>
-                                <div class="hidden-for-small small-4 medium-2 large-2 columns text-left">
-                                    Price
-                                </div>
-                                <div class="hidden-for-small small-4 medium-1 large-1 columns text-right">
-                                    Actions
-                                </div>  
+                <h:panelGroup layout="block" id="booksPanel">
+                    <c:if test="#{cartBB.bookList.size() eq 0}">
+                        <div class="row">
+                            <div class="panel medium-12 columns text-center">
+                                <h4 class="bibuliFont"><h:outputText value="Your cart is empty!"/></h4>
                             </div>
-                            <ui:repeat value="#{cartBB.bookList}" var="theBook">
-                                <hr/>
+                        </div>
+                    </c:if>
+
+                    <c:if test="#{cartBB.bookList.size() ne 0}">
+                        <div class="row">
+                            <div class="panel medium-12 columns text-center">
+                                <h4 class="bibuliFont"><h:outputText value="Your Cart"/></h4>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="small-12 medium-12 large-9 columns">
                                 <div class="row">
-                                    <div class="small-12 medium-3 large-3 columns text-center">
-                                        <img class="thumbnail cartImage" src="../resources/images/#{theBook.id}.jpg" alt="Book cover"/>
+                                    <div class="hidden-for-small small-4 medium-9 large-9 columns text-left">&#160;</div>
+                                    <div class="hidden-for-small small-4 medium-2 large-2 columns text-left">
+                                        Price
                                     </div>
-                                    <div class="small-12 medium-6 large-6 columns text-left">
-                                        <h:form>
-                                            <h5><h:commandLink type="submit" value="#{theBook.title}" action="#{cartBB.displayProductPage(theBook)}"/></h5>
-                                        </h:form>
-                                        <h6>
-                                            <ul>
-                                                <li class="inlineClass">By </li>
-                                                <ui:repeat value="#{theBook.contributorList}" var="contrib">
-                                                    <li class="inlineClass">#{contrib.name} (#{contrib.contribution.type})</li>
-                                                </ui:repeat>
-                                            </ul>
-                                        </h6>
-                                    </div>
-                                    <div class="small-6 medium-2 large-2 columns text-left">
-                                        <c:if test="#{theBook.salePrice eq 0}">
-                                            <p><h:outputText value="#{theBook.listPrice}$" class="redFont"/></p>
-                                        </c:if>
-                                        <c:if test="#{theBook.salePrice ne 0}">
-                                            <p>
-                                                <h:outputText value="#{theBook.salePrice}$" class="redFont"/>
-                                                <br/><br/>
-                                                You save:
-                                                <h:outputText value="#{theBook.listPrice}$" class="strikethrough"/>
-                                                <h:outputText value="&nbsp;(#{cartBB.getSavingsPercentage(theBook.salePrice, theBook.listPrice)}%)"/>
-                                            </p>
-                                        </c:if>
-                                    </div>
-                                    <div class="small-6 medium-1 large-1 columns text-right">
-                                        <h:form>
-                                            <h:commandLink type="submit" class="button alert step fi-trash size-12" action="#{cartBB.removeBookFromCart(theBook)}"/>
-                                        </h:form>
-                                    </div>
+                                    <div class="hidden-for-small small-4 medium-1 large-1 columns text-right">
+                                        Actions
+                                    </div>  
                                 </div>
-                            </ui:repeat>
-                        </div>
-                        <div class="small-12 medium-12 large-3 columns text-center">
-                            <br/><br/>
-                            <div class="callout secondary sticky">
-                                <hr/>
-                                <br/>
-                                <h4>Subtotal <small><h:outputText value="(#{cartBB.bookList.size()} books)"/></small></h4>
-                                <p><h:outputText value="#{cartBB.subtotal}$"/></p>
-                                <h:form>
-                                    <h:commandLink type="submit" class="button expanded success step fi-credit-card size-12" value=" Proceed to Checkout" action="#{checkoutBB.displayCheckoutPage()}"/>
-                                </h:form>
-                                <br/>
-                                <hr/>
+                                <ui:repeat value="#{cartBB.bookList}" var="theBook">
+                                    <hr/>
+                                    <div class="row">
+                                        <div class="small-12 medium-3 large-3 columns text-center">
+                                            <img class="thumbnail cartImage" src="../resources/images/#{theBook.id}.jpg" alt="Book cover"/>
+                                        </div>
+                                        <div class="small-12 medium-6 large-6 columns text-left">
+                                            <h:form>
+                                                <h5><h:commandLink type="submit" value="#{theBook.title}" action="#{cartBB.displayProductPage(theBook)}"/></h5>
+                                            </h:form>
+                                            <h6>
+                                                <ul>
+                                                    <li class="inlineClass">By </li>
+                                                    <ui:repeat value="#{theBook.contributorList}" var="contrib">
+                                                        <li class="inlineClass">#{contrib.name} (#{contrib.contribution.type})</li>
+                                                    </ui:repeat>
+                                                </ul>
+                                            </h6>
+                                        </div>
+                                        <div class="small-6 medium-2 large-2 columns text-left">
+                                            <c:if test="#{theBook.salePrice eq 0}">
+                                                <p><h:outputText value="#{theBook.listPrice}$" class="redFont"/></p>
+                                            </c:if>
+                                            <c:if test="#{theBook.salePrice ne 0}">
+                                                <p>
+                                                    <h:outputText value="#{theBook.salePrice}$" class="redFont"/>
+                                                    <br/><br/>
+                                                    You save:
+                                                    <h:outputText value="#{theBook.listPrice}$" class="strikethrough"/>
+                                                    <h:outputText value="&nbsp;(#{cartBB.getSavingsPercentage(theBook.salePrice, theBook.listPrice)}%)"/>
+                                                </p>
+                                            </c:if>
+                                        </div>
+                                        <div class="small-6 medium-1 large-1 columns text-right">
+                                            <h:form>
+                                                <p:commandLink update="booksPanel" type="submit" class="button alert step fi-trash size-12" action="#{cartBB.removeBookFromCart(theBook)}"/>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                            <div class="small-12 medium-12 large-3 columns text-center">
+                                <br/><br/>
+                                <div class="callout secondary sticky">
+                                    <hr/>
+                                    <br/>
+                                    <h4>Subtotal <small><h:outputText value="(#{cartBB.bookList.size()} books)"/></small></h4>
+                                    <p><h:outputText value="#{cartBB.subtotal}$"/></p>
+                                    <h:form>
+                                        <h:commandLink type="submit" class="button expanded success step fi-credit-card size-12" value=" Proceed to Checkout" action="#{checkoutBB.displayCheckoutPage()}"/>
+                                    </h:form>
+                                    <br/>
+                                    <hr/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </c:if>
-
+                    </c:if>
+                </h:panelGroup>
                 <br/>
                 <hr/>
             </ui:define>

@@ -75,7 +75,7 @@ public class BannerJpaController implements Serializable {
             throw ex;
         }
     }
-    
+
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
@@ -97,7 +97,7 @@ public class BannerJpaController implements Serializable {
             throw ex;
         }
     }
-    
+
     public List<Banner> findBannerEntities() {
         return findBannerEntities(true, -1, -1);
     }
@@ -107,28 +107,31 @@ public class BannerJpaController implements Serializable {
     }
 
     private List<Banner> findBannerEntities(boolean all, int maxResults, int firstResult) {
-		CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-		cq.select(cq.from(Banner.class));
-		Query q = em.createQuery(cq);
-		if (!all) {
-			q.setMaxResults(maxResults);
-			q.setFirstResult(firstResult);
-		}
-		return q.getResultList();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Banner.class));
+        Query q = em.createQuery(cq);
+        if (!all) {
+            q.setMaxResults(maxResults);
+            q.setFirstResult(firstResult);
+        }
+        return q.getResultList();
     }
 
     public Banner findBanner(Integer id) {
-		return em.find(Banner.class, id);
+        return em.find(Banner.class, id);
     }
 
     public int getBannerCount() {
-		CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-		Root<Banner> rt = cq.from(Banner.class);
-		cq.select(em.getCriteriaBuilder().count(rt));
-		Query q = em.createQuery(cq);
-		return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Banner> rt = cq.from(Banner.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        return ((Long) q.getSingleResult()).intValue();
     }
-    
-    
-    
+
+    public List<Banner> findSelectedBanners() {
+        Query q = em.createQuery("SELECT b FROM Banner b WHERE b.selected=1");
+        return (List<Banner>) q.getResultList();
+    }
+
 }

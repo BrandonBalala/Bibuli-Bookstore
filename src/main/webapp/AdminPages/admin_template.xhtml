@@ -2,17 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 
-<!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+        <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
 
-<!--        <meta charset="utf-8"></meta>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-         Tell the browser to be responsive to screen width 
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>-->
+        <!--        <meta charset="utf-8"></meta>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+                 Tell the browser to be responsive to screen width 
+                <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>-->
 
         <!-- In the content of each page have <ui:define name="windowTitle">Title</ui:define> -->
         <title><ui:insert name="title" /></title>
@@ -29,7 +30,7 @@
         <link rel="stylesheet" href="#{resource['admin:dist/css/skins/skin-black.min.css']}"></link>
     </h:head>
     <h:body class="hold-transition skin-black sidebar-mini">
-        <div class="wrapper">
+         <div class="wrapper">
             <!-- Main Header -->
             <header id ="header" class="main-header">
                 <!-- Logo -->
@@ -52,11 +53,11 @@
                         <ul class="nav navbar-nav">
                             <!-- Admin name. Will be a variable in JSF. -->
                             <li>
-                                <a>Hello Administrator!</a>
+                                <a>Hello #{session.getAttribute('admin')}</a>
                             </li>
                             <li>
                                 <!-- Add functionality -->
-                                <a href="#">Sign out</a>
+                                <h:form><h:commandLink  class="whiteFont blackBackgroundColor" value="#{bundle.logout}" action="#{loginBB.logout()}"></h:commandLink></h:form>
                             </li>
                         </ul>
                     </div>
@@ -98,6 +99,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div id="content" class="content-wrapper">
+            <f:event type="preRenderView" listener="#{AdminLoginBB.sendToLogin()}" />
             <ui:insert name="body" />
         </div><!-- /.content-wrapper -->
 
@@ -109,10 +111,10 @@
 
         <!-- REQUIRED JS SCRIPTS -->
         <!-- jQuery 2.1.4 -->
-<!--        <script src="#{resource['admin:plugins/jQuery/jQuery-2.1.4.min.js']}"></script>-->
+        <!--<script src="#{resource['admin:plugins/jQuery/jQuery-2.1.4.min.js']}"></script>-->
         <!-- Bootstrap 3.3.5 -->
-        <script src="#{resource['admin:bootstrap/js/bootstrap.min.js']}"></script>
+         <script src="#{resource['admin:bootstrap/js/bootstrap.min.js']}"></script>
         <!-- AdminLTE App -->
-        <script src="#{resource['admin:dist/js/app.min.js']}"></script>|
+         <script src="#{resource['admin:dist/js/app.min.js']}"></script>
     </h:body>
 </html>

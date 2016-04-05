@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -23,67 +26,69 @@ public class MasterLayoutBackingBean implements Serializable {
 
     private List<Genre> genreList;
     private List<Format> formatList;
-    
+
     @Inject
     private GenreJpaController genreController;
 
     @Inject
     private FormatJpaController formatController;
-    
+
     @Inject
     private BooksJpaController bookController;
-    
+
     @Inject
     private ResultBackingBean resultBB;
-    
-    public List<Genre> getGenreList(){
-        if(genreList == null){
+
+    public List<Genre> getGenreList() {
+        if (genreList == null) {
             genreList = new ArrayList<Genre>();
         }
-        
+
         return genreList;
     }
-    
-    public void setGenreList(List<Genre> genreList){
+
+    public void setGenreList(List<Genre> genreList) {
         this.genreList = genreList;
     }
-    
-    public List<Format> getFormatList(){
-        if(formatList == null){
+
+    public List<Format> getFormatList() {
+        if (formatList == null) {
             formatList = new ArrayList<Format>();
         }
-        
+
         return formatList;
     }
-    
-    public void setFormatList(List<Format> formatList){
+
+    public void setFormatList(List<Format> formatList) {
         this.formatList = formatList;
     }
-    
+
     @PostConstruct
     public void init() {
         //genreList = genreController.findAllGenres();
         genreList = genreController.findAllUsedGenres();
         formatList = formatController.findAllFormats();
     }
-    
-    public String displayAllBooks(){
+
+    public String displayAllBooks() {
         resultBB.setBookList(bookController.findAllBooks());
-        
-        return "results";
+
+        return "results?faces-redirect=true";
     }
-    
-    public String displayBooksByGenre(String genre){
+
+    public String displayBooksByGenre(String genre) {
         resultBB.setBookList(bookController.findBooksByGenre(genre));
-        
-        return "results";
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        String cookie = genre;
+        response.addCookie(new Cookie("lastGenre", cookie));
+
+        return "results?faces-redirect=true";
     }
-    
-    public String displayBooksByFormat(String format){
+
+    public String displayBooksByFormat(String format) {
         resultBB.setBookList(bookController.findBooksByFormat(format));
-        
-        return "results";
+
+        return "results?faces-redirect=true";
     }
-    
-    
+
 }

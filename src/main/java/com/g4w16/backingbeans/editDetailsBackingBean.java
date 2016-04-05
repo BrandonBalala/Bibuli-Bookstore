@@ -9,11 +9,13 @@ import com.g4w16.entities.Client;
 import com.g4w16.persistence.ClientJpaController;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -22,7 +24,7 @@ import javax.inject.Named;
  * @author ofern
  */
 @Named("detailsBB")
-@ViewScoped
+@SessionScoped
 public class editDetailsBackingBean implements Serializable {
     ClientUtil clientUtil = new ClientUtil();
     
@@ -33,14 +35,26 @@ public class editDetailsBackingBean implements Serializable {
     @Inject
     private ClientJpaController clientJPAController;
     
+    @PostConstruct
+    private void clientSetCheck()
+    {
+        if(client == null)
+          try {
+              FacesContext.getCurrentInstance().getExternalContext().redirect("accountDetails.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(editDetailsBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void setPassword(String password)
     {
         this.password = password;
     }
-    @PostConstruct
-    public void setClient()
+    public void setClient(Client client)
     {
+        if(client == null)
         client = clientJPAController.findClientById(clientUtil.getUserId());
+        else
+        this.client = client;
         origPassword = client.getPassword();
     }
     

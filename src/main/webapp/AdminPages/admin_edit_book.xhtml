@@ -32,21 +32,22 @@
                                 <h:outputLabel value="Identifiers type" for="identiType"></h:outputLabel>
                                 <p:selectCheckboxMenu id="identiType" value="#{booksBB.selectedBook.bookIdentifiersList}" label="Identifier type" scrollHeight="150"
                                                       filter="true" filterMatchMode="startsWith" panelStyle="width:250px" converter="com.g4w16.jsf.util.IdentifierConverter">
-                                    <f:selectItems value="#{booksBB.allIdentifierTypes}" />
+                                    <f:selectItems value="#{booksBB.allBookIdentifiers}" />
                                 </p:selectCheckboxMenu>
                                 <p:commandLink value="Submit" update="identiDisplay" />
                             </h:panelGrid>
 
                             <p:outputPanel id="identiDisplay" style="width:250px;padding-left:5px;margin-top:10px">
                                 <p:dataList value="#{booksBB.selectedBook.bookIdentifiersList}" var="type">
-                                    #{type}
+                                    #{type.identifierType}
                                 </p:dataList>
                             </p:outputPanel>-->
 
                             <h:panelGrid columns="3" >
-<!--                                <h:outputLabel value="isbn" for="isbn"></h:outputLabel>
-                                <p:inputText id="isbn" value="#{booksBB.selectedBook.bookIdentifiers}" />
-                                <h:message for="isbn" errorStyle="color:red; display:block"/>                              -->
+                                <h:outputLabel value="isbn" for="isbn"></h:outputLabel>
+                                <p:outputLabel id="isbn" value="#{booksBB.selectedBook.bookIdentifiers}"/>
+                                <h:inputHidden/>
+
 
                                 <h:outputLabel value="title" for="title"></h:outputLabel>
                                 <p:inputText id="title" value="#{booksBB.selectedBook.title}" />
@@ -84,23 +85,7 @@
                                 <h:message for="available" errorStyle="color:red; display:block"/>
                             </h:panelGrid>
 
-                            <br />
-                            <h:panelGrid columns="3">
-                                <h:outputLabel for="format" value="formats" />
-                                <p:selectCheckboxMenu id="format" value="#{booksBB.selectedBook.bookFormatsList}" label="format" scrollHeight="150"
-                                                      filter="true" filterMatchMode="startsWith" panelStyle="width:250px" converter="com.g4w16.jsf.util.FormatConverter">
-                                    <f:selectItems value="#{booksBB.allFormats}" />
-                                </p:selectCheckboxMenu>
-                                <p:commandLink value="Submit" update="formatDisplay" />
-                            </h:panelGrid>
 
-                            <p:outputPanel id="formatDisplay" style="width:250px;padding-left:5px;margin-top:10px">
-                                <p:dataList value="#{booksBB.selectedBook.bookFormatsList}" var="format">
-                                    #{format}
-                                </p:dataList>
-                            </p:outputPanel>
-                            <br />
-<!--
                             <h:panelGrid columns="3">
                                 <h:outputLabel for="genre" value="genre" />
                                 <p:selectCheckboxMenu id="genre" value="#{booksBB.selectedBook.genreList}" label="genre" scrollHeight="150"
@@ -115,20 +100,38 @@
                                     #{genre}
                                 </p:dataList>
                             </p:outputPanel>
-                            <br />-->
+                            <br />
+
+                            <br />
+                            <h:panelGrid columns="3">
+                                <h:outputLabel for="format" value="formats" />
+                                <p:selectCheckboxMenu id="format" value="#{booksBB.selectedBook.bookFormatsList}" label="format" scrollHeight="150"
+                                                      filter="true" filterMatchMode="startsWith" panelStyle="width:250px" converter="com.g4w16.jsf.util.FormatConverter">
+                                    <f:selectItems value="#{booksBB.allBookFormats}" var="f" itemLabel="#{f.format1}" itemValue="#{f}"/>
+                                </p:selectCheckboxMenu>
+                                <p:commandLink value="Submit" update="formatDisplay" />
+                            </h:panelGrid>
+
+                            <p:outputPanel id="formatDisplay" style="width:250px;padding-left:5px;margin-top:10px">
+                                <p:dataList value="#{booksBB.selectedBook.bookFormatsList}" var="format">
+                                    #{format.format1}
+                                </p:dataList>
+                            </p:outputPanel>
+                            <br />
+
 
                             <h:panelGrid columns="3">
                                 <h:outputLabel for="author" value="author" />
                                 <p:selectCheckboxMenu id="author" value="#{booksBB.selectedBook.contributorList}" label="author" scrollHeight="150"
                                                       filter="true" filterMatchMode="startsWith" panelStyle="width:250px" converter="com.g4w16.jsf.util.AuthorConverter">
-                                    <f:selectItems value="#{booksBB.allAuthors}" />
+                                    <f:selectItems value="#{booksBB.allAuthors}" var="a" itemLabel="#{a.name}" itemValue="#{a}" />
                                 </p:selectCheckboxMenu>
                                 <p:commandLink value="Submit" update="authorDisplay" />
                             </h:panelGrid>
 
                             <p:outputPanel id="authorDisplay" style="width:250px;padding-left:5px;margin-top:10px">
                                 <p:dataList value="#{booksBB.selectedBook.contributorList}" var="author">
-                                    #{author}
+                                    #{author.name}
                                 </p:dataList>
                             </p:outputPanel>
 
@@ -139,10 +142,10 @@
                             </h:panelGrid>
                             <br />
                             <p:commandButton value="update"
-                                             action="#{booksBB.updateBook}" class="btn btn-success btn-xs" />
+                                             action="#{booksBB.updateBook()}" class="btn btn-success btn-xs" />
                             <h:outputText value="&#160;" />
                             <p:commandButton value="cancel"
-                                             action="#{booksBB.cancel}" class="btn btn-danger btn-xs" immediate="true"/>
+                                             action="#{booksBB.cancel()}" class="btn btn-danger btn-xs" immediate="true"/>
                         </h:form>
                     </div>
                 </div>

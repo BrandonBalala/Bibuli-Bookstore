@@ -33,58 +33,51 @@
                         <h:form id="form">
                             <p:growl id="msgs"/>
 
-                            <p:dataTable id="table" var="book" value="#{booksBB.books}" rows="5"
+                            <p:dataTable id="table" var="book" value="#{booksBB.books}" rows="10"
                                          paginator="true"
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15"
                                          editable="false" style="margin-bottom:20px"
-                                         scrollable="true" scrollWidth="100%" scrollHeight="100%"
                                          selection="#{booksBB.selectedBook}" selectionMode="single" rowKey="#{book}">
 
 
-<!--                                <p:ajax event="rowEdit" listener="#{booksBB.onRowEdit}" update=":form:msgs"/>
-                                <p:ajax event="rowEditCancel" listener="#{booksBB.onRowCancel}" update=":form:msgs" />-->
 
-<!--                                <p:column  headerText="Edit Status" style="width:50px">
-                                    <p:rowEditor />
-                                </p:column>-->
+                                <p:column headerText="Details" style="width:20px">
+                                    <p:commandButton process="form" icon="ui-icon-search" action="#{booksBB.showDetail(book)}"/>
+                                </p:column>
 
-
-
-                                <p:column headerText="Removal Status" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" filterMatchMode="contains" style="width:70px">
+                                <p:column headerText="Removal Status" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" filterMatchMode="contains" style="width:20px">
                                     <h:outputText value="#{book.removalStatus}" />
                                 </p:column>
 
-                                <p:column headerText="Details" style="width:70px">
-                                    <p:commandButton process="form" value="Show" icon="ui-icon-search" action="#{booksBB.showDetail(book)}"/>
-                                </p:column>
-
-                                <p:column headerText="Book Identifier " sortBy="#{book.bookIdentifiers}" filterBy="#{book.bookIdentifiers}" filterMatchMode="contains" style="width:70px">
+                                <p:column headerText="Book Identifier " sortBy="#{book.bookIdentifiers}" filterBy="#{book.bookIdentifiers}" filterMatchMode="contains" style="width:30px">
                                     <h:outputText value="#{book.bookIdentifiers}" />
                                 </p:column> 
 
-                                <p:column headerText="Title" sortBy="#{book.title}" filterBy="#{book.title}" filterMatchMode="contains" style="width:200px">
+                                <p:column headerText="Title" sortBy="#{book.title}" filterBy="#{book.title}" filterMatchMode="contains" style="width:40px">
                                     <h:outputText value="#{book.title}" />
                                 </p:column>
 
-                                <p:column headerText="Book Contributor " sortBy="#{book.bookContributor}" filterBy="#{book.bookContributor}" filterMatchMode="contains" style="width:70px">
-                                    <h:outputText value="#{book.bookContributor}" />
-                                </p:column> 
 
-                                <p:column headerText="Pub Date" sortBy="#{book.formattedPubDate}" filterBy="#{book.formattedPubDate}" filterMatchMode="contains" style="width:70px">
-                                    <h:outputText value="#{book.formattedPubDate}" />
-                                </p:column>
 
-                                <p:column headerText="Book Genre " sortBy="#{book.bookGenre}" filterBy="#{book.bookGenre}" filterMatchMode="contains" style="width:70px">
+                                <p:column headerText="Book Genre " sortBy="#{book.bookGenre}" filterBy="#{book.bookGenre}" filterMatchMode="contains" style="width:30px">
                                     <h:outputText value="#{book.bookGenre}" />
                                 </p:column> 
 
-                                <p:column headerText="Book Format " sortBy="#{book.bookFormat}" filterBy="#{book.bookFormat}" filterMatchMode="contains" style="width:70px">
+                                <p:column headerText="Book Contributor " sortBy="#{book.bookContributor}" filterBy="#{book.bookContributor}" filterMatchMode="contains" style="width:30px">
+                                    <h:outputText value="#{book.bookContributor}" />
+                                </p:column> 
+
+                                <p:column headerText="Book Format " sortBy="#{book.bookFormat}" filterBy="#{book.bookFormat}" filterMatchMode="contains" style="width:30px">
                                     <h:outputText value="#{book.bookFormat}" />
                                 </p:column> 
 
-                                <p:column headerText="Publisher" sortBy="#{book.publisher}" filterBy="#{book.publisher}" filterMatchMode="contains" style="width:70px">
+                                <p:column headerText="Publisher" sortBy="#{book.publisher}" filterBy="#{book.publisher}" filterMatchMode="contains" style="width:30px">
                                     <h:outputText value="#{book.publisher}" />
+                                </p:column>
+
+                                <p:column headerText="Pub Date" sortBy="#{book.formattedPubDate}" filterBy="#{book.formattedPubDate}" filterMatchMode="contains" style="width:30px">
+                                    <h:outputText value="#{book.formattedPubDate}" />
                                 </p:column>
 
 

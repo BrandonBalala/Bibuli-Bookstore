@@ -4,77 +4,120 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-         <h:form id="editDetailsForm" >
-            <h:panelGrid columns="1" styleClass="centered-panel">
-                <p:panel id="primepanel" header="#{bundle.editDetails}">
+        <ui:composition template="./master-layout.xhtml">
+            <ui:define name="title">Bibuli | Login Page</ui:define>
 
-                   <h:panelGrid columns="3" cellpadding="1" border="0">                       
-
-                        <h:outputLabel value="#{bundle.titleLabel}" for="title" />
+            <ui:define name="content">
+                <f:event type="preRenderView" listener="#{loginBB.sendToLogin()}" />
+                <h:form>
+                <hr/>
+                <div class="row">
+                    <div class="large-5 columns callout large-centered large">
+                        <div class="row">
+                            <div class="large-12 text-center">
+                                <h3>#{bundle.myAccount}</h3>
+                            </div>                  
+                        </div>
+                        
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>#{bundle.emailLabel}
+                                        <p:inputText id="email" value="#{detailsBB.client.email}" readonly="true"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                 <div class="large-12 columns">
+                                <h:outputLabel value="#{bundle.titleLabel}" for="title" />
                         <h:selectOneMenu id="title" value="#{detailsBB.client.title}" required="true" requiredMessage="#{bundle.titleRequired}" >
                               <c:forEach var="item" items="#{titleBB.getTitles()}">
                                   <f:selectItem itemValue="#{item.id}" itemLabel="#{bundle[item.id]}"/>
                               </c:forEach>
                             </h:selectOneMenu>
                          <p:message for="title" style="color:red"/>
-                        
-                        <p:outputLabel for="firstName" value="#{bundle.firstNameLabel}"/>
+                                </div>
+                            </div>
+                            
+                           <div class="row">
+                                <div class="large-12 columns">
+                                   <p:outputLabel for="firstName" value="#{bundle.firstNameLabel}"/>
                         <p:inputText id="firstName" value="#{detailsBB.client.firstName}" required="true"
                                      requiredMessage="#{bundle.firstNameRequired}"/>
                         <p:message for="firstName" style="color:red"/>
-
-                      
-                        <p:outputLabel for="lastName" value="#{bundle.lastNameLabel}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <p:outputLabel for="lastName" value="#{bundle.lastNameLabel}"/>
                         <p:inputText id="lastName" value="#{detailsBB.client.lastName}"  required="true"
                                      requiredMessage="#{bundle.lastNameRequired}"/>
                         <p:message for="lastName" style="color:red"/>
 
-                        
-                        <p:outputLabel for="companyName" value="#{bundle.companyNameLabel}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                     <p:outputLabel for="companyName" value="#{bundle.companyNameLabel}"/>
                         <p:inputText id="companyName" value="#{detailsBB.client.companyName}"/>
                         <p:message for="companyName" style="color:red"/>
 
-                        <p:outputLabel for="homePhoneNumber" value="#{bundle.homePhoneNumberLabel}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <p:outputLabel for="homePhoneNumber" value="#{bundle.homePhoneNumberLabel}"/>
                         <p:inputMask id="homePhoneNumber" value="#{detailsBB.client.homePhoneNumber}" required="true"
                                      requiredMessage="#{bundle.homePhoneRequired}"
                                      mask="(999) 999-9999" />
                         <p:message for="homePhoneNumber" style="color:red"/>
-
-                        <p:outputLabel for="cellPhoneNumber" value="#{bundle.cellPhoneNumberLabel}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <p:outputLabel for="cellPhoneNumber" value="#{bundle.cellPhoneNumberLabel}"/>
                         <p:inputMask id="cellPhoneNumber" value="#{detailsBB.client.cellPhoneNumber}"
                                      mask="(999) 999-9999" />
                         <p:message for="cellPhoneNumber" style="color:red"/>
-
-                        <p:outputLabel for="email" value="#{bundle.emailLabel}"/>
-                        <p:inputText id="email" value="#{detailsBB.client.email}" required="true" disabled="true"
-                                     requiredMessage="#{bundle.emailRequired}"/>
-                        <p:message for="email" style="color:red"/>
-
-                        <p:outputLabel for="passwordCurrent" value="#{bundle.currentPasswordLabel}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                     <p:outputLabel for="passwordCurrent" value="#{bundle.currentPasswordLabel}"/>
                         <p:password id="passwordCurrent" value="#{detailsBB.password}" feedback="true"
                                     required="true" promptLabel="#{bundle.passwordPrompt}"
-                                    weakLabel="#{bundle.weakPassword}" goodLabel="#{bundle.goodPassword}" strongLabel="#{bundle.strongPassword}"
                                     requiredMessage="#{bundle.currentPasswordRequired}" />
                         <p:message for="passwordCurrent" style="color:red"/>
-
-                        <p:outputLabel for="passwordNew" value="#{bundle.newPasswordConfirmLabel}"/>
+                                </div>
+                            </div>
+                     <div class="row">
+                                <div class="large-12 columns">
+                                     <p:outputLabel for="passwordNew" value="#{bundle.newPasswordConfirmLabel}"/>
                         <p:password id="passwordNew" value="#{detailsBB.client.password}" feedback="false"
-                                    required="true" requiredMessage="#{bundle.newPasswordRequired}" redisplay="true"/>
+                                    required="true" requiredMessage="#{bundle.newPasswordRequired}"
+                                    weakLabel="#{bundle.weakPassword}" goodLabel="#{bundle.goodPassword}" strongLabel="#{bundle.strongPassword}" redisplay="true"/>
                         <p:message for="passwordNew" style="color:red"/>
-
-                    </h:panelGrid>
-                    <p:commandButton id="primebutton" value="#{bundle.modifyButton}"
-                                     style="display: block;margin: 0 auto;"
-                                     action="#{detailsBB.saveChanges()}" ajax="false" />
-                  
-                </p:panel>
-            </h:panelGrid>
-        </h:form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <br/>
+                                <div class="large-12 columns">
+                                    <p:commandButton id="primebutton" value="#{bundle.modifyButton}"
+                                                     class="button expanded radius"
+                                                     action="#{AccountDetailsBB.saveChanges()}" ajax="false" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <hr/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,6 +26,7 @@ public class PollBackingBean {
     private Poll poll;
     
     private int choice;
+    private boolean resultsActive;
     
     @Inject
     private PollJpaController pollController;
@@ -40,6 +42,7 @@ public class PollBackingBean {
             int index = randomGenerator.nextInt(polls.size());
             this.poll = polls.get(index);
         }
+        
         return poll;
     }
     
@@ -51,11 +54,28 @@ public class PollBackingBean {
         this.choice = choice;
     }
     
+    public boolean isResultsActive(){
+        return resultsActive;
+    }
+    
+    public void setResultsActive(boolean isActive){
+        this.resultsActive = isActive;
+    }
+    
+    
     public void submitResult(){
         try {
             pollController.updatePoll(poll.getId(), choice);
+            resultsActive = true;
         } catch (Exception ex) {
             Logger.getLogger(PollBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @PostConstruct
+    public void init(){
+        this.poll = getPoll();
+        resultsActive = false;
+    }
+    
 }

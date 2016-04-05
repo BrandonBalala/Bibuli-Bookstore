@@ -5,8 +5,8 @@
  */
 package com.g4w16.jsf.util;
 
+import com.g4w16.entities.BookFormatsPK;
 import com.g4w16.persistence.BookFormatsJpaController;
-import com.g4w16.persistence.FormatJpaController;
 import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -23,8 +23,9 @@ public class FormatConverter implements Converter {
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         System.out.println(">>>>>>>>>>>>format" + value);
+        String [] str=value.split(",");
         BookFormatsJpaController formatJpa = CDI.current().select(BookFormatsJpaController.class).get();
-        return null;
+        return formatJpa.findBookFormatByID(new BookFormatsPK(Integer.parseInt(str[0]),str[1]));
     }
 
     @Override
