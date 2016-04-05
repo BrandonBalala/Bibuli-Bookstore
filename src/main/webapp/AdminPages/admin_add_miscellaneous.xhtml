@@ -62,7 +62,7 @@
                                 </p:tab>
 
 
-                                <p:tab title="Add Contribution">
+                                <p:tab title="Add Contribution Type">
                                     <h:form id="form2">
                                         <h:panelGrid id="grid2" cellpadding="5" columns="3" style="margin-bottom:10px">
                                             <f:facet name="header">
@@ -93,6 +93,8 @@
 
                                     </h:form>
                                 </p:tab>
+                                
+                                
                                 
                                 <p:tab title="Add Province">
                                     <h:form id="form3">
@@ -189,6 +191,53 @@
 
                                     </h:form>
                                 </p:tab>
+                                
+                                <p:tab title="Add Contributor">
+                                    <h:form id="form6">
+                                        <h:panelGrid id="grid6" cellpadding="5" columns="2" style="margin-bottom:10px">
+                                            <f:facet name="header">
+                                                <p:messages id="msgs6"  autoUpdate="true" closable="true"/>
+                                            </f:facet>
+
+                                            <p:outputLabel for="newcontributor" value="Contributor Name:" />
+                                            <p:inputText id="newcontributor" value="#{miscellBB.newContributor}" required="true" requiredMessage="Contributor is required." />
+                                            
+                                            <p:outputLabel for="newtype" value="Contributor Type:" />
+                                            <p:inputText id="newtype" value="#{miscellBB.newType}" required="true" requiredMessage="Contribution type is required." />
+                                            
+                                            <p:commandButton value="Save" actionListener="#{miscellBB.addContributor()}" update="table6 newcontributor newtype" process="grid6" icon="ui-icon-check"/>
+                                           
+                                        </h:panelGrid>
+
+                                        <p:dataTable id="table6" var="contributor" value="#{miscellBB.allContributor}" rows="10"
+                                                     paginator="true"
+                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15"
+                                                     editable="true" style="margin-bottom:20px"
+                                                     selection="#{miscellBB.selectedContributor}" rowKey="#{contributor.id}" >
+
+                                            <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
+                                            
+                                            <p:column headerText="ID" sortBy="#{contributor.id}" filterBy="#{contributor.id}" filterMatchMode="contains" style="width:200px">
+                                                <h:outputText value="#{contributor.id}" />
+                                            </p:column>
+                                            
+                                            <p:column headerText="Contributor Name" sortBy="#{contributor.name}" filterBy="#{contributor.name}" filterMatchMode="contains" style="width:200px">
+                                                <h:outputText value="#{contributor.name}" />
+                                            </p:column>
+                                            
+                                            <p:column headerText="Contribution Type" sortBy="#{contributor.contribution}" filterBy="#{contributor.contribution}" filterMatchMode="contains" style="width:200px">
+                                                <h:outputText value="#{contributor.contribution}" />
+                                            </p:column>
+                                            
+                                            <f:facet name="footer">
+                                                <p:commandButton process="table6" update="table6" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteContributor(miscellBB.selectedContributor)}" />
+                                            </f:facet>
+                                        </p:dataTable>
+                                    </h:form>
+                                </p:tab>
+                                
+                                
                             </p:tabView>
 
                         </h:form >
