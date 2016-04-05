@@ -17,6 +17,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -132,7 +133,18 @@ public class AdminJpaController implements Serializable {
 		Query q = em.createQuery(cq);
 		return ((Long) q.getSingleResult()).intValue();
     }
-
+    
+      public Admin findAdminByEmailAndPassword(String username,String password){
+        try
+        {
+        Query q = em.createQuery("SELECT a FROM Admin a WHERE a.username = :username AND a.password = :password");
+        q.setParameter("username", username);
+        q.setParameter("password", password);
+        return  (Admin) q.getSingleResult();
+        } catch(NoResultException e) {
+        return null;
+       }
+    }
 
 
     //no need for find by username as the findAdmin does the same thing due to the

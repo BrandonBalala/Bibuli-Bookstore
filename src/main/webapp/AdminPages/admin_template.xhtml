@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 
         <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
@@ -29,7 +30,7 @@
         <link rel="stylesheet" href="#{resource['admin:dist/css/skins/skin-black.min.css']}"></link>
     </h:head>
     <h:body class="hold-transition skin-black sidebar-mini">
-        <div class="wrapper">
+         <div class="wrapper">
             <!-- Main Header -->
             <header id ="header" class="main-header">
                 <!-- Logo -->
@@ -52,11 +53,11 @@
                         <ul class="nav navbar-nav">
                             <!-- Admin name. Will be a variable in JSF. -->
                             <li>
-                                <a>Hello Administrator!</a>
+                                <a>Hello #{session.getAttribute('admin')}</a>
                             </li>
                             <li>
                                 <!-- Add functionality -->
-                                <a href="#">Sign out</a>
+                                <h:form><h:commandLink  class="whiteFont blackBackgroundColor" value="#{bundle.logout}" action="#{loginBB.logout()}"></h:commandLink></h:form>
                             </li>
                         </ul>
                     </div>
@@ -98,6 +99,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div id="content" class="content-wrapper">
+            <f:event type="preRenderView" listener="#{AdminLoginBB.sendToLogin()}" />
             <ui:insert name="body" />
         </div><!-- /.content-wrapper -->
 

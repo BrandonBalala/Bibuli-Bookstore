@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -83,4 +84,9 @@ public class InvoiceBackingBean implements Serializable {
             }
             return catcher.toString();
         }
+    
+    public void sendToInvoicesList() throws IOException {
+         if (sale == null)
+         FacesContext.getCurrentInstance().getExternalContext().redirect("my-books.xhtml");
+    }
 }

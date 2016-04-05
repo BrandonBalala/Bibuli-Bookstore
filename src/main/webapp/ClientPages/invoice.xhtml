@@ -16,13 +16,14 @@
             <ui:define name="title">Bibuli | Shipping Address</ui:define>
 
             <ui:define name="content">
-                <hr/>
-
+                
+                <f:event type="preRenderView" listener="#{invoiceBB.sendToInvoicesList()}" />
                 <div class="container">
-                    <div class="row">
+                    
+                    <div class="row"><h:link value="Back to Your Books" outcome="my-books" /><hr/>
                         <div class="col-xs-12">
                             <div class="invoice-title">
-                                <h:link value="Download Books" outcome="my-books" />
+                               
                                 <h3>#{(bundle.invoiceNum).concat(invoiceBB.sale.id)}</h3>
                             </div>
                             <small>#{bundle.bibuli}</small>

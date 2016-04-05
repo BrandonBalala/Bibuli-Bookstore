@@ -1401,9 +1401,11 @@ VALUES
 
 INSERT INTO `banner` (`URI`, `SELECTED`)
 VALUES
-('https://www.johnniewalker.com/', '1'),
-('http://www.osheaga.com/', '1'),
-('https://www.dawsoncollege.qc.ca/', '0');
+('aberfeldy_ad.jpg', '1'),
+('johniewalker_ad.JPG', '1'),
+('netflix_ad.jpg', '1'),
+('osheaga_ad.jpg', '1');
+
 
 insert into Sales (id, DateEntered, Client, GrossValue, NetValue, Removed, BillingAddress) values 
 (1, "2015-12-25 00:00:00", 37, 86.47, 3.77, 1, 1),
