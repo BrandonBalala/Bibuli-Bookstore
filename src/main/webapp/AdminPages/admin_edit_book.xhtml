@@ -46,7 +46,7 @@
                             <h:panelGrid columns="3" >
                                 <h:outputLabel value="isbn" for="isbn"></h:outputLabel>
                                 <p:outputLabel id="isbn" value="#{booksBB.selectedBook.bookIdentifiers}"/>
-                                <h:inputHidden value="#{booksBB.isbn}"/>
+                                <h:inputHidden/>
 
 
                                 <h:outputLabel value="title" for="title"></h:outputLabel>
@@ -142,10 +142,10 @@
                             </h:panelGrid>
                             <br />
                             <p:commandButton value="update"
-                                             action="#{booksBB.updateBook}" class="btn btn-success btn-xs" />
+                                             action="#{booksBB.updateBook()}" class="btn btn-success btn-xs" />
                             <h:outputText value="&#160;" />
                             <p:commandButton value="cancel"
-                                             action="#{booksBB.cancel}" class="btn btn-danger btn-xs" immediate="true"/>
+                                             action="#{booksBB.cancel()}" class="btn btn-danger btn-xs" immediate="true"/>
                         </h:form>
                     </div>
                 </div>

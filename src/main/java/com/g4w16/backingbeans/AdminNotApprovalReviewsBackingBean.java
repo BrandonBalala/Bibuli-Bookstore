@@ -42,6 +42,7 @@ public class AdminNotApprovalReviewsBackingBean implements Serializable{
     @PostConstruct
     public void init() {
         reviews = reviewController.findReviewByApprovalStatus(Boolean.FALSE);
+        status= new ArrayList<>(Arrays.asList("TRUE","FALSE"));
     }
     
     public List<Reviews> getReviews(){
@@ -49,7 +50,7 @@ public class AdminNotApprovalReviewsBackingBean implements Serializable{
     } 
     
     public List<String> getStatus(){
-        status= new ArrayList<>(Arrays.asList("TRUE","FALSE"));
+        
         return status;
     }
     
