@@ -37,7 +37,8 @@ import javax.inject.Named;
 
 /**
  *
- * @author Dan, Annie So
+ * @author Dan
+ * @author Annie So
  */
 @Named("miscellBB")
 @RequestScoped
