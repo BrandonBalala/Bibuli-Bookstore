@@ -79,12 +79,12 @@
                                                      requiredMessage="#{bundle.homePhoneRequired}"
                                                      mask="(999) 999-9999" >
                                             <f:validator validatorId="phoneValidator" />
-                                             <f:ajax event="blur" render="homePhoneNumber" />
+                                             <f:ajax event="blur" render="homePhoneNumbermessage" />
                                         </p:inputMask>
                                     </label>
                                 </div>
                                 <div class="large-12 text-left">
-                                    <h:message id="homePhoneNumber" for="homePhoneNumber" style="color:red"/>
+                                    <h:message id="homePhoneNumbermessage" for="homePhoneNumber" style="color:red"/>
                                 </div> 
                             </div>
                             <div class="row">
@@ -93,12 +93,12 @@
                                         <p:inputMask id="cellPhoneNumber" value="#{registerBB.client.cellPhoneNumber}"
                                                      mask="(999) 999-9999" required="true">
                                             <f:validator validatorId="phoneValidator" />
-                                             <f:ajax event="blur" render="cellPhoneNumber" />
+                                             <f:ajax event="blur" render="cellPhoneNumbermessage" />
                                         </p:inputMask>
                                     </label>
                                 </div>
                                 <div class="large-12 text-left">
-                                    <h:message id="cellPhoneNumber" for="cellPhoneNumber" style="color:red"/>
+                                    <h:message id="cellPhoneNumbermessage" for="cellPhoneNumber" style="color:red"/>
 
                                 </div> 
                             </div>
