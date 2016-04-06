@@ -40,12 +40,7 @@
                                 <f:facet name="header">
                                     <p:messages id="msgs" autoUpdate="true" closable="true"/>
                                 </f:facet>
-                                
-                                <p:outputLabel for="uri" value="New Ad URI:" />
-                                <p:inputText id="uri" size="100" value="#{bannerBB.uri}" required="true"  />
-                                
-                                <p:commandButton value="Add" action="#{bannerBB.addAction(bannerBB.uri)}" update="table uri msgs" process="grid" icon="ui-icon-check"/>
-
+                                     
                                 <br/>
                                  </h:panelGrid>
                                 <p:dataTable id="table" var="ad" value="#{bannerBB.banners}" rows="10"

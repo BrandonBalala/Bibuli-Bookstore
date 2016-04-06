@@ -128,15 +128,17 @@ public class AdminBannerBackingBean implements Serializable {
         bannerJpaController.edit(selected);
     }
 
-    public void addAction(String name) throws Exception {
-        InputStream stream = uploadedFile.getInputStream();
-        Files.copy(stream, new File("/WEB-INF/books/" + name, name).toPath());
-        stream.close();
-        Banner b = new Banner();
-        b.setUri(name);
-        b.setSelected(false);
-        bannerJpaController.create(b);
-        init();
-        uri="";
-    }
+//    public void addAction(String name) throws Exception {
+//        
+//        InputStream stream = uploadedFile.getInputStream();
+//        Files.copy(stream, new File("/WEB-INF/books/" + name, name).toPath());
+//        stream.close();
+//        Banner b = new Banner();
+//        b.setUri(name);
+//        b.setSelected(false);
+//        bannerJpaController.create(b);
+//        init();
+//        uri="";
+//        }     
+    
 }

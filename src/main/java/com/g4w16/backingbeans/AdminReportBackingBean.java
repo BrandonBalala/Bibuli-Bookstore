@@ -36,7 +36,7 @@ public class AdminReportBackingBean implements Serializable {
     private List<Object[]> topClients;
     private List<Object[]> zeroSales;
 
-    private String clientId;
+    private Integer clientId;
     private String contributorName;
     private String publisherName;
     private Date startDate;
@@ -52,7 +52,7 @@ public class AdminReportBackingBean implements Serializable {
         topClients = new ArrayList<>();
         zeroSales = new ArrayList<>();
 
-        clientId = "0";
+        clientId = 0;
         contributorName = "";
         publisherName = "";
 
@@ -99,12 +99,12 @@ public class AdminReportBackingBean implements Serializable {
     }
 
     public List<Object[]> getSalesByClient() {
-        salesByClient = salesController.getSalesByClient(startDate, endDate, Integer.valueOf(clientId));
+        salesByClient = salesController.getSalesByClient(startDate, endDate, clientId);
         return salesByClient;
     }
 
     public BigDecimal getSalesByClientTotalSales() {
-        salesByClient = salesController.getSalesByClient(startDate, endDate, Integer.valueOf(clientId));
+        salesByClient = salesController.getSalesByClient(startDate, endDate, clientId);
         BigDecimal total = BigDecimal.ZERO;
 
         for (Object[] sale : salesByClient) {
@@ -115,7 +115,7 @@ public class AdminReportBackingBean implements Serializable {
     }
 
     public BigDecimal getSalesByClientTotalCost() {
-        salesByClient = salesController.getSalesByClient(startDate, endDate, Integer.valueOf(clientId));
+        salesByClient = salesController.getSalesByClient(startDate, endDate, clientId);
         BigDecimal total = BigDecimal.ZERO;
 
         for (Object[] sale : salesByClient) {
@@ -126,7 +126,7 @@ public class AdminReportBackingBean implements Serializable {
     }
 
     public BigDecimal getSalesByClientTotalProfit() {
-        salesByClient = salesController.getSalesByClient(startDate, endDate, Integer.valueOf(clientId));
+        salesByClient = salesController.getSalesByClient(startDate, endDate, clientId);
         BigDecimal total = BigDecimal.ZERO;
 
         for (Object[] sale : salesByClient) {
@@ -178,8 +178,8 @@ public class AdminReportBackingBean implements Serializable {
         salesByPublisher = salesController.getSalesByPublisher(startDate, endDate, publisherName);
         return salesByPublisher;
     }
-    
-      public BigDecimal getSalesByPublisherTotalSales() {
+
+    public BigDecimal getSalesByPublisherTotalSales() {
         salesByPublisher = salesController.getSalesByPublisher(startDate, endDate, publisherName);
         BigDecimal total = BigDecimal.ZERO;
 
@@ -216,8 +216,8 @@ public class AdminReportBackingBean implements Serializable {
         topSellers = salesController.getTopSellers(startDate, endDate);
         return topSellers;
     }
-    
-     public BigDecimal getTopSellersTotalSales() {
+
+    public BigDecimal getTopSellersTotalSales() {
         topSellers = salesController.getTopSellers(startDate, endDate);
         BigDecimal total = BigDecimal.ZERO;
 
@@ -254,8 +254,8 @@ public class AdminReportBackingBean implements Serializable {
         topClients = salesController.getTopClients(startDate, endDate);
         return topClients;
     }
-    
-     public BigDecimal getTopClientsTotalSales() {
+
+    public BigDecimal getTopClientsTotalSales() {
         topClients = salesController.getTopClients(startDate, endDate);
         BigDecimal total = BigDecimal.ZERO;
 
@@ -294,11 +294,15 @@ public class AdminReportBackingBean implements Serializable {
     }
 
     public String getClientId() {
-        return clientId;
+        return String.valueOf(clientId);
     }
 
     public void setClientId(String clientId) {
-        this.clientId = clientId;
+        try {
+            this.clientId = Integer.parseInt(clientId);
+        } catch (NumberFormatException nfe) {
+            this.clientId = 0;
+        }
     }
 
     public String getContributorName() {
