@@ -435,7 +435,7 @@ body{
 }
 
 .carouselRow:hover{
-    cursor: w-resize;
+    cursor: pointer;
 }
 
 .ui-selectoneradio{
@@ -444,17 +444,6 @@ body{
     border: none !important;
     border-collapse: separate !important;
     margin-bottom: 0rem !important;
-}
-
-.adImages{
-    user-drag: none; 
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    height:300px;
-    width: 450px;
 }
 
 .rowFlex{
@@ -512,4 +501,38 @@ a:hover, a:active, a:focus {
     .orbit{
         display: none !important;
     }
+    .searchBar{
+        display: none !important;
+    }
+}
+
+.adImages{
+    height:275px;
+    width: 450px;
+}
+
+.dragRemoved{
+    user-drag: none !important; 
+    user-select: none !important;
+    -moz-user-select: none !important;
+    -webkit-user-drag: none !important;
+    -webkit-user-select: none !important;
+    -ms-user-select: none !important;
+}
+
+.selectMenuLanguage{
+    margin: 0px !important;
+    border-color: #1e1b1b;
+}
+
+.divider{
+    padding-left: 20px !important;
+}
+
+.unselectable {
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -o-user-select: none !important;
+    user-select: none !important;
 }

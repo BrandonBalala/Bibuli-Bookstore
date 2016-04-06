@@ -5,29 +5,28 @@
  */
 package com.g4w16.backingbeans;
 
-import com.g4w16.entities.BookFormats;
 import com.g4w16.entities.Books;
 import com.g4w16.entities.Client;
 import com.g4w16.entities.Sales;
 import com.g4w16.entities.SalesDetails;
 import com.g4w16.persistence.ClientJpaController;
 import com.g4w16.persistence.SalesJpaController;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -80,10 +79,6 @@ public class PurchasedBooksBackingBean implements Serializable {
             return  new ArrayList();
     }
 
-    public void downloadBook(BookFormats bookFormat) {
-
-    }
-
     public String getFormattedDate(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         return dateFormat.format(date);
@@ -120,5 +115,27 @@ public class PurchasedBooksBackingBean implements Serializable {
 
         client = clientController.findClientById(clientID);
         }
+    }
+     
+ 
+    public void downloadBook(String book) throws IOException {
+       InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/WEB-INF/books/"+book);
+       byte[] buf = new byte[stream.available()];
+      int offset = 0;
+      int numRead = 0;
+      while ((offset < buf.length) && ((numRead = stream.read(buf, offset, buf.length -offset)) >= 0)) 
+      {
+        offset += numRead;
+      }
+      stream.close();
+      HttpServletResponse response =
+         (HttpServletResponse) FacesContext.getCurrentInstance()
+        .getExternalContext().getResponse();
+
+     response.setHeader("Content-Disposition", "attachment;filename="+book);
+     response.getOutputStream().write(buf);
+     response.getOutputStream().flush();
+     response.getOutputStream().close();
+     FacesContext.getCurrentInstance().responseComplete();
     }
 }

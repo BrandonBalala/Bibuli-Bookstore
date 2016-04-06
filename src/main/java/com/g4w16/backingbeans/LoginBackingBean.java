@@ -112,14 +112,6 @@ public class LoginBackingBean implements Serializable {
         return "mainPage?faces-redirect=true";
     }
 
-    //REMOVE LATER, USED FOR TESTING ONLY 
-    //FASHFASFHOASIFHOIOASOIH
-    @PostConstruct
-    public void init() {
-        email = "cbutler1@a8.net";
-        password = "a";
-    }
-
     private void removeOwnedBooksFromCart() {
         Client client = clientJPAController.findClientById(clientUtil.getUserId());
         List<Books> bookList = cartBB.getBookList();

@@ -369,6 +369,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
 //                    }
 //                }
 //            }
+            em.merge(books);
             utx.commit();
         } catch (Exception ex) {
             try {
