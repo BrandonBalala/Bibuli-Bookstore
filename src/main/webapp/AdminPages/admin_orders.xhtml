@@ -27,7 +27,7 @@
                         <div class="col-xs-12">
 
                             <h:form id="form">
-                                <p:dataTable id="ordersTable" var="sale" value="#{orderBB.sales}" rows="5"
+                                <p:dataTable id="ordersTable" var="sale" value="#{orderBB.sales}" rows="10"
                                              paginator="true" paginatorPosition="top"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                              style="margin-bottom:20px" selection="#{orderBB.selectedSale}" selectionMode="single" rowKey="#{sale.id}">

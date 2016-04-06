@@ -371,8 +371,6 @@ public class SalesJpaController implements Serializable {
 
         List<Object[]> results = q.getResultList();
 
-        //TypedQuery<Object[]> q2 = em.createQuery("SELECT b.id, b.title, sd.price, b.wholesalePrice, (sd.price - b.wholesalePrice) AS profit FROM Sales s JOIN s.client c JOIN s.salesDetailsList sd JOIN sd.book b WHERE c.id = :clientId WHERE sd.removed = false AND CAST(s.dateEntered AS DATE) BETWEEN CAST(:startDate AS DATE) AND CAST(:endDate AS DATE) ORDER BY s.dateEntered ASC", Object[].class);
-        //TypedQuert<Object[]> q3 = em.createQuery("SELECT b.id, b.title, sd.price, b.wholesalePrice, (sd.proce - b.wholesalePrice) AS profit FROM Sales s JOIN s.client c JOIN s.salesDetailsList sd JOIN sd.book b WHERE c.id = :clientId ")
         return results;
     }
 
@@ -397,7 +395,7 @@ public class SalesJpaController implements Serializable {
                 + "GROUP BY b.id "
                 + "ORDER BY s.dateEntered ASC", Object[].class);
 
-        q.setParameter("contributorName", contributorName);
+        q.setParameter("contributorName", contributorName.trim());
         q.setParameter("startDate", startDate);
         q.setParameter("endDate", endDate);
 
@@ -427,7 +425,7 @@ public class SalesJpaController implements Serializable {
                 + "GROUP BY b.id "
                 + "ORDER BY s.dateEntered ASC", Object[].class);
 
-        q.setParameter("publisherName", publisherName);
+        q.setParameter("publisherName", publisherName.trim());
         q.setParameter("startDate", startDate);
         q.setParameter("endDate", endDate);
 

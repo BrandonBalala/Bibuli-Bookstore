@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="#{resource['admin:customStyle.css']}"></link>
     </h:head>
     <h:body class="hold-transition skin-black sidebar-mini">
-         <div class="wrapper">
+        <div class="wrapper">
             <!-- Main Header -->
             <header id ="header" class="main-header">
                 <!-- Logo -->
@@ -74,19 +74,14 @@
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu">
                     <li class="header">Navigation</li>     
-                    <li class="active"><a href="admin_home.xhtml"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                    <li><a href="admin_home.xhtml"><i class="fa fa-home"></i> <span>Home</span></a></li>
                     <li><a href="admin_books.xhtml"><i class="fa fa-book"></i> <span>Inventory</span></a></li>
-                    <li><a href="admin_sales.xhtml"><i class="fa fa-dollar"></i> <span>Sales</span></a></li>
+                    <li><a href="admin_sales.xhtml"><i class="fa fa-dollar"></i> <span>Set Sales</span></a></li>
                     <li><a href="admin_clients.xhtml"><i class="fa fa-user"></i> <span>Clients</span></a></li>
                     <li><a href="admin_orders.xhtml"><i class="fa fa-money"></i> <span>Orders</span></a></li>
                     <li><a href="admin_reports.xhtml"><i class="fa fa-line-chart"></i> <span>Reports</span></a></li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-edit"></i> <span>Reviews</span><i class="fa fa-angle-left pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="admin_not_approval_reviews.xhtml">Not Approval Reviews</a></li>
-                            <li><a href="admin_view_reviews.xhtml">View All Reviews</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="admin_not_approval_reviews.xhtml"><i class="fa fa-edit"></i><span>Not Approval Reviews</span></a></li>
+                    <li><a href="admin_view_reviews.xhtml"><i class="fa fa-list"></i><span>View All Reviews</span></a></li>
                     <li><a href="admin_poll.xhtml"><i class="fa fa-question-circle"></i> <span>Surveys</span></a></li>
                     <li><a href="admin_newsFeed.xhtml"><i class="fa fa-feed"></i> <span>News</span></a></li>
                     <li><a href="admin_banner.xhtml"><i class="fa fa-tv"></i> <span>Ads</span></a></li>
@@ -114,8 +109,8 @@
         <!-- jQuery 2.1.4 -->
         <!--<script src="#{resource['admin:plugins/jQuery/jQuery-2.1.4.min.js']}"></script>-->
         <!-- Bootstrap 3.3.5 -->
-         <script src="#{resource['admin:bootstrap/js/bootstrap.min.js']}"></script>
+        <script src="#{resource['admin:bootstrap/js/bootstrap.min.js']}"></script>
         <!-- AdminLTE App -->
-         <script src="#{resource['admin:dist/js/app.min.js']}"></script>
+        <script src="#{resource['admin:dist/js/app.min.js']}"></script>
     </h:body>
 </html>

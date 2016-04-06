@@ -42,7 +42,8 @@ import javax.inject.Named;
 
 /**
  *
- * @author Dan, Annie So
+ * @author Dan
+ * @author Annie So
  */
 @Named("miscellBB")
 @RequestScoped
@@ -148,19 +149,34 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addGenre() {
-        try {
-            Genre g = new Genre();
-            g.setType(newGenre);
-            genreJpaController.create(g);
-            init();
-            newGenre = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
-        } catch (RollbackFailureException rfe) {
-            newGenre = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rfe.getMessage(), rfe.getMessage()));
-        } catch (Exception e) {
-            newGenre = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newGenre.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Genre cannot be longer than 128 characters", "Genre cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (Genre genre : allGenre) {
+            if (genre.getType().equalsIgnoreCase(newGenre)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate genre", "Cannot have a duplicate genre"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                Genre g = new Genre();
+                g.setType(newGenre);
+                genreJpaController.create(g);
+                init();
+                newGenre = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (RollbackFailureException rfe) {
+                newGenre = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rfe.getMessage(), rfe.getMessage()));
+            } catch (Exception e) {
+                newGenre = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
         }
     }
 
@@ -206,17 +222,31 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addContributionType() {
-        try {
-            ContributionType c = new ContributionType();
-            c.setType(newContributionType);
-            contributionTypeJpaController.create(c);
-            init();
-            newContributionType = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+        boolean noErrors = true;
+        if (newContributionType.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contribution type cannot be longer than 128 characters", "Contribution type cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (ContributionType type : allContributionType) {
+            if (type.getType().equalsIgnoreCase(newContributionType)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate contribution type", "Cannot have a duplicate contribution type"));
+                noErrors = false;
+                break;
+            }
+        }
+        if (noErrors) {
+            try {
+                ContributionType c = new ContributionType();
+                c.setType(newContributionType);
+                contributionTypeJpaController.create(c);
+                init();
+                newContributionType = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
 
-        } catch (Exception e) {
-            newContributionType = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            } catch (Exception e) {
+                newContributionType = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
         }
     }
 
@@ -264,26 +294,40 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addProvince() {
-        try {
-            Province p = new Province();
-            p.setId(newProvince);
-            provinceJpaController.create(p);
+        boolean noErrors = true;
+        if (newProvince.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Province cannot be longer than 128 characters", "Province cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (Province province : allProvince) {
+            if (province.getId().equalsIgnoreCase(newProvince)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate province", "Cannot have a duplicate province"));
+                noErrors = false;
+                break;
+            }
+        }
+        if (noErrors) {
+            try {
+                Province p = new Province();
+                p.setId(newProvince);
+                provinceJpaController.create(p);
 
-            TaxeRates tax = new TaxeRates();
-            tax.setProvince(newProvince);
-            tax.setGst(BigDecimal.ZERO);
-            tax.setHst(BigDecimal.ZERO);
-            tax.setPst(BigDecimal.ZERO);
-            tax.setUpdated(new Date());
-            taxController.create(tax);
+                TaxeRates tax = new TaxeRates();
+                tax.setProvince(newProvince);
+                tax.setGst(BigDecimal.ZERO);
+                tax.setHst(BigDecimal.ZERO);
+                tax.setPst(BigDecimal.ZERO);
+                tax.setUpdated(new Date());
+                taxController.create(tax);
 
-            init();
-            newProvince = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+                init();
+                newProvince = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
 
-        } catch (Exception e) {
-            newProvince = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            } catch (Exception e) {
+                newProvince = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
         }
     }
 
@@ -329,16 +373,31 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addTitle() {
-        try {
-            Title t = new Title();
-            t.setId(newTitle);
-            titleJpaController.create(t);
-            init();
-            newTitle = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
-        } catch (Exception e) {
-            newTitle = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newTitle.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Title cannot be longer than 128 characters", "Title cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (Title title : allTitle) {
+            if (title.getId().equalsIgnoreCase(newTitle)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate title", "Cannot have a duplicate title"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                Title t = new Title();
+                t.setId(newTitle);
+                titleJpaController.create(t);
+                init();
+                newTitle = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newTitle = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
         }
     }
 
@@ -384,16 +443,30 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addFormat() {
-        try {
-            Format f = new Format();
-            f.setType(newFormat);
-            formatController.create(f);
-            init();
-            newFormat = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
-        } catch (Exception e) {
-            newFormat = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newFormat.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Format cannot be longer than 128 characters", "Format cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (Format format : allFormat) {
+            if (format.getType().equalsIgnoreCase(newFormat)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate format", "Cannot have a duplicate format"));
+                noErrors = false;
+                break;
+            }
+        }
+        if (noErrors) {
+            try {
+                Format f = new Format();
+                f.setType(newFormat);
+                formatController.create(f);
+                init();
+                newFormat = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newFormat = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
         }
     }
 
@@ -449,17 +522,32 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addContributor() {
-        try {
-            Contributor c = new Contributor();
-            c.setName(newContributor);
-            c.setContribution(new ContributionType(newType));
-            contributorJpaController.create(c);
-            init();
-            newContributor = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
-        } catch (Exception e) {
-            newContributor = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newContributor.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contributor cannot be longer than 128 characters", "Contributor cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (Contributor contributor : allContributor) {
+            if (contributor.getName().equalsIgnoreCase(newContributor) && contributor.getContribution().getType().equalsIgnoreCase(newType)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate contributor with the same contribution type", "Cannot have a duplicate contributor with the same contribution type"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                Contributor c = new Contributor();
+                c.setName(newContributor);
+                c.setContribution(new ContributionType(newType));
+                contributorJpaController.create(c);
+                init();
+                newContributor = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newContributor = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
         }
     }
 
@@ -505,16 +593,31 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addIdentifierType() {
-        try {
-            IdentifierType i = new IdentifierType();
-            i.setType(newIdentifierType);
-            identifierTypeJpaController.create(i);
-            init();
-            newIdentifierType = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
-        } catch (Exception e) {
-            newIdentifierType = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newIdentifierType.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Identifier type cannot be longer than 128 characters", "Identifier type cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (IdentifierType type : allIdentifierType) {
+            if (type.getType().equalsIgnoreCase(newIdentifierType)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate identifier type", "Cannot have a duplicate identifer type"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                IdentifierType i = new IdentifierType();
+                i.setType(newIdentifierType);
+                identifierTypeJpaController.create(i);
+                init();
+                newIdentifierType = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newIdentifierType = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
         }
     }
 
