@@ -23,6 +23,7 @@ import javax.inject.Named;
 /**
  *
  * @author wangdan
+ * @author Annie So
  */
 @Named("managementBB")
 @RequestScoped
@@ -79,22 +80,42 @@ public class AdminManagement implements Serializable {
     }
 
     public void addAdmin() throws RollbackFailureException, Exception {
-        try {
-            Admin a = new Admin();
-            a.setUsername(newName);
-            a.setPassword(newPassword);
-            adminJpaController.create(a);
-            init();
-            newName = "";
-            newPassword = "";
-        } catch (RollbackFailureException rfe) {
-            newName = "";
-            newPassword = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
-        } catch (Exception e) {
-            newName = "";
-            newPassword = "";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+
+        if (newName.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Name cannot be longer than 128 characters", "Name cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        if (newPassword.length() > 254) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password cannot be longer than 128 characters", "Password cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (Admin admin : allAdmin) {
+            if (admin.getUsername().equalsIgnoreCase(newName)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "An admin with that name already exists", "An admin with that name already exists"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                Admin a = new Admin();
+                a.setUsername(newName);
+                a.setPassword(newPassword);
+                adminJpaController.create(a);
+                init();
+                newName = "";
+                newPassword = "";
+            } catch (RollbackFailureException rfe) {
+                newName = "";
+                newPassword = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newName = "";
+                newPassword = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
         }
     }
 

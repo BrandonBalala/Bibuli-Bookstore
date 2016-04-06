@@ -33,11 +33,11 @@
                             <p:outputLabel for="endDate" value="End Date:" />
                             <p:calendar id="endDate" value="#{reportBB.endDate}" />
 
+                            <p:commandButton value="Get Report" update=":form:allTabs:totalSalesTable :form:allTabs:totalSalesTotalSales :form:allTabs:totalSalesTotalCost :form:allTabs:totalSalesTotalProfit :form:allTabs:salesByClientTable :form:allTabs:salesByClientTotalSales :form:allTabs:salesByClientTotalCost :form:allTabs:salesByClientTotalProfit :form:allTabs:salesByContributorTable :form:allTabs:salesByContributorTotalSales :form:allTabs:salesByContributorTotalCost :form:allTabs:salesByContributorTotalProfit :form:allTabs:salesByPublisherTable :form:allTabs:salesByPublisherTotalSales :form:allTabs:salesByPublisherTotalCost :form:allTabs:salesByPublisherTotalProfit :form:allTabs:topSellersTable :form:allTabs:topSellersTotalSales :form:allTabs:topSellersTotalCost :form:allTabs:topSellersTotalProfit :form:allTabs:topClientsTable :form:allTabs:topClientsTotalSales :form:allTabs:topClientsTotalCost :form:allTabs:topClientsTotalProfit :form:allTabs:zeroSalesTable" icon="ui-icon-check" />
+                            
                             <p></p>
-                            <p:tabView scrollable="true">
-
+                            <p:tabView id="allTabs" scrollable="true">
                                 <p:tab title="Total Sales">
-                                    <p:commandButton value="Get Report" update="totalSalesTable totalSalesTotalSales totalSalesTotalCost totalSalesTotalProfit" icon="ui-icon-check" />
                                     <p></p>
 
                                     <p:outputLabel value="Total Sales: "/>
@@ -79,7 +79,6 @@
                                     <p:outputLabel for="clientId" value="Client ID:" />
                                     <p:inputText id="clientId" value="#{reportBB.clientId}" />
 
-                                    <p:commandButton value="Get Report" update="salesByClientTable salesByClientTotalSales salesByClientTotalCost salesByClientTotalProfit" icon="ui-icon-check" />
                                     <p></p>
 
                                     <p:outputLabel value="Total Sales: "/>
@@ -120,8 +119,6 @@
 
                                     <p:outputLabel for="contributorName" value="Contributor Name:" />
                                     <p:inputText id="contributorName" value="#{reportBB.contributorName}" />
-
-                                    <p:commandButton value="Get Report" update="salesByContributorTable salesByContributorTotalSales salesByContributorTotalCost salesByContributorTotalProfit" icon="ui-icon-check" />
 
                                     <p></p>
 
@@ -164,8 +161,6 @@
                                     <p:outputLabel for="publisherName" value="Publisher Name:" />
                                     <p:inputText id="publisherName" value="#{reportBB.publisherName}" />
 
-                                    <p:commandButton value="Get Report" update="salesByPublisherTable salesByPublisherTotalSales salesByPublisherTotalCost salesByPublisherTotalProfit" icon="ui-icon-check" />
-
                                     <p></p>
                                     
                                     <p:outputLabel value="Total Sales: "/>
@@ -202,9 +197,7 @@
                                     </p:dataTable>
                                 </p:tab>
 
-                                <p:tab title="Top Sellers">
-                                    <p:commandButton value="Get Report" update="topSellersTable topSellersTotalSales topSellersTotalCost topSellersTotalProfit" icon="ui-icon-check" />
-                                    
+                                <p:tab title="Top Sellers">                                    
                                     <p></p>
                                     
                                     <p:outputLabel value="Total Sales: "/>
@@ -241,9 +234,7 @@
                                     </p:dataTable>
                                 </p:tab>
 
-                                <p:tab title="Top Clients">
-                                    <p:commandButton value="Get Report" update="topClientsTable topClientsTotalSales topClientsTotalCost topClientsTotalProfit" icon="ui-icon-check" />
-                                    
+                                <p:tab title="Top Clients">                           
                                     <p></p>
                                     
                                     <p:outputLabel value="Total Sales: "/>
@@ -285,8 +276,6 @@
                                 </p:tab>
 
                                 <p:tab title="Zero Sales">
-                                    <p:commandButton value="Get Report" update="zeroSalesTable" icon="ui-icon-check" />
-                                    
                                     <p></p>
                                                                
                                     <p:dataTable id="zeroSalesTable" var="zeroSales" value="#{reportBB.zeroSales}"
