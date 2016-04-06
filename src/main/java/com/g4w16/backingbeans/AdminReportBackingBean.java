@@ -167,7 +167,7 @@ public class AdminReportBackingBean implements Serializable {
         salesByContributor = salesController.getSalesByContributor(startDate, endDate, contributorName);
         BigDecimal total = BigDecimal.ZERO;
 
-        for (Object[] sale : salesByClient) {
+        for (Object[] sale : salesByContributor) {
             total = total.add((BigDecimal) sale[4]);
         }
 
@@ -202,10 +202,10 @@ public class AdminReportBackingBean implements Serializable {
     }
 
     public BigDecimal getSalesByPublisherTotalProfit() {
-        salesByPublisher = salesController.getSalesByContributor(startDate, endDate, publisherName);
+        salesByPublisher = salesController.getSalesByPublisher(startDate, endDate, publisherName);
         BigDecimal total = BigDecimal.ZERO;
 
-        for (Object[] sale : salesByClient) {
+        for (Object[] sale : salesByPublisher) {
             total = total.add((BigDecimal) sale[4]);
         }
 
