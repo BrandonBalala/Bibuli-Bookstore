@@ -65,7 +65,7 @@ CREATE TABLE Books (
   WholesalePrice DECIMAL(12,2) NOT NULL DEFAULT 0,
   ListPrice DECIMAL(12,2) NOT NULL,
   SalePrice DECIMAL(12,2) NOT NULL DEFAULT 0,
-  PubDate timestamp NOT NULL,
+  PubDate timestamp NOT NULL DEFAULT 0,
   DateEntered timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   RemovalStatus BOOLEAN NOT NULL DEFAULT 0
 )ENGINE=InnoDB;

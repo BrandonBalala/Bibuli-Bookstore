@@ -39,6 +39,6 @@
         wrap-jdbc-objects="false">
         <property name="URL" value="jdbc:mysql://localhost:3306/g4w16?zeroDateTimeBehavior=convertToNull"/>
         <property name="User" value="g4w16"/>
-        <property name="Password" value="g4w16"/>
+        <property name="Password" value="handle4parrot"/>
     </jdbc-connection-pool>
 </resources>
