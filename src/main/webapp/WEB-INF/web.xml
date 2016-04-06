@@ -30,7 +30,7 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>faces/mainPage.xhtml</welcome-file>
+        <welcome-file>faces/ClientPages/mainPage.xhtml</welcome-file>
     </welcome-file-list>
 
 </web-app>
