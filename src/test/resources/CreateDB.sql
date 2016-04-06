@@ -2081,3 +2081,4 @@ VALUES ('AB', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
 
 INSERT INTO `admin` (`username`, `Password`) VALUES ('adminG4', 'adminG4');
 INSERT INTO `admin` (`username`, `Password`) VALUES ('DawsonManager', 'collegedawson');
+INSERT INTO `admin` (`username`, `Password`) VALUES ('adminG4W16', 'adminG4W16');
