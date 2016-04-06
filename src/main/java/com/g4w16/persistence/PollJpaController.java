@@ -8,6 +8,7 @@ package com.g4w16.persistence;
 import com.g4w16.entities.Poll;
 import com.g4w16.interfaces.PollJpaInterface;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
+import com.g4w16.persistence.exceptions.PreexistingEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
@@ -43,7 +44,7 @@ public class PollJpaController implements Serializable, PollJpaInterface {
     }
 
     @Override
-    public void create(Poll poll) throws RollbackFailureException, Exception {
+    public void create(Poll poll) throws PreexistingEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
             em.persist(poll);
@@ -53,6 +54,9 @@ public class PollJpaController implements Serializable, PollJpaInterface {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+            }
+            if (findPollByID(poll.getId()) != null) {
+                throw new PreexistingEntityException("Poll " + poll + " already exists.", ex);
             }
             throw ex;
         }

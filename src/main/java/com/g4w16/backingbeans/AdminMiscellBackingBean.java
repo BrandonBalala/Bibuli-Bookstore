@@ -9,6 +9,7 @@ import com.g4w16.entities.ContributionType;
 import com.g4w16.entities.Contributor;
 import com.g4w16.entities.Format;
 import com.g4w16.entities.Genre;
+import com.g4w16.entities.IdentifierType;
 import com.g4w16.entities.Province;
 import com.g4w16.entities.TaxeRates;
 import com.g4w16.entities.Title;
@@ -21,15 +22,19 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import com.g4w16.persistence.GenreJpaController;
+import com.g4w16.persistence.IdentifierTypeJpaController;
 import com.g4w16.persistence.ProvinceJpaController;
 import com.g4w16.persistence.TaxeRatesJpaController;
 import com.g4w16.persistence.TitleJpaController;
+import com.g4w16.persistence.exceptions.NonexistentEntityException;
 
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -37,8 +42,7 @@ import javax.inject.Named;
 
 /**
  *
- * @author Dan
- * @author Annie So
+ * @author Dan, Annie So
  */
 @Named("miscellBB")
 @RequestScoped
@@ -89,6 +93,13 @@ public class AdminMiscellBackingBean implements Serializable {
     private List<Contributor> allContributor;
     private List<Contributor> selectedContributor;
 
+    @Inject
+    private IdentifierTypeJpaController identifierTypeJpaController;
+
+    private String newIdentifierType;
+    private List<IdentifierType> allIdentifierType;
+    private List<IdentifierType> selectedIdentifierType;
+
     @PostConstruct
     public void init() {
         allGenre = genreJpaController.findAllGenres();
@@ -109,6 +120,8 @@ public class AdminMiscellBackingBean implements Serializable {
         allContributor = contributorJpaController.findAllContributors();
         selectedContributor = new ArrayList<>();
 
+        allIdentifierType = identifierTypeJpaController.findAllIdentifierTypes();
+        selectedIdentifierType = new ArrayList<>();
     }
 
     /**
@@ -134,27 +147,35 @@ public class AdminMiscellBackingBean implements Serializable {
         this.newGenre = newGenre;
     }
 
-    public void addGenre() throws RollbackFailureException, Exception {
+    public void addGenre() {
         try {
             Genre g = new Genre();
             g.setType(newGenre);
             genreJpaController.create(g);
             init();
             newGenre = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
         } catch (RollbackFailureException rfe) {
+            newGenre = "";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rfe.getMessage(), rfe.getMessage()));
         } catch (Exception e) {
+            newGenre = "";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
     }
 
-    public void deleteGenre(List<Genre> selected) throws RollbackFailureException, Exception {
-        for (Genre g : selected) {
-            genreJpaController.destroy(g.getType());
+    public void deleteGenre(List<Genre> selected) {
+        try {
+            for (Genre g : selected) {
+                genreJpaController.destroy(g.getType());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -191,18 +212,28 @@ public class AdminMiscellBackingBean implements Serializable {
             contributionTypeJpaController.create(c);
             init();
             newContributionType = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+
         } catch (Exception e) {
+            newContributionType = "";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
     }
 
-    public void deleteContributionType(List<ContributionType> selected) throws RollbackFailureException, Exception {
-        for (ContributionType c : selected) {
-            contributionTypeJpaController.destroy(c.getType());
+    public void deleteContributionType(List<ContributionType> selected) {
+        try {
+            for (ContributionType c : selected) {
+                contributionTypeJpaController.destroy(c.getType());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -248,18 +279,26 @@ public class AdminMiscellBackingBean implements Serializable {
 
             init();
             newProvince = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+
         } catch (Exception e) {
+            newProvince = "";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
     }
 
-    public void deleteProvince(List<Province> selected) throws RollbackFailureException, Exception {
-        for (Province p : selected) {
-            provinceJpaController.destroy(p.getId());
+    public void deleteProvince(List<Province> selected) {
+        try {
+            for (Province p : selected) {
+                provinceJpaController.destroy(p.getId());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -296,18 +335,25 @@ public class AdminMiscellBackingBean implements Serializable {
             titleJpaController.create(t);
             init();
             newTitle = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
         } catch (Exception e) {
+            newTitle = "";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
     }
 
-    public void deleteTitle(List<Title> selected) throws RollbackFailureException, Exception {
-        for (Title t : selected) {
-            titleJpaController.destroy(t.getId());
+    public void deleteTitle(List<Title> selected) {
+        try {
+            for (Title t : selected) {
+                titleJpaController.destroy(t.getId());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -344,18 +390,27 @@ public class AdminMiscellBackingBean implements Serializable {
             formatController.create(f);
             init();
             newFormat = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
         } catch (Exception e) {
+            newFormat = "";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
     }
 
-    public void deleteFormat(List<Format> selected) throws RollbackFailureException, Exception {
-        for (Format f : selected) {
-            formatController.destroy(f.getType());
+    public void deleteFormat(List<Format> selected) {
+        try {
+            for (Format f : selected) {
+                formatController.destroy(f.getType());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -401,19 +456,82 @@ public class AdminMiscellBackingBean implements Serializable {
             contributorJpaController.create(c);
             init();
             newContributor = "";
-            newType=null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
         } catch (Exception e) {
+            newContributor = "";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
     }
 
-    public void deleteContributor(List<Contributor> selected) throws RollbackFailureException, Exception {
-        for (Contributor c : selected) {
-            contributorJpaController.destroy(c.getId());
+    public void deleteContributor(List<Contributor> selected) {
+        try {
+            for (Contributor c : selected) {
+                contributorJpaController.destroy(c.getId());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+    }
+
+    /**
+     * ***************Identifier Type************************
+     */
+    public String getNewIdentifierType() {
+        return newIdentifierType;
+    }
+
+    public void setNewIdentifierType(String newIdentifierType) {
+        this.newIdentifierType = newIdentifierType;
+    }
+
+    public List<IdentifierType> getAllIdentifierType() {
+        return allIdentifierType;
+    }
+
+    public void setAllIdentifierType(List<IdentifierType> allIdentifierType) {
+        this.allIdentifierType = allIdentifierType;
+    }
+
+    public List<IdentifierType> getSelectedIdentifierType() {
+        return selectedIdentifierType;
+    }
+
+    public void setSelectedIdentifierType(List<IdentifierType> selectedIdentifierType) {
+        this.selectedIdentifierType = selectedIdentifierType;
+    }
+
+    public void addIdentifierType() {
+        try {
+            IdentifierType i = new IdentifierType();
+            i.setType(newIdentifierType);
+            identifierTypeJpaController.create(i);
+            init();
+            newIdentifierType = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+        } catch (Exception e) {
+            newIdentifierType = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        }
+    }
+
+    public void deleteIdentifierType(List<IdentifierType> selected) {
+        try {
+            for (IdentifierType i : selected) {
+                identifierTypeJpaController.destroy(i.getType());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

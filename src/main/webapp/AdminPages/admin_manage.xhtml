@@ -35,7 +35,7 @@
                                 <p:outputLabel for="newpw" value="Password:" />
                                 <p:inputText id="newpw" value="#{managementBB.newPassword}" required="true" requiredMessage="Password is required." />
 
-                                <p:commandButton value="Save" actionListener="#{managementBB.addAdmin()}" update="table newname newpw" process="grid" icon="ui-icon-check"/>
+                                <p:commandButton value="Save" actionListener="#{managementBB.addAdmin()}" update="table newname newpw msgs" process="grid" icon="ui-icon-check"/>
 
                             </h:panelGrid>
 

@@ -6,13 +6,13 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Admin;
-import com.g4w16.entities.Genre;
 import com.g4w16.persistence.AdminJpaController;
-import com.g4w16.persistence.GenreJpaController;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -27,6 +27,7 @@ import javax.inject.Named;
 @Named("managementBB")
 @RequestScoped
 public class AdminManagement implements Serializable {
+
     @Inject
     AdminJpaController adminJpaController;
 
@@ -34,7 +35,7 @@ public class AdminManagement implements Serializable {
     private String newPassword;
     private List<Admin> allAdmin;
     private List<Admin> selectedAdmin;
-    
+
     @PostConstruct
     public void init() {
         allAdmin = adminJpaController.findAdminEntities();
@@ -57,8 +58,6 @@ public class AdminManagement implements Serializable {
         this.newPassword = newPassword;
     }
 
-    
-
     public List<Admin> getAllAdmin() {
         return allAdmin;
     }
@@ -74,11 +73,11 @@ public class AdminManagement implements Serializable {
     public void setSelectedAdmin(List<Admin> selectedAdmin) {
         this.selectedAdmin = selectedAdmin;
     }
-    
-    public int getAdminCount(){
+
+    public int getAdminCount() {
         return adminJpaController.getAdminCount();
     }
-    
+
     public void addAdmin() throws RollbackFailureException, Exception {
         try {
             Admin a = new Admin();
@@ -87,21 +86,31 @@ public class AdminManagement implements Serializable {
             adminJpaController.create(a);
             init();
             newName = "";
-            newPassword="";
+            newPassword = "";
         } catch (RollbackFailureException rfe) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rfe.getMessage(), rfe.getMessage()));
+            newName = "";
+            newPassword = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
         } catch (Exception e) {
+            newName = "";
+            newPassword = "";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
     }
 
-    public void deleteAdmin(List<Admin> selected) throws RollbackFailureException, Exception {
-        for (Admin a : selected) {
-            adminJpaController.destroy(a.getUsername());
+    public void deleteAdmin(List<Admin> selected) {
+        try {
+            for (Admin a : selected) {
+                adminJpaController.destroy(a.getUsername());
+                init();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+            }
+        } catch (RollbackFailureException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
-    
 }
