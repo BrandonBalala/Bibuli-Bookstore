@@ -71,7 +71,7 @@ public class FormatJpaControllerTest {
         // so that only the test cases run on the server or embedded
         // container
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
-                .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
+                //.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                 .addPackage(FormatJpaController.class.getPackage())
                 .addPackage(Format.class.getPackage())
                 .addPackage(RollbackFailureException.class.getPackage())

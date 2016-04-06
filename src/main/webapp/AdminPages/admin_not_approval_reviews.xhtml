@@ -18,7 +18,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Not Approval Reviews ( <h:outputText value="#{notApprovalReviewBB.falseReviewsAccount}"/>  Reviews )
+                        Not Approval Reviews ( <h:outputText value="#{notApprovalReviewBB.falseReviewsCount}"/>  Reviews )
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -28,9 +28,8 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <f:ajax>
+                           
                             <h:form id="form">
-                                <p:growl id="msgs" showDetail="true"/>
                                 <p:dataTable id="dataTable" var="review" value="#{notApprovalReviewBB.reviews}" rows="5"
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -39,7 +38,7 @@
                                              selection="#{review}" selectionMode="single" rowKey="#{review.reviewsPK}">
                                     
                                     <p:ajax event="rowEdit" listener="#{notApprovalReviewBB.onRowEdit}" update=":form:dataTable"/>
-                                    <p:ajax event="rowEditCancel" listener="#{notApprovalReviewBB.onRowCancel}" update=":form:msgs" />
+                                    <p:ajax event="rowEditCancel" listener="#{notApprovalReviewBB.onRowCancel}" update=":form:dataTable" />
                                     
                                     
 
@@ -84,7 +83,7 @@
 
                                 </p:dataTable>
                             </h:form>
-                            </f:ajax>
+                            
 
                         </div>
                     </div>

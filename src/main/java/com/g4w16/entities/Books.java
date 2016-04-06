@@ -48,23 +48,23 @@ public class Books implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 128)
     @Column(name = "Title")
     private String title;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 128)
     @Column(name = "Publisher")
     private String publisher;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Lob
     @Size(min = 1, max = 16777215)
     @Column(name = "Description")
     private String description;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "Pages")
     private int pages;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -81,7 +81,7 @@ public class Books implements Serializable {
     @Column(name = "SalePrice")
     private BigDecimal salePrice;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "PubDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date pubDate;
@@ -118,6 +118,12 @@ public class Books implements Serializable {
         this.salePrice = BigDecimal.ZERO;
         this.dateEntered = Date.from(Instant.now());
         this.removalStatus = false;
+        this.contributorList = new ArrayList<Contributor>();
+        this.bookIdentifiersList = new ArrayList<BookIdentifiers>();
+        this.salesDetailsList = new ArrayList<SalesDetails>();
+        this.reviewsList = new ArrayList<Reviews>();
+        this.bookFormatsList = new ArrayList<BookFormats>();
+        this.genreList = new ArrayList<Genre>();
     }
 
     public Books(Integer id) {
@@ -126,6 +132,12 @@ public class Books implements Serializable {
         this.salePrice = BigDecimal.ZERO;
         this.dateEntered = Date.from(Instant.now());
         this.removalStatus = false;
+        this.contributorList = new ArrayList<Contributor>();
+        this.bookIdentifiersList = new ArrayList<BookIdentifiers>();
+        this.salesDetailsList = new ArrayList<SalesDetails>();
+        this.reviewsList = new ArrayList<Reviews>();
+        this.bookFormatsList = new ArrayList<BookFormats>();
+        this.genreList = new ArrayList<Genre>();
     }
 
     public Books(Integer id, String title, String publisher, String description, int pages, BigDecimal wholesalePrice, BigDecimal listPrice, BigDecimal salePrice, Date pubDate, Date dateEntered, boolean removalStatus) {
@@ -265,14 +277,14 @@ public class Books implements Serializable {
     public List<Reviews> getReviewsList() {
         return reviewsList;
     }
-    
-     public List<Reviews> getApprovedReviewsList() {
-         List<Reviews> list = new ArrayList();
-         for(Reviews review : reviewsList)
-         {
-             if(review.getApproval())
-                 list.add(review);
-         }
+
+    public List<Reviews> getApprovedReviewsList() {
+        List<Reviews> list = new ArrayList();
+        for (Reviews review : reviewsList) {
+            if (review.getApproval()) {
+                list.add(review);
+            }
+        }
         return list;
     }
 
@@ -310,41 +322,41 @@ public class Books implements Serializable {
 
     @Override
     public String toString() {
-        return ""+id;
+        return "" + id;
     }
 
     public String getFormattedPubDate() {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         return dateFormat.format(pubDate);
     }
-    
-    public String getBookGenre(){
-        ArrayList<String> genres=new ArrayList<String>();
-        for(Genre g:this.getGenreList()){
+
+    public String getBookGenre() {
+        ArrayList<String> genres = new ArrayList<String>();
+        for (Genre g : this.getGenreList()) {
             genres.add(g.getType());
         }
         return String.join(",", genres);
     }
-    
-    public String getBookFormat(){
-        ArrayList<String> formats=new ArrayList<String>();
-        for(BookFormats f: this.getBookFormatsList()){
+
+    public String getBookFormat() {
+        ArrayList<String> formats = new ArrayList<String>();
+        for (BookFormats f : this.getBookFormatsList()) {
             formats.add(f.getBookFormatsPK().getFormat());
         }
         return String.join(",", formats);
     }
-    
-    public String getBookIdentifiers(){
-        ArrayList<String> bookIdentifiers=new ArrayList<String>();
-        for(BookIdentifiers i: this.getBookIdentifiersList()){
+
+    public String getBookIdentifiers() {
+        ArrayList<String> bookIdentifiers = new ArrayList<String>();
+        for (BookIdentifiers i : this.getBookIdentifiersList()) {
             bookIdentifiers.add(i.getCode());
         }
         return String.join(",", bookIdentifiers);
     }
-    
-    public String getBookContributor(){
-        ArrayList<String> bookContributor=new ArrayList<String>();
-        for(Contributor c: this.getContributorList()){
+
+    public String getBookContributor() {
+        ArrayList<String> bookContributor = new ArrayList<String>();
+        for (Contributor c : this.getContributorList()) {
             bookContributor.add(c.getName());
         }
         return String.join(",", bookContributor);

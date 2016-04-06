@@ -15,6 +15,8 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -107,8 +109,15 @@ public class AdminBannerBackingBean implements Serializable {
         this.filteredBanners = filteredBanners;
     }
 
-    public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
-        bannerJpaController.edit((Banner) event.getObject());
+    public void onRowEdit(RowEditEvent event)  {
+        
+        try {
+            bannerJpaController.edit((Banner) event.getObject());
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminBannerBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(AdminBannerBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        }
     }
 
     public void onRowCancel(RowEditEvent event) {
@@ -129,5 +138,10 @@ public class AdminBannerBackingBean implements Serializable {
         b.setSelected(false);
         bannerJpaController.create(b);
         init();
+        uri="";
+        } catch (Exception ex) {
+            Logger.getLogger(AdminBannerBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        }
     }
+    
 }

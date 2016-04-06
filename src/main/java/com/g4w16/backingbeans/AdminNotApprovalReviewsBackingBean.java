@@ -73,7 +73,7 @@ public class AdminNotApprovalReviewsBackingBean implements Serializable{
         reviewController.destroy(oneReview.getReviewsPK());
     }
     
-    public int getFalseReviewsAccount(){
+    public int getFalseReviewsCount(){
         return reviews.size();
     }
     

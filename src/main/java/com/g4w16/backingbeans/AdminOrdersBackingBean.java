@@ -42,6 +42,10 @@ public class AdminOrdersBackingBean implements Serializable {
         System.out.println("initializing");
         sales = salesController.findSalesEntities();
     }
+    
+    public int getOrderCount(){
+        return salesController.getSalesCount();
+    }
 
     public List<Sales> getSales() {
         return salesController.findSalesEntities();
