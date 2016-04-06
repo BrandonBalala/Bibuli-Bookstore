@@ -52,10 +52,10 @@
                                                     <hr/>
                                                     <h:form>
                                                         <ui:repeat value="#{theBook.bookFormatsList}" var="theBookFormat">
-                                                            <!--                                                            <h:commandLink type="submit" class="button secondary expanded hollow tiny" action="{purchasedBooksBB.downloadBook(theBookFormat)}" value="{theBookFormat.format1.type}"/>-->
-                                                            <h:outputLink class="button secondary expanded hollow tiny" value="../resources/books/#{theBookFormat.file}">
-                                                                #{theBookFormat.format1.type}
-                                                            </h:outputLink>
+                                                            <h:commandLink type="submit" class="button secondary expanded hollow tiny" action="#{purchasedBooksBB.downloadBook(theBookFormat.file)}" value="#{theBookFormat.format1.type}" />
+<!--                                                            <h:outputLink class="button secondary expanded hollow tiny" value="../resources/books/{theBookFormat.file}" > 
+                                                                {theBookFormat.format1.type}
+                                                            </h:outputLink>-->
                                                         </ui:repeat>
                                                     </h:form>
                                                 </div>

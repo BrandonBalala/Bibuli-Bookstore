@@ -34,10 +34,11 @@
                         <div class="col-xs-12">
 
 
-                            <h:form id="form">
+                            <h:form id="form" enctype="multipart/form-data">
                                 <p:growl id="msgs"/>
 
                                 New Ad uri : <h:inputText size="100" value="#{bannerBB.uri}" />
+                                <h:inputFile id="file" value="#{bannerBB.uploadedFile}" />
                                 <h:commandButton value="Add" action="#{bannerBB.addAction(bannerBB.uri)}" />
                                     
 
