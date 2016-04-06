@@ -7,9 +7,11 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Banner;
 import com.g4w16.entities.Books;
+import com.g4w16.entities.Feed;
 import com.g4w16.entities.Genre;
 import com.g4w16.persistence.BannerJpaController;
 import com.g4w16.persistence.BooksJpaController;
+import com.g4w16.persistence.FeedJpaController;
 import com.g4w16.persistence.PollJpaController;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,13 +42,16 @@ public class ClientMainBackingBean implements Serializable {
 
     @Inject
     private PollJpaController pollJpaController;
+    
+    @Inject
+    private FeedJpaController feedJpaController;
 
     @Inject
     private ProductPageBackingBean productBB;
 
     @Inject
     private BannerJpaController bannerControler;
-
+    Random randomGenerator = new Random();
     private List<Books> bestSellerBooks;
     private List<Books> recentlyAddedBooks;
     private List<Books> newestReleases;
@@ -64,6 +69,14 @@ public class ClientMainBackingBean implements Serializable {
             return true;
         }
 
+    }
+    
+    public Feed getCurrentlyActiveFeed()
+    {
+        List<Feed> feeds = feedJpaController.findActiveFeeds();
+       
+        int index = randomGenerator.nextInt(feeds.size());
+        return feeds.get(index);
     }
 
     public List<Books> getBestSellersBooks() {
@@ -123,7 +136,6 @@ public class ClientMainBackingBean implements Serializable {
             genreList.add(aGenre);
         }
         //GET A GENRE
-        Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(genreList.size());
         //If book has multipe genres pick one genre at random to display in recommended books carousel
         String genre = genreList.get(index).getType();
@@ -160,7 +172,6 @@ public class ClientMainBackingBean implements Serializable {
             int i = 0;
              while(i < 2 )
              {
-             Random randomGenerator = new Random();
                 int index = randomGenerator.nextInt(bannerList.size());
                 while(banners.contains(bannerList.get(index)))
                     index = randomGenerator.nextInt(bannerList.size());

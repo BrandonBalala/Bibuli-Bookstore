@@ -116,9 +116,9 @@
     <version>5.3</version>
 </dependency>
 <dependency>
-    <groupId>org.apache.myfaces.tomahawk</groupId>
-    <artifactId>tomahawk20</artifactId>
-    <version>1.1.10</version>
+  <groupId>rome</groupId>
+  <artifactId>rome</artifactId>
+  <version>1.0</version>
 </dependency>
     </dependencies>
 

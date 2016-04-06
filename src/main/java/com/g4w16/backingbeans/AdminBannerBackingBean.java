@@ -139,9 +139,6 @@ public class AdminBannerBackingBean implements Serializable {
         bannerJpaController.create(b);
         init();
         uri="";
-        } catch (Exception ex) {
-            Logger.getLogger(AdminBannerBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-        }
     }
     
 }

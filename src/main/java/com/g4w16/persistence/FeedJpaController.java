@@ -5,6 +5,7 @@
  */
 package com.g4w16.persistence;
 
+import com.g4w16.entities.Banner;
 import com.g4w16.entities.Feed;
 import com.g4w16.interfaces.FeedJpaInterface;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
@@ -151,5 +152,9 @@ public class FeedJpaController implements Serializable, FeedJpaInterface {
         Query query = em.createQuery("SELECT f FROM Feed f WHERE f.uri like :uri");
         query.setParameter("uri","%"+uri+'%');
         return (List<Feed>) query.getResultList();
+    }
+    public List<Feed> findActiveFeeds() {
+        Query q = em.createQuery("SELECT f FROM Feed f WHERE f.selected=1");
+        return (List<Feed>) q.getResultList();
     }
 }
