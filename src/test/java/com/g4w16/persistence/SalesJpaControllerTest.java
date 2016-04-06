@@ -451,7 +451,7 @@ public class SalesJpaControllerTest {
         List<Object[]> saleItems = salesController.getTotalSales(
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)));
-        
+
         assertThat(saleItems).hasSize(35);
     }
 
@@ -464,7 +464,7 @@ public class SalesJpaControllerTest {
         List<Object[]> saleItems = salesController.getTotalSales(
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 2, 1).toEpochDay() * 24 * 60 * 60)));
-        
+
         assertThat(saleItems).hasSize(0);
     }
 
@@ -477,7 +477,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 100);
-        
+
         assertThat(saleItems).hasSize(4);
     }
 
@@ -490,7 +490,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 Integer.MIN_VALUE);
-        
+
         assertThat(saleItems).hasSize(0);
     }
 
@@ -504,7 +504,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 50);
-        
+
         assertThat(saleItems).hasSize(0);
     }
 
@@ -517,7 +517,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 "Erik Larson");
-        
+
         assertThat(saleItems).hasSize(2);
     }
 
@@ -530,7 +530,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 "Some Person");
-       
+
         assertThat(saleItems).hasSize(0);
     }
 
@@ -544,7 +544,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 "Erin Moore");
-        
+
         assertThat(saleItems).hasSize(0);
     }
 
@@ -557,7 +557,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 "Ten Speed Press");
-        
+
         assertThat(saleItems).hasSize(2);
     }
 
@@ -570,7 +570,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 "We don't exist");
-        
+
         assertThat(saleItems).hasSize(0);
     }
 
@@ -584,7 +584,7 @@ public class SalesJpaControllerTest {
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 2, 1).toEpochDay() * 24 * 60 * 60)),
                 "Orbit");
-        
+
         assertThat(saleItems).hasSize(0);
     }
 
@@ -596,7 +596,7 @@ public class SalesJpaControllerTest {
         List<Object[]> topSellers = salesController.getTopSellers(
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)));
-        
+
         assertThat(topSellers).hasSize(35);
     }
 
@@ -608,10 +608,10 @@ public class SalesJpaControllerTest {
         List<Object[]> topSellers = salesController.getTopSellers(
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 2, 1).toEpochDay() * 24 * 60 * 60)));
-        
+
         assertThat(topSellers).hasSize(0);
     }
-    
+
     /**
      * Test the getTopClients method.
      */
@@ -620,7 +620,7 @@ public class SalesJpaControllerTest {
         List<Object[]> topClients = salesController.getTopClients(
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)));
-        
+
         assertThat(topClients).hasSize(19);
     }
 
@@ -632,10 +632,10 @@ public class SalesJpaControllerTest {
         List<Object[]> topClients = salesController.getTopClients(
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 2, 1).toEpochDay() * 24 * 60 * 60)));
-        
+
         assertThat(topClients).hasSize(0);
     }
-    
+
     /**
      * Test the getZeroSales method.
      */
@@ -644,7 +644,7 @@ public class SalesJpaControllerTest {
         List<Object[]> zeroSales = salesController.getZeroSales(
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2016, 2, 1).toEpochDay() * 24 * 60 * 60)));
-        
+
         assertThat(zeroSales).hasSize(65);
     }
 
@@ -656,7 +656,70 @@ public class SalesJpaControllerTest {
         List<Object[]> zeroSales = salesController.getZeroSales(
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 1, 1).toEpochDay() * 24 * 60 * 60)),
                 Date.from(Instant.ofEpochSecond(LocalDate.of(2015, 2, 1).toEpochDay() * 24 * 60 * 60)));
-        
+
         assertThat(zeroSales).hasSize(100);
+    }
+
+    /**
+     * Test the getTotalSalesForClient method.
+     */
+    @Test
+    public void testGetTotalSalesForClient() {
+        BigDecimal salesForClient = salesController.getTotalSalesForClient(100);
+
+        assertThat(salesForClient).isEqualTo(BigDecimal.valueOf(182.29));
+    }
+
+    /**
+     * Test the getTotalSalesForClient method for a client number that isn't in
+     * the database.
+     */
+    @Test
+    public void testGetTotalSalesForNonexistentClient() {
+        BigDecimal salesForClient = salesController.getTotalSalesForClient(Integer.MIN_VALUE);
+
+        assertThat(salesForClient).isEqualTo(BigDecimal.ZERO);
+    }
+
+    /**
+     * Test the getTotalSalesForClient method if the customer has never bought
+     * anything.
+     */
+    @Test
+    public void testGetTotalSalesForClientNoSales() {
+        BigDecimal salesForClient = salesController.getTotalSalesForClient(50);
+
+        assertThat(salesForClient).isEqualTo(BigDecimal.ZERO);
+    }
+    
+    /**
+     * Test the getTotalSalesForClient method.
+     */
+    @Test
+    public void testGetTotalSalesForBook() {
+        BigDecimal salesForBook = salesController.getTotalSalesForBook(100);
+
+        assertThat(salesForBook).isEqualTo(BigDecimal.valueOf(40.11));
+    }
+
+    /**
+     * Test the getTotalSalesForBook method for a book id that isn't in
+     * the database.
+     */
+    @Test
+    public void testGetTotalSalesForNonexistentBook() {
+        BigDecimal salesForBook = salesController.getTotalSalesForBook(Integer.MIN_VALUE);
+
+        assertThat(salesForBook).isEqualTo(BigDecimal.ZERO);
+    }
+
+    /**
+     * Test the getTotalSalesForBook method if the book has never been sold.
+     */
+    @Test
+    public void testGetTotalSalesForBookNoSales() {
+        BigDecimal salesForBook = salesController.getTotalSalesForBook(24);
+
+        assertThat(salesForBook).isEqualTo(BigDecimal.ZERO);
     }
 }

@@ -35,9 +35,20 @@
 
                             <p></p>
                             <p:tabView scrollable="true">
+
                                 <p:tab title="Total Sales">
-                                    <p:commandButton value="Get Report" update="totalSalesTable" icon="ui-icon-check" />
+                                    <p:commandButton value="Get Report" update="totalSalesTable totalSalesTotalSales totalSalesTotalCost totalSalesTotalProfit" icon="ui-icon-check" />
                                     <p></p>
+
+                                    <p:outputLabel value="Total Sales: "/>
+                                    <h:outputText id="totalSalesTotalSales" value="#{reportBB.totalSalesTotalSales}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Cost: "/>
+                                    <h:outputText id="totalSalesTotalCost" value="#{reportBB.totalSalesTotalCost}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Profit: "/>
+                                    <h:outputText id="totalSalesTotalProfit" value="#{reportBB.totalSalesTotalProfit}"/>
+
                                     <p:dataTable id="totalSalesTable" var="totalSale" value="#{reportBB.totalSales}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -68,9 +79,18 @@
                                     <p:outputLabel for="clientId" value="Client ID:" />
                                     <p:inputText id="clientId" value="#{reportBB.clientId}" />
 
-                                    <p:commandButton value="Get Report" update="salesByClientTable" icon="ui-icon-check" />
-
+                                    <p:commandButton value="Get Report" update="salesByClientTable salesByClientTotalSales salesByClientTotalCost salesByClientTotalProfit" icon="ui-icon-check" />
                                     <p></p>
+
+                                    <p:outputLabel value="Total Sales: "/>
+                                    <h:outputText id="salesByClientTotalSales" value="#{reportBB.salesByClientTotalSales}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Cost: "/>
+                                    <h:outputText id="salesByClientTotalCost" value="#{reportBB.salesByClientTotalCost}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Profit: "/>
+                                    <h:outputText id="salesByClientTotalProfit" value="#{reportBB.salesByClientTotalProfit}"/>
+
                                     <p:dataTable id="salesByClientTable" var="salesByClient" value="#{reportBB.salesByClient}" 
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -101,9 +121,19 @@
                                     <p:outputLabel for="contributorName" value="Contributor Name:" />
                                     <p:inputText id="contributorName" value="#{reportBB.contributorName}" />
 
-                                    <p:commandButton value="Get Report" update="salesByContributorTable" icon="ui-icon-check" />
+                                    <p:commandButton value="Get Report" update="salesByContributorTable salesByContributorTotalSales salesByContributorTotalCost salesByContributorTotalProfit" icon="ui-icon-check" />
 
                                     <p></p>
+
+                                    <p:outputLabel value="Total Sales: "/>
+                                    <h:outputText id="salesByContributorTotalSales" value="#{reportBB.salesByContributorTotalSales}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Cost: "/>
+                                    <h:outputText id="salesByContributorTotalCost" value="#{reportBB.salesByContributorTotalCost}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Profit: "/>
+                                    <h:outputText id="salesByContributorTotalProfit" value="#{reportBB.salesByContributorTotalProfit}"/>
+
                                     <p:dataTable id="salesByContributorTable" var="salesByContributor" value="#{reportBB.salesByContributor}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -134,9 +164,19 @@
                                     <p:outputLabel for="publisherName" value="Publisher Name:" />
                                     <p:inputText id="publisherName" value="#{reportBB.publisherName}" />
 
-                                    <p:commandButton value="Get Report" update="salesByPublisherTable" icon="ui-icon-check" />
+                                    <p:commandButton value="Get Report" update="salesByPublisherTable salesByPublisherTotalSales salesByPublisherTotalCost salesByPublisherTotalProfit" icon="ui-icon-check" />
 
                                     <p></p>
+                                    
+                                    <p:outputLabel value="Total Sales: "/>
+                                    <h:outputText id="salesByPublisherTotalSales" value="#{reportBB.salesByPublisherTotalSales}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Cost: "/>
+                                    <h:outputText id="salesByPublisherTotalCost" value="#{reportBB.salesByPublisherTotalCost}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Profit: "/>
+                                    <h:outputText id="salesByPublisherTotalProfit" value="#{reportBB.salesByPublisherTotalProfit}"/>
+                                    
                                     <p:dataTable id="salesByPublisherTable" var="salesByPublisher" value="#{reportBB.salesByPublisher}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -163,8 +203,19 @@
                                 </p:tab>
 
                                 <p:tab title="Top Sellers">
-                                    <p:commandButton value="Get Report" update="topSellersTable" icon="ui-icon-check" />
+                                    <p:commandButton value="Get Report" update="topSellersTable topSellersTotalSales topSellersTotalCost topSellersTotalProfit" icon="ui-icon-check" />
+                                    
                                     <p></p>
+                                    
+                                    <p:outputLabel value="Total Sales: "/>
+                                    <h:outputText id="topSellersTotalSales" value="#{reportBB.topSellersTotalSales}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Cost: "/>
+                                    <h:outputText id="topSellersTotalCost" value="#{reportBB.topSellersTotalCost}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Profit: "/>
+                                    <h:outputText id="topSellersTotalProfit" value="#{reportBB.topSellersTotalProfit}"/>
+                                    
                                     <p:dataTable id="topSellersTable" var="topSeller" value="#{reportBB.topSellers}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -191,8 +242,19 @@
                                 </p:tab>
 
                                 <p:tab title="Top Clients">
-                                    <p:commandButton value="Get Report" update="topClientsTable" icon="ui-icon-check" />
+                                    <p:commandButton value="Get Report" update="topClientsTable topClientsTotalSales topClientsTotalCost topClientsTotalProfit" icon="ui-icon-check" />
+                                    
                                     <p></p>
+                                    
+                                    <p:outputLabel value="Total Sales: "/>
+                                    <h:outputText id="topClientsTotalSales" value="#{reportBB.topClientsTotalSales}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Cost: "/>
+                                    <h:outputText id="topClientsTotalCost" value="#{reportBB.topClientsTotalCost}"/>
+                                    <br/>
+                                    <p:outputLabel value="Total Profit: "/>
+                                    <h:outputText id="topClientsTotalProfit" value="#{reportBB.topClientsTotalProfit}"/>
+                                    
                                     <p:dataTable id="topClientsTable" var="topClients" value="#{reportBB.topClients}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -224,7 +286,9 @@
 
                                 <p:tab title="Zero Sales">
                                     <p:commandButton value="Get Report" update="zeroSalesTable" icon="ui-icon-check" />
+                                    
                                     <p></p>
+                                                               
                                     <p:dataTable id="zeroSalesTable" var="zeroSales" value="#{reportBB.zeroSales}"
                                                  rows="10" paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">

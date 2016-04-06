@@ -137,6 +137,6 @@ public class AdminBannerBackingBean implements Serializable {
         b.setSelected(false);
         bannerJpaController.create(b);
         init();
-        uri = "";
+        uri="";
     }
 }

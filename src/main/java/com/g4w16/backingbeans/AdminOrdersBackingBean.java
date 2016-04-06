@@ -39,11 +39,10 @@ public class AdminOrdersBackingBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        System.out.println("initializing");
         sales = salesController.findSalesEntities();
     }
-    
-    public int getOrderCount(){
+
+    public int getOrderCount() {
         return salesController.getSalesCount();
     }
 
@@ -72,11 +71,6 @@ public class AdminOrdersBackingBean implements Serializable {
     }
 
     public void setSelectedDetail(SalesDetails selectedDetail) {
-        if (selectedDetail == null) {
-            System.out.println("null selection");
-        } else {
-            System.out.println("good selection");
-        }
         this.selectedDetail = selectedDetail;
     }
 
@@ -87,12 +81,8 @@ public class AdminOrdersBackingBean implements Serializable {
     }
 
     public void removeSalesDetail(SalesDetails detail) throws RollbackFailureException, Exception {
-        System.out.println("In remove");
         if (!detail.getRemoved()) {
-            System.out.println("Removing");
             detailsController.removeSalesDetail(detail.getId());
-        } else {
-            System.out.println("Not removing");
         }
     }
 

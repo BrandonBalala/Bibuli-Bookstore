@@ -29,19 +29,23 @@
                     <div class="row">
                         <div class="col-xs-12">
 
-                           
+
                             <h:form id="form">
                                 <p:growl id="msgs"/>
 
                                 <p:dataTable id="table" var="client" value="#{clientBB.clients}" rows="10"
-                                             paginator="true"
+                                             paginator="true" paginatorPosition="top"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15"
                                              editable="true" style="margin-bottom:20px"
-                                             selection="#{client}" selectionMode="single" rowKey="#{client.id}">
-
-                                    <p:ajax event="rowEdit" listener="#{clientBB.onRowEdit}" update=":form:msgs" />
+                                             selection="#{clientBB.selectedClient}" selectionMode="single" rowKey="#{client.id}">
+                                    <p:ajax event="rowSelect" listener="#{clientBB.onRowSelect}" update=":form:addressTable"/>
+                                    <p:ajax event="rowEdit" listener="#{clientBB.onClientEdit}" update=":form:msgs" />
                                     <p:ajax event="rowEditCancel" listener="#{clientBB.onRowCancel}" update=":form:msgs" />
+
+                                    <f:facet name="header">
+                                        Clients
+                                    </f:facet>
 
                                     <p:column  headerText="Edit" style="width:50px">
                                         <p:rowEditor />
@@ -104,6 +108,51 @@
                                         </p:cellEditor>
                                     </p:column>
 
+                                    <p:column headerText="Total Sales" sortBy="#{clientBB.getTotalSales(client.id)}" filterBy="#{clientBB.getTotalSales(client.id)}" filterMatchMode="contains" style="width:120px">
+                                        <h:outputText value="#{clientBB.getTotalSales(client.id)}" />
+                                    </p:column>
+
+                                </p:dataTable>
+
+                                <p:dataTable id="addressTable" var="address" value="#{clientBB.billingAddress}" rows="5" 
+                                             paginator="true" paginatorPosition="top"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             style="margin-bottom:20px" selection="#{clientBB.selectedAddress}" selectionMode="single" rowKey="#{address.id}">
+                                    <f:facet name="header">
+                                        Order Details 
+                                    </f:facet>
+
+                                    <p:column headerText="Id" sortBy="#{address.id}" filterBy="#{address.id}" filterMatchMode="contains">
+                                        <h:outputText value="#{address.id}" />
+                                    </p:column>
+
+                                    <p:column headerText="Name" sortBy="#{address.name}" filterBy="#{address.name}" filterMatchMode="contains">
+                                        <h:outputText value="#{address.name}" />
+                                    </p:column>                                   
+
+                                    <p:column headerText="Province" sortBy="#{address.province}" filterBy="#{address.province}" filterMatchMode="contains">
+                                        <h:outputText value="#{address.province}" />
+                                    </p:column>
+
+                                    <p:column headerText="City" sortBy="#{address.city}" filterBy="#{address.city}" filterMatchMode="contains">
+                                        <h:outputText value="#{address.city}" />
+                                    </p:column>
+
+                                    <p:column headerText="First Civic Address" sortBy="#{address.firstCivicAddress}" filterBy="#{address.firstCivicAddress}" filterMatchMode="contains">
+                                        <h:outputText value="#{address.firstCivicAddress}" />
+                                    </p:column>
+
+                                    <p:column headerText="Second Civic Address" sortBy="#{address.secondCivicAddress}" filterBy="#{address.secondCivicAddress}" filterMatchMode="contains">
+                                        <h:outputText value="#{address.secondCivicAddress}" />
+                                    </p:column>
+
+                                    <p:column headerText="Postal Code" sortBy="#{address.postalCode}" filterBy="#{address.postalCode}" filterMatchMode="contains">
+                                        <h:outputText value="#{address.postalCode}" />
+                                    </p:column>
+
+                                    <p:column headerText="Removed" sortBy="#{address.removed}" filterBy="#{address.removed}" filterMatchMode="contains">
+                                        <h:outputText value="#{address.removed}" />
+                                    </p:column>
                                 </p:dataTable>
                             </h:form>
 
