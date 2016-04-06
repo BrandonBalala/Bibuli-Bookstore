@@ -91,7 +91,7 @@
                                 <div class="large-12 columns">
                                     <label>#{bundle.cellPhoneNumberLabel}
                                         <p:inputMask id="cellPhoneNumber" value="#{registerBB.client.cellPhoneNumber}"
-                                                     mask="(999) 999-9999" >
+                                                     mask="(999) 999-9999" required="true">
                                             <f:validator validatorId="phoneValidator" />
                                              <f:ajax event="blur" render="cellPhoneNumber" />
                                         </p:inputMask>
