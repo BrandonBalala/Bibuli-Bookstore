@@ -278,26 +278,24 @@
                         <br/><br/>
                     </c:if>
                 </h:panelGroup>
-                <div class="row large-8">
-                    <div class="large-12 columns">
-                        <div class="row text-center">
-                            <div class="large-12 columns">
-                                <h4 class="carouselTitle">- News Feed -</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <p:feedReader value="#{ClientMainBB.currentlyActiveFeed.uri}" var="rss" size="5">
+                <div class="row large-9">
+                    <div class="row text-center">
                         <div class="large-12 columns">
-                            <div class="row text-center">
-                                <div class="large-12 columns">
-                                </div>
+                            <h4 class="carouselTitle">- News Feed -</h4>
+                        </div>                       
+                    </div>
+                    <div class="row text-center callout">
+                        <p:feedReader value="#{ClientMainBB.currentlyActiveFeed.uri}" var="rss" size="2">
+                            <div class="large-12 columns">
+                                <h:outputText value="#{rss.title}" style="font-weight: bold;"/>
                             </div>
-                        </div>
-                        <h:outputText value="#{rss.title}" style="font-weight: bold;"/>
-                        <br/>
-                        <h:outputText value="#{rss.description.value}" escape="false"/>
-                        <p:separator />
-                    </p:feedReader>
+                            <br/>
+                            <div class="large-12 columns">
+                                <h:outputText value="#{rss.description.value}" escape="false"/>
+                            </div>
+                            <p:separator />
+                        </p:feedReader>                      
+                    </div>
                 </div>
                 <hr/>
 
