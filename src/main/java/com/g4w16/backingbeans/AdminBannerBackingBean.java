@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
@@ -28,7 +28,7 @@ import org.primefaces.model.UploadedFile;
  * @author wangdan
  */
 @Named("bannerBB")
-@ViewScoped
+@RequestScoped
 public class AdminBannerBackingBean implements Serializable {
 
     private UploadedFile uploadedFile;
@@ -129,10 +129,11 @@ public class AdminBannerBackingBean implements Serializable {
 
     public void addAction(String name) throws Exception {
 //        InputStream stream = uploadedFile.getInputstream();
-//        Files.copy(stream, new File("/WEB-INF/books/" + name, name).toPath());
+//        Files.copy(stream, new File("/Images/ads/" + name, name).toPath());
 //        stream.close();
+        
         Banner b = new Banner();
-        b.setUri((uploadedFile != null)+"");
+        b.setUri(name);
         b.setSelected(false);
         bannerJpaController.create(b);
         init();

@@ -2,10 +2,7 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Client;
 import com.g4w16.persistence.ClientJpaController;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -26,7 +23,8 @@ import javax.servlet.http.HttpSession;
 @Named("AccountDetailsBB")
 @SessionScoped
 public class AccountDetailsBackingBean implements Serializable{
-    ClientUtil clientUtil = new ClientUtil();
+    @Inject
+    ClientUtil clientUtil;
     
     private Client client;
     @Inject
@@ -34,11 +32,9 @@ public class AccountDetailsBackingBean implements Serializable{
     @Inject
     private editDetailsBackingBean editDetails;
     
-    @PostConstruct
     public void setClient()
     {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        if(session.getAttribute("Authenticated") != null)
+        if(clientUtil.isAuthenticated())
         client = clientJPAController.findClientById(clientUtil.getUserId());
     }
     
