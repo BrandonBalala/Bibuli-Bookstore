@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="#{localeBean.language}"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-<f:view locale="#{localeBean.locale}"
-	<h:head>
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <f:view locale="#{localeBean.locale}"/>
+    <h:head>
         <title><ui:insert name="title" /></title>
         <link rel="stylesheet" type="text/css" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
         <link rel="stylesheet" type="text/css" href="#{resource['css:foundation/foundation-icons.css']}"/>
@@ -95,13 +95,13 @@
                             </ul>
                         </li>
                         <li>
-							<h:form>
-								<h:selectOneMenu value="#{localeBean.language}" onchange="submit()" class="whiteFont anchorFontSize">
-									<f:selectItem itemValue="en" itemLabel="English" />
-									<f:selectItem itemValue="fr" itemLabel="French" />
-								</h:selectOneMenu>
-							</h:form>
-						</li>
+                            <h:form>
+                                <h:selectOneMenu value="#{localeBean.language}" onchange="submit()" class="whiteFont anchorFontSize">
+                                    <f:selectItem itemValue="en" itemLabel="English" />
+                                    <f:selectItem itemValue="fr" itemLabel="French" />
+                                </h:selectOneMenu>
+                            </h:form>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -164,9 +164,9 @@
         <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 
         <script>
-            $(window).load(function () {
-                $(document).foundation();
-            });
+                                    $(window).load(function () {
+                                        $(document).foundation();
+                                    });
         </script>
     </h:body>
 </html>
