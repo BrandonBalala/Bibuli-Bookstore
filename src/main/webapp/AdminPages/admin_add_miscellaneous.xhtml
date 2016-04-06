@@ -23,226 +23,251 @@
                 </ol>
             </section>
             <section class="content">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h:form id="form">
+                <h:form id="form">
 
-                            <h3>Add Miscellaneous</h3>
-                            <p:tabView orientation="left">
-                                <p:tab title="Add Genre">
-                                    <h:form id="form1">
-                                        <h:panelGrid id="grid1" cellpadding="5" columns="3" style="margin-bottom:10px">
-                                            <f:facet name="header">
-                                                <p:messages id="msgs1" autoUpdate="true" closable="true"/>
-                                            </f:facet>
+                    <h3>Add Miscellaneous</h3>
+                    <p:tabView id="allTabs" orientation="left">
+                        <p:tab title="Add Genre">
+                            <h:form id="form1">
+                                <h:panelGrid id="grid1" cellpadding="5" columns="3" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs1" closable="true"/>
+                                    </f:facet>
 
-                                            <p:outputLabel for="newgenre" value="New Genre:" />
-                                            <p:inputText id="newgenre" value="#{miscellBB.newGenre}" required="true" requiredMessage="Genre is required." />
-                                            <p:commandButton value="Save" actionListener="#{miscellBB.addGenre()}" update="table1 newgenre" process="grid1" icon="ui-icon-check"/>
-                                           
-                                        </h:panelGrid>
+                                    <p:outputLabel for="newgenre" value="New Genre:" />
+                                    <p:inputText id="newgenre" value="#{miscellBB.newGenre}" required="true" requiredMessage="Genre is required." />
+                                    <p:commandButton value="Save" actionListener="#{miscellBB.addGenre()}" update="table1 newgenre msgs1" process="grid1" icon="ui-icon-check"/>
 
-                                        <p:dataTable id="table1" var="genre" value="#{miscellBB.allGenre}" rows="10"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" style="margin-bottom:20px"
-                                                     selection="#{miscellBB.selectedGenre}" rowKey="#{genre}" >
+                                </h:panelGrid>
 
-                                            <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
-                                            <p:column headerText="Genre" sortBy="#{genre.type}" filterBy="#{genre.type}" filterMatchMode="contains" style="width:200px">
-                                                <h:outputText value="#{genre.type}" />
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:commandButton process="table1" update="table1" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteGenre(miscellBB.selectedGenre)}" />
-                                            </f:facet>
-                                        </p:dataTable>
+                                <p:dataTable id="table1" var="genre" value="#{miscellBB.allGenre}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{miscellBB.selectedGenre}" rowKey="#{genre}" >
 
-                                    </h:form>
-                                </p:tab>
+                                    <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
+                                    <p:column headerText="Genre" sortBy="#{genre.type}" filterBy="#{genre.type}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{genre.type}" />
+                                    </p:column>
+                                    <f:facet name="footer">
+                                        <p:commandButton process="table1" update="table1" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteGenre(miscellBB.selectedGenre)}" />
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+                        </p:tab>
 
+                        <p:tab title="Add Contribution Type">
+                            <h:form id="form2">
+                                <h:panelGrid id="grid2" cellpadding="5" columns="3" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs2" closable="true"/>
+                                    </f:facet>
 
-                                <p:tab title="Add Contribution Type">
-                                    <h:form id="form2">
-                                        <h:panelGrid id="grid2" cellpadding="5" columns="3" style="margin-bottom:10px">
-                                            <f:facet name="header">
-                                                <p:messages id="msgs2"  autoUpdate="true" closable="true"/>
-                                            </f:facet>
+                                    <p:outputLabel for="newcontribution" value="New Contribution:" />
+                                    <p:inputText id="newcontribution" value="#{miscellBB.newContributionType}" required="true" requiredMessage="Contribution Type is required." />
+                                    <p:commandButton id="button" value="Save" actionListener="#{miscellBB.addContributionType()}" update="table2 newcontribution msgs2 :form:allTabs:form6:newtype" process="grid2" icon="ui-icon-check"/>
 
-                                            <p:outputLabel for="newcontribution" value="New Contribution:" />
-                                            <p:inputText id="newcontribution" value="#{miscellBB.newContributionType}" required="true" requiredMessage="Contribution Type is required." />
-                                            <p:commandButton value="Save" actionListener="#{miscellBB.addContributionType()}" update="table2 newcontribution" process="grid2" icon="ui-icon-check"/>
-                                           
-                                        </h:panelGrid>
+                                </h:panelGrid>
 
-                                        <p:dataTable id="table2" var="contributionType" value="#{miscellBB.allContributionType}" rows="10"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" style="margin-bottom:20px"
-                                                     selection="#{miscellBB.selectedContributionType}" rowKey="#{contributionType}" >
+                                <p:dataTable id="table2" var="contributionType" value="#{miscellBB.allContributionType}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{miscellBB.selectedContributionType}" rowKey="#{contributionType}" >
 
-                                            <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
-                                            <p:column headerText="Contribution Type" sortBy="#{contributionType.type}" filterBy="#{contributionType.type}" filterMatchMode="contains" style="width:200px">
-                                                <h:outputText value="#{contributionType.type}" />
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:commandButton process="table2" update="table2" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteContributionType(miscellBB.selectedContributionType)}" />
-                                            </f:facet>
-                                        </p:dataTable>
+                                    <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
+                                    <p:column headerText="Contribution Type" sortBy="#{contributionType.type}" filterBy="#{contributionType.type}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{contributionType.type}" />
+                                    </p:column>
+                                    <f:facet name="footer">
+                                        <p:commandButton process="table2" update="table2 :form:allTabs:form6:newtype" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteContributionType(miscellBB.selectedContributionType)}" />
+                                    </f:facet>
+                                </p:dataTable>
 
-                                    </h:form>
-                                </p:tab>
-                                
-                                
-                                
-                                <p:tab title="Add Province">
-                                    <h:form id="form3">
-                                        <h:panelGrid id="grid3" cellpadding="5" columns="3" style="margin-bottom:10px">
-                                            <f:facet name="header">
-                                                <p:messages id="msgs3"  autoUpdate="true" closable="true"/>
-                                            </f:facet>
+                            </h:form>
+                        </p:tab>
 
-                                            <p:outputLabel for="newprovince" value="New Province:" />
-                                            <p:inputText id="newprovince" value="#{miscellBB.newProvince}" required="true" requiredMessage="Province is required." />
-                                            <p:commandButton value="Save" actionListener="#{miscellBB.addProvince()}" update="table3 newprovince" process="grid3" icon="ui-icon-check"/>
-                                           
-                                        </h:panelGrid>
+                        <p:tab title="Add Province">
+                            <h:form id="form3">
+                                <h:panelGrid id="grid3" cellpadding="5" columns="3" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs3"  closable="true"/>
+                                    </f:facet>
 
-                                        <p:dataTable id="table3" var="province" value="#{miscellBB.allProvince}" rows="10"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" style="margin-bottom:20px"
-                                                     selection="#{miscellBB.selectedProvince}" rowKey="#{province}" >
+                                    <p:outputLabel for="newprovince" value="New Province:" />
+                                    <p:inputText id="newprovince" value="#{miscellBB.newProvince}" required="true" requiredMessage="Province is required." />
+                                    <p:commandButton value="Save" actionListener="#{miscellBB.addProvince()}" update="table3 newprovince msgs3" process="grid3" icon="ui-icon-check"/>
 
-                                            <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
-                                            <p:column headerText="Province" sortBy="#{province.id}" filterBy="#{province.id}" filterMatchMode="contains" style="width:200px">
-                                                <h:outputText value="#{province.id}" />
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:commandButton process="table3" update="table3" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteProvince(miscellBB.selectedProvince)}" />
-                                            </f:facet>
-                                        </p:dataTable>
+                                </h:panelGrid>
 
-                                    </h:form>
-                                </p:tab>
-                                
-                                <p:tab title="Add Title">
-                                    <h:form id="form4">
-                                        <h:panelGrid id="grid4" cellpadding="5" columns="3" style="margin-bottom:10px">
-                                            <f:facet name="header">
-                                                <p:messages id="msgs4"  autoUpdate="true" closable="true"/>
-                                            </f:facet>
+                                <p:dataTable id="table3" var="province" value="#{miscellBB.allProvince}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{miscellBB.selectedProvince}" rowKey="#{province}" >
 
-                                            <p:outputLabel for="newtitle" value="New Title:" />
-                                            <p:inputText id="newtitle" value="#{miscellBB.newTitle}" required="true" requiredMessage="Title is required." />
-                                            <p:commandButton value="Save" actionListener="#{miscellBB.addTitle()}" update="table4 newtitle" process="grid4" icon="ui-icon-check"/>
-                                           
-                                        </h:panelGrid>
+                                    <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
+                                    <p:column headerText="Province" sortBy="#{province.id}" filterBy="#{province.id}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{province.id}" />
+                                    </p:column>
+                                    <f:facet name="footer">
+                                        <p:commandButton process="table3" update="table3" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteProvince(miscellBB.selectedProvince)}" />
+                                    </f:facet>
+                                </p:dataTable>
 
-                                        <p:dataTable id="table4" var="title" value="#{miscellBB.allTitle}" rows="10"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" style="margin-bottom:20px"
-                                                     selection="#{miscellBB.selectedTitle}" rowKey="#{title}" >
+                            </h:form>
+                        </p:tab>
 
-                                            <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
-                                            <p:column headerText="Title" sortBy="#{title.id}" filterBy="#{title.id}" filterMatchMode="contains" style="width:200px">
-                                                <h:outputText value="#{title.id}" />
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:commandButton process="table4" update="table4" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteTitle(miscellBB.selectedTitle)}" />
-                                            </f:facet>
-                                        </p:dataTable>
+                        <p:tab title="Add Title">
+                            <h:form id="form4">
+                                <h:panelGrid id="grid4" cellpadding="5" columns="3" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs4"   closable="true"/>
+                                    </f:facet>
 
-                                    </h:form>
-                                </p:tab>
-                                
-                                <p:tab title="Add Format">
-                                    <h:form id="form5">
-                                        <h:panelGrid id="grid5" cellpadding="5" columns="3" style="margin-bottom:10px">
-                                            <f:facet name="header">
-                                                <p:messages id="msgs5"  autoUpdate="true" closable="true"/>
-                                            </f:facet>
+                                    <p:outputLabel for="newtitle" value="New Title:" />
+                                    <p:inputText id="newtitle" value="#{miscellBB.newTitle}" required="true" requiredMessage="Title is required." />
+                                    <p:commandButton value="Save" actionListener="#{miscellBB.addTitle()}" update="table4 newtitle msgs4" process="grid4" icon="ui-icon-check"/>
 
-                                            <p:outputLabel for="newFormat" value="New Format: " />
-                                            <p:inputText id="newFormat" value="#{miscellBB.newFormat}" required="true" requiredMessage="Format is required." />
-                                            <p:commandButton value="Save" actionListener="#{miscellBB.addFormat()}" update="table5 newFormat" process="grid5" icon="ui-icon-check"/>
-                                           
-                                        </h:panelGrid>
+                                </h:panelGrid>
 
-                                        <p:dataTable id="table5" var="format" value="#{miscellBB.allFormat}" rows="10"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" style="margin-bottom:20px"
-                                                     selection="#{miscellBB.selectedFormat}" rowKey="#{format.type}" >
+                                <p:dataTable id="table4" var="title" value="#{miscellBB.allTitle}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{miscellBB.selectedTitle}" rowKey="#{title}" >
 
-                                            <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
-                                            <p:column headerText="Format" sortBy="#{format.type}" filterBy="#{format.type}" filterMatchMode="contains" style="width:200px">
-                                                <h:outputText value="#{format.type}" />
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:commandButton process="table5" update="table5" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteFormat(miscellBB.selectedFormat)}" />
-                                            </f:facet>
-                                        </p:dataTable>
+                                    <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
+                                    <p:column headerText="Title" sortBy="#{title.id}" filterBy="#{title.id}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{title.id}" />
+                                    </p:column>
+                                    <f:facet name="footer">
+                                        <p:commandButton process="table4" update="table4" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteTitle(miscellBB.selectedTitle)}" />
+                                    </f:facet>
+                                </p:dataTable>
 
-                                    </h:form>
-                                </p:tab>
-                                
-                                <p:tab title="Add Contributor">
-                                    <h:form id="form6">
-                                        <h:panelGrid id="grid6" cellpadding="5" columns="2" style="margin-bottom:10px">
-                                            <f:facet name="header">
-                                                <p:messages id="msgs6"  autoUpdate="true" closable="true"/>
-                                            </f:facet>
+                            </h:form>
+                        </p:tab>
 
-                                            <p:outputLabel for="newcontributor" value="Contributor Name:" />
-                                            <p:inputText id="newcontributor" value="#{miscellBB.newContributor}" required="true" requiredMessage="Contributor is required." />
-                                            
-                                            <p:outputLabel for="newtype" value="Contributor Type:" />
-                                            <p:inputText id="newtype" value="#{miscellBB.newType}" required="true" requiredMessage="Contribution type is required." />
-                                            
-                                            <p:commandButton value="Save" actionListener="#{miscellBB.addContributor()}" update="table6 newcontributor newtype" process="grid6" icon="ui-icon-check"/>
-                                           
-                                        </h:panelGrid>
+                        <p:tab title="Add Format">
+                            <h:form id="form5">
+                                <h:panelGrid id="grid5" cellpadding="5" columns="3" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs5"   closable="true"/>
+                                    </f:facet>
 
-                                        <p:dataTable id="table6" var="contributor" value="#{miscellBB.allContributor}" rows="10"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15"
-                                                     editable="true" style="margin-bottom:20px"
-                                                     selection="#{miscellBB.selectedContributor}" rowKey="#{contributor.id}" >
+                                    <p:outputLabel for="newFormat" value="New Format: " />
+                                    <p:inputText id="newFormat" value="#{miscellBB.newFormat}" required="true" requiredMessage="Format is required." />
+                                    <p:commandButton value="Save" actionListener="#{miscellBB.addFormat()}" update="table5 newFormat msgs5" process="grid5" icon="ui-icon-check"/>
 
-                                            <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
-                                            
-                                            <p:column headerText="ID" sortBy="#{contributor.id}" filterBy="#{contributor.id}" filterMatchMode="contains" style="width:200px">
-                                                <h:outputText value="#{contributor.id}" />
-                                            </p:column>
-                                            
-                                            <p:column headerText="Contributor Name" sortBy="#{contributor.name}" filterBy="#{contributor.name}" filterMatchMode="contains" style="width:200px">
-                                                <h:outputText value="#{contributor.name}" />
-                                            </p:column>
-                                            
-                                            <p:column headerText="Contribution Type" sortBy="#{contributor.contribution}" filterBy="#{contributor.contribution}" filterMatchMode="contains" style="width:200px">
-                                                <h:outputText value="#{contributor.contribution}" />
-                                            </p:column>
-                                            
-                                            <f:facet name="footer">
-                                                <p:commandButton process="table6" update="table6" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteContributor(miscellBB.selectedContributor)}" />
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-                                </p:tab>
-                                
-                                
-                            </p:tabView>
+                                </h:panelGrid>
 
-                        </h:form >
-                    </div>
-                </div>
+                                <p:dataTable id="table5" var="format" value="#{miscellBB.allFormat}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{miscellBB.selectedFormat}" rowKey="#{format.type}" >
+
+                                    <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
+                                    <p:column headerText="Format" sortBy="#{format.type}" filterBy="#{format.type}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{format.type}" />
+                                    </p:column>
+                                    <f:facet name="footer">
+                                        <p:commandButton process="table5" update="table5" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteFormat(miscellBB.selectedFormat)}" />
+                                    </f:facet>
+                                </p:dataTable>
+
+                            </h:form>
+                        </p:tab>
+
+                        <p:tab title="Add Contributor">
+                            <h:form id="form6">
+                                <h:panelGrid id="grid6" cellpadding="5" columns="2" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs6"   closable="true"/>
+                                    </f:facet>
+
+                                    <p:outputLabel for="newcontributor" value="Contributor Name:" />
+                                    <p:inputText id="newcontributor" value="#{miscellBB.newContributor}" required="true" requiredMessage="Contributor is required." />
+
+                                    <p:outputLabel for="newtype" value="Contributor Type:" />
+                                    <p:selectOneMenu id="newtype" value="#{miscellBB.newType}" label="ContributionTypes">
+                                        <f:selectItems value="#{miscellBB.allContributionType}" var="contribType" itemLabel="#{contribType.type}" itemValue="#{contribType.type}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:commandButton value="Save" actionListener="#{miscellBB.addContributor()}" update="table6 newcontributor msgs6" process="grid6" icon="ui-icon-check"/>
+
+                                </h:panelGrid>
+
+                                <p:dataTable id="table6" var="contributor" value="#{miscellBB.allContributor}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{miscellBB.selectedContributor}" rowKey="#{contributor.id}" >
+
+                                    <p:column  selectionMode="multiple"  style="width:30px;text-align:center"/>
+
+                                    <p:column headerText="ID" sortBy="#{contributor.id}" filterBy="#{contributor.id}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{contributor.id}" />
+                                    </p:column>
+
+                                    <p:column headerText="Contributor Name" sortBy="#{contributor.name}" filterBy="#{contributor.name}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{contributor.name}" />
+                                    </p:column>
+
+                                    <p:column headerText="Contribution Type" sortBy="#{contributor.contribution}" filterBy="#{contributor.contribution}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{contributor.contribution}" />
+                                    </p:column>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton process="table6" update="table6" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteContributor(miscellBB.selectedContributor)}" />
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+                        </p:tab>
+
+                        <p:tab title="Add Identifier Type">
+                            <h:form id="form7">
+                                <h:panelGrid id="grid7" cellpadding="5" columns="3" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs7"   closable="true"/>
+                                    </f:facet>
+
+                                    <p:outputLabel for="newIdentifier" value="New Identifier Type: " />
+                                    <p:inputText id="newIdentifier" value="#{miscellBB.newIdentifierType}" required="true" requiredMessage="Identifier Type is required." />
+                                    <p:commandButton value="Save" actionListener="#{miscellBB.addIdentifierType()}" update="table7 newIdentifier msgs7" process="grid7" icon="ui-icon-check"/>
+
+                                </h:panelGrid>
+
+                                <p:dataTable id="table7" var="identifier" value="#{miscellBB.allIdentifierType}" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             editable="true" style="margin-bottom:20px"
+                                             selection="#{miscellBB.selectedIdentifierType}" rowKey="#{identifier.type}" >
+
+                                    <p:column  selectionMode="multiple"  style="width:16px;text-align:center"/>
+                                    <p:column headerText="Identifier Type" sortBy="#{identifier.type}" filterBy="#{identifier.type}" filterMatchMode="contains" style="width:200px">
+                                        <h:outputText value="#{identifier.type}" />
+                                    </p:column>
+                                    <f:facet name="footer">
+                                        <p:commandButton process="table7" update="table7" icon="ui-icon-close" value="Delete" actionListener="#{miscellBB.deleteIdentifierType(miscellBB.selectedIdentifierType)}" />
+                                    </f:facet>
+                                </p:dataTable>
+
+                            </h:form>
+                        </p:tab>
+
+                    </p:tabView>
+
+                </h:form >
             </section>
 
         </ui:define>

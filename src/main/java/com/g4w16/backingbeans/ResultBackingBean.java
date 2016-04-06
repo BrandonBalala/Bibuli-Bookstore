@@ -124,6 +124,14 @@ public class ResultBackingBean implements Serializable {
                     return rating2.compareTo(rating1);
                 });
                 break;
+            case "topSellers":
+                Collections.sort(bookList, (Books b1, Books b2) -> {
+                    Integer salesCont1 = b1.getSalesDetailsList().size();
+                    Integer saleCount2 = b2.getSalesDetailsList().size();
+                    
+                    return saleCount2.compareTo(salesCont1);
+                });
+                break;
         }
     }
 

@@ -1396,8 +1396,8 @@ VALUES (1,"What is your native language?", "English", "French", "Spanish", "Othe
 
 INSERT INTO `feed` (`Name`, `URI`, `SELECTED`)
 VALUES
-('Librarians fight rise of precarious work', 'http://www.cbc.ca/news/canada/toronto/precarious-work-librarians-1.3508778', '1'),
-('CBC FORUM\r\nWhat''s the best way forward for Canadian health care?', 'http://www.cbc.ca/news/politics/health-care-forum-1.3508132', '0');
+('CBC top story', 'http://rss.cbc.ca/lineup/topstories.xml', '1'),
+('CBC healthcare', 'http://rss.cbc.ca/lineup/health.xml', '0');
 
 INSERT INTO `banner` (`URI`, `SELECTED`)
 VALUES

@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
@@ -124,12 +126,15 @@ public class AdminFeedBackingBean implements Serializable {
             f.setName(name);
             f.setUri(uri);
             f.setSelected(false);
+            feedJpaController.create(f);
             init();
             uri = "";
             name = "";
-            feedJpaController.create(f);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
         } catch (Exception ex) {
-            Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+            uri = "";
+            name = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
         }
 
     }

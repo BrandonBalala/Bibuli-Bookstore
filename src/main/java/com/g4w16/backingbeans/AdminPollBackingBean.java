@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
@@ -167,11 +169,20 @@ public class AdminPollBackingBean implements Serializable {
             p.setFourthCount(0);
             p.setSelected(false);
             pollJpaController.create(p);
+            init();
+            question = "";
+            option1 = "";
+            option2 = "";
+            option3 = "";
+            option4 = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
         } catch (Exception ex) {
-            Logger.getLogger(AdminPollBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            question = "";
+            option1 = "";
+            option2 = "";
+            option3 = "";
+            option4 = "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
         }
-        init();
-
     }
-
 }
