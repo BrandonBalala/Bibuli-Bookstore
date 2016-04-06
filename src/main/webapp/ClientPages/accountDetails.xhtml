@@ -16,6 +16,7 @@
 
             <ui:define name="content">
                  <f:event type="preRenderView" listener="#{loginBB.sendToLogin()}" />
+                 <f:event type="preRenderView" listener="#{AccountDetailsBB.setClient()}" />
                 <hr/>
                 <div class="row">
                     <div class="large-5 columns callout large-centered large">

@@ -45,7 +45,7 @@
                                 <p:inputText id="uri" size="100" value="#{bannerBB.uri}" required="true" />
                                 
                                 <p:fileUpload  id="file" value="#{bannerBB.uploadedFile}" />
-                                <p:commandButton value="Add" action="#{bannerBB.addAction(bannerBB.uri)}" update="table uri msgs" process="grid" icon="ui-icon-check"/>
+                                <p:commandButton value="Add" ajax="false" action="#{bannerBB.addAction(bannerBB.uri)}" update="table uri msgs" process="grid" icon="ui-icon-check"/>
                                 
                                 <br/>
                                  </h:panelGrid>
