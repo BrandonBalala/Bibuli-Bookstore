@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui" 
+      xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
@@ -54,7 +54,7 @@
                     <div class="row text-center">
                         <div class="large-12 columns">
                             <h4 class="carouselTitle">- Best Sellers -</h4>
-                        </div>                       
+                        </div>
                     </div>
                     <hr/>
                     <div class="row carouselRow">
@@ -65,7 +65,7 @@
                                         <div class="image-wrapper overlay-fade-in-new-background">
                                             <img class="carouselImage" src="#{resource['images:' += book.id += '.jpg']}" alt="Book cover"/>
                                             <h:form>
-                                                <h:commandLink action="#{ClientMainBB.displayProductPage(book)}"> 
+                                                <h:commandLink action="#{ClientMainBB.displayProductPage(book)}">
                                                     <div class="image-overlay-content">
                                                         <h2><h:outputText value="#{book.title}"/></h2>
 
@@ -98,7 +98,7 @@
                     <div class="row text-center">
                         <div class="large-12 columns">
                             <h4 class="carouselTitle">- New Releases -</h4>
-                        </div> 
+                        </div>
                     </div>
                     <hr/>
                     <div class="row carouselRow">
@@ -109,7 +109,7 @@
                                         <div class="image-wrapper overlay-fade-in-new-background">
                                             <img class="carouselImage" src="#{resource['images:' += book.id += '.jpg']}" alt="Book cover"/>
                                             <h:form>
-                                                <h:commandLink action="#{ClientMainBB.displayProductPage(book)}"> 
+                                                <h:commandLink action="#{ClientMainBB.displayProductPage(book)}">
                                                     <div class="image-overlay-content">
                                                         <h2><h:outputText value="#{book.title}"/></h2>
 
@@ -142,7 +142,7 @@
                         <div class="row text-center">
                             <div class="large-12 columns">
                                 <h4 class="carouselTitle">- Recommended Books -</h4>
-                            </div> 
+                            </div>
                         </div>
                         <hr/>
                         <div class="row carouselRow">
@@ -153,7 +153,7 @@
                                             <div class="image-wrapper overlay-fade-in-new-background">
                                                 <img class="carouselImage" src="#{resource['images:' += book.id += '.jpg']}" alt="Book cover"/>
                                                 <h:form>
-                                                    <h:commandLink action="#{ClientMainBB.displayProductPage(book)}"> 
+                                                    <h:commandLink action="#{ClientMainBB.displayProductPage(book)}">
                                                         <div class="image-overlay-content">
                                                             <h2><h:outputText value="#{book.title}"/></h2>
 
@@ -192,7 +192,7 @@
                         <div class="large-5 columns">
                             <div class="row callout small text-center">
                                 <div class="large-12 columns">
-                                    <img class="adImages dragRemoved" src="#{resource['images:' += banner.uri]}" alt="ad"/>
+                                    <img class="adImages dragRemoved" src="#{resource['images:ads/' += banner.uri]}" alt="ad"/>
                                 </div>
                             </div>
                         </div>
@@ -278,14 +278,24 @@
                         <br/><br/>
                     </c:if>
                 </h:panelGroup>
-                <div class="row large-8">
-                    <h4 class="carouselTitle">- News Feed -</h4>
-                <p:feedReader value="#{ClientMainBB.currentlyActiveFeed.uri}" var="rss" size="5">
+                <div class="row large-9">
+                    <div class="row text-center">
+                        <div class="large-12 columns">
+                            <h4 class="carouselTitle">- News Feed -</h4>
+                        </div>
+                    </div>
+                    <div class="row text-center callout">
+                        <p:feedReader value="#{ClientMainBB.currentlyActiveFeed.uri}" var="rss" size="2">
+                            <div class="large-12 columns">
                                 <h:outputText value="#{rss.title}" style="font-weight: bold;"/>
-                                <br/>
+                            </div>
+                            <br/>
+                            <div class="large-12 columns">
                                 <h:outputText value="#{rss.description.value}" escape="false"/>
-                                <p:separator />
-                            </p:feedReader>
+                            </div>
+                            <p:separator />
+                        </p:feedReader>
+                    </div>
                 </div>
                 <hr/>
 

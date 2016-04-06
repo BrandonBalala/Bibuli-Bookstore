@@ -9,7 +9,6 @@ import com.g4w16.entities.Banner;
 import com.g4w16.persistence.BannerJpaController;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
@@ -21,8 +20,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.Part;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -32,7 +31,7 @@ import org.primefaces.event.RowEditEvent;
 @ViewScoped
 public class AdminBannerBackingBean implements Serializable {
 
-    private Part uploadedFile;
+    private UploadedFile uploadedFile;
     private List<Banner> banners;
     private List<Integer> ids;
     private int bannerId;
@@ -49,11 +48,11 @@ public class AdminBannerBackingBean implements Serializable {
 
     }
 
-    public Part getUploadedFile() {
+    public UploadedFile getUploadedFile() {
         return uploadedFile;
     }
 
-    public void setUploadedFile(Part uploadedFile) {
+    public void setUploadedFile(UploadedFile uploadedFile) {
         this.uploadedFile = uploadedFile;
     }
 
@@ -128,17 +127,15 @@ public class AdminBannerBackingBean implements Serializable {
         bannerJpaController.edit(selected);
     }
 
-//    public void addAction(String name) throws Exception {
-//        
-//        InputStream stream = uploadedFile.getInputStream();
+    public void addAction(String name) throws Exception {
+//        InputStream stream = uploadedFile.getInputstream();
 //        Files.copy(stream, new File("/WEB-INF/books/" + name, name).toPath());
 //        stream.close();
-//        Banner b = new Banner();
-//        b.setUri(name);
-//        b.setSelected(false);
-//        bannerJpaController.create(b);
-//        init();
-//        uri="";
-//        }     
-    
+        Banner b = new Banner();
+        b.setUri((uploadedFile != null)+"");
+        b.setSelected(false);
+        bannerJpaController.create(b);
+        init();
+        uri="";
+    }
 }

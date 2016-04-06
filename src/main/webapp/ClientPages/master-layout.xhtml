@@ -3,12 +3,13 @@
 <html lang="#{localeBean.language}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-    <f:view locale="#{localeBean.locale}"/>
+<f:view locale="#{localeBean.locale}" />
+
     <h:head>
         <title><ui:insert name="title" /></title>
         <link rel="stylesheet" type="text/css" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
@@ -16,10 +17,11 @@
         <link rel="stylesheet" type="text/css" href="#{resource['css:mycss.css']}"/>
         <link rel="stylesheet" type="text/css" href="#{resource['css:fluidity/fluidity.css']}"/>
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
-        <link rel="icon" href="#{resource['images:logos/logo.png']}"/>
+        <link rel="icon" type="image/x-icon" href="#{resource['images:logos/favicon.ico']}"/>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
         <link rel="stylesheet" type="text/css" href="#{resource['css:foundation/motion-ui.css']}"/>
     </h:head>
+
     <h:body>
         <div data-sticky-container="" id="header">
             <div class="title-bar removeMarginTop divHeader" data-sticky="" data-options="marginTop:0;">
@@ -141,8 +143,8 @@
                         <h4>The Company</h4>
                         <ul class="footer-links">
                             <li><a href="#">Home</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Help</a></li>
+                            <li><a href="#">Terms of use</a></li>
                             <li><a href="#">Contact Us</a></li>
                         </ul>
                     </div>
@@ -159,15 +161,15 @@
             </div>
         </footer>
 
-        <!--        Foundation-->
+        <!-- Javascript -->
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script src="#{resource['js:vendor/foundation.js']}"></script>
+        <script src="#{resource['js:foundation.js']}"></script>
 
         <script>
-                                    $(window).load(function () {
-                                        $(document).foundation();
-                                    });
+			$(window).load(function () {
+				$(document).foundation();
+			});
         </script>
     </h:body>
 </html>

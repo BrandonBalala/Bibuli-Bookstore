@@ -29,11 +29,14 @@
                                 <div class="large-12 columns">
                                     <label>#{bundle.emailLabel}
                                         <p:inputText id="email" value="#{loginBB.email}"
-                                                     requiredMessage="#{bundle.emailRequired}"/>
+                                                     requiredMessage="#{bundle.emailRequired}">
+                                            <f:validator validatorId="emailValidator" />
+                                             <f:ajax event="blur" render="emailError" />
+                                        </p:inputText>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="email" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message id="emailError" for="email" style="color:red"/>
                                 </div> 
                             </div>
                             <div class="row">
