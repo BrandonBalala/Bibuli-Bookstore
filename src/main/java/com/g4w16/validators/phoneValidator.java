@@ -18,7 +18,7 @@ import javax.faces.validator.ValidatorException;
  */
 @FacesValidator("phoneValidator")
 public class phoneValidator implements Validator {
- private static final String PHONE_PATTERN = "^[0-9]{7})$";
+ private static final String PHONE_PATTERN = "^[0-9]{7}$";
     @Override
     public void validate(FacesContext fc, UIComponent uic, Object o) throws ValidatorException {
         if(((String)o).matches(PHONE_PATTERN)){
