@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author 1311213
+ * @author Ofer Nitka-Nakash
  */
 @Named("ClientMainBB")
 @SessionScoped
