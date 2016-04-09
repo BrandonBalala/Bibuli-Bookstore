@@ -6,13 +6,13 @@
 package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Admin;
-import com.g4w16.entities.Genre;
 import com.g4w16.persistence.AdminJpaController;
-import com.g4w16.persistence.GenreJpaController;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -23,10 +23,12 @@ import javax.inject.Named;
 /**
  *
  * @author wangdan
+ * @author Annie So
  */
 @Named("managementBB")
 @RequestScoped
 public class AdminManagement implements Serializable {
+
     @Inject
     AdminJpaController adminJpaController;
 
@@ -34,7 +36,7 @@ public class AdminManagement implements Serializable {
     private String newPassword;
     private List<Admin> allAdmin;
     private List<Admin> selectedAdmin;
-    
+
     @PostConstruct
     public void init() {
         allAdmin = adminJpaController.findAdminEntities();
@@ -57,8 +59,6 @@ public class AdminManagement implements Serializable {
         this.newPassword = newPassword;
     }
 
-    
-
     public List<Admin> getAllAdmin() {
         return allAdmin;
     }
@@ -74,34 +74,64 @@ public class AdminManagement implements Serializable {
     public void setSelectedAdmin(List<Admin> selectedAdmin) {
         this.selectedAdmin = selectedAdmin;
     }
-    
-    public int getAdminCount(){
+
+    public int getAdminCount() {
         return adminJpaController.getAdminCount();
     }
-    
+
     public void addAdmin() throws RollbackFailureException, Exception {
-        try {
-            Admin a = new Admin();
-            a.setUsername(newName);
-            a.setPassword(newPassword);
-            adminJpaController.create(a);
-            init();
-            newName = "";
-            newPassword="";
-        } catch (RollbackFailureException rfe) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rfe.getMessage(), rfe.getMessage()));
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+
+        if (newName.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Name cannot be longer than 128 characters", "Name cannot be longer than 128 characters"));
+            noErrors = false;
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+        if (newPassword.length() > 254) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password cannot be longer than 128 characters", "Password cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (Admin admin : allAdmin) {
+            if (admin.getUsername().equalsIgnoreCase(newName)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "An admin with that name already exists", "An admin with that name already exists"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                Admin a = new Admin();
+                a.setUsername(newName);
+                a.setPassword(newPassword);
+                adminJpaController.create(a);
+                init();
+                newName = "";
+                newPassword = "";
+            } catch (RollbackFailureException rfe) {
+                newName = "";
+                newPassword = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newName = "";
+                newPassword = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
+        }
     }
 
-    public void deleteAdmin(List<Admin> selected) throws RollbackFailureException, Exception {
-        for (Admin a : selected) {
-            adminJpaController.destroy(a.getUsername());
+    public void deleteAdmin(List<Admin> selected) {
+        try {
+            for (Admin a : selected) {
+                adminJpaController.destroy(a.getUsername());
+                init();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+            }
+        } catch (RollbackFailureException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
-    
 }

@@ -9,7 +9,6 @@ import com.g4w16.entities.Banner;
 import com.g4w16.persistence.BannerJpaController;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
@@ -18,21 +17,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.Part;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
  * @author wangdan
  */
 @Named("bannerBB")
-@ViewScoped
+@RequestScoped
 public class AdminBannerBackingBean implements Serializable {
 
-    private Part uploadedFile;
+    private UploadedFile uploadedFile;
     private List<Banner> banners;
     private List<Integer> ids;
     private int bannerId;
@@ -48,11 +47,12 @@ public class AdminBannerBackingBean implements Serializable {
         banners = bannerJpaController.findBannerEntities();
 
     }
-      public Part getUploadedFile() {
+
+    public UploadedFile getUploadedFile() {
         return uploadedFile;
     }
 
-    public void setUploadedFile(Part uploadedFile) {
+    public void setUploadedFile(UploadedFile uploadedFile) {
         this.uploadedFile = uploadedFile;
     }
 
@@ -83,8 +83,6 @@ public class AdminBannerBackingBean implements Serializable {
         this.uri = uri;
     }
 
-    
-    
     public List<Integer> getIds() {
         ids = new ArrayList<>();
         for (int i = 0; i < banners.size(); i++) {
@@ -109,8 +107,8 @@ public class AdminBannerBackingBean implements Serializable {
         this.filteredBanners = filteredBanners;
     }
 
-    public void onRowEdit(RowEditEvent event)  {
-        
+    public void onRowEdit(RowEditEvent event) {
+
         try {
             bannerJpaController.edit((Banner) event.getObject());
         } catch (RollbackFailureException ex) {
@@ -130,15 +128,15 @@ public class AdminBannerBackingBean implements Serializable {
     }
 
     public void addAction(String name) throws Exception {
-        InputStream stream = uploadedFile.getInputStream();
-        Files.copy(stream, new File("/WEB-INF/books/"+name, name).toPath());
-        stream.close();
-        Banner b= new Banner();
+//        InputStream stream = uploadedFile.getInputstream();
+//        Files.copy(stream, new File("/Images/ads/" + name, name).toPath());
+//        stream.close();
+        
+        Banner b = new Banner();
         b.setUri(name);
         b.setSelected(false);
         bannerJpaController.create(b);
         init();
         uri="";
     }
-    
 }

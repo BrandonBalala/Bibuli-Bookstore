@@ -80,7 +80,9 @@
                                     <h:outputText value="#{book.formattedPubDate}" />
                                 </p:column>
 
-
+                                <p:column headerText="Total Sales" sortBy="#{booksBB.getTotalSales(book.id)}" filterBy="#{booksBB.getTotalSales(book.id)}" filterMatchMode="contains" style="width:20px">
+                                    <h:outputText value="#{booksBB.getTotalSales(book.id)}" />
+                                </p:column>
 
 
 

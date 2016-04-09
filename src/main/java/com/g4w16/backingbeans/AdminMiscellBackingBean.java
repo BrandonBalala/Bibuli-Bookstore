@@ -9,6 +9,7 @@ import com.g4w16.entities.ContributionType;
 import com.g4w16.entities.Contributor;
 import com.g4w16.entities.Format;
 import com.g4w16.entities.Genre;
+import com.g4w16.entities.IdentifierType;
 import com.g4w16.entities.Province;
 import com.g4w16.entities.TaxeRates;
 import com.g4w16.entities.Title;
@@ -21,15 +22,19 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import com.g4w16.persistence.GenreJpaController;
+import com.g4w16.persistence.IdentifierTypeJpaController;
 import com.g4w16.persistence.ProvinceJpaController;
 import com.g4w16.persistence.TaxeRatesJpaController;
 import com.g4w16.persistence.TitleJpaController;
+import com.g4w16.persistence.exceptions.NonexistentEntityException;
 
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -37,7 +42,8 @@ import javax.inject.Named;
 
 /**
  *
- * @author Dan, Annie So
+ * @author Dan
+ * @author Annie So
  */
 @Named("miscellBB")
 @RequestScoped
@@ -88,6 +94,13 @@ public class AdminMiscellBackingBean implements Serializable {
     private List<Contributor> allContributor;
     private List<Contributor> selectedContributor;
 
+    @Inject
+    private IdentifierTypeJpaController identifierTypeJpaController;
+
+    private String newIdentifierType;
+    private List<IdentifierType> allIdentifierType;
+    private List<IdentifierType> selectedIdentifierType;
+
     @PostConstruct
     public void init() {
         allGenre = genreJpaController.findAllGenres();
@@ -108,6 +121,8 @@ public class AdminMiscellBackingBean implements Serializable {
         allContributor = contributorJpaController.findAllContributors();
         selectedContributor = new ArrayList<>();
 
+        allIdentifierType = identifierTypeJpaController.findAllIdentifierTypes();
+        selectedIdentifierType = new ArrayList<>();
     }
 
     /**
@@ -133,27 +148,50 @@ public class AdminMiscellBackingBean implements Serializable {
         this.newGenre = newGenre;
     }
 
-    public void addGenre() throws RollbackFailureException, Exception {
-        try {
-            Genre g = new Genre();
-            g.setType(newGenre);
-            genreJpaController.create(g);
-            init();
-            newGenre = "";
-        } catch (RollbackFailureException rfe) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rfe.getMessage(), rfe.getMessage()));
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+    public void addGenre() {
+        boolean noErrors = true;
+        if (newGenre.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Genre cannot be longer than 128 characters", "Genre cannot be longer than 128 characters"));
+            noErrors = false;
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+        for (Genre genre : allGenre) {
+            if (genre.getType().equalsIgnoreCase(newGenre)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate genre", "Cannot have a duplicate genre"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                Genre g = new Genre();
+                g.setType(newGenre);
+                genreJpaController.create(g);
+                init();
+                newGenre = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (RollbackFailureException rfe) {
+                newGenre = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rfe.getMessage(), rfe.getMessage()));
+            } catch (Exception e) {
+                newGenre = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
+        }
     }
 
-    public void deleteGenre(List<Genre> selected) throws RollbackFailureException, Exception {
-        for (Genre g : selected) {
-            genreJpaController.destroy(g.getType());
+    public void deleteGenre(List<Genre> selected) {
+        try {
+            for (Genre g : selected) {
+                genreJpaController.destroy(g.getType());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -184,24 +222,48 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addContributionType() {
-        try {
-            ContributionType c = new ContributionType();
-            c.setType(newContributionType);
-            contributionTypeJpaController.create(c);
-            init();
-            newContributionType = "";
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newContributionType.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contribution type cannot be longer than 128 characters", "Contribution type cannot be longer than 128 characters"));
+            noErrors = false;
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+        for (ContributionType type : allContributionType) {
+            if (type.getType().equalsIgnoreCase(newContributionType)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate contribution type", "Cannot have a duplicate contribution type"));
+                noErrors = false;
+                break;
+            }
+        }
+        if (noErrors) {
+            try {
+                ContributionType c = new ContributionType();
+                c.setType(newContributionType);
+                contributionTypeJpaController.create(c);
+                init();
+                newContributionType = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+
+            } catch (Exception e) {
+                newContributionType = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
+        }
     }
 
-    public void deleteContributionType(List<ContributionType> selected) throws RollbackFailureException, Exception {
-        for (ContributionType c : selected) {
-            contributionTypeJpaController.destroy(c.getType());
+    public void deleteContributionType(List<ContributionType> selected) {
+        try {
+            for (ContributionType c : selected) {
+                contributionTypeJpaController.destroy(c.getType());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -232,33 +294,55 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addProvince() {
-        try {
-            Province p = new Province();
-            p.setId(newProvince);
-            provinceJpaController.create(p);
-
-            TaxeRates tax = new TaxeRates();
-            tax.setProvince(newProvince);
-            tax.setGst(BigDecimal.ZERO);
-            tax.setHst(BigDecimal.ZERO);
-            tax.setPst(BigDecimal.ZERO);
-            tax.setUpdated(new Date());
-            taxController.create(tax);
-
-            init();
-            newProvince = "";
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newProvince.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Province cannot be longer than 128 characters", "Province cannot be longer than 128 characters"));
+            noErrors = false;
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+        for (Province province : allProvince) {
+            if (province.getId().equalsIgnoreCase(newProvince)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate province", "Cannot have a duplicate province"));
+                noErrors = false;
+                break;
+            }
+        }
+        if (noErrors) {
+            try {
+                Province p = new Province();
+                p.setId(newProvince);
+                provinceJpaController.create(p);
+
+                TaxeRates tax = new TaxeRates();
+                tax.setProvince(newProvince);
+                tax.setGst(BigDecimal.ZERO);
+                tax.setHst(BigDecimal.ZERO);
+                tax.setPst(BigDecimal.ZERO);
+                tax.setUpdated(new Date());
+                taxController.create(tax);
+
+                init();
+                newProvince = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+
+            } catch (Exception e) {
+                newProvince = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
+        }
     }
 
-    public void deleteProvince(List<Province> selected) throws RollbackFailureException, Exception {
-        for (Province p : selected) {
-            provinceJpaController.destroy(p.getId());
+    public void deleteProvince(List<Province> selected) {
+        try {
+            for (Province p : selected) {
+                provinceJpaController.destroy(p.getId());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -289,24 +373,46 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addTitle() {
-        try {
-            Title t = new Title();
-            t.setId(newTitle);
-            titleJpaController.create(t);
-            init();
-            newTitle = "";
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newTitle.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Title cannot be longer than 128 characters", "Title cannot be longer than 128 characters"));
+            noErrors = false;
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+        for (Title title : allTitle) {
+            if (title.getId().equalsIgnoreCase(newTitle)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate title", "Cannot have a duplicate title"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                Title t = new Title();
+                t.setId(newTitle);
+                titleJpaController.create(t);
+                init();
+                newTitle = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newTitle = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
+        }
     }
 
-    public void deleteTitle(List<Title> selected) throws RollbackFailureException, Exception {
-        for (Title t : selected) {
-            titleJpaController.destroy(t.getId());
+    public void deleteTitle(List<Title> selected) {
+        try {
+            for (Title t : selected) {
+                titleJpaController.destroy(t.getId());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -337,24 +443,47 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addFormat() {
-        try {
-            Format f = new Format();
-            f.setType(newFormat);
-            formatController.create(f);
-            init();
-            newFormat = "";
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newFormat.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Format cannot be longer than 128 characters", "Format cannot be longer than 128 characters"));
+            noErrors = false;
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Create succesfully!"));
+        for (Format format : allFormat) {
+            if (format.getType().equalsIgnoreCase(newFormat)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate format", "Cannot have a duplicate format"));
+                noErrors = false;
+                break;
+            }
+        }
+        if (noErrors) {
+            try {
+                Format f = new Format();
+                f.setType(newFormat);
+                formatController.create(f);
+                init();
+                newFormat = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newFormat = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
+        }
     }
 
-    public void deleteFormat(List<Format> selected) throws RollbackFailureException, Exception {
-        for (Format f : selected) {
-            formatController.destroy(f.getType());
+    public void deleteFormat(List<Format> selected) {
+        try {
+            for (Format f : selected) {
+                formatController.destroy(f.getType());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Delete succesfully!"));
     }
 
     /**
@@ -393,26 +522,119 @@ public class AdminMiscellBackingBean implements Serializable {
     }
 
     public void addContributor() {
-        try {
-            Contributor c = new Contributor();
-            c.setName(newContributor);
-            c.setContribution(new ContributionType(newType));
-            contributorJpaController.create(c);
-            init();
-            newContributor = "";
-            newType=null;
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        boolean noErrors = true;
+        if (newContributor.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contributor cannot be longer than 128 characters", "Contributor cannot be longer than 128 characters"));
+            noErrors = false;
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+        for (Contributor contributor : allContributor) {
+            if (contributor.getName().equalsIgnoreCase(newContributor) && contributor.getContribution().getType().equalsIgnoreCase(newType)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate contributor with the same contribution type", "Cannot have a duplicate contributor with the same contribution type"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                Contributor c = new Contributor();
+                c.setName(newContributor);
+                c.setContribution(new ContributionType(newType));
+                contributorJpaController.create(c);
+                init();
+                newContributor = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newContributor = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
+        }
     }
 
-    public void deleteContributor(List<Contributor> selected) throws RollbackFailureException, Exception {
-        for (Contributor c : selected) {
-            contributorJpaController.destroy(c.getId());
+    public void deleteContributor(List<Contributor> selected) {
+        try {
+            for (Contributor c : selected) {
+                contributorJpaController.destroy(c.getId());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        init();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+    }
+
+    /**
+     * ***************Identifier Type************************
+     */
+    public String getNewIdentifierType() {
+        return newIdentifierType;
+    }
+
+    public void setNewIdentifierType(String newIdentifierType) {
+        this.newIdentifierType = newIdentifierType;
+    }
+
+    public List<IdentifierType> getAllIdentifierType() {
+        return allIdentifierType;
+    }
+
+    public void setAllIdentifierType(List<IdentifierType> allIdentifierType) {
+        this.allIdentifierType = allIdentifierType;
+    }
+
+    public List<IdentifierType> getSelectedIdentifierType() {
+        return selectedIdentifierType;
+    }
+
+    public void setSelectedIdentifierType(List<IdentifierType> selectedIdentifierType) {
+        this.selectedIdentifierType = selectedIdentifierType;
+    }
+
+    public void addIdentifierType() {
+        boolean noErrors = true;
+        if (newIdentifierType.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Identifier type cannot be longer than 128 characters", "Identifier type cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        for (IdentifierType type : allIdentifierType) {
+            if (type.getType().equalsIgnoreCase(newIdentifierType)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot have a duplicate identifier type", "Cannot have a duplicate identifer type"));
+                noErrors = false;
+                break;
+            }
+        }
+
+        if (noErrors) {
+            try {
+                IdentifierType i = new IdentifierType();
+                i.setType(newIdentifierType);
+                identifierTypeJpaController.create(i);
+                init();
+                newIdentifierType = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception e) {
+                newIdentifierType = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+            }
+        }
+    }
+
+    public void deleteIdentifierType(List<IdentifierType> selected) {
+        try {
+            for (IdentifierType i : selected) {
+                identifierTypeJpaController.destroy(i.getType());
+            }
+            init();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete succesfully!", "Delete succesfully!"));
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminMiscellBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

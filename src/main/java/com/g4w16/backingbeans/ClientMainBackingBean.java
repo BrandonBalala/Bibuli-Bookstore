@@ -186,7 +186,7 @@ public class ClientMainBackingBean implements Serializable {
     public String displayProductPage(Books book) {
         productBB.setBook(book);
 
-        return "product-page";
+        return "product-page?faces-redirect=true";
     }
 
     @PostConstruct

@@ -3,7 +3,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 8-Mar-2016, 10:20:03 AM
     Author     : BRANDON-PC
 */
@@ -204,15 +204,15 @@ table tr:nth-of-type(even) {
 }
 
 .container-4 input#search:-moz-placeholder { /* Firefox 18- */
-    color: #65737e;  
+    color: #65737e;
 }
 
 .container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
-    color: #65737e;  
+    color: #65737e;
 }
 
-.container-4 input#search:-ms-input-placeholder {  
-    color: #65737e;  
+.container-4 input#search:-ms-input-placeholder {
+    color: #65737e;
 }
 
 .container-4 button.icon{
@@ -309,7 +309,7 @@ table tr:nth-of-type(even) {
 
 #logoHeader{
     /*    width: 40px;*/
-    max-height: 40px;    
+    max-height: 40px;
 }
 
 #logoFooter{
@@ -363,17 +363,17 @@ table tr:nth-of-type(even) {
     text-decoration: none;
 }
 
-.anchorBibuli:hover 
+.anchorBibuli:hover
 {
-    color:orange; 
-    text-decoration:none; 
+    color:orange;
+    text-decoration:none;
     cursor:pointer;
     outline: 0;
 }
 
 li a:hover{
-    color:orange; 
-    text-decoration:none; 
+    color:orange;
+    text-decoration:none;
     cursor:pointer;
     outline: 0;
 }
@@ -434,8 +434,17 @@ body{
     z-index: 55 !important;
 }
 
+.stickyHelp{
+	max-width: 100% !important;
+    width:100% !important;
+	top: 0px !important;
+	bottom: auto !important;
+	position: fixed !important;
+    z-index: 55 !important;
+}
+
 .carouselRow:hover{
-    cursor: w-resize;
+    cursor: pointer;
 }
 
 .ui-selectoneradio{
@@ -446,24 +455,13 @@ body{
     margin-bottom: 0rem !important;
 }
 
-.adImages{
-    user-drag: none; 
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    height:300px;
-    width: 450px;
-}
-
 .rowFlex{
     display: flex;
 }
 
-hr{ 
-    border: 0 !important; 
-    height: 1px !important; 
+hr{
+    border: 0 !important;
+    height: 1px !important;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)) !important;
 }
 
@@ -488,7 +486,7 @@ a:hover, a:active, a:focus {
 
 .bibuliTitle{
     font-size: 200px !important;
-    font-family: pacifico; 
+    font-family: pacifico;
     display: inline-block;
     position: absolute;
     left: 50%;
@@ -499,7 +497,7 @@ a:hover, a:active, a:focus {
     color: white;
     text-shadow:
         3px 3px 0 #000,
-        -1px -1px 0 #000,  
+        -1px -1px 0 #000,
         1px -1px 0 #000,
         -1px 1px 0 #000,
         1px 1px 0 #000;
@@ -512,4 +510,38 @@ a:hover, a:active, a:focus {
     .orbit{
         display: none !important;
     }
+    .searchBar{
+        display: none !important;
+    }
+}
+
+.adImages{
+    height:275px;
+    width: 450px;
+}
+
+.dragRemoved{
+    user-drag: none !important;
+    user-select: none !important;
+    -moz-user-select: none !important;
+    -webkit-user-drag: none !important;
+    -webkit-user-select: none !important;
+    -ms-user-select: none !important;
+}
+
+.selectMenuLanguage{
+    margin: 0px !important;
+    border-color: #1e1b1b;
+}
+
+.divider{
+    padding-left: 20px !important;
+}
+
+.unselectable {
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -o-user-select: none !important;
+    user-select: none !important;
 }

@@ -29,22 +29,28 @@
                                 <div class="large-12 columns">
                                     <label>#{bundle.emailLabel}
                                         <p:inputText id="email" value="#{loginBB.email}"
-                                                     requiredMessage="#{bundle.emailRequired}"/>
+                                                     requiredMessage="#{bundle.emailRequired}">
+                                            <f:validator validatorId="emailValidator" />
+                                             <f:ajax event="blur" render="emailError" />
+                                        </p:inputText>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="email" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message id="emailError" for="email" style="color:red"/>
                                 </div> 
                             </div>
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label>#{bundle.passwordLabel}
                                         <p:password id="password" value="#{loginBB.password}"
-                                                    requiredMessage="#{bundle.passwordRequired}" />
+                                                    requiredMessage="#{bundle.passwordRequired}" >
+                                            <f:validator validatorId="passwordValidator" />
+                                             <f:ajax event="blur" render="passwordError" />
+                                        </p:password>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="password" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message id="passwordError" for="password" style="color:red"/>
                                 </div>                  
                             </div>
 

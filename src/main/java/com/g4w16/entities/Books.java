@@ -114,8 +114,8 @@ public class Books implements Serializable {
     private List<BookFormats> bookFormatsList;
 
     public Books() {
-        this.wholesalePrice = BigDecimal.ZERO;
-        this.salePrice = BigDecimal.ZERO;
+//        this.wholesalePrice = BigDecimal.ZERO;
+//        this.salePrice = BigDecimal.ZERO;
         this.dateEntered = Date.from(Instant.now());
         this.removalStatus = false;
         this.contributorList = new ArrayList<Contributor>();
@@ -128,8 +128,8 @@ public class Books implements Serializable {
 
     public Books(Integer id) {
         this.id = id;
-        this.wholesalePrice = BigDecimal.ZERO;
-        this.salePrice = BigDecimal.ZERO;
+//        this.wholesalePrice = BigDecimal.ZERO;
+//        this.salePrice = BigDecimal.ZERO;
         this.dateEntered = Date.from(Instant.now());
         this.removalStatus = false;
         this.contributorList = new ArrayList<Contributor>();

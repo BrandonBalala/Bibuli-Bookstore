@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
@@ -22,6 +24,7 @@ import org.primefaces.event.RowEditEvent;
 /**
  *
  * @author wangdan
+ * @author Annie So
  */
 @Named("feedBB")
 @RequestScoped
@@ -119,18 +122,31 @@ public class AdminFeedBackingBean implements Serializable {
     }
 
     public void addAction(String name, String uri) {
-        try {
-            Feed f = new Feed();
-            f.setName(name);
-            f.setUri(uri);
-            f.setSelected(false);
-            init();
-            uri = "";
-            name = "";
-            feedJpaController.create(f);
-        } catch (Exception ex) {
-            Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        boolean noErrors = true;
+        if (name.length() > 254) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Name cannot be longer than 254 characters", "Name cannot be longer than 254 characters"));
+            noErrors = false;
         }
-
+        if (uri.length() > 254) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "URI cannot be longer than 254 characters", "URI cannot be longer than 254 characters"));
+            noErrors = false;
+        }
+        if (noErrors) {
+            try {
+                Feed f = new Feed();
+                f.setName(name);
+                f.setUri(uri);
+                f.setSelected(false);
+                feedJpaController.create(f);
+                init();
+                uri = "";
+                name = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception ex) {
+                uri = "";
+                name = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+            }
+        }
     }
 }

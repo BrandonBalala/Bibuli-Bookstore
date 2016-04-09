@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
@@ -22,6 +24,7 @@ import org.primefaces.event.RowEditEvent;
 /**
  *
  * @author wangd
+ * @author Annie So
  */
 @Named("pollsBB")
 @RequestScoped
@@ -145,7 +148,7 @@ public class AdminPollBackingBean implements Serializable {
                     break;
                 }
             }
-            
+
             selected.setSelected(true);
             pollJpaController.edit(selected);
             init();
@@ -154,24 +157,57 @@ public class AdminPollBackingBean implements Serializable {
     }
 
     public void addAction(String question, String option1, String option2, String option3, String option4) {
-        try {
-            Poll p = new Poll();
-            p.setQuestion(question);
-            p.setFirstAnswer(option1);
-            p.setSecondAnswer(option2);
-            p.setThirdAnswer(option3);
-            p.setFourthAnswer(option4);
-            p.setFirstCount(0);
-            p.setSecondCount(0);
-            p.setThirdCount(0);
-            p.setFourthCount(0);
-            p.setSelected(false);
-            pollJpaController.create(p);
-        } catch (Exception ex) {
-            Logger.getLogger(AdminPollBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        boolean noErrors = true;
+
+        if (question.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Question cannot be longer than 128 characters", "Question cannot be longer than 128 characters"));
+            noErrors = false;
         }
-        init();
-
+        if (option1.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Option 1 cannot be longer than 128 characters", "Option 1 cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        if (option2.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Option 2 cannot be longer than 128 characters", "Option 2 cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        if (option3.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Option 3 cannot be longer than 128 characters", "Option 3 cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        if (option4.length() > 128) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Option 4 cannot be longer than 128 characters", "Option 4 cannot be longer than 128 characters"));
+            noErrors = false;
+        }
+        if (noErrors) {
+            try {
+                Poll p = new Poll();
+                p.setQuestion(question);
+                p.setFirstAnswer(option1);
+                p.setSecondAnswer(option2);
+                p.setThirdAnswer(option3);
+                p.setFourthAnswer(option4);
+                p.setFirstCount(0);
+                p.setSecondCount(0);
+                p.setThirdCount(0);
+                p.setFourthCount(0);
+                p.setSelected(false);
+                pollJpaController.create(p);
+                init();
+                question = "";
+                option1 = "";
+                option2 = "";
+                option3 = "";
+                option4 = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Create succesfully!", "Create succesfully!"));
+            } catch (Exception ex) {
+                question = "";
+                option1 = "";
+                option2 = "";
+                option3 = "";
+                option4 = "";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+            }
+        }
     }
-
 }

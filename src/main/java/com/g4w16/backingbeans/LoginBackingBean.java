@@ -14,7 +14,6 @@ import com.g4w16.persistence.ClientJpaController;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -30,6 +29,7 @@ import javax.servlet.http.HttpSession;
 @ViewScoped
 public class LoginBackingBean implements Serializable {
 
+    private Client client;
      HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
     @Inject
     private ClientJpaController clientJPAController;
@@ -43,6 +43,10 @@ public class LoginBackingBean implements Serializable {
     
     @Inject
     private ShoppingCartBackingBean cartBB;
+
+    public Client getClient() {
+        return client;
+    }
 
     public String getEmail() {
         return email;
@@ -74,7 +78,7 @@ public class LoginBackingBean implements Serializable {
         boolean authenticated = false;
 
         // Is there a client with these credentials
-        Client client = clientJPAController.findClientByEmailAndPassword(email, password);
+        client = clientJPAController.findClientByEmailAndPassword(email, password);
 
         // There is a client so login was successful
         if (client != null) {
@@ -95,7 +99,7 @@ public class LoginBackingBean implements Serializable {
         // Place the message in the context so that it will be displayed
         FacesContext.getCurrentInstance().addMessage(null, message);
 
-        removeOwnedBooksFromCart();
+        //removeOwnedBooksFromCart();
 
         return "mainPage?faces-redirect=true";
     }
@@ -110,14 +114,6 @@ public class LoginBackingBean implements Serializable {
                 .getSession(false)).invalidate();
 
         return "mainPage?faces-redirect=true";
-    }
-
-    //REMOVE LATER, USED FOR TESTING ONLY 
-    //FASHFASFHOASIFHOIOASOIH
-    @PostConstruct
-    public void init() {
-        email = "cbutler1@a8.net";
-        password = "a";
     }
 
     private void removeOwnedBooksFromCart() {

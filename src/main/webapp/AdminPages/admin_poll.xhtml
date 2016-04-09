@@ -57,7 +57,7 @@
                                     <p:outputLabel for="option4" value="Option 4: " />
                                     <h:inputText id="option4" size="50" value="#{pollsBB.option4}" required="true" />
 
-                                    <p:commandButton value="Add" action="#{pollsBB.addAction(pollsBB.question,pollsBB.option1,pollsBB.option2,pollsBB.option3,pollsBB.option4)}" update="table question option1 option2 option3 option4" process="grid" icon="ui-icon-check" /> 
+                                    <p:commandButton value="Add" action="#{pollsBB.addAction(pollsBB.question,pollsBB.option1,pollsBB.option2,pollsBB.option3,pollsBB.option4)}" update="table question option1 option2 option3 option4 msgs" process="grid" icon="ui-icon-check" /> 
                                 </h:panelGrid>
 
                                 <p:dataTable id="table" var="poll" value="#{pollsBB.polls}" rows="5"
@@ -154,7 +154,7 @@
                                     </p:column>
 
                                     <f:facet name="footer">
-                                        <p:commandButton  actionListener="#{pollsBB.changeStatus(pollsBB.selected)}" process="table" update="table"  icon="ui-icon-search" value="Show"  />
+                                        <p:commandButton  actionListener="#{pollsBB.changeStatus(pollsBB.selected)}" process="table" update="table"   value="Show"  />
                                     </f:facet>
 
                                 </p:dataTable>

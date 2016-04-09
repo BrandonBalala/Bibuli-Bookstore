@@ -390,7 +390,7 @@ public class ClientJpaController implements Serializable {
     }
 
     public List<Client> findClientByCellPhone(String cellphone){
-        Query q = em.createQuery("SELECT c FROM Client c WHERE c.cellPhoneNumber = :cellPhoneNumber");
+        Query q = em.createQuery("SELECT c FROM Client c WHERE c.cellPhoneNumber = :cellPhoneNumber", Client.class);
         q.setParameter("cellPhoneNumber", cellphone);
         List<Client> results = (List<Client>) q.getResultList();
 

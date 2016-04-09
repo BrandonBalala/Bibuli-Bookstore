@@ -14,7 +14,10 @@
 
         <ui:define name="body">
             <section class="content-header">
-
+                 <h1>
+                       Admin Management
+                    </h1>
+                
                 <ol class="breadcrumb">
                     <li><a href="admin_home.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li><a href="#"><i class="fa fa-dashboard"></i> Admin Management</a></li>
@@ -26,7 +29,7 @@
                         <h:form id="form">
                             <h:panelGrid id="grid" cellpadding="5" columns="2" style="margin-bottom:10px">
                                 <f:facet name="header">
-                                    <p:messages id="msgs" showDetail="true" autoUpdate="true" closable="true"/>
+                                    <p:messages id="msgs"  autoUpdate="true" closable="true"/>
                                 </f:facet>
 
                                 <p:outputLabel for="newname" value="User Name:" />
@@ -35,7 +38,7 @@
                                 <p:outputLabel for="newpw" value="Password:" />
                                 <p:inputText id="newpw" value="#{managementBB.newPassword}" required="true" requiredMessage="Password is required." />
 
-                                <p:commandButton value="Save" actionListener="#{managementBB.addAdmin()}" update="table newname newpw" process="grid" icon="ui-icon-check"/>
+                                <p:commandButton value="Save" actionListener="#{managementBB.addAdmin()}" update="table newname newpw msgs" process="grid" icon="ui-icon-check"/>
 
                             </h:panelGrid>
 

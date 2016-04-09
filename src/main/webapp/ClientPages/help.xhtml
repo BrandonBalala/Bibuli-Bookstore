@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="./master-layout.xhtml">
+            <ui:define name="title">Bibuli | Help</ui:define>
+
+            <ui:define name="content">
+                <hr/>
+
+				<div class="callout primary small">
+					<div class="row column text-center">
+						<h1>Need some help ?</h1>
+					</div>
+				</div>
+
+				<div class="row" id="content">
+					<div class="small-12 medium-4 large-4 columns" data-sticky-container="">
+						<div class="sticky" data-sticky="" data-anchor="content">
+							<h4>From here you can understand every page of the website</h4>
+							<ul>
+								<li><a href="#header_help">Header</a></li>
+								<li><a href="#footer_help">Footer</a></li>
+								<li><a href="#index_help">Index / Homepage</a></li>
+								<li><a href="#results_help">Results List</a></li>
+								<li><a href="#product_help">Product's Page</a></li>
+								<li><a href="#login_help">Login Form</a></li>
+								<li><a href="#register_help">Register Form</a></li>
+								<li><a href="#account_help">"My account" Page</a></li>
+								<li><a href="#cart_help">Shopping Cart</a></li>
+								<li><a href="#checkout_help">Checkout Page</a></li>
+								<li><a href="#mybooks_help">"My books" Page</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="small-12 medium-8 large-8 columns">
+						<div>
+							<h3 id="header_help">The header</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>The header is a really important component of our website. It is divided in two parts. On the left part, you can click on... :
+								<ul>
+									<li><strong>Our logo:</strong> at any time during the visit, it'll take you back to the <a href="#index_help">homepage</a>.</li>
+									<li><strong>Browse:</strong> This opens a dropdown menu from where you can choose different options. You can see our entire inventory, or browse our inventory either by genre or by format (EPUB, MOBI, PDF...).</li>
+									<li><strong>My books:</strong> This takes you to the <a href="#mybooks_help">"My books" page</a>.</li>
+								</ul>
+							</p>
+							<p>On the right part, try out these... :
+								<ul>
+									<li><strong>The search field:</strong> You can search what you want in our inventory depending on a book's title, an author's name, or even a book's ISBN number. It will take you directly to the <a href="#product_help">product's page</a> if there's a single result to your search, or it will <a href="#results_help">lists all the results</a> if there's more than one.</li>
+									<li><strong>Help button:</strong> How did you think you got here?</li>
+									<li><strong>Shopping cart:</strong> Click it and you'll be able to see what's in your <a href="#cart_help">cart</a>.</li>
+									<li><strong>Login/Logout/Register:</strong> If you're not logged in, use that button to log in. <a href="#login_help">The login form</a> will appear. If you're logged in, the button changes to <strong>Logout</strong> and clicking it will <strong>redirect</strong> you to the homepage. If you don't have an account, you should make one by clicking <a href="#register_help">Register</a>.</li>
+									<li><strong>EN/FR:</strong> As we use internationalization, you are able to switch the website's language from English to French. What comes from  our database is not translated though :'(</li>
+								</ul>
+							</p>
+							<p>Notice how the header follows you when you scroll down our pages ;) You don't have to go all the way up to make another search or to login, etc. Pretty convenient, right?!</p><br />
+						</div>
+
+						<div>
+							<h3 id="footer_help">The footer</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>On our footer, from left to right, you can see:
+								<ul>
+									<li>Bibuli's logo and the headquarters' adress.</li>
+									<li>Bibuli's team.</li>
+									<li>And some basic footer links and social stuff which don't do anything ;)</li>
+								</ul>
+							</p><br />
+						</div>
+
+						<div>
+							<h3 id="index_help">The index or homepage</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>This is the page you land on first when you come to our website. It's the starting point. You're going to see special sections, represented by carousels:
+								<ul>
+									<li><strong>Best Sellers</strong> These are the champions, from which we are able to make a living.</li>
+									<li><strong>New releases</strong> You'll see the 4 most recent eBooks that entered our inventory.</li>
+									<li><strong>Recommended:</strong> If you are a returning customer to the website, depending on what you bought or what you genres you looked at, you'll see books that might interest you.</li>
+								</ul>
+							</p>
+							<p>There are other things on our homepage, such as a <strong>poll</strong> you can participate to. Once you answer the question, you will see the results as form as a pie-chart. </p><br />
+						</div>
+
+						<div>
+							<h3 id="results_help">The results list</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>When there's multiple results to your search, or if you're just browsing the inventory depending on genres, etc, you will see a list of eBooks. Click on one and it will take you the book's product's page.</p><br />
+						</div>
+
+						<div>
+							<h3 id="product_help">The product's page</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>This is where you can see the details of the eBook, you can add it to your cart, you can write reviews, and see similar products.</p><br />
+						</div>
+
+						<div>
+							<h3 id="login_help">The login form</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>Besides simple browsing, you won't be able to actually do things on our website if you're not logged in. For instance, adding a book to the cart, writing a review on a book...</p><br />
+						</div>
+
+						<div>
+							<h3 id="register_help">The register form</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>Having an account is essential on Bibuli! Without one, you will only be able to browse our books basically. So we suggest you create an account now! It's a really easy process, just fill in this form.</p><br />
+						</div>
+
+						<div>
+							<h3 id="account_help">"My account" page</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>On this page, you are able to see the details of your account, the informations you provided, etc. Of course, that implies you created an account in the first place. You are also able to edit your informations if you wish to do so.</p><br />
+						</div>
+
+						<div>
+							<h3 id="cart_help">The shopping cart</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>It allows you to see what items you added to your cart. Adding a book to the cart is the first step to buy it. Just click the <strong>Add to cart</strong> button on the desired product's page. From your shopping cart, you can also remove items you don't want to buy anymore.</p><br />
+						</div>
+
+						<div>
+							<h3 id="checkout_help">The checkout page</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>The whole payment process starts with this page. God bless this page! You will see a table of the eBooks added to your cart, with their own prices. Then you can see the <strong>total price before tax</strong> of your order. We add the <strong>different taxes (PST, HST, GST...)</strong> and we get the <strong>total price</strong> of your order.
+							<br /><br />The payment is done via credit card. Please add your credit card information by filling the form:
+							<ul>
+								<li>The credit card Brand --> We accept only MasterCard and Visa.</li>
+								<li>The credit card Number --> We use the Luhn algorithm to check if the number you provided is valid or not.</li>
+								<li>The Expiration Month and Year</li>
+								<li>The cardholder's Name</li>
+								<li>The Security Code (CVV) --> located on the back of your credit card.</li>
+							</ul></p>
+							<p>Click the <strong>Place Order</strong> button to complete your order. You are now forwarded to the <a href="#mybooks_help">"My books" page</a></p>
+							<br />
+						</div>
+
+						<div>
+							<h3 id="mybooks_help">"My books" page</h3>
+							<img class="thumbnail" src="http://placehold.it/850x350" />
+							<p>This page allows you to see the books you bought from us! This is also from this page that you can download the copy of your purchases, in your favorite format (depending on availability). You are also able to see your invoices.</p><br />
+						</div>
+					</div>
+
+				</div>
+
+                <hr/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

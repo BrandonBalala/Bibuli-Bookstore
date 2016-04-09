@@ -7,6 +7,7 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.persistence.SalesJpaController;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,7 @@ public class AdminReportBackingBean implements Serializable {
     private List<Object[]> topClients;
     private List<Object[]> zeroSales;
 
-    private String clientId;
+    private Integer clientId;
     private String contributorName;
     private String publisherName;
     private Date startDate;
@@ -51,7 +52,9 @@ public class AdminReportBackingBean implements Serializable {
         topClients = new ArrayList<>();
         zeroSales = new ArrayList<>();
 
-        clientId = "0";
+        clientId = 0;
+        contributorName = "";
+        publisherName = "";
 
         startDate = new Date();
         endDate = new Date();
@@ -62,17 +65,75 @@ public class AdminReportBackingBean implements Serializable {
         return totalSales;
     }
 
-    public void setTotalSales(List<Object[]> totalSales) {
-        this.totalSales = totalSales;
+    public BigDecimal getTotalSalesTotalSales() {
+        totalSales = salesController.getTotalSales(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : totalSales) {
+            total = total.add((BigDecimal) sale[2]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getTotalSalesTotalCost() {
+        totalSales = salesController.getTotalSales(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : totalSales) {
+            total = total.add((BigDecimal) sale[3]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getTotalSalesTotalProfit() {
+        totalSales = salesController.getTotalSales(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : totalSales) {
+            total = total.add((BigDecimal) sale[4]);
+        }
+
+        return total;
     }
 
     public List<Object[]> getSalesByClient() {
-        salesByClient = salesController.getSalesByClient(startDate, endDate, Integer.valueOf(clientId));
+        salesByClient = salesController.getSalesByClient(startDate, endDate, clientId);
         return salesByClient;
     }
 
-    public void setSalesByClient(List<Object[]> salesByClient) {
-        this.salesByClient = salesByClient;
+    public BigDecimal getSalesByClientTotalSales() {
+        salesByClient = salesController.getSalesByClient(startDate, endDate, clientId);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByClient) {
+            total = total.add((BigDecimal) sale[2]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getSalesByClientTotalCost() {
+        salesByClient = salesController.getSalesByClient(startDate, endDate, clientId);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByClient) {
+            total = total.add((BigDecimal) sale[3]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getSalesByClientTotalProfit() {
+        salesByClient = salesController.getSalesByClient(startDate, endDate, clientId);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByClient) {
+            total = total.add((BigDecimal) sale[4]);
+        }
+
+        return total;
     }
 
     public List<Object[]> getSalesByContributor() {
@@ -80,8 +141,37 @@ public class AdminReportBackingBean implements Serializable {
         return salesByContributor;
     }
 
-    public void setSalesByContributor(List<Object[]> salesByContributor) {
-        this.salesByContributor = salesByContributor;
+    public BigDecimal getSalesByContributorTotalSales() {
+        salesByContributor = salesController.getSalesByContributor(startDate, endDate, contributorName);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByContributor) {
+            total = total.add((BigDecimal) sale[2]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getSalesByContributorTotalCost() {
+        salesByContributor = salesController.getSalesByContributor(startDate, endDate, contributorName);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByContributor) {
+            total = total.add((BigDecimal) sale[3]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getSalesByContributorTotalProfit() {
+        salesByContributor = salesController.getSalesByContributor(startDate, endDate, contributorName);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByContributor) {
+            total = total.add((BigDecimal) sale[4]);
+        }
+
+        return total;
     }
 
     public List<Object[]> getSalesByPublisher() {
@@ -89,8 +179,37 @@ public class AdminReportBackingBean implements Serializable {
         return salesByPublisher;
     }
 
-    public void setSalesByPublisher(List<Object[]> salesByPublisher) {
-        this.salesByPublisher = salesByPublisher;
+    public BigDecimal getSalesByPublisherTotalSales() {
+        salesByPublisher = salesController.getSalesByPublisher(startDate, endDate, publisherName);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByPublisher) {
+            total = total.add((BigDecimal) sale[2]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getSalesByPublisherTotalCost() {
+        salesByPublisher = salesController.getSalesByPublisher(startDate, endDate, publisherName);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByPublisher) {
+            total = total.add((BigDecimal) sale[3]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getSalesByPublisherTotalProfit() {
+        salesByPublisher = salesController.getSalesByPublisher(startDate, endDate, publisherName);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : salesByPublisher) {
+            total = total.add((BigDecimal) sale[4]);
+        }
+
+        return total;
     }
 
     public List<Object[]> getTopSellers() {
@@ -98,8 +217,37 @@ public class AdminReportBackingBean implements Serializable {
         return topSellers;
     }
 
-    public void setTopSellers(List<Object[]> topSellers) {
-        this.topSellers = topSellers;
+    public BigDecimal getTopSellersTotalSales() {
+        topSellers = salesController.getTopSellers(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : topSellers) {
+            total = total.add((BigDecimal) sale[2]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getTopSellersTotalCost() {
+        topSellers = salesController.getTopSellers(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : topSellers) {
+            total = total.add((BigDecimal) sale[3]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getTopSellersTotalProfit() {
+        topSellers = salesController.getTopSellers(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : topSellers) {
+            total = total.add((BigDecimal) sale[4]);
+        }
+
+        return total;
     }
 
     public List<Object[]> getTopClients() {
@@ -107,8 +255,37 @@ public class AdminReportBackingBean implements Serializable {
         return topClients;
     }
 
-    public void setTopClients(List<Object[]> topClients) {
-         this.topClients = topClients;
+    public BigDecimal getTopClientsTotalSales() {
+        topClients = salesController.getTopClients(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : topClients) {
+            total = total.add((BigDecimal) sale[3]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getTopClientsTotalCost() {
+        topClients = salesController.getTopClients(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : topClients) {
+            total = total.add((BigDecimal) sale[4]);
+        }
+
+        return total;
+    }
+
+    public BigDecimal getTopClientsTotalProfit() {
+        topClients = salesController.getTopClients(startDate, endDate);
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Object[] sale : topClients) {
+            total = total.add((BigDecimal) sale[5]);
+        }
+
+        return total;
     }
 
     public List<Object[]> getZeroSales() {
@@ -116,16 +293,16 @@ public class AdminReportBackingBean implements Serializable {
         return zeroSales;
     }
 
-    public void setZeroSales(List<Object[]> zeroSales) {
-        this.zeroSales = zeroSales;
-    }
-
     public String getClientId() {
-        return clientId;
+        return String.valueOf(clientId);
     }
 
     public void setClientId(String clientId) {
-        this.clientId = clientId;
+        try {
+            this.clientId = Integer.parseInt(clientId);
+        } catch (NumberFormatException nfe) {
+            this.clientId = 0;
+        }
     }
 
     public String getContributorName() {

@@ -36,7 +36,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Brandon Balala
+ * @author Brandon Balala, Ofer Nitka-Nakash
  */
 @Named("productPageBB")
 @SessionScoped

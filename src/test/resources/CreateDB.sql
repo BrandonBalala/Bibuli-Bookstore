@@ -65,7 +65,7 @@ CREATE TABLE Books (
   WholesalePrice DECIMAL(12,2) NOT NULL DEFAULT 0,
   ListPrice DECIMAL(12,2) NOT NULL,
   SalePrice DECIMAL(12,2) NOT NULL DEFAULT 0,
-  PubDate timestamp NOT NULL,
+  PubDate timestamp NOT NULL DEFAULT 0,
   DateEntered timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   RemovalStatus BOOLEAN NOT NULL DEFAULT 0
 )ENGINE=InnoDB;
@@ -1396,8 +1396,8 @@ VALUES (1,"What is your native language?", "English", "French", "Spanish", "Othe
 
 INSERT INTO `feed` (`Name`, `URI`, `SELECTED`)
 VALUES
-('Librarians fight rise of precarious work', 'http://www.cbc.ca/news/canada/toronto/precarious-work-librarians-1.3508778', '1'),
-('CBC FORUM\r\nWhat''s the best way forward for Canadian health care?', 'http://www.cbc.ca/news/politics/health-care-forum-1.3508132', '0');
+('CBC top story', 'http://rss.cbc.ca/lineup/topstories.xml', '1'),
+('CBC healthcare', 'http://rss.cbc.ca/lineup/health.xml', '0');
 
 INSERT INTO `banner` (`URI`, `SELECTED`)
 VALUES
@@ -2081,3 +2081,4 @@ VALUES ('AB', '0.00', '0.05', '0.00', CURRENT_TIMESTAMP),
 
 INSERT INTO `admin` (`username`, `Password`) VALUES ('adminG4', 'adminG4');
 INSERT INTO `admin` (`username`, `Password`) VALUES ('DawsonManager', 'collegedawson');
+INSERT INTO `admin` (`username`, `Password`) VALUES ('adminG4W16', 'adminG4W16');

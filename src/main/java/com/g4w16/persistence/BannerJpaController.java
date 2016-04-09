@@ -7,6 +7,7 @@ package com.g4w16.persistence;
 
 import com.g4w16.entities.Banner;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
+import com.g4w16.persistence.exceptions.PreexistingEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
@@ -39,7 +40,7 @@ public class BannerJpaController implements Serializable {
     public BannerJpaController() {
     }
 
-    public void create(Banner banner) throws RollbackFailureException, Exception {
+    public void create(Banner banner) throws PreexistingEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
             em.persist(banner);
@@ -49,6 +50,9 @@ public class BannerJpaController implements Serializable {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+            }
+            if (findBanner(banner.getId()) != null) {
+                throw new PreexistingEntityException("Banner " + banner + " already exists.", ex);
             }
             throw ex;
         }

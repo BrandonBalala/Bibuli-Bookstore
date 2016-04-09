@@ -17,6 +17,7 @@ import com.g4w16.entities.SalesDetails;
 import com.g4w16.persistence.exceptions.IllegalOrphanException;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -370,8 +371,6 @@ public class SalesJpaController implements Serializable {
 
         List<Object[]> results = q.getResultList();
 
-        //TypedQuery<Object[]> q2 = em.createQuery("SELECT b.id, b.title, sd.price, b.wholesalePrice, (sd.price - b.wholesalePrice) AS profit FROM Sales s JOIN s.client c JOIN s.salesDetailsList sd JOIN sd.book b WHERE c.id = :clientId WHERE sd.removed = false AND CAST(s.dateEntered AS DATE) BETWEEN CAST(:startDate AS DATE) AND CAST(:endDate AS DATE) ORDER BY s.dateEntered ASC", Object[].class);
-        //TypedQuert<Object[]> q3 = em.createQuery("SELECT b.id, b.title, sd.price, b.wholesalePrice, (sd.proce - b.wholesalePrice) AS profit FROM Sales s JOIN s.client c JOIN s.salesDetailsList sd JOIN sd.book b WHERE c.id = :clientId ")
         return results;
     }
 
@@ -396,7 +395,7 @@ public class SalesJpaController implements Serializable {
                 + "GROUP BY b.id "
                 + "ORDER BY s.dateEntered ASC", Object[].class);
 
-        q.setParameter("contributorName", contributorName);
+        q.setParameter("contributorName", contributorName.trim());
         q.setParameter("startDate", startDate);
         q.setParameter("endDate", endDate);
 
@@ -426,7 +425,7 @@ public class SalesJpaController implements Serializable {
                 + "GROUP BY b.id "
                 + "ORDER BY s.dateEntered ASC", Object[].class);
 
-        q.setParameter("publisherName", publisherName);
+        q.setParameter("publisherName", publisherName.trim());
         q.setParameter("startDate", startDate);
         q.setParameter("endDate", endDate);
 
@@ -515,4 +514,50 @@ public class SalesJpaController implements Serializable {
 
         return results;
     }
+
+    /**
+     * Gets the total sales for a client.
+     * 
+     * @param clientId The client id.
+     * @return The total sales to the client.
+     */
+    public BigDecimal getTotalSalesForClient(Integer clientId) {
+        TypedQuery<BigDecimal> q = em.createQuery("SELECT SUM(sd.price) AS totalSales "
+                + "FROM Sales s JOIN s.salesDetailsList sd "
+                + "WHERE sd.removed = false "
+                + "AND s.client.id = :clientId", BigDecimal.class);
+        q.setParameter("clientId", clientId);
+
+        BigDecimal result = q.getSingleResult();
+
+        if (result == null) {
+            System.out.println("No results");
+            result = BigDecimal.ZERO;
+        }
+
+        return result;
+    }
+    
+    /**
+     * Gets the total sales for a book.
+     * 
+     * @param bookId The book id.
+     * @return The total sales of the book.
+     */
+    public BigDecimal getTotalSalesForBook(Integer bookId) {
+        TypedQuery<BigDecimal> q = em.createQuery("SELECT SUM(sd.price) AS totalSales "
+                + "FROM Sales s JOIN s.salesDetailsList sd "
+                + "WHERE sd.removed = false "
+                + "AND sd.book.id = :bookId", BigDecimal.class);
+        q.setParameter("bookId", bookId);
+
+        BigDecimal result = q.getSingleResult();
+
+        if (result == null) {
+            System.out.println("No results");
+            result = BigDecimal.ZERO;
+        }
+
+        return result;
+    } 
 }

@@ -26,6 +26,7 @@ import com.g4w16.persistence.GenreJpaController;
 import com.g4w16.persistence.IdentifierTypeJpaController;
 import com.g4w16.persistence.ReviewsJpaController;
 import com.g4w16.persistence.SalesDetailsJpaController;
+import com.g4w16.persistence.SalesJpaController;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
 import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
@@ -118,6 +119,9 @@ public class AdminBooksBackingBean implements Serializable {
     @Inject
     BookFormatsJpaController bookFormatsJpaController;
 
+    @Inject
+    private SalesJpaController salesController;
+
     private Books newBook;
 
     private List<String> newGenres;
@@ -163,6 +167,10 @@ public class AdminBooksBackingBean implements Serializable {
 
     public List<Books> getSaleBooks() {
         return saleBooks;
+    }
+
+    public BigDecimal getTotalSales(Integer bookId) {
+        return salesController.getTotalSalesForBook(bookId);
     }
 
     public int getSalesCount() {
@@ -357,12 +365,12 @@ public class AdminBooksBackingBean implements Serializable {
     public List<IdentifierType> getAllIdentifierTypes() {
         return allIdentifierTypes;
     }
-    
+
     public void onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         Books book = (Books) event.getObject();
         booksJpaController.edit(book);
     }
-     
+
     public void onRowCancel(RowEditEvent event) {
     }
 

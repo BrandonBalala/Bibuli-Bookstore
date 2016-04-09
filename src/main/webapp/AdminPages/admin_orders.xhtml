@@ -28,7 +28,7 @@
 
                             <h:form id="form">
                                 <p:dataTable id="ordersTable" var="sale" value="#{orderBB.sales}" rows="10"
-                                             paginator="true"
+                                             paginator="true" paginatorPosition="top"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                              style="margin-bottom:20px" selection="#{orderBB.selectedSale}" selectionMode="single" rowKey="#{sale.id}">
                                     <p:ajax event="rowSelect" listener="#{orderBB.onRowSelect}" update=":form:detailsTable"/>
@@ -46,6 +46,10 @@
 
                                     <p:column headerText="Client First Name" sortBy="#{sale.client.firstName}" filterBy="#{sale.client.firstName}" filterMatchMode="contains">
                                         <h:outputText value="#{sale.client.firstName}" />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Client Last Name" sortBy="#{sale.client.lastName}" filterBy="#{sale.client.lastName}" filterMatchMode="contains">
+                                        <h:outputText value="#{sale.client.lastName}" />
                                     </p:column>
 
                                     <p:column headerText="Date Entered" sortBy="#{sale.dateEntered}" filterBy="#{sale.dateEntered}" filterMatchMode="contains">
@@ -70,7 +74,7 @@
                                 </p:dataTable>
 
                                 <p:dataTable id="detailsTable" var="detail" value="#{orderBB.details}" rows="5" 
-                                             paginator="true" 
+                                             paginator="true" paginatorPosition="top"
                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                              style="margin-bottom:20px" selection="#{orderBB.selectedDetail}" selectionMode="single" rowKey="#{detail.id}">
                                     <f:facet name="header">
