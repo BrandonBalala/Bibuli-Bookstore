@@ -12,10 +12,9 @@
     </h:head>
     <h:body>
         <ui:composition template="./master-layout.xhtml">
-            <ui:define name="title">Bibuli | Shopping Cart</ui:define>
+            <ui:define name="title">Bibuli | #{bundle.myCart}</ui:define>
 
-            <ui:define name="content">
-                <!--                <c:set var="test" value="{cartBB.setBookList(bookController.findBooksByYear(2011))}" scope='session'/>-->
+            <ui:define name="content"> 
                 <hr/>
                 <br/>
 
@@ -23,7 +22,7 @@
                     <c:if test="#{cartBB.bookList.size() eq 0}">
                         <div class="row">
                             <div class="panel medium-12 columns text-center">
-                                <h4 class="bibuliFont"><h:outputText value="Your cart is empty!"/></h4>
+                                <h4 class="bibuliFont"><h:outputText value="#{bundle.emptyCart}"/></h4>
                             </div>
                         </div>
                     </c:if>
@@ -31,7 +30,7 @@
                     <c:if test="#{cartBB.bookList.size() ne 0}">
                         <div class="row">
                             <div class="panel medium-12 columns text-center">
-                                <h4 class="bibuliFont"><h:outputText value="Your Cart"/></h4>
+                                <h4 class="bibuliFont"><h:outputText value="#{bundle.yourCart}"/></h4>
                             </div>
                         </div>
                         <br/>
@@ -40,10 +39,10 @@
                                 <div class="row">
                                     <div class="hidden-for-small small-4 medium-9 large-9 columns text-left">&#160;</div>
                                     <div class="hidden-for-small small-4 medium-2 large-2 columns text-left">
-                                        Price
+                                        #{bundle.price}
                                     </div>
                                     <div class="hidden-for-small small-4 medium-1 large-1 columns text-right">
-                                        Actions
+                                        #{bundle.actions}
                                     </div>  
                                 </div>
                                 <ui:repeat value="#{cartBB.bookList}" var="theBook">
@@ -92,10 +91,10 @@
                                 <div class="callout secondary sticky">
                                     <hr/>
                                     <br/>
-                                    <h4>Subtotal <small><h:outputText value="(#{cartBB.bookList.size()} books)"/></small></h4>
+                                    <h4>#{bundle.subtotal} <small><h:outputText value="(#{cartBB.bookList.size()} #{bundle.books})"/></small></h4>
                                     <p><h:outputText value="#{cartBB.subtotal}$"/></p>
                                     <h:form>
-                                        <h:commandLink type="submit" class="button expanded success step fi-credit-card size-12" value=" Proceed to Checkout" action="#{checkoutBB.displayCheckoutPage()}"/>
+                                        <h:commandLink type="submit" class="button expanded success step fi-credit-card size-12" value=" #{bundle.proceedCheckout}" action="#{checkoutBB.displayCheckoutPage()}"/>
                                     </h:form>
                                     <br/>
                                     <hr/>

@@ -29,11 +29,11 @@ and open the template in the editor.
                     </div>
                     <div class="medium-12 large-7 columns">
                         <p:rating value="#{productPageBB.averageRating}" readonly="true"/>
-                        <h6><small><h:outputText value=" #{productPageBB.book.approvedReviewsList.size()} customer reviews" class="inline paddingLeft"/></small></h6>
+                        <h6><small><h:outputText value=" #{productPageBB.book.approvedReviewsList.size()} #{bundle.customerReviews}" class="inline paddingLeft"/></small></h6>
                         <h3><h:outputText value="#{productPageBB.book.title}"/></h3>
                         <h5>
                             <ul>
-                                <li class="inlineClass">By </li>
+                                <li class="inlineClass">#{bundle.by} </li>
                                 <ui:repeat value="#{productPageBB.book.contributorList}" var="contrib">
                                     <li class="inlineClass">#{contrib.name} (#{contrib.contribution.type})</li>
                                 </ui:repeat>
@@ -43,11 +43,11 @@ and open the template in the editor.
 
                         <ul class="centerAlign">
                             <c:if test="#{productPageBB.book.salePrice eq 0}">
-                                <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.book.listPrice}"/></li>
+                                <li class="prices"><b>#{bundle.price} </b><h:outputText value="#{productPageBB.book.listPrice}"/></li>
                             </c:if>
                             <c:if test="#{productPageBB.book.salePrice ne 0}">
-                                <li class="prices"><b>List Price: </b><h:outputText value="#{productPageBB.book.listPrice}$" class="strikethrough"/></li>
-                                <li class="prices"><b>Price: </b><h:outputText value="#{productPageBB.book.salePrice}$"/></li>
+                                <li class="prices"><b>#{bundle.listPrice} </b><h:outputText value="#{productPageBB.book.listPrice}$" class="strikethrough"/></li>
+                                <li class="prices"><b>#{bundle.price} </b><h:outputText value="#{productPageBB.book.salePrice}$"/></li>
                                 <li class="prices redFont"><b><h:outputText value="#{productPageBB.savingsPercentage}"/>% OFF</b></li>
                             </c:if>
                         </ul>
@@ -55,7 +55,7 @@ and open the template in the editor.
                             <p:growl id="cartMessage"/>
                             <p:commandLink class="button expanded hollow step fi-shopping-cart size-12" value=" Add to Cart" actionListener="#{productPageBB.addBookToCart()}" action="#{messageBean.displayMessage()}" update="cartMessage"/>
                         </h:form>
-                        <label>Available formats after purchase:
+                        <label>#{bundle.availableFormats}
                             <div class="small secondary expanded button-group">
                                 <ui:repeat value="#{productPageBB.book.bookFormatsList}" var="theBookFormat">
                                     <a class="button pointer"><h:outputText value="#{theBookFormat.format1.type}"/></a>   
@@ -68,19 +68,19 @@ and open the template in the editor.
                 <div class="column row">
                     <hr/>
                     <ul class="tabs" data-tabs="" id="example-tabs">
-                        <li class="tabs-title"><a href="#panel1">Book Details</a></li>
-                        <li class="tabs-title"><a href="#panel2">Reviews</a></li>
-                        <li class="tabs-title is-active"><a href="#panel3" aria-selected="true">Recommended Books</a></li>
-                        <li class="tabs-title"><a href="#panel4">By Same Contributors</a></li>
+                        <li class="tabs-title"><a href="#panel1">#{bundle.bookDetails}</a></li>
+                        <li class="tabs-title"><a href="#panel2">#{bundle.reviews}</a></li>
+                        <li class="tabs-title is-active"><a href="#panel3" aria-selected="true">#{bundle.recommendedBooks}</a></li>
+                        <li class="tabs-title"><a href="#panel4">#{bundle.sameContributors}</a></li>
 
                     </ul>
                     <div class="tabs-content" data-tabs-content="example-tabs">
                         <div class="tabs-panel" id="panel1">
-                            <h4>Book Details</h4>
+                            <h4>#{bundle.bookDetails}</h4>
                             <table class="noborder">
                                 <tbody>
                                     <tr>
-                                        <td class="rightAlign"><b>Genres:</b></td>
+                                        <td class="rightAlign"><b>#{bundle.genres}</b></td>
                                         <td>
                                             <ui:repeat value="#{productPageBB.book.genreList}" var="theGenre">
                                                 <h:outputText value="#{theGenre.type}"/><br/>
@@ -94,15 +94,15 @@ and open the template in the editor.
                                         </tr>
                                     </ui:repeat>
                                     <tr>
-                                        <td class="rightAlign"><b>Publisher:</b></td>
+                                        <td class="rightAlign"><b>#{bundle.publisher}</b></td>
                                         <td><h:outputText value="#{productPageBB.book.publisher}"/></td>
                                     </tr>
                                     <tr>
-                                        <td class="rightAlign"><b>Publication date:</b></td>
+                                        <td class="rightAlign"><b>#{bundle.pubDate}</b></td>
                                         <td><h:outputText value="#{productPageBB.formattedBookPubDate}"/></td>
                                     </tr>
                                     <tr>
-                                        <td class="rightAlign"><b>Pages:</b></td>
+                                        <td class="rightAlign"><b>#{bundle.pages}</b></td>
                                         <td><h:outputText value="#{productPageBB.book.pages}"/></td>
                                     </tr>
                                 </tbody>
@@ -123,7 +123,7 @@ and open the template in the editor.
                             <c:if test="#{empty productPageBB.book.approvedReviewsList}">
                                 <div class="row text-center">
                                     <div class="large-12">
-                                        <h4><h:outputText value="No reviews found, be the first!"/></h4>
+                                        <h4><h:outputText value="#{bundle.noReviews}"/></h4>
                                     </div>
                                 </div>
                             </c:if>
@@ -169,7 +169,7 @@ and open the template in the editor.
                             <c:if test="#{empty productPageBB.recommendedBookList}">
                                 <div class="row text-center">
                                     <div class="large-12">
-                                        <h4><h:outputText value="No recommended books found..."/></h4>
+                                        <h4><h:outputText value="#{bundle.noRecommended}"/></h4>
                                     </div>
                                 </div>
                             </c:if>
@@ -206,7 +206,7 @@ and open the template in the editor.
                             <c:if test="#{empty productPageBB.sameContributorsBookList}">
                                 <div class="row text-center">
                                     <div class="large-12">
-                                        <h4><h:outputText value="No books by same contributors..."/></h4>
+                                        <h4><h:outputText value="#{bundle.noSameContributors}"/></h4>
                                     </div>
                                 </div>
                             </c:if>

@@ -12,7 +12,7 @@
     </h:head>
     <h:body>
         <ui:composition template="./master-layout.xhtml">
-            <ui:define name="title">Bibuli | Search Results</ui:define>
+            <ui:define name="title">Bibuli | #{bundle.searchResults}</ui:define>
 
             <ui:define name="content">
                 <hr/>
@@ -21,7 +21,7 @@
                     <c:if test="#{resultBB.bookList.size() eq 0}">
                         <div class="row">
                             <div class="panel large-12 columns text-left">
-                                <h4>No books found...</h4>
+                                <h4>#{bundle.noBooksFound}</h4>
                             </div>
                         </div>
                     </c:if>
@@ -29,15 +29,15 @@
                     <c:if test="#{resultBB.bookList.size() ne 0}">
                         <div class="row">
                             <div class="large-12 columns text-center">
-                                <h4 class="bibuliFont">Search Results</h4>
+                                <h4 class="bibuliFont">#{bundle.searchResults}</h4>
                             </div>
                         </div>
                         <div class="row">
                             <div class="panel medium-9 columns text-left">
-                                <h4><h:outputText value="#{resultBB.bookList.size()} books found."/></h4>
+                                <h4><h:outputText value="#{resultBB.bookList.size()} #{bundle.booksFound}"/></h4>
                             </div>
                             <div class="medium-3 columns text-right">
-                                <label>Sort By
+                                <label>#{bundle.sortBy}
                                     <h:selectOneMenu value="#{resultBB.sortBy}" >
                                         <f:selectItem itemValue=" " itemLabel=""/>
                                         <f:selectItem itemValue="cheapestFirst" itemLabel="Price: Low to High"/>

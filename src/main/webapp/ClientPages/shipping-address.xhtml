@@ -13,14 +13,14 @@
     </h:head>
     <h:body>
         <ui:composition template="./master-layout.xhtml">
-            <ui:define name="title">Bibuli | Shipping Address</ui:define>
+            <ui:define name="title">Bibuli | #{bundle.shippingAddressTitle}</ui:define>
 
             <ui:define name="content">
                 <hr/>
 
                 <div class="row">
                     <div class="panel large-12 columns text-left">
-                        <h3>Select a billing address</h3>
+                        <h3>#{bundle.selectAddress}</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -38,7 +38,7 @@
                                             <br/><h:outputText value="#{address.city}, #{address.province} #{address.postalCode}"/>
                                             <br/>Canada
                                             <h:form>
-                                                <h:commandLink class="button expanded hollow" value="Ship to this address" action="#{checkoutBB.proceedToPayment(address)}"/>
+                                                <h:commandLink class="button expanded hollow" value="#{bundle.chooseAddress}" action="#{checkoutBB.proceedToPayment(address)}"/>
                                             </h:form>
                                         </p>
                                     </div>
@@ -50,10 +50,10 @@
                         <div class="callout secondary">
                             <hr/>
                             <br/>
-                            <h4 class="bibuliFont">Order Summary</h4>
+                            <h4 class="bibuliFont">#{bundle.orderSummary}</h4>
                             <div class="row">
                                 <div class="large-6 columns text-left">
-                                    Total before tax:
+                                    #{bundle.totalBeforeTax}
                                 </div>
                                 <div class="large-6 columns text-right">
                                     <h:outputText value="#{cartBB.subtotal}$"/>
@@ -68,7 +68,7 @@
 
                 <div class="row">
                     <div class="panel large-12 columns text-center">
-                        <h3>Add a new address</h3>
+                        <h3>#{bundle.newAddress}</h3>
                     </div>
                 </div>
                 <h:form id="billingForm" prependId="false">
@@ -76,7 +76,7 @@
                         <hr/>
                         <div class="row">
                             <div class="large-12 columns">
-                                <label>Location Name (eg. My Home, Cousin's Treehouse) 
+                                <label>#{bundle.locationName} (eg. My Home, Cousin's Treehouse) 
                                     <h:inputText id="name" value="#{checkoutBB.newAddress.name}" required="false">
                                         <f:validateLength maximum="128"/>
                                         <f:ajax event="blur" render="nameErr"/>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <label>Address Line 1 
+                                <label>#{bundle.addressLine1}
                                     <h:inputText id="address1" value="#{checkoutBB.newAddress.firstCivicAddress}" required="true" requiredMessage="Address1 is required">
                                         <f:validateLength minimum="5" maximum="250"/>
                                         <f:ajax event="blur" render="address1Err"/>
@@ -102,7 +102,7 @@
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <label>Address Line 2 
+                                <label>#{bundle.addressLine2}
                                     <h:inputText id="address2" value="#{checkoutBB.newAddress.secondCivicAddress}" required="false">
                                         <f:validateLength minimum="5" maximum="250"/>
                                         <f:ajax event="blur" render="address2Err"/>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="row">
                             <div class="large-6 columns">
-                                <label>City
+                                <label>#{bundle.city}
                                     <h:inputText id="city" value="#{checkoutBB.newAddress.city}" required="true" requiredMessage="City is required">
                                         <f:validateLength minimum="5" maximum="128"/>
                                         <f:ajax event="blur" render="cityErr"/>
@@ -123,7 +123,7 @@
                                 </label>
                             </div>
                             <div class="large-6 columns">
-                                <label>Province
+                                <label>#{bundle.province}
                                     <h:selectOneMenu id="province" value="#{checkoutBB.newAddress.province}" required="true" requiredMessage="Province is required">
                                         <f:selectItems value="#{checkoutBB.provinceList}" var="theProvince" 
                                                        itemLabel="#{theProvince.id}" itemValue="#{theProvince.id}" />
@@ -143,7 +143,7 @@
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <label>Postal Code 
+                                <label>#{bundle.postalCode} 
                                     <h:inputText id="postalCode" value="#{checkoutBB.newAddress.postalCode}" required="true" requiredMessage="Postal code required">
                                         <f:validateLength minimum="6" maximum="6"/>
                                         <f:ajax event="blur" render="postalCodeErr"/>
@@ -156,7 +156,7 @@
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <p:commandButton update="billingListPanel billingForm" class="button expanded hollow" value="Create" action="#{checkoutBB.createNewBillingAddress()}"/>
+                                <p:commandButton update="billingListPanel billingForm" class="button expanded hollow" value="#{bundle.create}" action="#{checkoutBB.createNewBillingAddress()}"/>
                             </div>
                         </div>
                     </div>
