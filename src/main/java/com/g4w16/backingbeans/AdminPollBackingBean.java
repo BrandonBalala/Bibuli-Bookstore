@@ -11,8 +11,6 @@ import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -136,6 +134,12 @@ public class AdminPollBackingBean implements Serializable {
     public void onRowCancel(RowEditEvent event) {
     }
 
+    /**
+     * Change selected status
+     * @param p
+     * @throws RollbackFailureException
+     * @throws Exception 
+     */
     public void changeStatus(Poll p) throws RollbackFailureException, Exception {
         selected = pollJpaController.findPollByID(p.getId());
         Poll current;
@@ -155,7 +159,15 @@ public class AdminPollBackingBean implements Serializable {
         }
 
     }
-
+    
+    /**
+     * Add a new record with validation for length
+     * @param question
+     * @param option1
+     * @param option2
+     * @param option3
+     * @param option4 
+     */
     public void addAction(String question, String option1, String option2, String option3, String option4) {
         boolean noErrors = true;
 
