@@ -10,7 +10,6 @@ import com.g4w16.entities.BookFormatsPK;
 import com.g4w16.entities.BookIdentifiers;
 import com.g4w16.entities.BookIdentifiersPK;
 import com.g4w16.entities.Books;
-import com.g4w16.entities.Client;
 import com.g4w16.entities.ContributionType;
 import com.g4w16.entities.Contributor;
 import com.g4w16.entities.Format;
@@ -34,8 +33,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -44,9 +41,9 @@ import org.primefaces.event.RowEditEvent;
 
 /**
  *
- * @author wangd
+ * @author Dan Wang, Brandon Balala
  */
-@Named("booksBB")
+@Named("booksBB") 
 @SessionScoped
 public class AdminBooksBackingBean implements Serializable {
 
@@ -532,6 +529,7 @@ public class AdminBooksBackingBean implements Serializable {
     }
 
     public String showCreatePage() {
+        initializeNew();
         return "admin_create_book?faces-redirect=true";
     }
 

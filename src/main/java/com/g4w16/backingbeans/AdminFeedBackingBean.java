@@ -102,6 +102,10 @@ public class AdminFeedBackingBean implements Serializable {
         this.filteredFeeds = filteredFeeds;
     }
 
+    /**
+     * Edit one record
+     * @param event 
+     */
     public void onRowEdit(RowEditEvent event) {
         try {
             feedJpaController.edit((Feed) event.getObject());
@@ -111,16 +115,30 @@ public class AdminFeedBackingBean implements Serializable {
             Logger.getLogger(AdminFeedBackingBean.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         }
     }
-
+    /**
+     * Edit is cancel
+     * @param event 
+     */
     public void onRowCancel(RowEditEvent event) {
     }
-
+    
+    /**
+     * Change selected status
+     * @param f
+     * @throws RollbackFailureException
+     * @throws Exception 
+     */
     public void changeStatus(Feed f) throws RollbackFailureException, Exception {
         selected = feedJpaController.findFeedByID(f.getId());
         selected.setSelected(f.getSelected());
         feedJpaController.edit(selected);
     }
-
+    
+    /**
+     * Add a new record
+     * @param name
+     * @param uri 
+     */
     public void addAction(String name, String uri) {
         boolean noErrors = true;
         if (name.length() > 254) {

@@ -18,7 +18,7 @@ import javax.inject.Named;
 
 /**
  *
- * @author 1232048
+ * @author Dan Wang
  */
 @Named("reviewBB")
 @SessionScoped

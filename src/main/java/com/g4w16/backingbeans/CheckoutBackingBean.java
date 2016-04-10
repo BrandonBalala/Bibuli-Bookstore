@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -290,6 +291,14 @@ public class CheckoutBackingBean implements Serializable {
         clearCart();
 
         return displayInvoice(salesController.findSales(sale.getId()));
+    }
+    
+    public int getMinYear(){
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
+    
+    public int getMaxYear(){
+        return (Calendar.getInstance().get(Calendar.YEAR) + 5);
     }
 
     private String displayInvoice(Sales sale) {

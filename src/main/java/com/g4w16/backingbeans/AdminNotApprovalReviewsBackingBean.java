@@ -1,6 +1,6 @@
 package com.g4w16.backingbeans;
 
-import com.g4w16.entities.Client;
+
 import com.g4w16.entities.Reviews;
 import com.g4w16.persistence.ReviewsJpaController;
 import com.g4w16.persistence.exceptions.NonexistentEntityException;
@@ -13,7 +13,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 /*
@@ -24,7 +23,7 @@ import org.primefaces.event.RowEditEvent;
 
 /**
  *
- * @author 1232048
+ * @author Dan Wang
  */
 @Named("notApprovalReviewBB")
 @SessionScoped
@@ -77,6 +76,12 @@ public class AdminNotApprovalReviewsBackingBean implements Serializable{
         return reviews.size();
     }
     
+    /**
+     * Change approval status
+     * @param event
+     * @throws RollbackFailureException
+     * @throws Exception 
+     */
     public void onRowEdit(RowEditEvent event) throws RollbackFailureException, Exception {
         Reviews editedReviw = (Reviews)event.getObject();
         reviewController.edit(editedReviw);

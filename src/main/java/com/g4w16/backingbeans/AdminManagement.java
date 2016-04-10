@@ -11,8 +11,6 @@ import com.g4w16.persistence.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -78,7 +76,11 @@ public class AdminManagement implements Serializable {
     public int getAdminCount() {
         return adminJpaController.getAdminCount();
     }
-
+    /**
+     * Add a new record, with validation for the length and already exist
+     * @throws RollbackFailureException
+     * @throws Exception 
+     */
     public void addAdmin() throws RollbackFailureException, Exception {
         boolean noErrors = true;
 
@@ -118,7 +120,11 @@ public class AdminManagement implements Serializable {
             }
         }
     }
-
+    
+    /**
+     * delete a record
+     * @param selected 
+     */
     public void deleteAdmin(List<Admin> selected) {
         try {
             for (Admin a : selected) {

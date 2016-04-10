@@ -20,7 +20,7 @@
 
                 <div class="row">
                     <div class="panel large-12 columns text-left">
-                        <h3>Select a shipping address</h3>
+                        <h3>Select a billing address</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -71,51 +71,88 @@
                         <h3>Add a new address</h3>
                     </div>
                 </div>
-                <h:form id="billingForm">
+                <h:form id="billingForm" prependId="false">
                     <div class="row large-6">
                         <hr/>
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>Location Name (eg. My Home, Cousin's Treehouse) 
-                                    <h:inputText value="#{checkoutBB.newAddress.name}"/>
+                                    <h:inputText id="name" value="#{checkoutBB.newAddress.name}" required="false">
+                                        <f:validateLength maximum="128"/>
+                                        <f:ajax event="blur" render="nameErr"/>
+                                    </h:inputText>
                                 </label>
+                            </div>
+                            <div class="large-12 columns">
+                                <h:message for="name" id="nameErr" style="color:red"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>Address Line 1 
-                                    <h:inputText value="#{checkoutBB.newAddress.firstCivicAddress}"/>
+                                    <h:inputText id="address1" value="#{checkoutBB.newAddress.firstCivicAddress}" required="true" requiredMessage="Address1 is required">
+                                        <f:validateLength minimum="5" maximum="250"/>
+                                        <f:ajax event="blur" render="address1Err"/>
+                                    </h:inputText>
                                 </label>
+                            </div>
+                            <div class="large-12 columns">
+                                <h:message for="address1" id="address1Err" style="color:red"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>Address Line 2 
-                                    <h:inputText value="#{checkoutBB.newAddress.secondCivicAddress}"/>
+                                    <h:inputText id="address2" value="#{checkoutBB.newAddress.secondCivicAddress}" required="false">
+                                        <f:validateLength minimum="5" maximum="250"/>
+                                        <f:ajax event="blur" render="address2Err"/>
+                                    </h:inputText>
                                 </label>
+                            </div>
+                            <div class="large-12 columns">
+                                <h:message for="address2" id="address2Err" style="color:red"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-6 columns">
                                 <label>City
-                                    <h:inputText value="#{checkoutBB.newAddress.city}"/>
+                                    <h:inputText id="city" value="#{checkoutBB.newAddress.city}" required="true" requiredMessage="City is required">
+                                        <f:validateLength minimum="5" maximum="128"/>
+                                        <f:ajax event="blur" render="cityErr"/>
+                                    </h:inputText>
                                 </label>
                             </div>
                             <div class="large-6 columns">
                                 <label>Province
-                                    <h:selectOneMenu value="#{checkoutBB.newAddress.province}" >
+                                    <h:selectOneMenu id="province" value="#{checkoutBB.newAddress.province}" required="true" requiredMessage="Province is required">
                                         <f:selectItems value="#{checkoutBB.provinceList}" var="theProvince" 
                                                        itemLabel="#{theProvince.id}" itemValue="#{theProvince.id}" />
+                                        <f:ajax event="blur" render="provinceErr"/>
                                     </h:selectOneMenu>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="large-6 columns">
+                                <h:message for="city" id="cityErr" style="color:red"/>
+                            </div>
+                            <div class="large-6 columns">
+                                <h:message for="province" id="provinceErr" style="color:red"/>
+
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="large-12 columns">
                                 <label>Postal Code 
-                                    <h:inputText value="#{checkoutBB.newAddress.postalCode}"/>
+                                    <h:inputText id="postalCode" value="#{checkoutBB.newAddress.postalCode}" required="true" requiredMessage="Postal code required">
+                                        <f:validateLength minimum="6" maximum="6"/>
+                                        <f:ajax event="blur" render="postalCodeErr"/>
+                                    </h:inputText>
                                 </label>
                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <h:message for="postalCode" id="postalCodeErr" style="color:red"/>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">

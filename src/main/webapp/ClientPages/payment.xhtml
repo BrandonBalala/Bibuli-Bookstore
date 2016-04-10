@@ -109,32 +109,76 @@
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>#{bundle.cardNum} 
-                                    <h:inputText value="#{checkoutBB.cardNumber}"/>
+                                    <h:inputText id="cardNumber" value="#{checkoutBB.cardNumber}"
+                                                 required="true" requiredMessage="Card number is required">
+                                        <f:validator validatorId="CreditCardValidator" />
+                                        <f:ajax event="blur" render="cardNumberErr"/>
+                                    </h:inputText>
                                 </label>
+                            </div>
+                            <div class="large-12 columns">
+                                <h:message for="cardNumber" id="cardNumberErr" style="color:red"/> 
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-4 columns">
                                 <label>#{bundle.expiryMonth}
-                                    <h:inputText value="#{checkoutBB.expiryMonth}"/>
+                                     <h:inputText id="month" value="#{checkoutBB.expiryMonth}"
+                                                 required="true" requiredMessage="Month is required">
+                                        <f:convertNumber integerOnly="true"/>
+                                        <f:validateLongRange minimum="1" maximum="12"/>
+                                        <f:ajax event="blur" render="monthErr"/>
+                                    </h:inputText>
+                                </label>
+                            </div>
+                            <div class="large-4 columns">
                                 </label>
                             </div>
                             <div class="large-4 columns">
                                 <label>#{bundle.expiryYear}
-                                    <h:inputText value="#{checkoutBB.expiryYear}"/>
+                                    <h:inputText id="year" value="#{checkoutBB.expiryYear}" 
+                                                 required="true" requiredMessage="Year is required">
+                                        <f:convertNumber integerOnly="true"/>
+                                        <f:validateLongRange minimum="#{checkoutBB.minYear}" maximum="#{checkoutBB.maxYear}"/>
+                                        <f:ajax event="blur" render="yearErr"/>
+                                    </h:inputText>
                                 </label>
+                            </div>
+                        </div> 
+                         <div class="large-4 columns">
+                                <label>#{bundle.securityCode}
+                                    <h:inputText id="securityCode" value="#{checkoutBB.securityCode}"
+                                                 required="true" requiredMessage="Security code required">
+                                        <f:convertNumber integerOnly="true"/>
+                                        <f:validateLength maximum="5"/>
+                                        <f:ajax event="blur" render="securityCodeErr"/>
+                                    </h:inputText>
+                                </label>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="large-4 columns">
+                                <h:message for="month" id="monthErr" style="color:red"/>
                             </div>
                             <div class="large-4 columns">
-                                <label>#{bundle.securityCode}
-                                    <h:inputText value="#{checkoutBB.securityCode}"/>
-                                </label>
+                                <h:message for="year" id="yearErr" style="color:red"/> 
                             </div>
-                        </div>                        
+                            <div class="large-4 columns">
+                                <h:message for="securityCode" id="securityCodeErr" style="color:red"/>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <label>#{bundle.holderName}
-                                    <h:inputText value="#{checkoutBB.nameOnCard}"/>
+                                <label>#{bundle.cardHolder}
+                                    <h:inputText id="name" value="#{checkoutBB.nameOnCard}"
+                                                 required="true" requiredMessage="Name is required">
+                                        <f:validateLength minimum="5" maximum="35"/>
+                                        <f:ajax event="blur" render="nameErr"/>
+                                    </h:inputText>
                                 </label>
+                            </div>
+                            <div class="large-12 columns">
+                                <h:message for="name" id="nameErr" style="color:red"/>
                             </div>
                         </div>
                         <div class="row">
@@ -150,4 +194,6 @@
         </ui:composition>
     </h:body>
 </html>
+
+                                
 
