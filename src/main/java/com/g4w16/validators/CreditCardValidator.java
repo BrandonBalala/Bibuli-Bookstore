@@ -12,6 +12,7 @@ import javax.faces.validator.ValidatorException;
  * annotation provides the name that is used in the tag This implementation
  * performs the Luhn test
  *
+ * @author Brandon Balala
  */
 @FacesValidator("CreditCardValidator")
 public class CreditCardValidator implements Validator {

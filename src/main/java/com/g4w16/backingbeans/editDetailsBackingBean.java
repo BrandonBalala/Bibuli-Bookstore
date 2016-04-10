@@ -15,13 +15,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author ofern
+ * Class which holds the account details editing backing data and Actions
+ * @author Ofer Nitka-Nakash
  */
 @Named("detailsBB")
 @SessionScoped
@@ -35,6 +36,10 @@ public class editDetailsBackingBean implements Serializable {
     @Inject
     private ClientJpaController clientJPAController;
     
+    
+    /*
+    * redirect if client not passed to the backing bean
+    */
     @PostConstruct
     private void clientSetCheck()
     {
@@ -68,9 +73,13 @@ public class editDetailsBackingBean implements Serializable {
         return client;
     }
     
-    public void saveChanges()
+    /*
+     * persists the changes if the orig password matched the one provided
+     * otherwise display a message.
+     */
+    public String saveChanges()
     {
-        if(this.origPassword.equals(this.password))
+        if(this.origPassword.equals(this.password)){
             try {
                 clientJPAController.edit(client);
         } catch (NonexistentEntityException ex) {
@@ -79,6 +88,15 @@ public class editDetailsBackingBean implements Serializable {
             Logger.getLogger(editDetailsBackingBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(editDetailsBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return "accountDetails?faces-redirect=true";
+    }
+        else{
+            FacesMessage msg = new FacesMessage("Changes Failed.", 
+						"Invalid Original Password.");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                       FacesContext.getCurrentInstance().addMessage(null,msg);
+                       return null;
         }
     }
 }

@@ -14,7 +14,7 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author 1311213
+ * @author Ofer Nitka-Nakash
  */
 @FacesValidator("emailValidator")
 public class emailValidator implements Validator {

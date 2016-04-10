@@ -14,7 +14,7 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author ofern
+ * @author Ofer Nitka-Nakash
  */
 @FacesValidator("nameValidator")
 public class nameValidator implements Validator{

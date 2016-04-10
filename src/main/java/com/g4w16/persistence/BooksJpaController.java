@@ -200,7 +200,7 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
     }
 
     @Override
-    public void edit(Books books) throws newpackage.exceptions.IllegalOrphanException, newpackage.exceptions.NonexistentEntityException, newpackage.exceptions.RollbackFailureException, Exception {
+    public void edit(Books books) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         
         try {
             utx.begin();
@@ -375,13 +375,13 @@ public class BooksJpaController implements Serializable, BooksJpaInterface {
             try {
                 utx.rollback();
             } catch (Exception re) {
-                throw new newpackage.exceptions.RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = books.getId();
                 if (findBookByID(id) == null) {
-                    throw new newpackage.exceptions.NonexistentEntityException("The books with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The books with id " + id + " no longer exists.");
                 }
             }
             throw ex;

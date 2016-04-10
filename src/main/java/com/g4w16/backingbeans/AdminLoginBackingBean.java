@@ -18,8 +18,8 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author ofern
+ * Class which takes care of giving all the backing data
+ * @author Ofer Nitka-Nakash
  */
 @Named("AdminLoginBB")
 @SessionScoped
@@ -52,7 +52,8 @@ public class AdminLoginBackingBean  implements Serializable{
     }
 
     /**
-     * Action
+     * Login method which contains a significant portion of code found in 
+     * Ken Fogel login example for JSF
      */
     public String login() {
 
@@ -69,17 +70,8 @@ public class AdminLoginBackingBean  implements Serializable{
         // There is a client so login was successful
         if (admin != null) {
             authenticated = true;
-//            message = MessageUtil.getMessage(
-//                    "messages", "welcome", new Object[]{username});
-//            message.setSeverity(FacesMessage.SEVERITY_INFO);
             session.setAttribute("admin", admin.getUsername());
         } 
-//        else {
-//            // MessagesUtil simplifies creating localized messages
-//            message = MessageUtil.getMessage(
-//                    "messages", "loginerror", new Object[]{username});
-//            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-//        }
         // Store the outcome in the session object
         session.setAttribute("adminAuthenticated", authenticated);
         if(!authenticated){
@@ -96,11 +88,17 @@ public class AdminLoginBackingBean  implements Serializable{
         
     }
 
+    /*
+    * A method which invalidates the current session
+    */
     public void logout() {
         ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
                 .getSession(false)).invalidate();
     }
     
+    /*
+    * Used to redirect to the login page if the user isn't authenticated
+    */
      public void sendToLogin() throws IOException {
          HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
          if (session.getAttribute("adminAuthenticated")== null || (boolean)session.getAttribute("adminAuthenticated")!= true)

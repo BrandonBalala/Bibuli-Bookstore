@@ -11,14 +11,13 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * AccountDetailsBackingBean takes care of providing the backing data for the accounts detail
+ * page and allows for the saving of edits done to the client entry
  */
 
 /**
  *
- * @author ofern
+ * @author Ofer Nitka-Nakash
  */
 @Named("AccountDetailsBB")
 @SessionScoped
@@ -43,6 +42,9 @@ public class AccountDetailsBackingBean implements Serializable{
         return client;
     }
      
+     /*
+     *editAccount saves the edits done to the client entity 
+     */
     public String editAccount()
     {
         editDetails.setClient(client);

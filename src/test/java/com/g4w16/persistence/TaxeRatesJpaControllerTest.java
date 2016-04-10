@@ -44,7 +44,7 @@ import org.junit.Ignore;
 
 /**
  *
- * @author ofern
+ * @author Ofer Nitka-Nakash
  */
 @RunWith(Arquillian.class)
 //@Ignore

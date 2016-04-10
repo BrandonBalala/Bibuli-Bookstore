@@ -10,18 +10,24 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author ofern
+ * A class to provide some methods which avoid client session based code rewriting
+ * @author Ofer Nitka-Nakash
  */
 @RequestScoped
 public class ClientUtil {
 
     private HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
+    /*
+    * A method which returns the logged in clients Id
+    */
     public int getUserId() {
         return (int) session.getAttribute("client");
     }
 
+    /*
+    * A method which return whether a user has been authenticated
+    */
     public boolean isAuthenticated() {
         boolean authentic = false;
         try {

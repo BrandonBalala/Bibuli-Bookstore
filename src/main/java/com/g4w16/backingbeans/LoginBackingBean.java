@@ -23,8 +23,8 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author ofern
+ * Class which takes care of giving all the backing data
+ * @author Ofer Nitka-Nakash
  */
 @Named("loginBB")
 @ViewScoped
@@ -66,7 +66,8 @@ public class LoginBackingBean implements Serializable {
     }
 
     /**
-     * Action
+     * Login method which contains a significant portion of code found in 
+     * Ken Fogel login example for JSF
      */
     public String login() {
 
@@ -102,11 +103,17 @@ public class LoginBackingBean implements Serializable {
         return null;
     }
 
+    /*
+    * Used to redirect to the login page if the user isn't authenticated
+    */
     public void sendToLogin() throws IOException {
          if (session.getAttribute("authenticated") == null || (boolean)session.getAttribute("authenticated")!= true)
          FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
     }
     
+    /*
+    * A method which invalidates the current session
+    */
     public String logout() {
         ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
                 .getSession(false)).invalidate();
@@ -114,20 +121,20 @@ public class LoginBackingBean implements Serializable {
         return "mainPage?faces-redirect=true";
     }
 
-    private void removeOwnedBooksFromCart() {
-        Client client = clientJPAController.findClientById(clientUtil.getUserId());
-        List<Books> bookList = cartBB.getBookList();
-        
-        salesLoop:
-        for (Sales sale : client.getSalesList()) {
-            for (SalesDetails salesDetail : sale.getSalesDetailsList()) {
-                Books temp = salesDetail.getBook();
-                if (bookList.contains(temp)) {
-                    bookList.remove(temp);
-                }
-            }
-        }
-        
-        cartBB.setBookList(bookList);
-    }
+//    private void removeOwnedBooksFromCart() {
+//        Client client = clientJPAController.findClientById(clientUtil.getUserId());
+//        List<Books> bookList = cartBB.getBookList();
+//        
+////        salesLoop:
+////        for (Sales sale : client.getSalesList()) {
+////            for (SalesDetails salesDetail : sale.getSalesDetailsList()) {
+////                Books temp = salesDetail.getBook();
+////                if (bookList.contains(temp)) {
+////                    bookList.remove(temp);
+////                }
+////            }
+////        }
+////        
+////        cartBB.setBookList(bookList);
+////    }
 }

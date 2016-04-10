@@ -13,8 +13,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author ofern
+ * Class which holds all the backing data and actions for registration of users
+ * @author Ofer Nitka-Nakash
  */
 @Named("registerBB")
 @ViewScoped
@@ -32,6 +32,9 @@ public class RegisterBackingBean implements Serializable{
         return client;
     }
     
+    /*
+    * Persists the Client to database and redirects to the login page.
+    */
     public String register() throws Exception {
         clientJpaController.create(client);
         

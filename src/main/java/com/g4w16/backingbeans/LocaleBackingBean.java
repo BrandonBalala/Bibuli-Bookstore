@@ -16,8 +16,8 @@ import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
 
 /**
- *
- * @author ofern
+ * A backing bean which holds all the locale data and actions
+ * @author Ofer Nitka-Nakash
  */
 @Named("LocaleBB")
 @SessionScoped
@@ -27,6 +27,10 @@ public class LocaleBackingBean implements Serializable{
 
    private static Map<String,Object> countries;
    
+   /*
+   * a static declaration block which states all the 
+   * supported locales.
+   */
    static{
       countries = new HashMap<String,Object>();
       countries.put("English", Locale.ENGLISH);
@@ -45,6 +49,10 @@ public class LocaleBackingBean implements Serializable{
       this.locale = locale;
    }
 
+   /*
+   * a value changed action which takes care of changing the local in the context 
+   * instance to the newly selected value
+   */
    public void ValueChanged(ValueChangeEvent e){
       String newLocaleValue = e.getNewValue().toString();
       for (Map.Entry<String, Object> entry : countries.entrySet()) {

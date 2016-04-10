@@ -14,8 +14,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author ofern
+ * Class which holds the title backing data and actions
+ * @author Ofer Nitka-Nakash
  */
 @Named("titleBB")
 @SessionScoped

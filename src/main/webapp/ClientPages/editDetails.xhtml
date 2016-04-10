@@ -104,12 +104,18 @@
                         <p:message for="passwordNew" style="color:red"/>
                                 </div>
                             </div>
+                        <div class="row text-center">
+                                <br/>
+                                <div class="large-12 columns">
+                                    <h:message for="" style="color:red"/>
+                                </div>
+                            </div>
                             <div class="row">
                                 <br/>
                                 <div class="large-12 columns">
                                     <p:commandButton id="primebutton" value="#{bundle.modifyButton}"
                                                      class="button expanded radius"
-                                                     action="#{AccountDetailsBB.editAccount()}" ajax="false" />
+                                                     action="#{detailsBB.saveChanges()}" ajax="false" />
                                 </div>
                             </div>
                         </div>

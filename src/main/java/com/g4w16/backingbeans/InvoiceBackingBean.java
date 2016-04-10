@@ -18,8 +18,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author ofern
+ * Class which holds all the data and actions needed by the invoices page
+ * @author Ofer Nitka-Nakash
  */
 @Named("invoiceBB")
 @SessionScoped
@@ -30,6 +30,9 @@ public class InvoiceBackingBean implements Serializable {
     private SalesJpaController salesJPAController;
     private DecimalFormat formatter = new DecimalFormat("#0.##");
     
+    /*
+    * pass back to the jsf page the formatter object for the prices
+    */
     public DecimalFormat getFormatter()
     {
         return formatter;
@@ -53,6 +56,10 @@ public class InvoiceBackingBean implements Serializable {
         return email;
     }
     
+    /*
+    * method which sends the user back to the invoice list if the invoice passed is null,
+    * meaning no invoice was passed
+    */
     public void sendToInvoicesList() throws IOException {
          if (sale == null)
          FacesContext.getCurrentInstance().getExternalContext().redirect("my-books.xhtml");
