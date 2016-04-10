@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,7 +22,7 @@ import javax.inject.Named;
  * @author Brandon Balala
  */
 @Named("pollBB")
-@RequestScoped
+@SessionScoped
 public class PollBackingBean {
     private Poll poll;
     
@@ -31,6 +32,10 @@ public class PollBackingBean {
     @Inject
     private PollJpaController pollController;
     
+    /**
+     * Get a poll at random from all selected polls
+     * @return Poll
+     */
     public Poll getPoll(){
         List<Poll> polls = pollController.findSelectedPolls();
         if(polls.isEmpty()){
@@ -46,23 +51,41 @@ public class PollBackingBean {
         return poll;
     }
     
+    /**
+     * Get choice
+     * @return choice
+     */
     public int getChoice(){
         return choice;
     }
     
+    /**
+     * Set choice
+     * @param choice 
+     */
     public void setChoice(int choice){
         this.choice = choice;
     }
     
+    /**
+     * is the result active
+     * @return resultsActive
+     */
     public boolean isResultsActive(){
         return resultsActive;
     }
     
+    /**
+     * Set whether results is active or not
+     * @param isActive 
+     */
     public void setResultsActive(boolean isActive){
         this.resultsActive = isActive;
     }
     
-    
+    /**
+     * Submit the result of the poll
+     */
     public void submitResult(){
         try {
             pollController.updatePoll(poll.getId(), choice);

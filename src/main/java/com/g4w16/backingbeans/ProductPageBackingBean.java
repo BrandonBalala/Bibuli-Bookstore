@@ -69,6 +69,10 @@ public class ProductPageBackingBean implements Serializable {
     @Inject
     private ClientUtil clientUtil;
 
+    /**
+     * Get review
+     * @return review
+     */
     public Reviews getReview() {
         if (review == null) {
             review = new Reviews();
@@ -77,14 +81,26 @@ public class ProductPageBackingBean implements Serializable {
         return review;
     }
 
+    /**
+     * Set review
+     * @param review 
+     */
     public void setReview(Reviews review) {
         this.review = review;
     }
 
+    /**
+     * Get edit
+     * @return 
+     */
     public boolean getEdit() {
         return edit;
     }
 
+    /**
+     * Get book
+     * @return 
+     */
     public Books getBook() {
         if (book == null) {
             book = new Books();
@@ -93,8 +109,13 @@ public class ProductPageBackingBean implements Serializable {
         return book;
     }
 
+    /**
+     * Set book
+     * @param book 
+     */
     public void setBook(Books book) {
         this.book = book;
+        //Set in cookie
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         String cookie = "";
         for (Genre g : book.getGenreList()) {
@@ -117,6 +138,9 @@ public class ProductPageBackingBean implements Serializable {
         }
     }
 
+    /**
+     * Create a review
+     */
     public void createReview() {
         ReviewsPK pk = new ReviewsPK();
         pk.setBook(book.getId());
@@ -144,16 +168,28 @@ public class ProductPageBackingBean implements Serializable {
         }
     }
 
+    /**
+     * Get formatted book publication date
+     * @return String
+     */
     public String getFormattedBookPubDate() {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         return dateFormat.format(book.getPubDate());
     }
 
+    /**
+     * Get formatted review creation date
+     * @return String
+     */
     public String getFormattedReviewCreationDate() {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         return dateFormat.format(review.getCreationDate());
     }
 
+    /**
+     * Calculate the average rating
+     * @return int
+     */
     public int getAverageRating() {
         if (book.getApprovedReviewsList().isEmpty()) {
             return 0;
@@ -168,6 +204,10 @@ public class ProductPageBackingBean implements Serializable {
         return sum / numBooks;
     }
 
+    /**
+     * Calculate savings percentage
+     * @return int
+     */
     public int getSavingsPercentage() {
         BigDecimal sale = book.getSalePrice();
         BigDecimal retail = book.getListPrice();
@@ -179,10 +219,18 @@ public class ProductPageBackingBean implements Serializable {
         return savingsPercentage;
     }
 
+    /**
+     * Get recommended book list
+     * @return recommendedBookList
+     */
     public List<Books> getRecommendedBookList() {
         return recommendedBookList;
     }
 
+    /**
+     * Set recommended book list
+     * @param numBooks 
+     */
     private void setRecommendedBookList(int numBooks) {
         List<Genre> genreList = book.getGenreList();
         Random randomGenerator = new Random();
@@ -201,10 +249,18 @@ public class ProductPageBackingBean implements Serializable {
         this.recommendedBookList = recommendedBooks.subList(0, numBooks);
     }
 
+    /**
+     * Get books by same contributor
+     * @return 
+     */
     public List<Books> getSameContributorsBookList() {
         return sameContributorsBookList;
     }
 
+    /**
+     * Set list of books by same contributors
+     * @param numBooks 
+     */
     public void setSameContributorsBookList(int numBooks) {
         List<Books> booksByContributors = new ArrayList<Books>();
 
@@ -228,12 +284,21 @@ public class ProductPageBackingBean implements Serializable {
         this.sameContributorsBookList = booksByContributors.subList(0, numBooks);
     }
 
+    /**
+     * Display product page for selected book
+     * @param book
+     * @return
+     * @throws IOException 
+     */
     public String displayProductPageRecommended(Books book) throws IOException {
         setBook(book);
 
         return "product-page?faces-redirect=true";
     }
 
+    /**
+     * Add book to cart while doing simple validation
+     */
     public void addBookToCart() {
         List<Books> bookList = cartBB.getBookList();
         boolean owned = false;
@@ -263,6 +328,12 @@ public class ProductPageBackingBean implements Serializable {
         }
     }
 
+    /**
+     * Display product page for selected book
+     * @param book
+     * @return
+     * @throws IOException 
+     */
     public String displayProductPageSameContrib(Books book) throws IOException {
         setBook(book);
 

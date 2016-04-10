@@ -39,6 +39,10 @@ public class MasterLayoutBackingBean implements Serializable {
     @Inject
     private ResultBackingBean resultBB;
 
+    /**
+     * Get list of all genres
+     * @return genreList
+     */
     public List<Genre> getGenreList() {
         if (genreList == null) {
             genreList = new ArrayList<Genre>();
@@ -47,10 +51,18 @@ public class MasterLayoutBackingBean implements Serializable {
         return genreList;
     }
 
+    /**
+     * Set list of genre
+     * @param genreList 
+     */
     public void setGenreList(List<Genre> genreList) {
         this.genreList = genreList;
     }
 
+    /**
+     * Get all format list
+     * @return formatList
+     */
     public List<Format> getFormatList() {
         if (formatList == null) {
             formatList = new ArrayList<Format>();
@@ -59,6 +71,10 @@ public class MasterLayoutBackingBean implements Serializable {
         return formatList;
     }
 
+    /**
+     * Set format list
+     * @param formatList 
+     */
     public void setFormatList(List<Format> formatList) {
         this.formatList = formatList;
     }
@@ -70,12 +86,21 @@ public class MasterLayoutBackingBean implements Serializable {
         formatList = formatController.findAllFormats();
     }
 
+    /**
+     * Redirect to results page, display all books
+     * @return String
+     */
     public String displayAllBooks() {
         resultBB.setBookList(bookController.findAllBooks());
 
         return "results?faces-redirect=true";
     }
 
+    /**
+     * Display results page for all books by genre
+     * @param genre
+     * @return String
+     */
     public String displayBooksByGenre(String genre) {
         resultBB.setBookList(bookController.findBooksByGenre(genre));
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -85,6 +110,11 @@ public class MasterLayoutBackingBean implements Serializable {
         return "results?faces-redirect=true";
     }
 
+    /**
+     * Display results page for all books by format
+     * @param format
+     * @return 
+     */
     public String displayBooksByFormat(String format) {
         resultBB.setBookList(bookController.findBooksByFormat(format));
 

@@ -73,22 +73,42 @@ public class CheckoutBackingBean implements Serializable {
     @Inject
     private InvoiceBackingBean invoiceBB;
 
+    /**
+     * Get choice address
+     * @return choiceAddress
+     */
     public BillingAddress getChoiceAddress() {
         return choiceAddress;
     }
 
+    /**
+     * Set choice address
+     * @param choiceAddress 
+     */
     public void setChoiceAddress(BillingAddress choiceAddress) {
         this.choiceAddress = choiceAddress;
     }
 
+    /**
+     * Get new address
+     * @return newAddress
+     */
     public BillingAddress getNewAddress() {
         return newAddress;
     }
 
+    /**
+     * Set new address
+     * @param newAddress 
+     */
     public void setNewAddress(BillingAddress newAddress) {
         this.newAddress = newAddress;
     }
 
+    /**
+     * Get client address list
+     * @return List<BillingAddress>
+     */
     public List<BillingAddress> getClientAddressList() {
 
         Client client = clientController.findClientById(clientUtil.getUserId());
@@ -170,10 +190,18 @@ public class CheckoutBackingBean implements Serializable {
         this.securityCode = securityCode;
     }
 
+    /**
+     * Get province list
+     * @return List<Province>
+     */
     public List<Province> getProvinceList() {
         return provinceController.findProvinceEntities();
     }
 
+    /**
+     * Create new billing address
+     * @throws Exception 
+     */
     public void createNewBillingAddress() throws Exception {
         newAddress.setClient(clientController.findClientById(clientUtil.getUserId()));
         newAddress.setId(clientUtil.getUserId());
@@ -183,6 +211,10 @@ public class CheckoutBackingBean implements Serializable {
         //return "payment";
     }
 
+    /**
+     * Display checkout page
+     * @return String
+     */
     public String displayCheckoutPage() {
         if (!validateAuthenticated()) {
             return "login";
@@ -191,6 +223,11 @@ public class CheckoutBackingBean implements Serializable {
         return "shipping-address";
     }
 
+    /**
+     * Proceed to the payment page
+     * @param address
+     * @return String
+     */
     public String proceedToPayment(BillingAddress address) {
         if (!validateAuthenticated()) {
             return "login";
@@ -201,6 +238,10 @@ public class CheckoutBackingBean implements Serializable {
         return "payment";
     }
 
+    /**
+     * Calculate the PST
+     * @return BigDecimal
+     */
     public BigDecimal calculatePST() {
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());
         BigDecimal subTotal = cartBB.getSubtotal();
@@ -214,6 +255,10 @@ public class CheckoutBackingBean implements Serializable {
         return pst;
     }
 
+    /**
+     * Calculate the HST
+     * @return BigDecimal
+     */
     public BigDecimal calculateHST() {
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());
         BigDecimal subTotal = cartBB.getSubtotal();
@@ -228,6 +273,10 @@ public class CheckoutBackingBean implements Serializable {
         return hst;
     }
 
+    /**
+     * Calculate the GST
+     * @return BigDecimal
+     */
     public BigDecimal calculateGST() {
         TaxeRates tax = taxeRatesController.findTaxeRates(choiceAddress.getProvince());
         BigDecimal subTotal = cartBB.getSubtotal();
@@ -242,6 +291,10 @@ public class CheckoutBackingBean implements Serializable {
         return qst;
     }
 
+    /**
+     * Calculate order total
+     * @return BigDecimal 
+     */
     public BigDecimal calculateOrderTotal() {
         BigDecimal subtotal = cartBB.getSubtotal();
         BigDecimal pst = calculatePST();
@@ -252,6 +305,11 @@ public class CheckoutBackingBean implements Serializable {
         return total;
     }
 
+    /**
+     * Place the order, redirect to right page
+     * @return
+     * @throws Exception 
+     */
     public String placeOrder() throws Exception {
         if (!validateAuthenticated()) {
             return "login";
@@ -293,19 +351,35 @@ public class CheckoutBackingBean implements Serializable {
         return displayInvoice(salesController.findSales(sale.getId()));
     }
     
+    /**
+     * Get minimum year
+     * @return int
+     */
     public int getMinYear(){
         return Calendar.getInstance().get(Calendar.YEAR);
     }
     
+    /**
+     * Get maximum year
+     * @return 
+     */
     public int getMaxYear(){
         return (Calendar.getInstance().get(Calendar.YEAR) + 5);
     }
 
+    /**
+     * Display invoice for the sale
+     * @param sale
+     * @return String
+     */
     private String displayInvoice(Sales sale) {
         invoiceBB.setSale(sale);
         return "invoice";
     }
 
+    /**
+     * Clear the credit card information
+     */
     private void clearCreditCardInfo() {
         cardNumber = "";
         nameOnCard = "";
@@ -314,14 +388,24 @@ public class CheckoutBackingBean implements Serializable {
         securityCode = "";
     }
 
+    /**
+     * Clear address information
+     */
     private void clearAddressInfo() {
         newAddress = new BillingAddress();
     }
 
+    /**
+     * Clear the cart
+     */
     private void clearCart() {
         cartBB.getBookList().clear();
     }
 
+    /**
+     * Validate that client is authenticated
+     * @return 
+     */
     private boolean validateAuthenticated() {
         try {
             if (!clientUtil.isAuthenticated()) {

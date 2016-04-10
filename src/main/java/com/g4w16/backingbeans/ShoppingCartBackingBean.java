@@ -32,6 +32,10 @@ public class ShoppingCartBackingBean implements Serializable {
     @Inject
     private ProductPageBackingBean productBB;
 
+    /**
+     * Get book list
+     * @return List<Books>
+     */
     public List<Books> getBookList() {
         if (bookList == null) {
             bookList = new ArrayList<Books>();
@@ -40,10 +44,20 @@ public class ShoppingCartBackingBean implements Serializable {
         return bookList;
     }
 
+    /**
+     * Set book list
+     * @param bookList 
+     */
     public void setBookList(List<Books> bookList) {
         this.bookList = bookList;
     }
 
+    /**
+     * Calculate savings percentage
+     * @param salePrice
+     * @param retailPrice
+     * @return int
+     */
     public int getSavingsPercentage(BigDecimal salePrice, BigDecimal retailPrice) {
         double percentageInDecimal = (salePrice.doubleValue()) / (retailPrice.doubleValue());
         double savingsInDecimal = 1 - percentageInDecimal;
@@ -52,6 +66,10 @@ public class ShoppingCartBackingBean implements Serializable {
         return savingsPercentage;
     }
 
+    /**
+     * Add book to cart
+     * @param book 
+     */
     public void addBookToCart(Books book) {
         if (bookList == null) {
             bookList = new ArrayList<Books>();
@@ -60,6 +78,11 @@ public class ShoppingCartBackingBean implements Serializable {
         bookList.add(book);
     }
 
+    /**
+     * Display product page
+     * @param book
+     * @return String
+     */
     public String displayProductPage(Books book) {
         productBB.setBook(book);
 
@@ -70,6 +93,10 @@ public class ShoppingCartBackingBean implements Serializable {
         bookList.remove(theBook);
     }
 
+    /**
+     * Calculate subtotal
+     * @return 
+     */
     public BigDecimal getSubtotal() {
         BigDecimal subtotal = BigDecimal.ZERO;
         BigDecimal temp;
@@ -83,10 +110,11 @@ public class ShoppingCartBackingBean implements Serializable {
         return subtotal.setScale(2, RoundingMode.CEILING);
     }
     
+    /**
+     * Redirect to product page
+     * @return 
+     */
     public String proceedToCheckout(){
-
-        //TODO
-        
         return "checkout";
     }
 }

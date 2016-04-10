@@ -22,14 +22,25 @@ public class MessageManagedBean implements Serializable {
 
     private String message = "";
 
+    /**
+     * Get message
+     * @return 
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Set message
+     * @param message 
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Display message
+     */
     public void displayMessage() {
         FacesContext context = FacesContext.getCurrentInstance();
 

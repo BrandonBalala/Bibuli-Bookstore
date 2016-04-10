@@ -43,24 +43,29 @@ public class PurchasedBooksBackingBean implements Serializable {
 
     @Inject
     private LoginBackingBean loginBean;
-    
+
     @Inject
     private ClientUtil clientUtil;
 
     @Inject
     private ClientJpaController clientController;
-    
+
     @Inject
     private InvoiceBackingBean invoiceBB;
 
+    /**
+     * Get purchased books
+     *
+     * @return bookList
+     */
     public List<Books> getPurchasedBooks() {
         setClient();
         List<Sales> salesList;
-        if(client != null)
-        salesList = client.getSalesList();
-        else
+        if (client != null) {
+            salesList = client.getSalesList();
+        } else {
             salesList = new ArrayList();
-            
+        }
 
         List<Books> bookList = new ArrayList<Books>();
         for (Sales sale : salesList) {
@@ -72,70 +77,75 @@ public class PurchasedBooksBackingBean implements Serializable {
         return bookList;
     }
 
+    /**
+     * Get sales list
+     *
+     * @return List<Sales>
+     */
     public List<Sales> getSalesList() {
-        if(client != null)
-        return client.getSalesList();
-        else
-            return  new ArrayList();
+        if (client != null) {
+            return client.getSalesList();
+        } else {
+            return new ArrayList();
+        }
     }
 
+    /**
+     * Get formatted dates
+     *
+     * @param date
+     * @return String
+     */
     public String getFormattedDate(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         return dateFormat.format(date);
     }
-    
-    public String displayInvoice(Sales sale){
+
+    /**
+     * Display invoice for particular book
+     *
+     * @param sale
+     * @return String
+     */
+    public String displayInvoice(Sales sale) {
         invoiceBB.setSale(sale);
         return "invoice";
     }
 
-//    private boolean validateAuthenticated() {
-//        try {
-//            if (!clientUtil.isAuthenticated()) {
-//                return false;
-//            }
-//
-//            int clientID = clientUtil.getUserId();
-//            Client client = clientController.findClientById(clientID);
-//
-//            if (client == null) {
-//                return false;
-//            }
-//        } catch (Exception e) {
-//            return false;
-//        }
-//
-//        return true;
-//    }
-    public void setClient()
-    {
+    /**
+     * Set client
+     */
+    public void setClient() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        if(client == null && session.getAttribute("authenticated") != null){
-        int clientID = clientUtil.getUserId();
+        if (client == null && session.getAttribute("authenticated") != null) {
+            int clientID = clientUtil.getUserId();
 
-        client = clientController.findClientById(clientID);
+            client = clientController.findClientById(clientID);
         }
     }
-     
- 
-    public void downloadBook(String book) throws IOException {
-       InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/WEB-INF/books/"+book);
-       byte[] buf = new byte[stream.available()];
-      int offset = 0;
-      int numRead = 0;
-      while ((offset < buf.length) && ((numRead = stream.read(buf, offset, buf.length -offset)) >= 0)) 
-      {
-        offset += numRead;
-      }
-      stream.close();
-      HttpServletResponse response =
-         (HttpServletResponse) FacesContext.getCurrentInstance()
-        .getExternalContext().getResponse();
 
-     response.setHeader("Content-Disposition", "attachment;filename="+book);
-     response.getOutputStream().write(buf);
-     response.getOutputStream().flush();
-     response.getOutputStream().close();
-     FacesContext.getCurrentInstance().responseComplete();
+    /**
+     * Method in charge of downloading a book
+     * @param book
+     * @throws IOException
+     */
+    public void downloadBook(String book) throws IOException {
+        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/WEB-INF/books/" + book);
+        byte[] buf = new byte[stream.available()];
+        int offset = 0;
+        int numRead = 0;
+        while ((offset < buf.length) && ((numRead = stream.read(buf, offset, buf.length - offset)) >= 0)) {
+            offset += numRead;
+        }
+        stream.close();
+        HttpServletResponse response
+                = (HttpServletResponse) FacesContext.getCurrentInstance()
+                .getExternalContext().getResponse();
+
+        response.setHeader("Content-Disposition", "attachment;filename=" + book);
+        response.getOutputStream().write(buf);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+        FacesContext.getCurrentInstance().responseComplete();
     }
 }

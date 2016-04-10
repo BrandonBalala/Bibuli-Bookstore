@@ -42,6 +42,10 @@ public class ResultBackingBean implements Serializable {
         bookList = bookController.findBooksByYear(2011);
     }
 
+    /**
+     * Get book list
+     * @return List<Books>
+     */
     public List<Books> getBookList() {
         if (bookList == null) {
             bookList = new ArrayList<Books>();
@@ -50,11 +54,19 @@ public class ResultBackingBean implements Serializable {
         return bookList;
     }
 
+    /**
+     * Set book list
+     * @param bookList 
+     */
     public void setBookList(List<Books> bookList) {
         this.bookList = bookList;
         sortBy = "";
     }
 
+    /**
+     * Set a book
+     * @param book 
+     */
     public void setBook(Books book) {
         if (bookList == null) {
             bookList = new ArrayList<Books>();
@@ -63,14 +75,27 @@ public class ResultBackingBean implements Serializable {
         bookList.add(book);
     }
 
+    /**
+     * Get sort by
+     * @return 
+     */
     public String getSortBy() {
         return sortBy;
     }
 
+    /**
+     * Set sort by
+     * @param sortBy 
+     */
     public void setSortBy(String sortBy) {
         this.sortBy = sortBy;
     }
 
+    /**
+     * Return shortened title
+     * @param title
+     * @return String
+     */
     public String getShortTitle(String title) {
         int length = 30;
 
@@ -81,12 +106,20 @@ public class ResultBackingBean implements Serializable {
         return title.substring(0, 26) + "...";
     }
 
+    /**
+     * Display product page
+     * @param book
+     * @return String
+     */
     public String displayProductPage(Books book) {
         productBB.setBook(book);
 
         return "product-page";
     }
 
+    /**
+     * Sort the books by what is chosen by client
+     */
     public void sortBooks() {
         switch (sortBy) {
             case "cheapestFirst":
@@ -135,6 +168,11 @@ public class ResultBackingBean implements Serializable {
         }
     }
 
+    /**
+     * Calculate average rating based on the reviews for the book
+     * @param reviewList
+     * @return 
+     */
     private double getAverageRating(List<Reviews> reviewList) {
         if (reviewList.isEmpty()) {
             return 0.0;

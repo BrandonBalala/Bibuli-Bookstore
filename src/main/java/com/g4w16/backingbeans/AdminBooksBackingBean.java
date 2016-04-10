@@ -43,7 +43,7 @@ import org.primefaces.event.RowEditEvent;
  *
  * @author Dan Wang, Brandon Balala
  */
-@Named("booksBB") 
+@Named("booksBB")
 @SessionScoped
 public class AdminBooksBackingBean implements Serializable {
 
@@ -53,13 +53,6 @@ public class AdminBooksBackingBean implements Serializable {
     private Books selectedBook;
     private List<BookFormats> allBookFormats;
 
-    public List<BookFormats> getAllBookFormats() {
-        return allBookFormats;
-    }
-
-    public void setAllBookFormats(List<BookFormats> allBookFormats) {
-        this.allBookFormats = allBookFormats;
-    }
     private List<String> status;
     private List<Format> allFormats;
     private List<ContributionType> allContributionType;
@@ -67,57 +60,6 @@ public class AdminBooksBackingBean implements Serializable {
     private List<Contributor> allAuthors;
     private List<IdentifierType> allIdentifierTypes;
     private List<BookIdentifiers> allBookIdentifiers;
-
-    public List<BookIdentifiers> getAllBookIdentifiers() {
-        return allBookIdentifiers;
-    }
-
-    public void setAllBookIdentifiers(List<BookIdentifiers> allBookIdentifiers) {
-        this.allBookIdentifiers = allBookIdentifiers;
-    }
-
-    private String isbn;
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    @Inject
-    BooksJpaController booksJpaController;
-
-    @Inject
-    GenreJpaController genreJpaController;
-
-    @Inject
-    FormatJpaController formatJpaController;
-
-    @Inject
-    ContributionTypeJpaController contributionTypeJpaController;
-
-    @Inject
-    ContributorJpaController contributorJpaController;
-
-    @Inject
-    IdentifierTypeJpaController identifierTypeJpaController;
-
-    @Inject
-    ReviewsJpaController reviewsJpaController;
-
-    @Inject
-    SalesDetailsJpaController salesDetailsJpaController;
-
-    @Inject
-    BookIdentifiersJpaController bookIdentifiersJpaController;
-
-    @Inject
-    BookFormatsJpaController bookFormatsJpaController;
-
-    @Inject
-    private SalesJpaController salesController;
 
     private Books newBook;
 
@@ -134,6 +76,36 @@ public class AdminBooksBackingBean implements Serializable {
     private List<Contributor> newContributorList;
     private String newContributionType;
     private String newContributorName;
+    
+    private String isbn;
+
+    @Inject
+    private BooksJpaController booksJpaController;
+
+    @Inject
+    private GenreJpaController genreJpaController;
+
+    @Inject
+    private FormatJpaController formatJpaController;
+
+    @Inject
+    private ContributionTypeJpaController contributionTypeJpaController;
+
+    @Inject
+    private ContributorJpaController contributorJpaController;
+
+    @Inject
+    private IdentifierTypeJpaController identifierTypeJpaController;
+
+    @Inject
+    private BookIdentifiersJpaController bookIdentifiersJpaController;
+
+    @Inject
+    private BookFormatsJpaController bookFormatsJpaController;
+
+    @Inject
+    private SalesJpaController salesController;
+    
 
     /**
      * For Inventory page
@@ -156,49 +128,140 @@ public class AdminBooksBackingBean implements Serializable {
     }
 
     /**
-     * ****************All books**********************
+     * get all book identifiers
+     * @return List<BookIdentifiers>
+     */
+    public List<BookIdentifiers> getAllBookIdentifiers() {
+        return allBookIdentifiers;
+    }
+
+    /**
+     * Set all book identifiers
+     * @param allBookIdentifiers 
+     */
+    public void setAllBookIdentifiers(List<BookIdentifiers> allBookIdentifiers) {
+        this.allBookIdentifiers = allBookIdentifiers;
+    }
+
+    /**
+     * get isbn
+     * @return isbn
+     */
+    public String getIsbn() {
+        return isbn;
+    }
+
+    /**
+     * set isbn
+     * @param isbn 
+     */
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    /**
+     * get all book formats
+     * @return allBookFormats
+     */
+    public List<BookFormats> getAllBookFormats() {
+        return allBookFormats;
+    }
+
+    /**
+     * set all book formats
+     * @param allBookFormats 
+     */
+    public void setAllBookFormats(List<BookFormats> allBookFormats) {
+        this.allBookFormats = allBookFormats;
+    }
+
+    /**
+     * Get all books
+     * @return books
      */
     public List<Books> getBooks() {
         return books;
     }
 
+    /**
+     * Get sale books
+     * @return saleBooks
+     */
     public List<Books> getSaleBooks() {
         return saleBooks;
     }
 
+    /**
+     * Get total sales
+     * @param bookId
+     * @return total sales
+     */
     public BigDecimal getTotalSales(Integer bookId) {
         return salesController.getTotalSalesForBook(bookId);
     }
 
+    /**
+     * Get sales count
+     * @return sales count
+     */
     public int getSalesCount() {
         return saleBooks.size();
     }
 
+    /**
+     * Get books count
+     * @return books count
+     */
     public int getBooksCount() {
         return booksJpaController.getBooksCount();
     }
 
+    /**
+     * Get list of status
+     * @return status
+     */
     public List<String> getStatus() {
         status = new ArrayList<>(Arrays.asList("TRUE", "FALSE"));
         return status;
     }
 
+    /**
+     * Get filtered books
+     * @return filteredBooks
+     */
     public List<Books> getFilteredBooks() {
         return filteredBooks;
     }
 
+    /**
+     * set filtered clients
+     * @param filteredBooks 
+     */
     public void setFilteredClients(List<Books> filteredBooks) {
         this.filteredBooks = filteredBooks;
     }
 
+    /**
+     * get selected book
+     * @return selecctedBook
+     */
     public Books getSelectedBook() {
         return selectedBook;
     }
 
+    /**
+     * set selected book
+     * @param selectedBook 
+     */
     public void setSelectedBook(Books selectedBook) {
         this.selectedBook = selectedBook;
     }
 
+    /**
+     * Display book details, modification
+     * @param book
+     * @return String
+     */
     public String showDetail(Books book) {
         selectedBook = booksJpaController.findBookByID(book.getId());
 
@@ -208,26 +271,21 @@ public class AdminBooksBackingBean implements Serializable {
             newGenres.add(genres.getType());
         }
 
-//        for (BookFormats formats : selectedBook.getBookFormatsList()) {
-//            newBookFormatList.add(formats);
-//        }
         newBookFormatList = selectedBook.getBookFormatsList();
 
-//        for (BookIdentifiers identifiers : selectedBook.getBookIdentifiersList()) {
-//            newBookIdentifierList.add(identifiers);
-//        }
         newBookIdentifierList = selectedBook.getBookIdentifiersList();
 
-//        for (Contributor contributors : selectedBook.getContributorList()) {
-//            newContributorList.add(contributors);
-//        }
         newContributorList = selectedBook.getContributorList();
 
         return "admin_edit_book?faces-redirect=true";
     }
 
+    /**
+     * Update books in the database
+     * @return String
+     * @throws Exception 
+     */
     public String updateBook() throws Exception {
-        System.out.println(">>>>>>>>>>>>.update");
         Books originalBook = booksJpaController.findBookByID(selectedBook.getId());
 
         List<Contributor> oldContributorList = originalBook.getContributorList();
@@ -238,6 +296,7 @@ public class AdminBooksBackingBean implements Serializable {
         List<BookFormats> newFormatList = new ArrayList<BookFormats>();
         List<BookIdentifiers> newIdentifierList = new ArrayList<BookIdentifiers>();
         List<Genre> newGenreList = new ArrayList<Genre>();
+        
         for (String genre : newGenres) {
             newGenreList.add(new Genre(genre));
         }
@@ -272,8 +331,6 @@ public class AdminBooksBackingBean implements Serializable {
             newContribList.add(contributor);
         }
 
-/////////////////////////////////////////////////////
-//        try {
         //Delete old contributors
         for (Contributor contributor : oldContributorList) {
             if (!newContribList.contains(contributor)) {
@@ -335,45 +392,73 @@ public class AdminBooksBackingBean implements Serializable {
         return "admin_books?faces-redirect=true";
     }
 
+    /**
+     * Initialize everything and return back to book page
+     * @return 
+     */
     public String cancel() {
         initializeNew();
         return "admin_books?faces-redirect=true";
     }
-
+    
     /**
-     * ****************Edit a Book*********************
+     * get all contribution types
+     * @return allContributionType
      */
     public List<ContributionType> getAllContributionType() {
         return allContributionType;
     }
 
+    /**
+     * get all formats
+     * @return allFormats
+     */
     public List<Format> getAllFormats() {
         return allFormats;
     }
 
+    /**
+     * get all genre
+     * @return allGenre
+     */
     public List<Genre> getAllGenre() {
         return allGenre;
     }
 
+    /**
+     * get all authors
+     * @return allAuthors
+     */
     public List<Contributor> getAllAuthors() {
         return allAuthors;
     }
 
+    /**
+     * get all identifier types
+     * @return allIdentifierTypes
+     */
     public List<IdentifierType> getAllIdentifierTypes() {
         return allIdentifierTypes;
     }
 
+    /**
+     * Edit row in the table
+     * @param event
+     * @throws NonexistentEntityException
+     * @throws RollbackFailureException
+     * @throws Exception 
+     */
     public void onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         Books book = (Books) event.getObject();
         booksJpaController.edit(book);
     }
 
-    public void onRowCancel(RowEditEvent event) {
-    }
+    public void onRowCancel(RowEditEvent event) {}
 
     /**
      * ****************Create a book******************
      */
+    
     /**
      * @return the newBook
      */
@@ -528,15 +613,21 @@ public class AdminBooksBackingBean implements Serializable {
         this.newContributorName = newContributorName;
     }
 
+    /**
+     * Show create book page
+     * @return String
+     */
     public String showCreatePage() {
         initializeNew();
         return "admin_create_book?faces-redirect=true";
     }
 
+    /**
+     * Create book in the database
+     * @return String
+     * @throws Exception 
+     */
     public String createBook() throws Exception {
-        System.out.println("IN CREATE BOOK");
-        System.out.println("THE GENRES");
-
         List<Genre> genreList = new ArrayList<Genre>();
         for (String genre : newGenres) {
             genreList.add(new Genre(genre));
@@ -585,6 +676,9 @@ public class AdminBooksBackingBean implements Serializable {
         return "admin_books?faces-redirect=true";
     }
 
+    /**
+     * Create new book format
+     */
     public void createBookFormat() {
         System.out.println("In create book format");
 
@@ -617,6 +711,9 @@ public class AdminBooksBackingBean implements Serializable {
         clearFormatFields();
     }
 
+    /**
+     * Create new book identifier
+     */
     public void createBookIdentifier() {
         System.out.println("In create book format");
 
@@ -649,6 +746,9 @@ public class AdminBooksBackingBean implements Serializable {
         clearIdentifierFields();
     }
 
+    /**
+     * Create new contributor
+     */
     public void createContributor() {
         System.out.println("In create contributor");
 
@@ -681,6 +781,9 @@ public class AdminBooksBackingBean implements Serializable {
         clearContributorFields();
     }
 
+    /**
+     * Initialize all variables
+     */
     public void initializeNew() {
         newBook = new Books();
 
@@ -694,37 +797,65 @@ public class AdminBooksBackingBean implements Serializable {
         clearContributorFields();
     }
 
+    /**
+     * Update the book list
+     */
     private void updateBooks() {
         books = booksJpaController.findAllBooks();
     }
 
+    /**
+     * Clear format fields
+     */
     private void clearFormatFields() {
         newFormat = "";
         newFile = "";
     }
 
+    /**
+     * Clear identifier fields
+     */
     private void clearIdentifierFields() {
         newIdentifierType = "";
         newCode = "";
     }
 
+    /**
+     * Clear contributor fields
+     */
     private void clearContributorFields() {
         newContributionType = "";
         newContributorName = "";
     }
 
+    /**
+     * Remove contributor from list
+     * @param theContributor 
+     */
     public void removeContributor(Contributor theContributor) {
         newContributorList.remove(theContributor);
     }
 
+    /**
+     * Remove book identifiers from list
+     * @param bookIdentifiers 
+     */
     public void removeBookIdentifier(BookIdentifiers bookIdentifiers) {
         newBookIdentifierList.remove(bookIdentifiers);
     }
 
+    /**
+     * Remove book format from list
+     * @param bookFormat 
+     */
     public void removeBookFormat(BookFormats bookFormat) {
         newBookFormatList.remove(bookFormat);
     }
 
+    /**
+     * Remove genre from list
+     * @param genre 
+     */
     public void removeGenre(String genre) {
         newGenres.remove(genre);
     }
