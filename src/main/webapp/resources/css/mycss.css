@@ -435,11 +435,11 @@ body{
 }
 
 .stickyHelp{
-	max-width: 100% !important;
+    max-width: 100% !important;
     width:100% !important;
-	top: 0px !important;
-	bottom: auto !important;
-	position: fixed !important;
+    top: 0px !important;
+    bottom: auto !important;
+    position: fixed !important;
     z-index: 55 !important;
 }
 

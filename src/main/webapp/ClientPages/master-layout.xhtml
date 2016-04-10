@@ -86,7 +86,8 @@
                             <ul class="dropdown menu" data-dropdown-menu="">
                                 <li>
                                     <a href="#" class="whiteFont anchorFontSize"><i class="fi-torso-business"></i></a>
-                                    <ul class="menu vertical whiteFont blackBackgroundColor" >
+                                    <ul class="menu vertical whiteFont blackBackgroundColor" 
+                                        style="top: 100% !important;left: auto !important;right: 0 !important;" >
                                         <h:panelGroup rendered="#{!session.getAttribute('authenticated')}">
                                             <li><h:link class="whiteFont blackBackgroundColor" value="#{bundle.login}" outcome="login"/></li>
                                             <li><h:link class="whiteFont blackBackgroundColor" value="#{bundle.register}" outcome="register" /></li>
