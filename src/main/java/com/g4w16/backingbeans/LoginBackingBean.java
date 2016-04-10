@@ -63,7 +63,6 @@ public class LoginBackingBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-
     }
 
     /**
@@ -88,6 +87,7 @@ public class LoginBackingBean implements Serializable {
         }
         // Store the outcome in the session object
         session.setAttribute("authenticated", authenticated);
+
 
         //removeOwnedBooksFromCart();
         if(!authenticated){
