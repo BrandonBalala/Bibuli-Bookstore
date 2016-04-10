@@ -62,9 +62,15 @@
                                                      action="#{loginBB.login}" ajax="false" />
                                 </div>
                             </div>
+                             <div class="row text-center">
+                                <br/>
+                                <div class="large-12 columns">
+                                    <h:message for="" style="color:red"/>
+                                </div>
+                            </div>
                             <div class="row text-right">
                                 <div class="large-12 columns">
-                                    <h:link value="Register" outcome="register" />
+                                    <h:link value="#{bundle.register}" outcome="register" />
                                 </div>
                             </div>
                         </h:form>

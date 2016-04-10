@@ -17,6 +17,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -82,26 +83,23 @@ public class LoginBackingBean implements Serializable {
         // There is a client so login was successful
         if (client != null) {
             authenticated = true;
-//            message = MessageUtil.getMessage(
-//                    "messages", "welcome", new Object[]{email});
-//            message.setSeverity(FacesMessage.SEVERITY_INFO);
             session.setAttribute("client", client.getId());
-        } 
-//        else {
-//            // MessagesUtil simplifies creating localized messages
-//            message = MessageUtil.getMessage(
-//                    "messages", "loginerror", new Object[]{email});
-//            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-//        }
+        }
         // Store the outcome in the session object
         session.setAttribute("authenticated", authenticated);
 
-        // Place the message in the context so that it will be displayed
-//        FacesContext.getCurrentInstance().addMessage(null, message);
 
         //removeOwnedBooksFromCart();
-
+        if(!authenticated){
+            FacesMessage msg = new FacesMessage("Login failed.", 
+						"Invalid Credential.");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                       FacesContext.getCurrentInstance().addMessage(null,msg);
+        }
+        else{
         return "mainPage?faces-redirect=true";
+        }
+        return null;
     }
 
     public void sendToLogin() throws IOException {

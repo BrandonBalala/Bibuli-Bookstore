@@ -21,26 +21,26 @@
                 <f:event type="preRenderView" listener="#{purchasedBooksBB.setClient()}" />
                 <div class="row">
                     <div class="large-12 columns text-center">
-                        <h3 class="bibuliFont">Purchases</h3>
+                        <h3 class="bibuliFont">#{bundle.mybookPurchases}</h3>
                     </div>
                 </div>
 
                 <div class="column row">
                     <ul class="tabs" data-tabs="" id="example-tabs">
-                        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">My Books</a></li>
-                        <li class="tabs-title"><a href="#panel2">My Invoices</a></li>
+                        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">#{bundle.myBooks}</a></li>
+                        <li class="tabs-title"><a href="#panel2">#{bundle.myInvoice}</a></li>
                     </ul>
                     <div class="tabs-content" data-tabs-content="example-tabs">
                         <div class="tabs-panel is-active" id="panel1">
                             <c:if test="#{purchasedBooksBB.purchasedBooks.size() eq 0}">
                                 <div class="row text-center">
                                     <div class="large-12 columns">
-                                        <h4>No books owned, get shopping!</h4>
+                                        <h4>#{bundle.noBooksOwned}</h4>
                                     </div>
                                 </div>
                             </c:if>
                             <c:if test="#{purchasedBooksBB.purchasedBooks.size() ne 0}">
-                                <h4><h:outputText value="#{purchasedBooksBB.purchasedBooks.size()} books owned"/></h4>
+                                <h4><h:outputText value="#{purchasedBooksBB.purchasedBooks.size()} #{bundle.booksOwned}"/></h4>
                                 <div class="row small-up-1 medium-up-2 large-up-4">
                                     <ui:repeat value="#{purchasedBooksBB.purchasedBooks}" var="theBook">
                                         <div class="column">
@@ -69,21 +69,21 @@
                             <c:if test="#{empty purchasedBooksBB.salesList}">
                                 <div class="row text-center">
                                     <div class="large-12 columns">
-                                        <h4>No purchase History</h4>
+                                        <h4>#{bundle.noPurchaseHistory}</h4>
                                     </div>
                                 </div>
                             </c:if>
                             <c:if test="#{not empty purchasedBooksBB.salesList}">
-                                <h4>Purchase History</h4>
+                                <h4>#{bundle.purchaseHistory}</h4>
                                 <div class="row">
                                     <div class="large-12 columns">
                                         <table class="noborder">
                                             <thead>
                                                 <tr>
-                                                    <th>Invoice #</th>
-                                                    <th>Purchase Date</th>
-                                                    <th>Total Spent</th>
-                                                    <th>Action</th>
+                                                    <th>#{bundle.invoiceNum}</th>
+                                                    <th>#{bundle.purchaseDate}</th>
+                                                    <th>#{bundle.totalSpent}</th>
+                                                    <th>#{bundle.mybookAction}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -93,8 +93,8 @@
                                                         <td><h:outputText value="#{purchasedBooksBB.getFormattedDate(theSale.dateEntered)}"/></td>
                                                         <td><h:outputText value="#{theSale.grossValue}$"/></td>
                                                         <h:form>
-                                                            <td><h:commandLink type="submit" class="button" action="#{purchasedBooksBB.displayInvoice(theSale)}" value="Complete Invoice"/><h:form>
-                                                                    <h:commandLink type="submit" class="button" value="Send" action="#{invoiceBB.sendInvoice(theSale)}" />
+                                                            <td><h:commandLink type="submit" class="button" action="#{purchasedBooksBB.displayInvoice(theSale)}" value="#{bundle.mybookComplete}"/><h:form>
+                                                                   
                 </h:form></td>             
                                                         </h:form>
                                                     </tr>

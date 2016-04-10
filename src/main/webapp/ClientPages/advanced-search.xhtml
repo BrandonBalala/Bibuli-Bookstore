@@ -26,32 +26,32 @@
                 <h:form>
                     <div class="row">
                         <div class="large-3 columns text-left">
-                            <h:outputText value="What are you looking for:"/>
+                            <h:outputText value="#{bundle.searchingFor}"/>
                         </div>
                         <div class="large-9 columns">
-                            <h:inputText value="#{searchBean.keywords}" a:placeholder="Write anything..."/>
+                            <h:inputText value="#{searchBean.keywords}" a:placeholder="#{bundle.searchPlaceholder}"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="large-3 columns text-left">
-                            <h:outputText value="Search by:"/>
+                            <h:outputText value="#{bundle.searchBy}"/>
                         </div>
                         <div class="large-9 columns">
                             <h:selectOneMenu value="#{searchBean.searchBy}" >
-                                <f:selectItem itemValue="all" itemLabel="All"/>
-                                <f:selectItem itemValue="title" itemLabel="Title"/>
-                                <f:selectItem itemValue="identifier" itemLabel="Identifier Code"/>
-                                <f:selectItem itemValue="contributor" itemLabel="Contributor"/>
-                                <f:selectItem itemValue="publisher" itemLabel="Publisher"/>
-                                <f:selectItem itemValue="year" itemLabel="Publication Year"/>
-                                <f:selectItem itemValue="genre" itemLabel="Genre"/>
-                                <f:selectItem itemValue="format" itemLabel="Format"/>
+                                <f:selectItem itemValue="all" itemLabel="#{bundle.searchAll}"/>
+                                <f:selectItem itemValue="title" itemLabel="#{bundle.searchTitle}"/>
+                                <f:selectItem itemValue="identifier" itemLabel="#{bundle.searchIdentifier}"/>
+                                <f:selectItem itemValue="contributor" itemLabel="#{bundle.searchContributor}"/>
+                                <f:selectItem itemValue="publisher" itemLabel="#{bundle.searchPublisher}"/>
+                                <f:selectItem itemValue="year" itemLabel="#{bundle.searchPublicationYear}"/>
+                                <f:selectItem itemValue="genre" itemLabel="#{bundle.searchGenre}"/>
+                                <f:selectItem itemValue="format" itemLabel="#{bundle.searchFormat}"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
                     <div class="row">
                         <div class="large-12 columns text-right">
-                            <h:commandLink class="button expanded hollow step fi-magnifying-glass size-12" value=" Advanced Search" action="#{searchBean.advancedSearchBooks()}"/>
+                            <h:commandLink class="button expanded hollow step fi-magnifying-glass size-12" value="#{bundle.search}" action="#{searchBean.advancedSearchBooks()}"/>
                         </div>
                     </div>
                 </h:form>
