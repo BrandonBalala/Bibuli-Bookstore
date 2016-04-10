@@ -1,0 +1,1 @@
+We have still not mamaged to fix the uploading issue where the bound variable to the uploaded element is null.
