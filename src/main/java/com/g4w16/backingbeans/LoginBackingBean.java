@@ -62,7 +62,6 @@ public class LoginBackingBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-
     }
 
     /**
@@ -83,21 +82,22 @@ public class LoginBackingBean implements Serializable {
         // There is a client so login was successful
         if (client != null) {
             authenticated = true;
-            message = MessageUtil.getMessage(
-                    "messages", "welcome", new Object[]{email});
-            message.setSeverity(FacesMessage.SEVERITY_INFO);
+//            message = MessageUtil.getMessage(
+//                    "messages", "welcome", new Object[]{email});
+//            message.setSeverity(FacesMessage.SEVERITY_INFO);
             session.setAttribute("client", client.getId());
-        } else {
-            // MessagesUtil simplifies creating localized messages
-            message = MessageUtil.getMessage(
-                    "messages", "loginerror", new Object[]{email});
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-        }
+        } 
+//        else {
+//            // MessagesUtil simplifies creating localized messages
+//            message = MessageUtil.getMessage(
+//                    "messages", "loginerror", new Object[]{email});
+//            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+//        }
         // Store the outcome in the session object
         session.setAttribute("authenticated", authenticated);
 
         // Place the message in the context so that it will be displayed
-        FacesContext.getCurrentInstance().addMessage(null, message);
+//        FacesContext.getCurrentInstance().addMessage(null, message);
 
         //removeOwnedBooksFromCart();
 

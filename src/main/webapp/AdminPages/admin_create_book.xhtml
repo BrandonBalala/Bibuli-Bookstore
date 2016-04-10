@@ -29,66 +29,107 @@
                     <h:form id="theForm">
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Title</b></div>
-                            <div class="col-md-4"><p:inputText id="title" value="#{booksBB.newBook.title}"/></div>
-                            <div class="col-md-4"><h:message for="title" errorStyle="color:red; display:block"/></div>
+                            <div class="col-md-4">
+                                <p:inputText id="title" value="#{booksBB.newBook.title}" required="true" requiredMessage="Title is required">
+                                    <f:validateLength maximum="128"/>
+                                    <f:ajax event="blur" render="titleErr"/>
+                                </p:inputText>
+                            </div>
+                            <div class="col-md-4"><h:message for="title" id="titleErr" errorStyle="color:red; display:block"/></div>
                         </div>
                         <br/>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Publisher</b></div>
-                            <div class="col-md-4"><p:inputText id="publisher" value="#{booksBB.newBook.publisher}"/></div>
-                            <div class="col-md-4"><h:message for="publisher" errorStyle="color:red; display:block"/></div>
+                            <div class="col-md-4">
+                                <p:inputText id="publisher" value="#{booksBB.newBook.publisher}" required="true" requiredMessage="Publisher is required">
+                                    <f:validateLength maximum="128"/>
+                                    <f:ajax event="blur" render="publisherErr"/>
+                                </p:inputText>
+                            </div>
+                            <div class="col-md-4">
+                                <h:message for="publisher" id="publisherErr" errorStyle="color:red; display:block"/>
+                            </div>
                         </div>
                         <br/>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Description</b></div>
-                            <div class="col-md-4"><p:inputTextarea id="description" value="#{booksBB.newBook.description}"/></div>
-                            <div class="col-md-4"><h:message for="description" errorStyle="color:red; display:block"/></div>
+                            <div class="col-md-4">
+                                <p:inputTextarea id="description" value="#{booksBB.newBook.description}" required="true" requiredMessage="Description is required">
+                                    <f:ajax event="blur" render="descriptionErr"/>
+                                </p:inputTextarea>
+                            </div>
+                            <div class="col-md-4">
+                                <h:message for="description" id="descriptionErr" errorStyle="color:red; display:block"/>
+                            </div>
                         </div>
                         <br/>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Publication Date</b></div>
                             <div class="col-md-4">
-                                <p:calendar id="publish_date" value="#{booksBB.newBook.pubDate}"/>
+                                <p:calendar id="publish_date" value="#{booksBB.newBook.pubDate}" required="true" requiredMessage="Publication date is required">
+                                    <f:ajax event="blur" render="pubDateErr"/>
+                                </p:calendar>
                             </div>
-                            <div class="col-md-4"><h:message for="publish_date" errorStyle="color:red; display:block"/></div>
+                            <div class="col-md-4">
+                                <h:message for="publish_date" id="pubDateErr" errorStyle="color:red; display:block"/>
+                            </div>
                         </div>
                         <br/>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Number of Page</b></div>
                             <div class="col-md-4">
-                                <p:inputText id="page_number" value="#{booksBB.newBook.pages}">
-                                    <f:convertNumber />
+                                <p:inputText id="page_number" value="#{booksBB.newBook.pages}" required="true" requiredMessage="Number of pages is required">
+                                    <f:convertNumber integerOnly="true"/>
+                                    <f:validateLength minimum="1" maximum="11"/>
+                                    <f:ajax event="blur" render="numPagesErr"/>
                                 </p:inputText>
                             </div>
-                            <div class="col-md-4"><h:message for="page_number" errorStyle="color:red; display:block"/></div>
+                            <div class="col-md-4">
+                                <h:message for="page_number" id="numPagesErr" errorStyle="color:red; display:block"/>
+                            </div>
                         </div>
                         <br/>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Wholesale Price</b></div>
                             <div class="col-md-4">
-                                <p:inputText id="wholesale_price" value="#{booksBB.newBook.wholesalePrice}">
-                                    <f:converter converterId="javax.faces.BigDecimal"/>
+                                <p:inputText id="wholesale_price" value="#{booksBB.newBook.wholesalePrice}" required="true" requiredMessage="Wholesale price is required">
+                                    <f:convertNumber maxFractionDigits="2"/>
+                                    <f:validateLongRange minimum="0"/>
+                                    <f:validateLength minimum="1" maximum="12"/>
+                                    <f:ajax event="blur" render="wholesaleErr"/>
                                 </p:inputText>
                             </div>
-                            <div class="col-md-4"><h:message for="wholesale_price" errorStyle="color:red; display:block"/></div>
+                            <div class="col-md-4">
+                                <h:message for="wholesale_price" id="wholesaleErr" errorStyle="color:red; display:block"/>
+                            </div>
                         </div>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>List Price</b></div>
                             <div class="col-md-4">
-                                <p:inputText id="list_price" value="#{booksBB.newBook.listPrice}">
-                                    <f:converter converterId="javax.faces.BigDecimal"/>
+                                <p:inputText id="list_price" value="#{booksBB.newBook.listPrice}" required="true" requiredMessage="List price is required">
+                                    <f:convertNumber maxFractionDigits="2"/>
+                                    <f:validateLongRange minimum="0"/>
+                                    <f:validateLength minimum="1" maximum="12"/>
+                                    <f:ajax event="blur" render="listErr"/>
                                 </p:inputText>
                             </div>
-                            <div class="col-md-4"><h:message for="list_price" errorStyle="color:red; display:block"/></div>
+                            <div class="col-md-4">
+                                <h:message for="list_price" id="listErr" errorStyle="color:red; display:block"/>
+                            </div>
                         </div>
                         <div class="row row-centered">
                             <div class="col-md-4"><b>Sale Price</b></div>
                             <div class="col-md-4">
-                                <p:inputText id="sale_price" value="#{booksBB.newBook.salePrice}">
-                                    <f:converter converterId="javax.faces.BigDecimal"/>
+                                <p:inputText id="sale_price" value="#{booksBB.newBook.salePrice}" required="true" requiredMessage="Sale price is required">
+                                    <f:convertNumber maxFractionDigits="2"/>
+                                    <f:validateLongRange minimum="0"/>
+                                    <f:validateLength minimum="1" maximum="12"/>
+                                    <f:ajax event="blur" render="saleErr"/>
                                 </p:inputText>
                             </div>
-                            <div class="col-md-4"><h:message for="sale_price" errorStyle="color:red; display:block"/></div>
+                            <div class="col-md-4">
+                                <h:message for="sale_price" id="saleErr" errorStyle="color:red; display:block"/>
+                            </div>
                         </div>
                         <br/>
                         <div class="row row-centered">

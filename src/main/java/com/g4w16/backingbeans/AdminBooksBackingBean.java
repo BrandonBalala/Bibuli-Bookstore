@@ -532,6 +532,7 @@ public class AdminBooksBackingBean implements Serializable {
     }
 
     public String showCreatePage() {
+        initializeNew();
         return "admin_create_book?faces-redirect=true";
     }
 
