@@ -7,6 +7,7 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.Poll;
 import com.g4w16.persistence.PollJpaController;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -23,7 +24,7 @@ import javax.inject.Named;
  */
 @Named("pollBB")
 @SessionScoped
-public class PollBackingBean {
+public class PollBackingBean implements Serializable{
     private Poll poll;
     
     private int choice;
