@@ -10,10 +10,9 @@
 
 	<application>
 
-		<locale-config>
-            <default-locale>en_CA</default-locale>
-            <supported-locale>en_CA</supported-locale>
-			<supported-locale>fr_CA</supported-locale>
+	<locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>fr</supported-locale>
         </locale-config>
 
         <resource-bundle>

@@ -30,7 +30,7 @@ import org.primefaces.model.StreamedContent;
 
 /**
  *
- * @author Brandon Balala
+ * @author Brandon Balala, Ofer Nitka-Nakash
  */
 @Named("purchasedBooksBB")
 @SessionScoped

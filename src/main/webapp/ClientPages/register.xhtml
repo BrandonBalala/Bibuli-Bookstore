@@ -34,30 +34,36 @@
                                         </h:selectOneMenu>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="title" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message for="title" style="color:red"/>
                                 </div> 
                             </div>
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label>#{bundle.firstNameLabel}
                                         <p:inputText id="firstName" value="#{registerBB.client.firstName}" required="true"
-                                                     requiredMessage="#{bundle.firstNameRequired}"/>
+                                                     requiredMessage="#{bundle.firstNameRequired}">
+                                        <f:validator validatorId="nameValidator" />
+                                        <f:ajax event="blur" render="firstNameMessage" />
+                                        </p:inputText>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="firstName" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message id="firstNameMessage" for="firstName" style="color:red"/>
                                 </div> 
                             </div>
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label>#{bundle.lastNameLabel}
                                         <p:inputText id="lastName" value="#{registerBB.client.lastName}"  required="true"
-                                                     requiredMessage="#{bundle.lastNameRequired}"/>
+                                                     requiredMessage="#{bundle.lastNameRequired}">
+                                            <f:validator validatorId="nameValidator"/>
+                                            <f:ajax event="blur" render="lastNameMessage"/>
+                                        </p:inputText>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="lastName" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message id="lastNameMessage" for="lastName" style="color:red"/>
 
                                 </div> 
                             </div>
@@ -67,8 +73,8 @@
                                         <p:inputText id="companyName" value="#{registerBB.client.companyName}"/>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="companyName" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message for="companyName" style="color:red"/>
 
                                 </div> 
                             </div>
@@ -83,21 +89,22 @@
                                         </p:inputMask>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
+                                <div class="large-12 text-center">
                                     <h:message id="homePhoneNumbermessage" for="homePhoneNumber" style="color:red"/>
                                 </div> 
                             </div>
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label>#{bundle.cellPhoneNumberLabel}
-                                        <p:inputMask id="cellPhoneNumber" value="#{registerBB.client.cellPhoneNumber}"
-                                                     mask="(999) 999-9999" required="true">
+                                        <p:inputMask id="cellPhoneNumber" value="#{registerBB.client.cellPhoneNumber}" required="true"
+                                                     requiredMessage="#{bundle.cellPhoneRequired}"
+                                                     mask="(999) 999-9999" >
                                             <f:validator validatorId="phoneValidator" />
                                              <f:ajax event="blur" render="cellPhoneNumbermessage" />
                                         </p:inputMask>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
+                                <div class="large-12 text-center">
                                     <h:message id="cellPhoneNumbermessage" for="cellPhoneNumber" style="color:red"/>
 
                                 </div> 
@@ -113,7 +120,7 @@
                                         </p:inputText>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
+                                <div class="large-12 text-center">
                                     <h:message id="emailError" for="email" style="color:red"/>
 
                                 </div> 
@@ -125,11 +132,14 @@
                                         <p:password id="password" value="#{registerBB.client.password}" feedback="true"
                                                     required="true" promptLabel="#{bundle.passwordPrompt}"
                                                     weakLabel="#{bundle.weakPassword}" goodLabel="#{bundle.goodPassword}" strongLabel="#{bundle.strongPassword}"
-                                                    requiredMessage="#{bundle.passwordRequired}" match="password2"/>
+                                                    requiredMessage="#{bundle.passwordRequired}">
+                                            <f:validator validatorId="passwordValidator" />
+                                             <f:ajax event="blur" render="passwordError" />
+                                        </p:password>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="password" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message id="passwordError" for="password" style="color:red"/>
 
                                 </div> 
                             </div>
@@ -138,11 +148,14 @@
                                 <div class="large-12 columns">
                                     <label>#{bundle.passwordConfirmLabel}
                                         <p:password id="password2" value="#{registerBB.client.password}" feedback="false"
-                                                    required="true" requiredMessage="#{bundle.passwordConfirmRequired}"/>
+                                                    required="true" requiredMessage="#{bundle.passwordConfirmRequired}" match="password" validatorMessage="#{bundle.matchPass}">
+                                            <f:validator validatorId="passwordValidator" />
+                                             <f:ajax event="blur" render="passwordError2" />
+                                        </p:password>
                                     </label>
                                 </div>
-                                <div class="large-12 text-left">
-                                    <p:message for="password2" style="color:red"/>
+                                <div class="large-12 text-center">
+                                    <h:message id="passwordError2" for="password2" style="color:red"/>
                                 </div> 
                             </div>
                             <br/>
