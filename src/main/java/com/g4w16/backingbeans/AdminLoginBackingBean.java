@@ -82,11 +82,18 @@ public class AdminLoginBackingBean  implements Serializable{
 //        }
         // Store the outcome in the session object
         session.setAttribute("adminAuthenticated", authenticated);
-
-        // Place the message in the context so that it will be displayed
-        //FacesContext.getCurrentInstance().addMessage(null, message);
-
+        if(!authenticated){
+            FacesMessage msg = new FacesMessage("Login failed.", 
+						"Invalid Credential.");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                       FacesContext.getCurrentInstance().addMessage(null,msg);
+        }
+        else{
         return "admin_home?faces-redirect=true";
+        }
+        return null;
+
+        
     }
 
     public void logout() {
