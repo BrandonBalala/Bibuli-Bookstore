@@ -27,23 +27,23 @@
                 </div>
                 <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit="" data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
                     <ul class="orbit-container">
-                        <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-                        <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+                        <button class="orbit-previous"><span class="show-for-sr">#{bundle.mainpagePrevious}</span>&#9664;&#xFE0E;</button>
+                        <button class="orbit-next"><span class="show-for-sr">#{bundle.mainpageNext}</span>&#9654;&#xFE0E;</button>
                         <li class="is-active orbit-slide">
                             <img class="orbit-image sliderImages dragRemoved" src="#{resource['images:sliders/slider1.jpg']}" alt="Slider Img 1"/>
-                            <figcaption class="orbit-caption">Feed Your Imagination</figcaption>
+                            <figcaption class="orbit-caption">#{bundle.mainImagination}</figcaption>
                         </li>
                         <li class="orbit-slide">
                             <img class="orbit-image sliderImages dragRemoved" src="#{resource['images:sliders/slider3.jpg']}" alt="Slider Img 3"/>
-                            <figcaption class="orbit-caption">Expand Your Knowledge</figcaption>
+                            <figcaption class="orbit-caption">#{bundle.mainKnowledge}</figcaption>
                         </li>
                         <li class="orbit-slide">
                             <img class="orbit-image sliderImages dragRemoved" src="#{resource['images:sliders/slider4.jpg']}" alt="Slider Img 4"/>
-                            <figcaption class="orbit-caption">Reach for New Heights</figcaption>
+                            <figcaption class="orbit-caption">#{bundle.mainHeights}</figcaption>
                         </li>
                         <li class="orbit-slide">
                             <img class="orbit-image sliderImages dragRemoved" src="#{resource['images:sliders/slider2.jpg']}" alt="Slider Img 2"/>
-                            <figcaption class="orbit-caption">Read, Lead, Succeed.</figcaption>
+                            <figcaption class="orbit-caption">#{bundle.mainSucceed}</figcaption>
                         </li>
                     </ul>
                 </div>
@@ -53,7 +53,7 @@
                 <div class="row large-9" rendered="#{ClientMainBB.bestSellers()}">
                     <div class="row text-center">
                         <div class="large-12 columns">
-                            <h4 class="carouselTitle">- Best Sellers -</h4>
+                            <h4 class="carouselTitle">#{bundle.mainbSellers}</h4>
                         </div>
                     </div>
                     <hr/>
@@ -97,7 +97,7 @@
                 <div class="row large-9" rendered="#{ClientMainBB.newestReleases()}">
                     <div class="row text-center">
                         <div class="large-12 columns">
-                            <h4 class="carouselTitle">- New Releases -</h4>
+                            <h4 class="carouselTitle">#{bundle.mainnRelease}</h4>
                         </div>
                     </div>
                     <hr/>
@@ -141,7 +141,7 @@
                     <div class="row large-9">
                         <div class="row text-center">
                             <div class="large-12 columns">
-                                <h4 class="carouselTitle">- Recommended Books -</h4>
+                                <h4 class="carouselTitle">#{bundle.mainrBooks}</h4>
                             </div>
                         </div>
                         <hr/>
@@ -185,7 +185,7 @@
 
                 <div class="row large-8 text-center">
                     <div class="large-12 columns">
-                        <h4 class="carouselTitle">- Our Sponsors -</h4>
+                        <h4 class="carouselTitle">#{bundle.mainSponsor}</h4>
                     </div>
                     <ui:repeat var="banner" value="#{ClientMainBB.bannerList}">
 
@@ -207,7 +207,7 @@
                             <div class="large-12 columns">
                                 <div class="row text-center">
                                     <div class="large-12 columns">
-                                        <h4 class="carouselTitle">- Poll -</h4>
+                                        <h4 class="carouselTitle">#{bundle.poll}</h4>
                                     </div>
                                 </div>
                                 <div class="row callout text-center">
@@ -235,7 +235,7 @@
                             <div class="large-12 columns">
                                 <div class="row text-center">
                                     <div class="large-12 columns">
-                                        <h4 class="carouselTitle">- Poll Results -</h4>
+                                        <h4 class="carouselTitle">#{bundle.mainResults}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -281,7 +281,7 @@
                 <div class="row large-3 text-center">
                     <div class="row text-center">
                         <div class="large-12 columns">
-                            <h4 class="carouselTitle">- News Feed -</h4>
+                            <h4 class="carouselTitle">#{bundle.mainFeed}</h4>
                         </div>
                     </div>
                     <div class="row text-center callout">

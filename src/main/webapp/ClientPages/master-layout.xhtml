@@ -38,12 +38,12 @@
                             <ul class="menu vertical inline-list blackBackgroundColor">
                                 <li>
                                     <h:form>
-                                        <h:commandLink class="whiteFont blackBackgroundColor" value=" Shop All" action="#{masterLayoutBB.displayAllBooks()}"/>
+                                        <h:commandLink class="whiteFont blackBackgroundColor" value="#{bundle.masterSearch}" action="#{masterLayoutBB.displayAllBooks()}"/>
                                     </h:form>
                                     <!--                                    <h:link class="whiteFont blackBackgroundColor" value=" Shop All" outcome="{masterLayoutBB.displayAllBooks()}"/>-->
                                 </li>
                                 <li>
-                                    <a href="#" class="whiteFont blackBackgroundColor">By Genre</a>
+                                    <a href="#" class="whiteFont blackBackgroundColor">#{bundle.masterGenre}</a>
                                     <ul class="menu blackBackgroundColor">
                                         <ui:repeat value="#{masterLayoutBB.genreList}" var="theGenre">
                                             <li>
@@ -55,7 +55,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#" class="whiteFont blackBackgroundColor">By Format</a>
+                                    <a href="#" class="whiteFont blackBackgroundColor">#{bundle.masterFormat}</a>
                                     <ul class="vertical menu blackBackgroundColor">
                                         <ui:repeat value="#{masterLayoutBB.formatList}" var="theFormat">
                                             <h:form>
@@ -67,7 +67,7 @@
                             </ul>
                         </li>
                         <h:panelGroup rendered="#{session.getAttribute('authenticated')}">
-                            <li><a href="my-books.xhtml" class="whiteFont anchorFontSize"><i class="fi-book"></i>My Books</a></li>
+                            <li><a href="my-books.xhtml" class="whiteFont anchorFontSize"><i class="fi-book"></i>#{bundle.myBooks}</a></li>
                         </h:panelGroup>
                     </ul>
                 </div>
@@ -75,25 +75,25 @@
                     <ul class="dropdown menu inline-list" style="padding: 10px">
                         <li>
                             <h:form class="inlineClass">
-                                <h:inputText class="searchBar inlineClass" value="#{searchBean.keywords}" a:placeholder="Search..."/>
+                                <h:inputText class="searchBar inlineClass" value="#{searchBean.keywords}" a:placeholder="#{bundle.masterSearchPlaceholder}"/>
                                 <h:commandLink class="button fi-magnifying-glass searchButton iconLarge inlineClass" action="#{searchBean.searchBooks()}"/>
                             </h:form>
                         </li>
                         <li class="divider"/>
-                        <li><h:link class="whiteFont blackBackgroundColor fi-info anchorFontSize" value=" Help" outcome="help"/></li>
-                        <li><h:link class="whiteFont blackBackgroundColor fi-shopping-cart anchorFontSize" value=" Cart" outcome="shopping-cart"/></li>
+                        <li><h:link class="whiteFont blackBackgroundColor fi-info anchorFontSize" value="#{bundle.masterHelp}" outcome="help"/></li>
+                        <li><h:link class="whiteFont blackBackgroundColor fi-shopping-cart anchorFontSize" value="#{bundle.masterCart}" outcome="shopping-cart"/></li>
                         <li>
                             <ul class="dropdown menu" data-dropdown-menu="">
                                 <li>
                                     <a href="#" class="whiteFont anchorFontSize"><i class="fi-torso-business"></i></a>
                                     <ul class="menu vertical whiteFont blackBackgroundColor" >
                                         <h:panelGroup rendered="#{!session.getAttribute('authenticated')}">
-                                            <li><h:link class="whiteFont blackBackgroundColor" value="Login" outcome="login"/></li>
-                                            <li><h:link class="whiteFont blackBackgroundColor" value="Register" outcome="register" /></li>
-                                            <li><h:link class="whiteFont blackBackgroundColor" value="Admin" outcome="/AdminPages/admin_login"/></li>
+                                            <li><h:link class="whiteFont blackBackgroundColor" value="#{bundle.login}" outcome="login"/></li>
+                                            <li><h:link class="whiteFont blackBackgroundColor" value="#{bundle.register}" outcome="register" /></li>
+                                            <li><h:link class="whiteFont blackBackgroundColor" value="#{bundle.masterAdmin}" outcome="/AdminPages/admin_login"/></li>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{session.getAttribute('authenticated')}">
-                                            <li><h:link class="whiteFont blackBackgroundColor" value="My Account" outcome="accountDetails.xhtml"/></li>
+                                            <li><h:link class="whiteFont blackBackgroundColor" value="#{bundle.mastermyAccount}" outcome="accountDetails.xhtml"/></li>
                                             <li><h:form rendered="#{session.getAttribute('authenticated')}"><h:commandLink  class="whiteFont blackBackgroundColor" value="#{bundle.logout}" action="#{loginBB.logout()}"></h:commandLink></h:form></li>
                                         </h:panelGroup>
                                     </ul>
@@ -145,10 +145,10 @@
                     <div class="small-6 medium-3 large-2 columns">
                         <h4>The Company</h4>
                         <ul class="footer-links">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Terms of use</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">#{bundle.masterHome}</a></li>
+                            <li><a href="#">#{bundle.masterHelp}</a></li>
+                            <li><a href="#">#{bundle.masterTerms}</a></li>
+                            <li><a href="#">#{bundle.masterContact}</a></li>
                         </ul>
                     </div>
                     <div class="small-6 medium-3 large-2 columns">

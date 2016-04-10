@@ -28,8 +28,8 @@
                         <table class="noborder">
                             <thead>
                                 <tr>
-                                    <th width="1000">Title</th>
-                                    <th>Price</th>
+                                    <th width="1000">#{bundle.titleLabel}</th>
+                                    <th>#{bundle.paymentPrice}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,10 +50,10 @@
                     <div class="large-6 columns text-center">
                         <div class="callout secondary">
                             <hr/>
-                            <h4 class="bibuliFont">Order Summary</h4>
+                            <h4 class="bibuliFont">#{bundle.summary}</h4>
                             <div class="row">
                                 <div class="large-6 columns text-left">
-                                    Total before tax:
+                                    #{bundle.totalBefore}
                                 </div>
                                 <div class="large-6 columns text-right">
                                     <h:outputText value="#{cartBB.subtotal}$"/>
@@ -62,7 +62,7 @@
                             <hr/>
                             <div class="row">
                                 <div class="large-6 columns text-left">
-                                    Estimated PST:
+                                    #{bundle.estimatedPst}
                                 </div>
                                 <div class="large-6 columns text-right">
                                     <h:outputText value="#{checkoutBB.calculatePST()}$"/>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="row">
                                 <div class="large-6 columns text-left">
-                                    Estimated HST:
+                                    #{bundle.estimatedHst}
                                 </div>
                                 <div class="large-6 columns text-right">
                                     <h:outputText value="#{checkoutBB.calculateHST()}$"/>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="row">
                                 <div class="large-6 columns text-left">
-                                    Estimated GST:
+                                    #{bundle.estimatedGst}
                                 </div>
                                 <div class="large-6 columns text-right">
                                     <h:outputText value="#{checkoutBB.calculateGST()}$"/>
@@ -87,7 +87,7 @@
                             <hr/>
                             <div class="row redFont">
                                 <div class="large-6 columns text-left">
-                                    <b>Order Total:</b>
+                                    <b>#{bundle.orderTotal}</b>
                                 </div>
                                 <div class="large-6 columns text-right">
                                     <b><h:outputText value="#{checkoutBB.calculateOrderTotal()}$"/> </b>
@@ -100,7 +100,7 @@
                 <hr/>
                 <div class="row">
                     <div class="large-12 columns text-center">
-                        <h3>Select payment method</h3>
+                        <h3>#{bundle.paymentMethod}</h3>
                     </div>
                 </div>
 
@@ -108,38 +108,38 @@
                     <div class="row large-6">
                         <div class="row">
                             <div class="large-12 columns">
-                                <label>Card Number 
+                                <label>#{bundle.cardNum} 
                                     <h:inputText value="#{checkoutBB.cardNumber}"/>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-4 columns">
-                                <label>Expiry Month (MM)
+                                <label>#{bundle.expiryMonth}
                                     <h:inputText value="#{checkoutBB.expiryMonth}"/>
                                 </label>
                             </div>
                             <div class="large-4 columns">
-                                <label>Expiry Year (YYYY)
+                                <label>#{bundle.expiryYear}
                                     <h:inputText value="#{checkoutBB.expiryYear}"/>
                                 </label>
                             </div>
                             <div class="large-4 columns">
-                                <label>Security Code (###) 
+                                <label>#{bundle.securityCode}
                                     <h:inputText value="#{checkoutBB.securityCode}"/>
                                 </label>
                             </div>
                         </div>                        
                         <div class="row">
                             <div class="large-12 columns">
-                                <label>Cardholder Name 
+                                <label>#{bundle.holderName}
                                     <h:inputText value="#{checkoutBB.nameOnCard}"/>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <h:commandLink class="button expanded hollow" value="Place Order" action="#{checkoutBB.placeOrder()}"/>
+                                <h:commandLink class="button expanded hollow" value="#{bundle.placeOrder}" action="#{checkoutBB.placeOrder()}"/>
                             </div>
                         </div>
                     </div>
