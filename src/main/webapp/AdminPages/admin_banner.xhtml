@@ -35,20 +35,24 @@
 
 
                             <h:form id="form" enctype="multipart/form-data">
-                                
-                                 <h:panelGrid id="grid" cellpadding="5" columns="3" style="margin-bottom:10px">
-                                <f:facet name="header">
-                                    <p:messages id="msgs" autoUpdate="true" closable="true"/>
-                                </f:facet>
-                                <h:graphicImage value="#{bannerBB.uploadedFile}"/>
-                                <p:outputLabel for="uri" value="New Ad URI:" />
-                                <p:inputText id="uri" size="100" value="#{bannerBB.uri}" required="true" />
-                                
-                                <p:fileUpload  id="file" value="#{bannerBB.uploadedFile}" />
-                                <p:commandButton value="Add" ajax="false" action="#{bannerBB.addAction(bannerBB.uri)}" update="table uri msgs" process="grid" icon="ui-icon-check"/>
-                                
-                                <br/>
-                                 </h:panelGrid>
+                                <h:panelGrid id="grid" cellpadding="5" columns="1" style="margin-bottom:10px">
+                                    <f:facet name="header">
+                                        <p:messages id="msgs" autoUpdate="true" closable="true"/>
+                                    </f:facet>
+                                    <h:graphicImage value="#{bannerBB.uploadedFile}"/>
+                                    <br/>
+                                    <p:outputLabel for="uri" value="New Ad URI:" />
+                                    <p:inputText id="uri" size="100" value="#{bannerBB.uri}" required="true" requiredMessage="URI name is required">
+                                        <f:ajax event="blur" render="msgs"/>
+                                    </p:inputText>
+                                    <br/>
+                                    <p:fileUpload  id="file" value="#{bannerBB.uploadedFile}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" requiredMessage="Uploading a banner is required"/>
+                                    <br/>
+                                    <p:commandButton value="Add" action="#{bannerBB.addAction(bannerBB.uri)}"  update="table uri msgs" process="grid" icon="ui-icon-check"/>
+
+                                    <br/>
+                                </h:panelGrid>
+
                                 <p:dataTable id="table" var="ad" value="#{bannerBB.banners}" rows="10"
                                              paginator="true"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -82,8 +86,8 @@
                                     </p:column>
 
                                 </p:dataTable>
-                                </h:form>
-                            
+                            </h:form>
+
 
                         </div>
                     </div>
