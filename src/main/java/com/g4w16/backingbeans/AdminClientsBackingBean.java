@@ -8,7 +8,6 @@ package com.g4w16.backingbeans;
 
 import com.g4w16.entities.BillingAddress;
 import com.g4w16.entities.Client;
-import com.g4w16.entities.SalesDetails;
 import com.g4w16.entities.Title;
 import com.g4w16.persistence.BillingAddressJpaController;
 import com.g4w16.persistence.ClientJpaController;
@@ -76,7 +75,10 @@ public class AdminClientsBackingBean implements Serializable {
     public void setSelectedAddress(BillingAddress selectedAddress){
         this.selectedAddress = selectedAddress;
     }
-    
+    /**
+     * Display Billing Address of selected client
+     * @return 
+     */
     public List<BillingAddress> getBillingAddress() {
         if (selectedClient != null) {
             return clientJpaController.findClientById(selectedClient.getId()).getBillingAddressList();
@@ -97,6 +99,13 @@ public class AdminClientsBackingBean implements Serializable {
         this.filteredClients = filteredClients;
     }
     
+    /**
+     * Edit a record
+     * @param event
+     * @throws NonexistentEntityException
+     * @throws RollbackFailureException
+     * @throws Exception 
+     */
     public void onClientEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         Client editedClient = (Client) event.getObject();
         clientJpaController.edit(editedClient);
